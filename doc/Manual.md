@@ -523,6 +523,7 @@ Before you report any problems that you may have encountered with the LameXP sof
 The latest *official* release of the LameXP software can be obtained from one of the following *official* download mirrors:
 
 * <https://github.com/lordmulder/LameXP/releases/latest>
+* <https://osdn.net/pkg/lamexp/LameXP>
 * <http://sourceforge.net/projects/lamexp/files/>
 * <https://bitbucket.org/muldersoft/lamexp/downloads>
 * <https://www.assembla.com/spaces/lamexp/documents>
@@ -585,6 +586,8 @@ The source code of the **LameXP** software is managed using the [*Git*](http://g
 
 * ``git clone https://github.com/lordmulder/LameXP.git LameXP`` ([Browse](https://github.com/lordmulder/LameXP))
 
+* ``git clone https://scm.osdn.net/gitroot/lamexp/LameXP.git`` ([Browse](https://osdn.net/projects/lamexp/scm/git/LameXP/))
+
 * ``git clone https://bitbucket.org/muldersoft/lamexp.git LameXP`` ([Browse](https://bitbucket.org/muldersoft/lamexp/src))
 
 * ``git clone git://git.assembla.com/lamexp.git LameXP`` ([Browse](https://www.assembla.com/code/lamexp/git/nodes))
@@ -598,6 +601,8 @@ The source code of the **MUtilities** library is managed using the [*Git*](http:
 * ``git clone git://git.code.sf.net/p/mutilities/code MUtilities`` ([Browse](http://sourceforge.net/p/mutilities/code/))
 
 * ``git clone https://github.com/lordmulder/MUtilities.git MUtilities`` ([Browse](https://github.com/lordmulder/MUtilities))
+
+* ``git clone https://scm.osdn.net/gitroot/mutilities/MUtilities.git`` ([Browse](https://osdn.net/projects/mutilities/scm/git/MUtilities/))
 
 * ``git clone https://bitbucket.org/muldersoft/mutilities.git MUtilities`` ([Browse](https://bitbucket.org/muldersoft/mutilities/src))
 
