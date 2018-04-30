@@ -3031,52 +3031,52 @@ Sélection automatique (par défaut)</translation>
         <translation>Décodage</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="397"/>
+        <location filename="../../src/Thread_Process.cpp" line="399"/>
         <source>The source audio file could not be found:</source>
         <translation>Le fichier audio source n&apos;a pas pu être trouvé:</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="405"/>
+        <location filename="../../src/Thread_Process.cpp" line="407"/>
         <source>The source audio file could not be opened for reading:</source>
         <translation>Le fichier audio source n&apos;a pas pu être ouvert pour la lecture:</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="437"/>
+        <location filename="../../src/Thread_Process.cpp" line="441"/>
         <source>The target output directory doesn&apos;t exist and could NOT be created:</source>
         <translation>Le répertoire de sortie cible n&apos;existe pas et ne peut PAS être créé:</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="446"/>
+        <location filename="../../src/Thread_Process.cpp" line="450"/>
         <source>The target output directory is NOT writable:</source>
         <translation>Le répertoire de sortie cible n&apos;est pas accessible en écriture:</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="514"/>
+        <location filename="../../src/Thread_Process.cpp" line="503"/>
         <source>Failed to generate non-existing target file name!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="522"/>
+        <location filename="../../src/Thread_Process.cpp" line="511"/>
         <source>Unknown File Name</source>
         <translation>Nom de fichier inconnu</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="524"/>
+        <location filename="../../src/Thread_Process.cpp" line="513"/>
         <source>Unknown Title</source>
         <translation>Titre inconnu</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="525"/>
+        <location filename="../../src/Thread_Process.cpp" line="514"/>
         <source>Unknown Artist</source>
         <translation>Artiste inconnu</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="526"/>
+        <location filename="../../src/Thread_Process.cpp" line="515"/>
         <source>Unknown Album</source>
         <translation>Album inconnu</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="528"/>
+        <location filename="../../src/Thread_Process.cpp" line="517"/>
         <source>Unknown Comment</source>
         <translation>Commentaire inconnu</translation>
     </message>
@@ -3098,22 +3098,22 @@ Sélection automatique (par défaut)</translation>
         <translation>Ignoré.</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="466"/>
+        <location filename="../../src/Thread_Process.cpp" line="472"/>
         <source>Target output file already exists, going to skip this file:</source>
         <translation>Le fichier de sortie existe déjà, il sera ignoré :</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="467"/>
+        <location filename="../../src/Thread_Process.cpp" line="473"/>
         <source>If you don&apos;t want existing files to be skipped, please change the overwrite mode!</source>
         <translation>Si vous ne voulez pas ignorer les fichiers existants, veuillez changer le mode de remplacement !</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="474"/>
+        <location filename="../../src/Thread_Process.cpp" line="481"/>
         <source>Target output file already exists, going to delete existing file:</source>
         <translation>Le fichier de sortie existe déjà, il sera supprimé :</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="490"/>
+        <location filename="../../src/Thread_Process.cpp" line="489"/>
         <source>Failed to delete existing target file, will save to another file name!</source>
         <translation>Impossible de supprimer le fichier cible existant, il sera enregistré  sous un autre nom !</translation>
     </message>

@@ -390,6 +390,8 @@ int ProcessThread::generateOutFileName(QString &outFileName)
 {
 	outFileName.clear();
 
+	/* -------- Check source file -------- */
+
 	//Make sure the source file exists
 	const QFileInfo sourceFile(m_audioFile.filePath());
 	if(!(sourceFile.exists() && sourceFile.isFile()))
@@ -409,6 +411,8 @@ int ProcessThread::generateOutFileName(QString &outFileName)
 	{
 		readTest.close();
 	}
+
+	/* -------- Determine target directory -------- */
 
 	QDir targetDir(MUtils::clean_file_path(m_outputDirectory.isEmpty() ? sourceFile.canonicalPath() : m_outputDirectory, false));
 
@@ -440,7 +444,7 @@ int ProcessThread::generateOutFileName(QString &outFileName)
 	}
 	
 	//Make sure that the output dir is writable
-	QFile writeTest(QString("%1/.%2").arg(targetDir.canonicalPath(), MUtils::next_rand_str()));
+	QFile writeTest(MUtils::make_temp_file(targetDir, "~rw"));
 	if(!writeTest.open(QIODevice::ReadWrite))
 	{
 		handleMessage(QString("%1\n%2").arg(tr("The target output directory is NOT writable:"), QDir::toNativeSeparators(targetDir.absolutePath())));
@@ -448,8 +452,10 @@ int ProcessThread::generateOutFileName(QString &outFileName)
 	}
 	else
 	{
-		writeTest.remove();
+		writeTest.remove(); /*clean-up*/
 	}
+
+	/* -------- Generate initial file name and check -------- */
 
 	//File extension
 	const QString fileExt = m_renameFileExt.isEmpty() ? QString::fromUtf8(m_encoder->toEncoderInfo()->extension()) : m_renameFileExt;
@@ -458,7 +464,7 @@ int ProcessThread::generateOutFileName(QString &outFileName)
 	const QString fileName = MUtils::clean_file_name(QString("%1.%2").arg(applyRegularExpression(applyRenamePattern(sourceFile.completeBaseName(), m_audioFile.metaInfo())), fileExt), true);
 
 	//Generate full output path
-	outFileName = QString("%1/%2").arg(targetDir.canonicalPath(), fileName);
+	outFileName = targetDir.absoluteFilePath(fileName);
 
 	//Skip file, if target file exists (optional!)
 	if((m_overwriteMode == OverwriteMode_SkipExisting) && QFileInfo(outFileName).exists())
@@ -469,21 +475,14 @@ int ProcessThread::generateOutFileName(QString &outFileName)
 	}
 
 	//Delete file, if target file exists (optional!)
-	if((m_overwriteMode == OverwriteMode_Overwrite) && QFileInfo(outFileName).exists() && QFileInfo(outFileName).isFile())
+	const QFileInfo origFileName(outFileName);
+	if((m_overwriteMode == OverwriteMode_Overwrite) && origFileName.exists() && origFileName.isFile())
 	{
 		handleMessage(QString("%1\n%2\n").arg(tr("Target output file already exists, going to delete existing file:"), QDir::toNativeSeparators(outFileName)));
 		bool removed = false;
-		if(sourceFile.canonicalFilePath().compare(QFileInfo(outFileName).absoluteFilePath(), Qt::CaseInsensitive) != 0)
+		if(sourceFile.canonicalFilePath().compare(origFileName.absoluteFilePath(), Qt::CaseInsensitive) != 0)
 		{
-			for(int i = 0; i < 16; i++)
-			{
-				if(QFile::remove(outFileName))
-				{
-					removed = true;
-					break;
-				}
-				MUtils::OS::sleep_ms(1);
-			}
+			removed = MUtils::remove_file(outFileName);
 		}
 		if(!removed)
 		{
@@ -491,26 +490,16 @@ int ProcessThread::generateOutFileName(QString &outFileName)
 		}
 	}
 
-	//Generate final name
-	const QFileInfo origFileName(outFileName);
-	for (int n = 2; n <= 65534; ++n)
-	{
-		//Check file existence
-		if (QFileInfo(outFileName).exists())
-		{
-			outFileName = origFileName.absoluteDir().filePath(QString("%1 (%2).%3").arg(origFileName.completeBaseName(), QString::number(n), origFileName.suffix()));
-			continue;
-		}
+	/* -------- Generate final non-existing file name -------- */
 
-		//Create placeholder
-		QFile placeholder(outFileName);
-		if (placeholder.open(QIODevice::WriteOnly))
-		{
-			placeholder.close();
-			return 1;
-		}
+	//Generate final name
+	outFileName = MUtils::make_unique_file(origFileName.absoluteDir(), origFileName.completeBaseName(), origFileName.suffix(), true, true);
+	if(!outFileName.isEmpty())
+	{
+		return 1;
 	}
 
+	//Failed to generate
 	handleMessage(QString("%1\n").arg(tr("Failed to generate non-existing target file name!")));
 	return 0;
 }
