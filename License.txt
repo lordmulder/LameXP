@@ -1,18 +1,19 @@
 LameXP is released under the terms of the GNU GENERAL PUBLIC LICENSE
 (Version 2, June 1991) including the following *additional* annotations:
 
-When distributing binaries of the LameXP software, it is *STRICTLY
-FORBIDDEN* to bundle the LameXP program files and/or the LameXP
-installation program with any kind of Adware, Spyware or PUP (potentially
-unwanted program), including, but not limited to, any downloaders,
-dialers, browser toolbars/extensions or restricted shareware/demo
-programs. It is, however, perfectly legitimate to bundle LameXP with other
-OpenSource programs, according to the OSI (Open Source Initiative).
-Finally, it is also legitimate to bundle LameXP with commercial software,
-as long as that software does not meet the criteria of Adware, Spyware or
-PUP. If you bundle the LameXP software with another software, you are
-*REQUIRED* to make sure that the user is provided with an easy way to
-install and start the LameXP software separately from that other software.
+It is STRICTLY FORBIDDEN to bundle the LameXP software with other software
+in such a way that launching, installing or downloading the LameXP
+software involves the risk of launching, installing or downloading Adware,
+Spyware or other forms of PUP (potentially unwanted programs).
+
+This specifically means that you MUST NOT offer downloads of the LameXP
+software by means of a custom installation program, which - at least
+optionally - involves the execution, installation or download of Adware,
+Spyware or other forms of PUP (potentially unwanted programs).
+
+It is perfectly allowed to bundle the LameXP software with other software,
+provided that the LameXP software still MAY be launched, installed and
+downloaded WITHOUT the interference of any other components of the bundle.
 
 
 
