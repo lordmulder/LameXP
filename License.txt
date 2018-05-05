@@ -12,8 +12,8 @@ optionally - involves the execution, installation or download of Adware,
 Spyware or other forms of PUP (potentially unwanted programs).
 
 It is perfectly allowed to bundle the LameXP software with other software,
-provided that the LameXP software still MAY be launched, installed and
-downloaded WITHOUT the interference of any other components of the bundle.
+provided that the LameXP software still MAY be launched, installed or
+downloaded from the bundle WITHOUT the interference of other components.
 
 
 
