@@ -377,10 +377,21 @@ const AudioFileModel& AnalyzeTask::parseMediaInfo(const QByteArray &data, AudioF
 				qWarning("Invalid library identiofier property: \"%s\"", MUTILS_UTF8(identifier));
 				return audioFile;
 			}
-			const quint32 mediaInfoVer = (m_mediaInfoVer > 9999U) ? m_mediaInfoVer / 10U : m_mediaInfoVer;
-			if (versionLib.isEmpty() || (!checkVersionStr(versionLib, mediaInfoVer / 100U, mediaInfoVer % 100U)))
+			if (!versionLib.isEmpty())
 			{
-				qWarning("Invalid library version property: \"%s\"", MUTILS_UTF8(versionLib));
+				if (m_mediaInfoVer != UINT_MAX)
+				{
+					const quint32 mediaInfoVer = (m_mediaInfoVer > 9999U) ? m_mediaInfoVer / 10U : m_mediaInfoVer;
+					if (!checkVersionStr(versionLib, mediaInfoVer / 100U, mediaInfoVer % 100U))
+					{
+						qWarning("Invalid library version property: \"%s\"", MUTILS_UTF8(versionLib));
+						return audioFile;
+					}
+				}
+			}
+			else
+			{
+				qWarning("Library version property not found!");
 				return audioFile;
 			}
 			while (findNextElement(QLatin1String("Media"), xmlStream))
