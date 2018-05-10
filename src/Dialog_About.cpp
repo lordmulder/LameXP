@@ -52,6 +52,7 @@
 #include <QScrollBar>
 #include <QCloseEvent>
 #include <QElapsedTimer>
+#include <QLibraryInfo>
 #include <QWindowsVistaStyle>
 #include <QWindowsXPStyle>
 
@@ -550,7 +551,7 @@ void AboutDialog::initInformationTab(void)
 		MUtils::Version::lib_build_date().toString(Qt::ISODate).toLatin1().constData(),
 		MUtils::Version::lib_build_time().toString(Qt::ISODate).toLatin1().constData(),
 		QString::fromLatin1(qVersion()),
-		QString::fromLatin1(QT_PACKAGEDATE_STR)
+		QLibraryInfo::buildDate().toString(Qt::ISODate)
 	);
 
 	const QString copyrightStr = QString().sprintf
