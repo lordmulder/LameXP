@@ -1088,8 +1088,12 @@
     <CustomBuild Include="res\Tools.oggdec-sse2.qrc">
       <Filter>Resources</Filter>
     </CustomBuild>
-    <CustomBuild Include="res\Tools.oggdec-avx.qrc" />
-    <CustomBuild Include="res\Tools.oggdec-i686.qrc" />
+    <CustomBuild Include="res\Tools.oggdec-avx.qrc">
+      <Filter>Resources</Filter>
+    </CustomBuild>
+    <CustomBuild Include="res\Tools.oggdec-i686.qrc">
+      <Filter>Resources</Filter>
+    </CustomBuild>
   </ItemGroup>
   <ItemGroup>
     <None Include="ReadMe.txt" />
