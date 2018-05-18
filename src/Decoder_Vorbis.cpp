@@ -87,9 +87,9 @@ bool VorbisDecoder::decode(const QString &sourceFile, const QString &outputFile,
 
 bool VorbisDecoder::isFormatSupported(const QString &containerType, const QString &containerProfile, const QString &formatType, const QString &formatProfile, const QString &formatVersion)
 {
-	if(containerType.compare("OGG", Qt::CaseInsensitive) == 0)
+	if(containerType.compare(QLatin1String("OGG"), Qt::CaseInsensitive) == 0)
 	{
-		if(formatType.compare("Vorbis", Qt::CaseInsensitive) == 0)
+		if(formatType.compare(QLatin1String("Vorbis"), Qt::CaseInsensitive) == 0)
 		{
 			return true;
 		}

@@ -88,11 +88,11 @@ bool WMADecoder::decode(const QString &sourceFile, const QString &outputFile, QA
 
 bool WMADecoder::isFormatSupported(const QString &containerType, const QString &containerProfile, const QString &formatType, const QString &formatProfile, const QString &formatVersion)
 {
-	if(containerType.compare("Windows Media", Qt::CaseInsensitive) == 0)
+	if(containerType.compare(QLatin1String("Windows Media"), Qt::CaseInsensitive) == 0)
 	{
-		if(formatType.compare("WMA", Qt::CaseInsensitive) == 0)
+		if(formatType.compare(QLatin1String("WMA"), Qt::CaseInsensitive) == 0)
 		{
-			if(formatVersion.compare("Version 1", Qt::CaseInsensitive) == 0 || formatVersion.compare("Version 2", Qt::CaseInsensitive) == 0 || formatVersion.compare("Version 3", Qt::CaseInsensitive) == 0 || formatProfile.compare("Pro", Qt::CaseInsensitive) == 0 || formatProfile.compare("Lossless", Qt::CaseInsensitive) == 0)
+			if((formatVersion.compare(QLatin1String("1"), Qt::CaseInsensitive) == 0) || (formatVersion.compare(QLatin1String("2"), Qt::CaseInsensitive) == 0) || (formatVersion.compare(QLatin1String("3"), Qt::CaseInsensitive) == 0) || (formatProfile.compare(QLatin1String("Pro"), Qt::CaseInsensitive) == 0) || (formatProfile.compare(QLatin1String("Lossless"), Qt::CaseInsensitive) == 0))
 			{
 				return true;
 			}

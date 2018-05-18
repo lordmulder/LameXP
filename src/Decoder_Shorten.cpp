@@ -70,9 +70,10 @@ bool ShortenDecoder::decode(const QString &sourceFile, const QString &outputFile
 
 bool ShortenDecoder::isFormatSupported(const QString &containerType, const QString &containerProfile, const QString &formatType, const QString &formatProfile, const QString &formatVersion)
 {
-	if(containerType.compare("Shorten", Qt::CaseInsensitive) == 0)
+	static const QLatin1String shorten("Shorten");
+	if(containerType.compare(shorten, Qt::CaseInsensitive) == 0)
 	{
-		if(formatType.compare("Shorten", Qt::CaseInsensitive) == 0)
+		if(formatType.compare(shorten, Qt::CaseInsensitive) == 0)
 		{
 			return true;
 		}

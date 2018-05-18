@@ -87,9 +87,10 @@ bool WavPackDecoder::decode(const QString &sourceFile, const QString &outputFile
 
 bool WavPackDecoder::isFormatSupported(const QString &containerType, const QString &containerProfile, const QString &formatType, const QString &formatProfile, const QString &formatVersion)
 {
-	if(containerType.compare("WavPack", Qt::CaseInsensitive) == 0)
+	static const QLatin1String wavPack("WavPack");
+	if(containerType.compare(wavPack, Qt::CaseInsensitive) == 0)
 	{
-		if(formatType.compare("WavPack", Qt::CaseInsensitive) == 0)
+		if(formatType.compare(wavPack, Qt::CaseInsensitive) == 0)
 		{
 			return true;
 		}

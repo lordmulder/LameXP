@@ -85,9 +85,9 @@ void WaveDecoder::updateProgress(const double &progress)
 
 bool WaveDecoder::isFormatSupported(const QString &containerType, const QString &containerProfile, const QString &formatType, const QString &formatProfile, const QString &formatVersion)
 {
-	if(containerType.compare("Wave", Qt::CaseInsensitive) == 0)
+	if(containerType.compare(QLatin1String("Wave"), Qt::CaseInsensitive) == 0)
 	{
-		if(formatType.compare("PCM", Qt::CaseInsensitive) == 0)
+		if(formatType.compare(QLatin1String("PCM"), Qt::CaseInsensitive) == 0)
 		{
 			return true;
 		}

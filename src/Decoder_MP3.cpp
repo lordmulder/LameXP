@@ -36,8 +36,15 @@
 #include <QMutexLocker>
 
 //Static
-QScopedPointer<QRegExp> MP3Decoder::m_regxLayer, MP3Decoder::m_regxVersion;
 QMutex MP3Decoder::m_regexMutex;
+MUtils::Lazy<QRegExp> MP3Decoder::m_regxLayer([]
+{
+	return new QRegExp(L1S("^Layer\\s+(1|2|3)\\b"), Qt::CaseInsensitive);
+});
+MUtils::Lazy<QRegExp> MP3Decoder::m_regxVersion([]
+{
+	return new QRegExp(L1S("^(Version\\s+)?(1|2|2\\.5)\\b"), Qt::CaseInsensitive);
+});
 
 MP3Decoder::MP3Decoder(void)
 :
@@ -103,17 +110,9 @@ bool MP3Decoder::isFormatSupported(const QString &containerType, const QString &
 		if(formatType.compare(mpegAudio, Qt::CaseInsensitive) == 0)
 		{
 			QMutexLocker lock(&m_regexMutex);
-			if (m_regxLayer.isNull())
+			if ((*m_regxLayer).indexIn(formatProfile) >= 0)
 			{
-				m_regxLayer.reset(new QRegExp(L1S("^Layer\\s+(1|2|3)\\b"), Qt::CaseInsensitive));
-			}
-			if (m_regxLayer->indexIn(formatProfile) >= 0)
-			{
-				if (m_regxVersion.isNull())
-				{
-					m_regxVersion.reset(new QRegExp(L1S("^(Version\\s+)?(1|2|2\\.5)\\b"), Qt::CaseInsensitive));
-				}
-				return (m_regxVersion->indexIn(formatVersion) >= 0);
+				return ((*m_regxVersion).indexIn(formatVersion) >= 0);
 			}
 		}
 	}

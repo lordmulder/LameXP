@@ -87,9 +87,10 @@ bool AvisynthDecoder::decode(const QString &sourceFile, const QString &outputFil
 
 bool AvisynthDecoder::isFormatSupported(const QString &containerType, const QString &containerProfile, const QString &formatType, const QString &formatProfile, const QString &formatVersion)
 {
-	if(containerType.compare("Avisynth", Qt::CaseInsensitive) == 0)
+	static const QLatin1String avs("Avisynth");
+	if(containerType.compare(avs, Qt::CaseInsensitive) == 0)
 	{
-		if(formatType.compare("Avisynth", Qt::CaseInsensitive) == 0)
+		if(formatType.compare(avs, Qt::CaseInsensitive) == 0)
 		{
 			return true;
 		}

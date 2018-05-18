@@ -88,9 +88,10 @@ bool TTADecoder::decode(const QString &sourceFile, const QString &outputFile, QA
 
 bool TTADecoder::isFormatSupported(const QString &containerType, const QString &containerProfile, const QString &formatType, const QString &formatProfile, const QString &formatVersion)
 {
-	if(containerType.compare("TTA", Qt::CaseInsensitive) == 0)
+	static const QLatin1String tta("TTA");
+	if(containerType.compare(tta, Qt::CaseInsensitive) == 0)
 	{
-		if(formatType.compare("TTA", Qt::CaseInsensitive) == 0)
+		if(formatType.compare(tta, Qt::CaseInsensitive) == 0)
 		{
 			return true;
 		}

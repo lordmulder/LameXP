@@ -89,9 +89,9 @@ bool ALACDecoder::decode(const QString &sourceFile, const QString &outputFile, Q
 
 bool ALACDecoder::isFormatSupported(const QString &containerType, const QString &containerProfile, const QString &formatType, const QString &formatProfile, const QString &formatVersion)
 {
-	if(containerType.compare("MPEG-4", Qt::CaseInsensitive) == 0)
+	if(containerType.compare(QLatin1String("MPEG-4"), Qt::CaseInsensitive) == 0)
 	{
-		if(formatType.compare("ALAC", Qt::CaseInsensitive) == 0)
+		if(formatType.compare(QLatin1String("ALAC"), Qt::CaseInsensitive) == 0)
 		{
 			return true;
 		}

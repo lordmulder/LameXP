@@ -86,30 +86,32 @@ bool AC3Decoder::decode(const QString &sourceFile, const QString &outputFile, QA
 
 bool AC3Decoder::isFormatSupported(const QString &containerType, const QString &containerProfile, const QString &formatType, const QString &formatProfile, const QString &formatVersion)
 {
-	if(containerType.compare("AC-3", Qt::CaseInsensitive) == 0)
+	static const QLatin1String ac3("AC-3"), eac3("E-AC-3"), dts("DTS");
+	if(containerType.compare(ac3, Qt::CaseInsensitive) == 0)
 	{
-		if(formatType.compare("AC-3", Qt::CaseInsensitive) == 0)
+		if(formatType.compare(ac3, Qt::CaseInsensitive) == 0)
 		{
 			return true;
 		}
 	}
-	if(containerType.compare("E-AC-3", Qt::CaseInsensitive) == 0)
+	if(containerType.compare(eac3, Qt::CaseInsensitive) == 0)
 	{
-		if(formatType.compare("E-AC-3", Qt::CaseInsensitive) == 0)
+		if(formatType.compare(eac3, Qt::CaseInsensitive) == 0)
 		{
 			return true;
 		}
 	}
-	else if(containerType.compare("DTS", Qt::CaseInsensitive) == 0)
+
+	else if(containerType.compare(dts, Qt::CaseInsensitive) == 0)
 	{
-		if(formatType.compare("DTS", Qt::CaseInsensitive) == 0)
+		if(formatType.compare(dts, Qt::CaseInsensitive) == 0)
 		{
 			return true;
 		}
 	}
-	else if(containerType.compare("Wave", Qt::CaseInsensitive) == 0)
+	else if(containerType.compare(QLatin1String("Wave"), Qt::CaseInsensitive) == 0)
 	{
-		if(formatType.compare("AC-3", Qt::CaseInsensitive) == 0 || formatType.compare("E-AC-3", Qt::CaseInsensitive) == 0 || formatType.compare("DTS", Qt::CaseInsensitive) == 0)
+		if((formatType.compare(ac3, Qt::CaseInsensitive) == 0) || (formatType.compare(eac3, Qt::CaseInsensitive) == 0) || (formatType.compare(dts, Qt::CaseInsensitive) == 0))
 		{
 			return true;
 		}

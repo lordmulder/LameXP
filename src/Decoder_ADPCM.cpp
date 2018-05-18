@@ -88,17 +88,17 @@ bool ADPCMDecoder::decode(const QString &sourceFile, const QString &outputFile, 
 
 bool ADPCMDecoder::isFormatSupported(const QString &containerType, const QString &containerProfile, const QString &formatType, const QString &formatProfile, const QString &formatVersion)
 {
-	if(containerType.compare("Wave", Qt::CaseInsensitive) == 0)
+	if(containerType.compare(QLatin1String("Wave"), Qt::CaseInsensitive) == 0)
 	{
-		if(formatType.compare("ADPCM", Qt::CaseInsensitive) == 0)
+		if(formatType.compare(QLatin1String("ADPCM"), Qt::CaseInsensitive) == 0)
 		{
 			return true;
 		}
 	}
 
-	if(containerType.compare("AIFF", Qt::CaseInsensitive) == 0 || containerType.compare("AU", Qt::CaseInsensitive) == 0)
+	if((containerType.compare(QLatin1String("AIFF"), Qt::CaseInsensitive) == 0) ||( containerType.compare(QLatin1String("AU"), Qt::CaseInsensitive) == 0))
 	{
-		if(formatType.compare("PCM", Qt::CaseInsensitive) == 0 || formatType.compare("ADPCM", Qt::CaseInsensitive) == 0)
+		if((formatType.compare(QLatin1String("PCM"), Qt::CaseInsensitive) == 0) || (formatType.compare(QLatin1String("ADPCM"), Qt::CaseInsensitive) == 0))
 		{
 			return true;
 		}

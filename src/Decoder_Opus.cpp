@@ -96,9 +96,9 @@ bool OpusDecoder::decode(const QString &sourceFile, const QString &outputFile, Q
 
 bool OpusDecoder::isFormatSupported(const QString &containerType, const QString &containerProfile, const QString &formatType, const QString &formatProfile, const QString &formatVersion)
 {
-	if(containerType.compare("OGG", Qt::CaseInsensitive) == 0)
+	if(containerType.compare(QLatin1String("OGG"), Qt::CaseInsensitive) == 0)
 	{
-		if(formatType.compare("Opus", Qt::CaseInsensitive) == 0)
+		if(formatType.compare(QLatin1String("Opus"), Qt::CaseInsensitive) == 0)
 		{
 			{
 				return true;

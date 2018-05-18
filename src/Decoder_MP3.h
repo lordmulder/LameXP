@@ -23,6 +23,7 @@
 #pragma once
 
 #include "Decoder_Abstract.h"
+#include <MUtils/Lazy.h>
 
 class MP3Decoder : public AbstractDecoder
 {
@@ -36,6 +37,6 @@ public:
 
 private:
 	const QString m_binary;
-	static QScopedPointer<QRegExp> m_regxLayer, m_regxVersion;
+	static MUtils::Lazy<QRegExp> m_regxLayer, m_regxVersion;
 	static QMutex m_regexMutex;
 };

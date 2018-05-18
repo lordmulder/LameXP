@@ -86,14 +86,13 @@ bool AACDecoder::decode(const QString &sourceFile, const QString &outputFile, QA
 
 bool AACDecoder::isFormatSupported(const QString &containerType, const QString &containerProfile, const QString &formatType, const QString &formatProfile, const QString &formatVersion)
 {
-	if(containerType.compare("ADTS", Qt::CaseInsensitive) == 0 || containerType.compare("MPEG-4", Qt::CaseInsensitive) == 0)
+	if((containerType.compare(QLatin1String("ADTS"), Qt::CaseInsensitive) == 0) || (containerType.compare(QLatin1String("MPEG-4"), Qt::CaseInsensitive) == 0))
 	{
-		if(formatType.compare("AAC", Qt::CaseInsensitive) == 0)
+		if(formatType.compare(QLatin1String("AAC"), Qt::CaseInsensitive) == 0)
 		{
-			QStringList profileParts = formatProfile.split(" ", QString::SkipEmptyParts);
-			if(profileParts.contains("LC", Qt::CaseInsensitive) || profileParts.contains("HE-AAC", Qt::CaseInsensitive) || profileParts.contains("HE-AACv2", Qt::CaseInsensitive))
+			if((formatProfile.compare(QLatin1String("LC"), Qt::CaseInsensitive) == 0) || (formatProfile.compare(QLatin1String("HE-AAC"), Qt::CaseInsensitive) == 0) || (formatProfile.compare(QLatin1String("HE-AACv2"), Qt::CaseInsensitive) == 0))
 			{
-				if(formatVersion.compare("Version 2", Qt::CaseInsensitive) == 0 || formatVersion.compare("Version 4", Qt::CaseInsensitive) == 0 || formatVersion.isEmpty())
+				if((formatVersion.compare(QLatin1String("2"), Qt::CaseInsensitive) == 0) || (formatVersion.compare(QLatin1String("4"), Qt::CaseInsensitive) == 0) || formatVersion.isEmpty())
 				{
 					return true;
 				}

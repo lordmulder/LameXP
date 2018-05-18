@@ -77,9 +77,10 @@ bool SpeexDecoder::decode(const QString &sourceFile, const QString &outputFile, 
 
 bool SpeexDecoder::isFormatSupported(const QString &containerType, const QString &containerProfile, const QString &formatType, const QString &formatProfile, const QString &formatVersion)
 {
-	if(containerType.compare("Speex", Qt::CaseInsensitive) == 0 || containerType.compare("OGG", Qt::CaseInsensitive) == 0)
+	static const QLatin1String speex("Speex");
+	if(containerType.compare(speex, Qt::CaseInsensitive) == 0 || containerType.compare(QLatin1String("OGG"), Qt::CaseInsensitive) == 0)
 	{
-		if(formatType.compare("Speex", Qt::CaseInsensitive) == 0)
+		if(formatType.compare(speex, Qt::CaseInsensitive) == 0)
 		{
 			return true;
 		}

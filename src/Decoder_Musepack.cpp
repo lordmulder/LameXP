@@ -88,9 +88,10 @@ bool MusepackDecoder::decode(const QString &sourceFile, const QString &outputFil
 
 bool MusepackDecoder::isFormatSupported(const QString &containerType, const QString &containerProfile, const QString &formatType, const QString &formatProfile, const QString &formatVersion)
 {
-	if(containerType.compare("Musepack SV8", Qt::CaseInsensitive) == 0 || containerType.compare("Musepack SV7", Qt::CaseInsensitive) == 0)
+	static const QLatin1String mpc_sv8("Musepack SV8"), mpc_sv7("Musepack SV7");
+	if((containerType.compare(mpc_sv8, Qt::CaseInsensitive) == 0) || (containerType.compare(mpc_sv7, Qt::CaseInsensitive) == 0))
 	{
-		if(formatType.compare("Musepack SV8", Qt::CaseInsensitive) == 0 || formatType.compare("Musepack SV7", Qt::CaseInsensitive) == 0)
+		if((formatType.compare(mpc_sv8, Qt::CaseInsensitive) == 0) || (formatType.compare(mpc_sv7, Qt::CaseInsensitive) == 0))
 		{
 			return true;
 		}
