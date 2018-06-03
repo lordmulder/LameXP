@@ -8,6 +8,8 @@ LameXP Audio-Encoder Front-End &ndash; Changelog
 ## LameXP v4.17 [unreleased] ## {-}
 * Upgraded build environment to Microsoft Visual Studio 2017.7 (MSVC 19.14)
 * Updated MediaInfo to v18.05 (2018-05-09), compiled with ICL 18.2 and MSVC 15.7
+* Downgraded FAAD to from v2.8 to v2.7 for now, because v2.8 is currently broken with certain MP4 files
+* Fixed detection of certain WMA and AAC files [regression in LameXP v4.16]
 
 ## LameXP v4.16 [2018-04-30] ## {-}
 * Upgraded build environment to Microsoft Visual Studio 2017.6 (MSVC 19.13)

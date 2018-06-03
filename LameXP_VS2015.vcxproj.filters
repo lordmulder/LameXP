@@ -568,9 +568,6 @@
     <ClCompile Include="tmp\LameXP\QRC_Tools.refalac-sse2.cpp">
       <Filter>Generated Files\QRC</Filter>
     </ClCompile>
-    <ClCompile Include="tmp\LameXP\QRC_Tools.faad-avx.cpp">
-      <Filter>Generated Files\QRC</Filter>
-    </ClCompile>
     <ClCompile Include="tmp\LameXP\QRC_Tools.oggdec-i686.cpp">
       <Filter>Generated Files\QRC</Filter>
     </ClCompile>
@@ -1077,9 +1074,6 @@
       <Filter>Resources</Filter>
     </CustomBuild>
     <CustomBuild Include="res\Tools.refalac-sse2.qrc">
-      <Filter>Resources</Filter>
-    </CustomBuild>
-    <CustomBuild Include="res\Tools.faad-avx.qrc">
       <Filter>Resources</Filter>
     </CustomBuild>
     <CustomBuild Include="res\Tools.mediainfo-i686.qrc">
