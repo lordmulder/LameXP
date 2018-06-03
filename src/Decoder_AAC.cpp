@@ -61,7 +61,7 @@ bool AACDecoder::decode(const QString &sourceFile, const QString &outputFile, QA
 	}
 
 	int prevProgress = -1;
-	QRegExp regExp("\\b(\\d+)%\\s+decoding", Qt::CaseInsensitive);
+	QRegExp regExp("\\[(\\d+)%\\]\\s*decoding", Qt::CaseInsensitive); //regExp("\\b(\\d+)%\\s+decoding", Qt::CaseInsensitive);
 
 	const result_t result = awaitProcess(process, abortFlag, [this, &prevProgress, &regExp](const QString &text)
 	{
