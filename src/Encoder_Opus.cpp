@@ -35,6 +35,8 @@
 #include <QDir>
 #include <QUUid>
 
+static const int g_opusBitrateLUT[30] = { 8, 9, 10, 12, 14, 16, 20, 24, 28, 32, 40, 48, 56, 64, 72, 80, 88, 96, 104, 112, 120, 128, 144, 160, 176, 192, 208, 224, 240, 256 };
+
 ///////////////////////////////////////////////////////////////////////////////
 // Encoder Info
 ///////////////////////////////////////////////////////////////////////////////
@@ -62,7 +64,7 @@ class OpusEncoderInfo : public AbstractEncoderInfo
 		case SettingsModel::VBRMode:
 		case SettingsModel::ABRMode:
 		case SettingsModel::CBRMode:
-			return 32;
+			return 30;
 			break;
 		default:
 			MUTILS_THROW("Bad RC mode specified!");
@@ -76,7 +78,7 @@ class OpusEncoderInfo : public AbstractEncoderInfo
 		case SettingsModel::VBRMode:
 		case SettingsModel::ABRMode:
 		case SettingsModel::CBRMode:
-			return qBound(8, (index + 1) * 8, 256);
+			return g_opusBitrateLUT[qBound(0, index, 29)];
 			break;
 		default:
 			MUTILS_THROW("Bad RC mode specified!");
@@ -184,8 +186,8 @@ bool OpusEncoder::encode(const QString &sourceFile, const AudioFileModel_MetaInf
 		args << L1S("--framesize") << L1S("60");
 		break;
 	}
-
-	args << L1S("--bitrate") << QString::number(qBound(8, (m_configBitrate + 1) * 8, 256));
+	
+	args << L1S("--bitrate") << QString::number(g_opusBitrateLUT[qBound(0, m_configBitrate, 29)]);
 
 	if(!metaInfo.title().isEmpty())   args << L1S("--title")   << cleanTag(metaInfo.title());
 	if(!metaInfo.artist().isEmpty())  args << L1S("--artist")  << cleanTag(metaInfo.artist());
