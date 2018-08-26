@@ -575,6 +575,7 @@ Section "!Install Files"
 	
 	File /a `/oname=$R0` `${LAMEXP_SOURCE_PATH}\LameXP.exe`
 	File /nonfatal /a /r `${LAMEXP_SOURCE_PATH}\*.dll`
+	File /nonfatal /a /r `${LAMEXP_SOURCE_PATH}\*.rcc`
 	
 	${StdUtils.GetFileNamePart} $R1 "$R0"
 	File /a `/oname=$R1.VisualElementsManifest.xml` `${LAMEXP_SOURCE_PATH}\LameXP.VisualElementsManifest.xml`
