@@ -103,32 +103,32 @@
     <message>
         <location filename="../../src/Dialog_About.cpp" line="805"/>
         <source>Copyright (c) 2011 LoRd_MuldeR &amp;lt;mulder2@gmx.de&amp;gt;. Some rights reserved.</source>
-        <translation type="unfinished"></translation>
+        <translation>Copyright (c) 2011 LoRd_MuldeR &amp;lt;mulder2@gmx.de&amp;gt;. Certains droits réservés.</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_About.cpp" line="812"/>
         <source>By Jory Stone &amp;lt;jcsston@toughguy.net&amp;gt; and LoRd_MuldeR &amp;lt;mulder2@gmx.de&amp;gt;.</source>
-        <translation type="unfinished"></translation>
+        <translation>Par Jory Stone &amp;lt;jcsston@toughguy.net&amp;gt; et LoRd_MuldeR &amp;lt;mulder2@gmx.de&amp;gt;.</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_About.cpp" line="859"/>
         <source>Silk Icons - Over 700 icons in PNG format</source>
-        <translation type="unfinished"></translation>
+        <translation>Silk Icons - Plus de 700 icônes en format PNG</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_About.cpp" line="861"/>
         <source>By Mark James, released under the Creative Commons &apos;BY&apos; License.</source>
-        <translation type="unfinished"></translation>
+        <translation>Par Mark James, distribué sous la license Creative Commons &apos;BY&apos;.</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_About.cpp" line="866"/>
         <source>Angry Chicken and Ghost Scream sound</source>
-        <translation type="unfinished"></translation>
+        <translation>Sons de poulet en colère et de cri de fantôme</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_About.cpp" line="868"/>
         <source>By Alexander, released under the Creative Commons &apos;BY&apos; License.</source>
-        <translation type="unfinished"></translation>
+        <translation>Par Alexander, distribué sous la license Creative Commons &apos;BY&apos;.</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_About.cpp" line="928"/>
@@ -639,7 +639,7 @@
     <message>
         <location filename="../../gui/CueSheetImport.ui" line="570"/>
         <source> Output Directory </source>
-        <translation>Répertoire de sortie</translation>
+        <translation> Répertoire de sortie </translation>
     </message>
     <message>
         <location filename="../../gui/CueSheetImport.ui" line="594"/>
@@ -940,7 +940,7 @@
     <message>
         <location filename="../../gui/MainWindow.ui" line="620"/>
         <source> Meta Information </source>
-        <translation>Informations méta</translation>
+        <translation> Informations méta </translation>
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="654"/>
@@ -961,7 +961,7 @@
     <message>
         <location filename="../../gui/MainWindow.ui" line="732"/>
         <source> Options </source>
-        <translation>Options</translation>
+        <translation> Options </translation>
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="746"/>
@@ -982,7 +982,7 @@
     <message>
         <location filename="../../gui/MainWindow.ui" line="804"/>
         <source> Encoder / Format </source>
-        <translation>Encodeur/Format</translation>
+        <translation> Encodeur / Format </translation>
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="911"/>
@@ -992,7 +992,7 @@
     <message>
         <location filename="../../gui/MainWindow.ui" line="1028"/>
         <source> Rate Control Method </source>
-        <translation>Méthode de contrôle de taux</translation>
+        <translation> Méthode de contrôle de taux </translation>
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="1052"/>
@@ -1012,7 +1012,7 @@
     <message>
         <location filename="../../gui/MainWindow.ui" line="1132"/>
         <source> Quality / Bitrate </source>
-        <translation>Qualité/Débit binaire</translation>
+        <translation> Qualité / Débit binaire </translation>
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="1171"/>
@@ -1063,32 +1063,32 @@
     <message>
         <location filename="../../gui/MainWindow.ui" line="3992"/>
         <source>Add Overwrite </source>
-        <translation>Ajouter un remplacement d&apos;extension</translation>
+        <translation>Ajouter un remplacement d&apos;extension </translation>
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="4003"/>
         <source>Remove Overwrite </source>
-        <translation>Retirer un remplacement d&apos;extension</translation>
+        <translation>Retirer un remplacement d&apos;extension </translation>
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="4040"/>
         <source>Rename Files </source>
-        <translation>Renommer les fichiers</translation>
+        <translation>Renommer les fichiers </translation>
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="4057"/>
         <source>Regular Expressions </source>
-        <translation>Rechercher et remplacer</translation>
+        <translation>Rechercher et remplacer </translation>
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="4071"/>
         <source>File Extensions </source>
-        <translation>Extensions de fichiers</translation>
+        <translation>Extensions de fichiers </translation>
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="4329"/>
         <source> File Operations </source>
-        <translation>Fichiers existants</translation>
+        <translation> Fichiers existants </translation>
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="4487"/>
@@ -1098,7 +1098,7 @@
     <message>
         <location filename="../../gui/MainWindow.ui" line="4613"/>
         <source> Encode Now!</source>
-        <translation>Encoder maintenant!</translation>
+        <translation> Encoder maintenant!</translation>
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="4655"/>
@@ -1109,7 +1109,7 @@
     <message>
         <location filename="../../gui/MainWindow.ui" line="4691"/>
         <source> Exit Program</source>
-        <translation>Quitter le programme</translation>
+        <translation> Quitter le programme</translation>
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="4723"/>
@@ -1401,8 +1401,7 @@
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="1756"/>
         <source>Your TEMP folder is located at:</source>
-        <translation>	
-Votre dossier TEMP est situé ici:</translation>
+        <translation>Votre dossier TEMP est situé ici :</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="1759"/>
@@ -1606,7 +1605,7 @@ Votre dossier TEMP est situé ici:</translation>
     <message>
         <location filename="../../gui/MainWindow.ui" line="1673"/>
         <source> LAME Algorithm Quality </source>
-        <translation>Qualité de l&apos;algorithme LAME</translation>
+        <translation> Qualité de l&apos;algorithme LAME </translation>
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="1713"/>
@@ -1631,7 +1630,7 @@ Votre dossier TEMP est situé ici:</translation>
     <message>
         <location filename="../../gui/MainWindow.ui" line="1528"/>
         <source> Bitrate Management (LAME and OggEnc2) </source>
-        <translation>Gestion du débit (LAME et OggEnc2)</translation>
+        <translation> Gestion du débit (LAME et OggEnc2) </translation>
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="1568"/>
@@ -1657,9 +1656,7 @@ Votre dossier TEMP est situé ici:</translation>
         <location filename="../../gui/MainWindow.ui" line="1883"/>
         <location filename="../../gui/MainWindow.ui" line="1940"/>
         <source>Auto Select (Default)</source>
-        <translation>	
-	
-Sélection automatique (par défaut)</translation>
+        <translation>Sélection automatique (par défaut)</translation>
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="1888"/>
@@ -1759,7 +1756,7 @@ Sélection automatique (par défaut)</translation>
     <message>
         <location filename="../../gui/MainWindow.ui" line="2258"/>
         <source> Volume Normalization </source>
-        <translation>Normalisation du volume</translation>
+        <translation> Normalisation du volume </translation>
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="2266"/>
@@ -1774,7 +1771,7 @@ Sélection automatique (par défaut)</translation>
     <message>
         <location filename="../../gui/MainWindow.ui" line="4547"/>
         <source>Reset Advanced Options </source>
-        <translation>Réinitialiser les Options avancées</translation>
+        <translation>Réinitialiser les Options avancées </translation>
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="5042"/>
@@ -1784,7 +1781,7 @@ Sélection automatique (par défaut)</translation>
     <message>
         <location filename="../../gui/MainWindow.ui" line="2490"/>
         <source> Tone Adjustment </source>
-        <translation>Ajustement du ton</translation>
+        <translation> Ajustement du ton </translation>
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="2588"/>
@@ -1826,7 +1823,7 @@ Sélection automatique (par défaut)</translation>
     <message>
         <location filename="../../gui/MainWindow.ui" line="2668"/>
         <source> Custom Encoder Parameters </source>
-        <translation>Paramètres d&apos;encodage personnalisés</translation>
+        <translation> Paramètres d&apos;encodage personnalisés </translation>
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="2743"/>
@@ -1866,7 +1863,7 @@ Sélection automatique (par défaut)</translation>
     <message>
         <location filename="../../gui/MainWindow.ui" line="3171"/>
         <source> Temp Directory </source>
-        <translation>Répertoire temporaire</translation>
+        <translation> Répertoire temporaire </translation>
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="3186"/>
@@ -1993,7 +1990,7 @@ Sélection automatique (par défaut)</translation>
     <message>
         <location filename="../../gui/MainWindow.ui" line="3301"/>
         <source> Aften A/52 Options </source>
-        <translation>Options Aften A/52 </translation>
+        <translation> Options Aften A/52 </translation>
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="3313"/>
@@ -2335,17 +2332,17 @@ Sélection automatique (par défaut)</translation>
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="1593"/>
         <source>Your LameXP install directory is located here:</source>
-        <translation type="unfinished"></translation>
+        <translation>Votre dossier d&apos;installation LameXP est situé ici:</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="1595"/>
         <source>You can download the Nero AAC encoder for free from this website:</source>
-        <translation type="unfinished"></translation>
+        <translation>Vous pouvez télécherger l&apos;encodeur Nero AAC gratuitement depuis cette addresse :</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="1597"/>
         <source>Note: Nero AAC encoder version %1 or newer is required to enable AAC encoding support!</source>
-        <translation type="unfinished"></translation>
+        <translation>Note : La version %1 ou plus est nécessaire pour activer le support de l&apos;encodage AAC!</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="2454"/>
@@ -3053,7 +3050,7 @@ Sélection automatique (par défaut)</translation>
     <message>
         <location filename="../../src/Thread_Process.cpp" line="503"/>
         <source>Failed to generate non-existing target file name!</source>
-        <translation type="unfinished"></translation>
+        <translation>Échec de la génération de nom de fichier cible inexistant!</translation>
     </message>
     <message>
         <location filename="../../src/Thread_Process.cpp" line="511"/>
@@ -3453,7 +3450,7 @@ Sélection automatique (par défaut)</translation>
     <message>
         <location filename="../../gui/UpdateDialog.ui" line="573"/>
         <source>Press Esc button to cancel update check...</source>
-        <translation type="unfinished"></translation>
+        <translation>Pressez le bouton Échap pour annuler la vérification de mise à jour...</translation>
     </message>
     <message>
         <location filename="../../gui/UpdateDialog.ui" line="602"/>
@@ -3514,7 +3511,7 @@ Sélection automatique (par défaut)</translation>
     <message>
         <location filename="../../src/Dialog_Update.cpp" line="208"/>
         <source>Stopping update check, please wait...</source>
-        <translation type="unfinished"></translation>
+        <translation>Arrêt de la recherche de mises à jour, veuillez patienter...</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_Update.cpp" line="298"/>
@@ -3544,12 +3541,12 @@ Sélection automatique (par défaut)</translation>
     <message>
         <location filename="../../src/Dialog_Update.cpp" line="327"/>
         <source>Update check has been cancelled!</source>
-        <translation type="unfinished"></translation>
+        <translation>La vérification des mises à jour a été annulée!</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_Update.cpp" line="328"/>
         <source>The update check has been cancelled by the user. Please try again later.</source>
-        <translation type="unfinished"></translation>
+        <translation>La vérification des mises à jour a été annulée par l&apos;utilisateur. Veuillez réessayer plus tard.</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_Update.cpp" line="396"/>
