@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.0" language="uk_UA" sourcelanguage="en">
+<TS version="2.1" language="uk_UA" sourcelanguage="en">
 <context>
     <name>AboutDialog</name>
     <message>
@@ -182,12 +182,12 @@
     <message>
         <location filename="../../src/Dialog_About.cpp" line="805"/>
         <source>Copyright (c) 2011 LoRd_MuldeR &amp;lt;mulder2@gmx.de&amp;gt;. Some rights reserved.</source>
-        <translation type="unfinished"></translation>
+        <translation>Авторське право (c) зберігається за 2011 LoRd_MuldeR &amp;lt;mulder2@gmx.de&amp;gt;. Деякі права захищено.</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_About.cpp" line="812"/>
         <source>By Jory Stone &amp;lt;jcsston@toughguy.net&amp;gt; and LoRd_MuldeR &amp;lt;mulder2@gmx.de&amp;gt;.</source>
-        <translation type="unfinished"></translation>
+        <translation>Створено Jory Stone &amp;lt;jcsston@toughguy.net&amp;gt; і LoRd_MuldeR &amp;lt;mulder2@gmx.de&amp;gt;.</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_About.cpp" line="824"/>
