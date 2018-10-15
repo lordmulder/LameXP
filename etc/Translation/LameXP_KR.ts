@@ -84,7 +84,6 @@
         <location filename="../../src/Dialog_About.cpp" line="826"/>
         <location filename="../../src/Dialog_About.cpp" line="833"/>
         <location filename="../../src/Dialog_About.cpp" line="840"/>
-        <location filename="../../src/Dialog_About.cpp" line="847"/>
         <location filename="../../src/Dialog_About.cpp" line="854"/>
         <source>Released under the terms of the GNU Lesser General Public License.</source>
         <translation type="unfinished">GNU 약소 일반 공중 사용 허가서의 약관 하에 출시됨.</translation>
@@ -205,11 +204,6 @@
         <translation type="unfinished">GnuPG - GNU 개인정보 보호</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_About.cpp" line="845"/>
-        <source>GNU Wget - Software for retrieving files using HTTP</source>
-        <translation type="unfinished">GNU Wget - HTTP를 사용하여 파일을 검색하기 위한 소프트웨어</translation>
-    </message>
-    <message>
         <location filename="../../src/Dialog_About.cpp" line="859"/>
         <source>Silk Icons - Over 700 icons in PNG format</source>
         <translation type="unfinished">Silk 아이콘 - PNG 형식의 700 이상의 아이콘</translation>
@@ -314,6 +308,16 @@
         <location filename="../../src/Dialog_About.cpp" line="647"/>
         <source>Special thanks to:</source>
         <translation type="unfinished">특별히 감사합니다:</translation>
+    </message>
+    <message>
+        <location filename="../../src/Dialog_About.cpp" line="845"/>
+        <source>cURL - Curl URL Request Library</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/Dialog_About.cpp" line="847"/>
+        <source>By Daniel Stenberg, released under the terms of the MIT/X Derivate License.</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/Dialog_About.cpp" line="852"/>
@@ -3439,139 +3443,139 @@
         <translation type="unfinished">닫기</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="163"/>
-        <location filename="../../src/Dialog_Update.cpp" line="368"/>
+        <location filename="../../src/Dialog_Update.cpp" line="162"/>
+        <location filename="../../src/Dialog_Update.cpp" line="367"/>
         <source>Build</source>
         <translation type="unfinished">Build</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="164"/>
+        <location filename="../../src/Dialog_Update.cpp" line="163"/>
         <source>Unknown</source>
         <translation type="unfinished">알 수 없음</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="291"/>
+        <location filename="../../src/Dialog_Update.cpp" line="290"/>
         <source>Testing your internet connection, please wait...</source>
         <translation type="unfinished">인터넷 연결 테스트 중, 잠시만 기다려 주십시오...</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="317"/>
+        <location filename="../../src/Dialog_Update.cpp" line="316"/>
         <source>Network connectivity test has failed!</source>
         <translation type="unfinished">네트워크 연결 테스트가 실패되었습니다!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="294"/>
+        <location filename="../../src/Dialog_Update.cpp" line="293"/>
         <source>Checking for new updates online, please wait...</source>
         <translation type="unfinished">새로운 업데이트 확인 중, 잠시만 기다려 주십시오...</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="322"/>
+        <location filename="../../src/Dialog_Update.cpp" line="321"/>
         <source>Failed to fetch update information from server!</source>
         <translation type="unfinished">서버로부터 업데이트 정보를 불러오기가 실패되었습니다!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="323"/>
+        <location filename="../../src/Dialog_Update.cpp" line="322"/>
         <source>Sorry, the update server might be busy at this time. Plase try again later.</source>
         <translation type="unfinished">죄송하지만, 업데이트 서버가 폭주 상태입니다. 나중에 다시 시도하시기 바랍니다.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="367"/>
+        <location filename="../../src/Dialog_Update.cpp" line="366"/>
         <source>More information available at:</source>
         <translation type="unfinished">추가 정보 링크:</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="297"/>
+        <location filename="../../src/Dialog_Update.cpp" line="296"/>
         <source>A new version of LameXP is available!</source>
         <translation type="unfinished">LameXP의 새 버전을 사용할 수 있습니다!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="208"/>
+        <location filename="../../src/Dialog_Update.cpp" line="207"/>
         <source>Stopping update check, please wait...</source>
         <translation type="unfinished">업데이트 확인 중지 중, 잠시 기다려 주십시오...</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="298"/>
+        <location filename="../../src/Dialog_Update.cpp" line="297"/>
         <source>We highly recommend all users to install this update as soon as possible.</source>
         <translation type="unfinished">이 업데이트를 신속히 설치하시길 모든 사용자들에게 권장합니다.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="302"/>
+        <location filename="../../src/Dialog_Update.cpp" line="301"/>
         <source>No new updates available at this time.</source>
         <translation type="unfinished">사용 가능한 새로운 업데이트가 없습니다.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="303"/>
+        <location filename="../../src/Dialog_Update.cpp" line="302"/>
         <source>Your version of LameXP is still up-to-date. Please check for updates regularly!</source>
         <translation type="unfinished">LameXP의 최신 버전입니다. 자주 업데이트를 확인하여 주십시오!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="307"/>
+        <location filename="../../src/Dialog_Update.cpp" line="306"/>
         <source>Your version appears to be newer than the latest release.</source>
         <translation type="unfinished">현재 설치된 버전이 최신 출시 버전 보다 더 최신인 것 같습니다.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="308"/>
+        <location filename="../../src/Dialog_Update.cpp" line="307"/>
         <source>This usually indicates your are currently using a pre-release version of LameXP.</source>
         <translation type="unfinished">이런 경우는 LameXP의 시험판 사용을 의미합니다.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="327"/>
+        <location filename="../../src/Dialog_Update.cpp" line="326"/>
         <source>Update check has been cancelled!</source>
         <translation type="unfinished">업데이트 확인이 취소되었습니다!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="328"/>
+        <location filename="../../src/Dialog_Update.cpp" line="327"/>
         <source>The update check has been cancelled by the user. Please try again later.</source>
         <translation type="unfinished">업데이트 확인이 취소되었습니다. 나중에 다시 시도하시기 바랍니다.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="396"/>
+        <location filename="../../src/Dialog_Update.cpp" line="395"/>
         <source>Update is being downloaded, please be patient...</source>
         <translation type="unfinished">업데이트를 내려받고 있습니다. 잠시만 기다려주십시오...</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="444"/>
+        <location filename="../../src/Dialog_Update.cpp" line="443"/>
         <source>Update ready to install. Applicaion will quit...</source>
         <translation type="unfinished">업데이트 설치 준비. 프로그램이 종료됩니다...</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="452"/>
+        <location filename="../../src/Dialog_Update.cpp" line="451"/>
         <source>Update failed. Please try again or download manually!</source>
         <translation type="unfinished">업데이트 실패. 다시 시도하거나 업데이트를 수동으로 내려받으시기 바랍니다!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="312"/>
+        <location filename="../../src/Dialog_Update.cpp" line="311"/>
         <source>It appears that the computer currently is offline!</source>
         <translation type="unfinished">현재 컴퓨터가 인터넷에 연결되어 있지 않은 걸로 보입니다!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="313"/>
-        <location filename="../../src/Dialog_Update.cpp" line="318"/>
+        <location filename="../../src/Dialog_Update.cpp" line="312"/>
+        <location filename="../../src/Dialog_Update.cpp" line="317"/>
         <source>Please make sure your computer is connected to the internet and try again.</source>
         <translation type="unfinished">인터넷 연결을 확인하고 다시 시도하시기 바랍니다.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="288"/>
+        <location filename="../../src/Dialog_Update.cpp" line="287"/>
         <source>Initializing, please wait...</source>
         <translation type="unfinished">초기화 중, 잠시만 기다려 주십시오...</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="255"/>
+        <location filename="../../src/Dialog_Update.cpp" line="254"/>
         <source>Discard</source>
         <translation type="unfinished">닫기</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="255"/>
+        <location filename="../../src/Dialog_Update.cpp" line="254"/>
         <source>Ignore</source>
         <translation type="unfinished">무시</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="253"/>
+        <location filename="../../src/Dialog_Update.cpp" line="252"/>
         <source>Sorry, but only users in the &quot;Administrators&quot; group can install updates.</source>
         <translation type="unfinished">죄송하지만 관리자 그룹의 사용자들만 업데이트를 설치할 수 있습니다.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="254"/>
+        <location filename="../../src/Dialog_Update.cpp" line="253"/>
         <source>Please start application from an administrator account and try again!</source>
         <translation type="unfinished">프로그램을 관리자 권한으로 시작한 다음 다시 시도하시기 바랍니다!</translation>
     </message>

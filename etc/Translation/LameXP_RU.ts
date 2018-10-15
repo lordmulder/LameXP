@@ -86,7 +86,6 @@
         <location filename="../../src/Dialog_About.cpp" line="826"/>
         <location filename="../../src/Dialog_About.cpp" line="833"/>
         <location filename="../../src/Dialog_About.cpp" line="840"/>
-        <location filename="../../src/Dialog_About.cpp" line="847"/>
         <location filename="../../src/Dialog_About.cpp" line="854"/>
         <source>Released under the terms of the GNU Lesser General Public License.</source>
         <translation>Распространяется на условиях GNU Lesser General Public License.</translation>
@@ -207,11 +206,6 @@
         <translation></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_About.cpp" line="845"/>
-        <source>GNU Wget - Software for retrieving files using HTTP</source>
-        <translation>GNU Wget - программное обеспечение для получения файлов через HTTP</translation>
-    </message>
-    <message>
         <location filename="../../src/Dialog_About.cpp" line="859"/>
         <source>Silk Icons - Over 700 icons in PNG format</source>
         <translation type="unfinished"></translation>
@@ -316,6 +310,16 @@
         <location filename="../../src/Dialog_About.cpp" line="647"/>
         <source>Special thanks to:</source>
         <translation>Отдельная благодарность:</translation>
+    </message>
+    <message>
+        <location filename="../../src/Dialog_About.cpp" line="845"/>
+        <source>cURL - Curl URL Request Library</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/Dialog_About.cpp" line="847"/>
+        <source>By Daniel Stenberg, released under the terms of the MIT/X Derivate License.</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/Dialog_About.cpp" line="852"/>
@@ -3482,141 +3486,141 @@
         <translation>Закрыть</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="163"/>
-        <location filename="../../src/Dialog_Update.cpp" line="368"/>
+        <location filename="../../src/Dialog_Update.cpp" line="162"/>
+        <location filename="../../src/Dialog_Update.cpp" line="367"/>
         <source>Build</source>
         <translation>Сборка</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="164"/>
+        <location filename="../../src/Dialog_Update.cpp" line="163"/>
         <source>Unknown</source>
         <translation>Неизвестно</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="291"/>
+        <location filename="../../src/Dialog_Update.cpp" line="290"/>
         <source>Testing your internet connection, please wait...</source>
         <translation>Проверяю соединение с сетью, пожалуйста, подождите...</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="317"/>
+        <location filename="../../src/Dialog_Update.cpp" line="316"/>
         <source>Network connectivity test has failed!</source>
         <translation>Нет соединения с сетью!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="294"/>
+        <location filename="../../src/Dialog_Update.cpp" line="293"/>
         <source>Checking for new updates online, please wait...</source>
         <translation>Проверяю обновления, пожалуйста, подождите...</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="322"/>
+        <location filename="../../src/Dialog_Update.cpp" line="321"/>
         <source>Failed to fetch update information from server!</source>
         <translation>Не могу получить информацию об обновлениях с сервера!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="323"/>
+        <location filename="../../src/Dialog_Update.cpp" line="322"/>
         <source>Sorry, the update server might be busy at this time. Plase try again later.</source>
         <translation>Извините, сервер обновлений сейчас недоступен. Пожалуйста, попробуйте позднее.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="367"/>
+        <location filename="../../src/Dialog_Update.cpp" line="366"/>
         <source>More information available at:</source>
         <translation>Подробная информация здесь:</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="297"/>
+        <location filename="../../src/Dialog_Update.cpp" line="296"/>
         <source>A new version of LameXP is available!</source>
         <translation>Доступна новя версия LameXP!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="208"/>
+        <location filename="../../src/Dialog_Update.cpp" line="207"/>
         <source>Stopping update check, please wait...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="298"/>
+        <location filename="../../src/Dialog_Update.cpp" line="297"/>
         <source>We highly recommend all users to install this update as soon as possible.</source>
         <translatorcomment>A nasty typo corrected</translatorcomment>
         <translation>Настоятельно  рекомендуем установить это обновление как можно скорее.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="302"/>
+        <location filename="../../src/Dialog_Update.cpp" line="301"/>
         <source>No new updates available at this time.</source>
         <translation>На данный момент обновлений нет.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="303"/>
+        <location filename="../../src/Dialog_Update.cpp" line="302"/>
         <source>Your version of LameXP is still up-to-date. Please check for updates regularly!</source>
         <translation>Вы используете самую новую версию. Проверяйте обновления регулярно!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="307"/>
+        <location filename="../../src/Dialog_Update.cpp" line="306"/>
         <source>Your version appears to be newer than the latest release.</source>
         <translation>Установленная версия новее чем последний релиз.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="308"/>
+        <location filename="../../src/Dialog_Update.cpp" line="307"/>
         <source>This usually indicates your are currently using a pre-release version of LameXP.</source>
         <translation>Это обычно значит, что вы используете бета версию LameXP.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="327"/>
+        <location filename="../../src/Dialog_Update.cpp" line="326"/>
         <source>Update check has been cancelled!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="328"/>
+        <location filename="../../src/Dialog_Update.cpp" line="327"/>
         <source>The update check has been cancelled by the user. Please try again later.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="396"/>
+        <location filename="../../src/Dialog_Update.cpp" line="395"/>
         <source>Update is being downloaded, please be patient...</source>
         <translation>Скачиваю обновление...</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="444"/>
+        <location filename="../../src/Dialog_Update.cpp" line="443"/>
         <source>Update ready to install. Applicaion will quit...</source>
         <translation>Обновление готово к установке. Завершение приложения...</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="452"/>
+        <location filename="../../src/Dialog_Update.cpp" line="451"/>
         <source>Update failed. Please try again or download manually!</source>
         <translatorcomment>Фак май майнд</translatorcomment>
         <translation>Не могу установить обновление в автоматическом режиме. Повторите попытку или установите обновление вручную!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="312"/>
+        <location filename="../../src/Dialog_Update.cpp" line="311"/>
         <source>It appears that the computer currently is offline!</source>
         <translation>Похоже компьютер не подключен к интернету!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="313"/>
-        <location filename="../../src/Dialog_Update.cpp" line="318"/>
+        <location filename="../../src/Dialog_Update.cpp" line="312"/>
+        <location filename="../../src/Dialog_Update.cpp" line="317"/>
         <source>Please make sure your computer is connected to the internet and try again.</source>
         <translation>Пожалуйста, проверьте, что ваш компьютер подключен к интернету и попробуйте снова.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="288"/>
+        <location filename="../../src/Dialog_Update.cpp" line="287"/>
         <source>Initializing, please wait...</source>
         <translation>Инициализация, пожалуйста, подождите...</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="255"/>
+        <location filename="../../src/Dialog_Update.cpp" line="254"/>
         <source>Discard</source>
         <translation>Отменить</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="255"/>
+        <location filename="../../src/Dialog_Update.cpp" line="254"/>
         <source>Ignore</source>
         <translation>Игнорировать</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="253"/>
+        <location filename="../../src/Dialog_Update.cpp" line="252"/>
         <source>Sorry, but only users in the &quot;Administrators&quot; group can install updates.</source>
         <translation>Извините, но только пользователи из группы &quot;Администраторы&quot; могут устанавливать обновления.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="254"/>
+        <location filename="../../src/Dialog_Update.cpp" line="253"/>
         <source>Please start application from an administrator account and try again!</source>
         <translation>Пожалуйста, запустите приложение с правами администратора и попробуйте снова!</translation>
     </message>
