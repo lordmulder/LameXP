@@ -215,6 +215,7 @@
     <file>tools/aften.sse2.exe</file>
     <file>tools/aften.x64.exe</file>
     <file>tools/avs2wav.exe</file>
+    <file>tools/curl.exe</file>
     <file>tools/dcaenc.exe</file>
     <file>tools/faad.i686.exe</file>
     <file>tools/faad.sse2.exe</file>
@@ -232,7 +233,6 @@
     <file>tools/mac.x64-sse2.exe</file>
     <file>tools/mac.x86-i686.exe</file>
     <file>tools/mac.x86-sse2.exe</file>
-    <file>tools/mcat.exe</file>
     <file>tools/mediainfo.i686.exe</file>
     <file>tools/mediainfo.sse2.exe</file>
     <file>tools/mediainfo.x64.exe</file>
@@ -264,7 +264,6 @@
     <file>tools/tta.exe</file>
     <file>tools/valdec.exe</file>
     <file>tools/vorbiscomment.exe</file>
-    <file>tools/wget.exe</file>
     <file>tools/wma2wav.exe</file>
     <file>tools/wupdate.exe</file>
     <file>tools/wvunpack.x64-avx.exe</file>

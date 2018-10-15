@@ -842,10 +842,10 @@ void AboutDialog::initSoftwareTab(void)
 	);
 	moreAboutText += makeToolText
 	(
-		tr("GNU Wget - Software for retrieving files using HTTP"),
-		"wget.exe", "v?.??.?",
-		tr("Released under the terms of the GNU Lesser General Public License."),
-		"http://www.gnu.org/software/wget/"
+		tr("cURL - Curl URL Request Library"),
+		"curl.exe", "v?.??.?",
+		tr("By Daniel Stenberg, released under the terms of the MIT/X Derivate License."),
+		"https://curl.haxx.se/"
 	);
 	moreAboutText += makeToolText
 	(

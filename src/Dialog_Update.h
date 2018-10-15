@@ -77,8 +77,7 @@ private:
 	Ui::UpdateDialog *const ui; //for Qt UIC
 	const SettingsModel *const m_settings;
 
-	const QString m_binaryWGet;
-	const QString m_binaryMCat;
+	const QString m_binaryCurl;
 	const QString m_binaryGnuPG;
 	const QString m_binaryKeys;
 	const QString m_binaryUpdater;
