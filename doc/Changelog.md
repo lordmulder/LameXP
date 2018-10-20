@@ -12,6 +12,7 @@ LameXP Audio-Encoder Front-End &ndash; Changelog
 * Downgraded FAAD to from v2.8 to v2.7 for now, because v2.8 is currently broken with certain MP4 files
 * Fixed detection of certain WMA and AAC files [regression in LameXP v4.16]
 * Some improvements to the auto-update function, which is now using cURL instead of Wget
+* Updated language files (big thank-you to all contributors !!!)
 
 ## LameXP v4.16 [2018-04-30] ## {-}
 * Upgraded build environment to Microsoft Visual Studio 2017.6 (MSVC 19.13)
@@ -31,6 +32,7 @@ LameXP Audio-Encoder Front-End &ndash; Changelog
 * Some improvements to output file name generation code
 * Added "Visual Elements" manifest for Windows 8+ "Start" screen tile
 * Some more protection against "DLL pre-loading" attacks has been implemented
+* Updated language files (big thank-you to all contributors !!!)
 
 ## LameXP v4.15 [2017-05-31] ## {-}
 
@@ -45,6 +47,7 @@ LameXP Audio-Encoder Front-End &ndash; Changelog
 * Updated FAAD decoder to v2.7 from CVS in order to include latest libFAAD fixes (2016-11-11)
 * Updated Monkey's Audio binary to v4.25 (2017-03-12), compiled with ICL 17.0 and MSVC 14.0
 * Some tweaks to the auto-update function in order to speed-up the update check in most situations
+* Updated language files (big thank-you to all contributors !!!)
 
 ## LameXP v4.14 [2016-11-19] ## {-}
 
