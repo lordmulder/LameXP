@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.0" language="uk_UA" sourcelanguage="en">
+<TS version="2.1" language="uk_UA" sourcelanguage="en">
 <context>
     <name>AboutDialog</name>
     <message>
@@ -313,12 +313,12 @@
     <message>
         <location filename="../../src/Dialog_About.cpp" line="845"/>
         <source>cURL - Curl URL Request Library</source>
-        <translation type="unfinished"></translation>
+        <translation>cURL - Curl URL Request Library</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_About.cpp" line="847"/>
         <source>By Daniel Stenberg, released under the terms of the MIT/X Derivate License.</source>
-        <translation type="unfinished"></translation>
+        <translation>Випущено Daniel Stenberg під ліцензією MIT/X Derivate License.</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_About.cpp" line="852"/>
