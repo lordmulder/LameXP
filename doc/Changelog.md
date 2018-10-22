@@ -9,6 +9,7 @@ LameXP Audio-Encoder Front-End &ndash; Changelog
 * Upgraded build environment to Microsoft Visual Studio 2017.8 (MSVC 19.15)
 * Updated Opus encoder/decoder libraries to v1.3-RC2 (2018-09-27) and Opus-Tools to v0.2+2 (2018-09-30)
 * Updated MediaInfo to v18.05 (2018-05-09), compiled with ICL 18.2 and MSVC 15.7
+* Updated GnuPG to v1.4.23 (2018-06-11), compiled with GCC 7.3.0
 * Downgraded FAAD to from v2.8 to v2.7 for now, because v2.8 is currently broken with certain MP4 files
 * Fixed detection of certain WMA and AAC files [regression in LameXP v4.16]
 * Some improvements to the auto-update function, which is now using cURL instead of Wget
