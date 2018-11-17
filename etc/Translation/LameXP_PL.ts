@@ -277,22 +277,22 @@
     <message>
         <location filename="../../src/Dialog_About.cpp" line="805"/>
         <source>Copyright (c) 2011 LoRd_MuldeR &amp;lt;mulder2@gmx.de&amp;gt;. Some rights reserved.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Prawo do własności (c) posiada 2011 LoRd_MuldeR &amp;lt;mulder2@gmx.de&amp;gt;. Pewne prawa zastrzeżone.</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_About.cpp" line="812"/>
         <source>By Jory Stone &amp;lt;jcsston@toughguy.net&amp;gt; and LoRd_MuldeR &amp;lt;mulder2@gmx.de&amp;gt;.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Autorstwa Jory Stone &amp;lt;jcsston@toughguy.net&amp;gt; i LoRd_MuldeR &amp;lt;mulder2@gmx.de&amp;gt;.</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_About.cpp" line="845"/>
         <source>cURL - Curl URL Request Library</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">cURL - Biblioteka klienta Curl URL</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_About.cpp" line="847"/>
         <source>By Daniel Stenberg, released under the terms of the MIT/X Derivate License.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Autorstwa Daniela Stenberga, wydane na warunkach licencji MIT/X Derivate License.</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_About.cpp" line="810"/>
