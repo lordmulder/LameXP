@@ -5,6 +5,10 @@ LameXP Audio-Encoder Front-End &ndash; Changelog
 
 # LameXP v4.xx History #
 
+## LameXP v4.18 [unreleased] ## {-}
+* Upgraded build environment to Microsoft Visual Studio 2017.9 (MSVC 19.16)
+* Updated Vorbis encoder to OggEnc v2.88 (2018-11-14), using libvorbis v1.3.6 and aoTuV b6.03_2018
+
 ## LameXP v4.17 [2018-11-10] ## {-}
 * Upgraded build environment to Microsoft Visual Studio 2017.8 (MSVC 19.15)
 * Updated Opus encoder/decoder libraries to v1.3 (2018-10-17) and Opus-Tools to v0.2+3 (2018-10-16)
