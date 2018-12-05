@@ -8,6 +8,7 @@ LameXP Audio-Encoder Front-End &ndash; Changelog
 ## LameXP v4.18 [unreleased] ## {-}
 * Upgraded build environment to Microsoft Visual Studio 2017.9 (MSVC 19.16)
 * Updated Vorbis encoder to OggEnc v2.88 (2018-11-14), using libvorbis v1.3.6 and aoTuV b6.03_2018
+* Added *64-Bit* binaries of mpg123 decoder to v1.25.10 (2018-03-05), compiled with GCC 8.2.1
 
 ## LameXP v4.17 [2018-11-10] ## {-}
 * Upgraded build environment to Microsoft Visual Studio 2017.8 (MSVC 19.15)
