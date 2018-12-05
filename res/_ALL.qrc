@@ -237,9 +237,10 @@
     <file>tools/mediainfo.sse2.exe</file>
     <file>tools/mediainfo.x64.exe</file>
     <file>tools/mpcdec.exe</file>
-    <file>tools/mpg123.avx.exe</file>
-    <file>tools/mpg123.i686.exe</file>
-    <file>tools/mpg123.sse2.exe</file>
+    <file>tools/mpg123.x64-avx.exe</file>
+    <file>tools/mpg123.x64-sse2.exe</file>
+    <file>tools/mpg123.x86-i686.exe</file>
+    <file>tools/mpg123.x86-sse2.exe</file>
     <file>tools/oggdec.avx.exe</file>
     <file>tools/oggdec.i686.exe</file>
     <file>tools/oggdec.sse2.exe</file>
