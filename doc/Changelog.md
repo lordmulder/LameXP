@@ -10,11 +10,12 @@ LameXP Audio-Encoder Front-End &ndash; Changelog
 * Updated Vorbis encoder to OggEnc v2.88 (2018-11-14), using libvorbis v1.3.6 with aoTuV b6.03 (2018)
 * Updated FLAC encoder/decoder to v1.3.2+ Git (2018-09-19), compiled with ICL 19.0 and MSVC 14.16
 * Updated mpg123 decoder to v1.25.10 (2018-03-05) and added *64-Bit* binaries, compiled with GCC 8.2.1
+* Updated MediaInfo to v18.08.1 (2018-09-10), compiled with ICL 19.0 and MSVC 14.16
 
 ## LameXP v4.17 [2018-11-10] ## {-}
 * Upgraded build environment to Microsoft Visual Studio 2017.8 (MSVC 14.15)
 * Updated Opus encoder/decoder libraries to v1.3 (2018-10-17) and Opus-Tools to v0.2+3 (2018-10-16)
-* Updated MediaInfo to v18.05 (2018-05-09), compiled with ICL 18.2 and MSVC 15.7
+* Updated MediaInfo to v18.05 (2018-05-09), compiled with ICL 18.2 and MSVC 14.14
 * Updated GnuPG to v1.4.23 (2018-06-11), compiled with GCC 7.3.0
 * Downgraded FAAD to from v2.8 to v2.7 for now, because v2.8 is currently broken with certain MP4 files
 * Fixed detection of certain WMA and AAC files [regression in LameXP v4.16]
