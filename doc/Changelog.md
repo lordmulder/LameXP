@@ -6,12 +6,13 @@ LameXP Audio-Encoder Front-End &ndash; Changelog
 # LameXP v4.xx History #
 
 ## LameXP v4.18 [unreleased] ## {-}
-* Upgraded build environment to Microsoft Visual Studio 2017.9 (MSVC 19.16)
-* Updated Vorbis encoder to OggEnc v2.88 (2018-11-14), using libvorbis v1.3.6 and aoTuV b6.03_2018
-* Added *64-Bit* binaries of mpg123 decoder to v1.25.10 (2018-03-05), compiled with GCC 8.2.1
+* Upgraded build environment to Microsoft Visual Studio 2017.9 (MSVC 14.16)
+* Updated Vorbis encoder to OggEnc v2.88 (2018-11-14), using libvorbis v1.3.6 with aoTuV b6.03 (2018)
+* Updated FLAC encoder/decoder to v1.3.2+ Git (2018-09-19), compiled with ICL 19.0 and MSVC 14.16
+* Updated mpg123 decoder to v1.25.10 (2018-03-05) and added *64-Bit* binaries, compiled with GCC 8.2.1
 
 ## LameXP v4.17 [2018-11-10] ## {-}
-* Upgraded build environment to Microsoft Visual Studio 2017.8 (MSVC 19.15)
+* Upgraded build environment to Microsoft Visual Studio 2017.8 (MSVC 14.15)
 * Updated Opus encoder/decoder libraries to v1.3 (2018-10-17) and Opus-Tools to v0.2+3 (2018-10-16)
 * Updated MediaInfo to v18.05 (2018-05-09), compiled with ICL 18.2 and MSVC 15.7
 * Updated GnuPG to v1.4.23 (2018-06-11), compiled with GCC 7.3.0
@@ -21,18 +22,18 @@ LameXP Audio-Encoder Front-End &ndash; Changelog
 * Updated language files (big thank-you to all contributors !!!)
 
 ## LameXP v4.16 [2018-04-30] ## {-}
-* Upgraded build environment to Microsoft Visual Studio 2017.6 (MSVC 19.13)
+* Upgraded build environment to Microsoft Visual Studio 2017.6 (MSVC 14.13)
 * Updated LAME encoder to v3.100 Final (2017-10-13), compiled with ICL 18.0 and MSVC 14.1
 * Updated mpg123 decoder to v1.25.10 (2018-03-05), compiled with GCC 7.3.0
 * Updated Opus encoder/decoder libraries to v1.3-beta-31 (2018-03-27) and Opus-Tools to v0.1.10-51 (2018-03-04)
-* Updated Monkey's Audio binary to v4.33 (2017-12-01), compiled with ICL 18.0 and MSVC 15.5
+* Updated Monkey's Audio binary to v4.33 (2017-12-01), compiled with ICL 18.0 and MSVC 14.12
 * Updated FAAD decoder to v2.8.6 (2017-10-10), compiled with ICL 18.0 and MSVC 15.5
 * Updated Vorbis decoder to OggDec v1.10.1+ (2015-03-19), using libVorbis v1.3.6 (2018-03-16)
-* Updated ALAC decoder to refalac v1.64 (2017-05-19), compiled with ICL 18.0 and MSVC 15.5
-* Updated WavPack decoder to v5.1.0 (2017-01-20), compiled with ICL 18.0 and MSVC 15.5
-* Updated MediaInfo to v18.03.1+ (2018-04-19), compiled with ICL 18.2 and MSVC 15.6
+* Updated ALAC decoder to refalac v1.64 (2017-05-19), compiled with ICL 18.0 and MSVC 14.12
+* Updated WavPack decoder to v5.1.0 (2017-01-20), compiled with ICL 18.0 and MSVC 14.12
+* Updated MediaInfo to v18.03.1+ (2018-04-19), compiled with ICL 18.2 and MSVC 14.13
 * Updated GnuPG to v1.4.22 (2017-07-19), compiled with GCC 7.2.0
-* Updated QAAC add-in (separate download) to QAAC v2.64 (2017-07-19), compiled with ICL 18.0 and MSVC 15.5
+* Updated QAAC add-in (separate download) to QAAC v2.64 (2017-07-19), compiled with ICL 18.0 and MSVC 14.12
 * Complete re-write of MediaInfo parsing code, now using XML-based MediaInfo output
 * Improved auto-detection of max. parallel instances on computers with "fast" (i.e. SSD or similar) drive
 * Some improvements to output file name generation code
