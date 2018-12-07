@@ -257,6 +257,7 @@ attrib +R "%OUT_FILE%.exe"
 
 "%~dp0\..\..\..\Prerequisites\GnuPG\bin\gpg.exe" -v -u 0x6CF3FA22 -a -o "%OUT_FILE%.exe.sig"  --detach-sign "%OUT_FILE%.exe"
 "%~dp0\..\..\..\Prerequisites\GnuPG\bin\gpg.exe" -v -u 0x5F57E03F -a -o "%OUT_FILE%.exe.sig2" --detach-sign "%OUT_FILE%.exe"
+"%~dp0\..\..\..\Prerequisites\GnuPG\bin\gpg.exe" -v -u 0x5F57E03F -a -o "%OUT_FILE%.zip.sig2" --detach-sign "%OUT_FILE%.zip"
 
 attrib +R "%OUT_FILE%.exe.sig"
 attrib +R "%OUT_FILE%.exe.sig2"
