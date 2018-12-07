@@ -32,6 +32,14 @@
 #include <QDir>
 #include <QProcess>
 #include <QRegExp>
+#include <QMutexLocker>
+
+//Static
+QMutex AACDecoder::m_regexMutex;
+MUtils::Lazy<QRegExp> AACDecoder::m_regxFeatures([]
+{
+	return new QRegExp(L1S("\\bLC\\b"), Qt::CaseInsensitive);
+});
 
 AACDecoder::AACDecoder(void)
 :
@@ -90,7 +98,8 @@ bool AACDecoder::isFormatSupported(const QString &containerType, const QString &
 	{
 		if(formatType.compare(QLatin1String("AAC"), Qt::CaseInsensitive) == 0)
 		{
-			if((formatProfile.compare(QLatin1String("LC"), Qt::CaseInsensitive) == 0) || (formatProfile.compare(QLatin1String("HE-AAC"), Qt::CaseInsensitive) == 0) || (formatProfile.compare(QLatin1String("HE-AACv2"), Qt::CaseInsensitive) == 0))
+			QMutexLocker lock(&m_regexMutex);
+			if ((*m_regxFeatures).indexIn(formatProfile) >= 0)
 			{
 				if((formatVersion.compare(QLatin1String("2"), Qt::CaseInsensitive) == 0) || (formatVersion.compare(QLatin1String("4"), Qt::CaseInsensitive) == 0) || formatVersion.isEmpty())
 				{

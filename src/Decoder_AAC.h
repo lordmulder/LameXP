@@ -23,6 +23,7 @@
 #pragma once
 
 #include "Decoder_Abstract.h"
+#include <MUtils/Lazy.h>
 
 class AACDecoder : public AbstractDecoder
 {
@@ -36,4 +37,6 @@ public:
 
 private:
 	const QString m_binary;
+	static MUtils::Lazy<QRegExp> m_regxFeatures;
+	static QMutex m_regexMutex;
 };

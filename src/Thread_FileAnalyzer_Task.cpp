@@ -104,6 +104,7 @@ static MUtils::Lazy<const QMap<QPair<AnalyzeTask::MI_trackType_t, QString>, Anal
 	ADD_PROPTERY_MAPPING_1(aud, format);
 	ADD_PROPTERY_MAPPING_1(aud, format_version);
 	ADD_PROPTERY_MAPPING_1(aud, format_profile);
+	ADD_PROPTERY_MAPPING_2(aud, format_additionalfeatures, format_profile);
 	ADD_PROPTERY_MAPPING_1(aud, duration);
 	ADD_PROPTERY_MAPPING_1(aud, channel_s_);
 	ADD_PROPTERY_MAPPING_1(aud, samplingrate);
