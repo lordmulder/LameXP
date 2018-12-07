@@ -34,8 +34,15 @@ static const int g_mp3BitrateLUT[15] = {32, 40, 48, 56, 64, 80, 96, 112, 128, 16
 static const int g_lameVBRQualityLUT[11] = {9, 8, 7, 6, 5, 4, 3, 2, 1, 0, INT_MAX};
 
 //Static
-QScopedPointer<QRegExp> MP3Encoder::m_regxLayer, MP3Encoder::m_regxVersion;
 QMutex MP3Encoder::m_regexMutex;
+MUtils::Lazy<QRegExp> MP3Encoder::m_regxLayer([]
+{
+	return new QRegExp(L1S("^Layer\\s+(1|2|3)\\b"), Qt::CaseInsensitive);
+});
+MUtils::Lazy<QRegExp> MP3Encoder::m_regxVersion([]
+{
+	return new QRegExp(L1S("^(Version\\s+)?(1|2|2\\.5)\\b"), Qt::CaseInsensitive);
+});
 
 ///////////////////////////////////////////////////////////////////////////////
 // Encoder Info
@@ -281,17 +288,9 @@ bool MP3Encoder::isFormatSupported(const QString &containerType, const QString &
 		else if (formatType.compare(mpegAudio, Qt::CaseInsensitive) == 0)
 		{
 			QMutexLocker lock(&m_regexMutex);
-			if (m_regxLayer.isNull())
+			if ((*m_regxLayer).indexIn(formatProfile) >= 0)
 			{
-				m_regxLayer.reset(new QRegExp(L1S("^Layer\\s+(1|2|3)\\b"), Qt::CaseInsensitive));
-			}
-			if (m_regxLayer->indexIn(formatProfile) >= 0)
-			{
-				if (m_regxVersion.isNull())
-				{
-					m_regxVersion.reset(new QRegExp(L1S("^(Version\\s+)?(1|2|2\\.5)\\b"), Qt::CaseInsensitive));
-				}
-				return (m_regxVersion->indexIn(formatVersion) >= 0);
+				return ((*m_regxVersion).indexIn(formatVersion) >= 0);
 			}
 		}
 	}

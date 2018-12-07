@@ -25,6 +25,7 @@
 #include "Encoder_Abstract.h"
 
 #include <QObject>
+#include <MUtils/Lazy.h>
 
 class MP3Encoder : public AbstractEncoder
 {
@@ -55,7 +56,7 @@ private:
 	int m_configChannelMode;
 
 	static QMutex m_regexMutex;
-	static QScopedPointer<QRegExp> m_regxLayer, m_regxVersion;
+	static MUtils::Lazy<QRegExp> m_regxLayer, m_regxVersion;
 
 	int clipBitrate(int bitrate);
 };
