@@ -99,7 +99,7 @@ bool AACDecoder::isFormatSupported(const QString &containerType, const QString &
 		if(formatType.compare(QLatin1String("AAC"), Qt::CaseInsensitive) == 0)
 		{
 			QMutexLocker lock(&m_regexMutex);
-			if ((*m_regxFeatures).indexIn(formatProfile) >= 0)
+			if (m_regxFeatures->indexIn(formatProfile) >= 0)
 			{
 				if((formatVersion.compare(QLatin1String("2"), Qt::CaseInsensitive) == 0) || (formatVersion.compare(QLatin1String("4"), Qt::CaseInsensitive) == 0) || formatVersion.isEmpty())
 				{

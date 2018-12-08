@@ -288,9 +288,9 @@ bool MP3Encoder::isFormatSupported(const QString &containerType, const QString &
 		else if (formatType.compare(mpegAudio, Qt::CaseInsensitive) == 0)
 		{
 			QMutexLocker lock(&m_regexMutex);
-			if ((*m_regxLayer).indexIn(formatProfile) >= 0)
+			if (m_regxLayer->indexIn(formatProfile) >= 0)
 			{
-				return ((*m_regxVersion).indexIn(formatVersion) >= 0);
+				return (m_regxVersion->indexIn(formatVersion) >= 0);
 			}
 		}
 	}

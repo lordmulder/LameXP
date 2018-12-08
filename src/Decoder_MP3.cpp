@@ -110,9 +110,9 @@ bool MP3Decoder::isFormatSupported(const QString &containerType, const QString &
 		if(formatType.compare(mpegAudio, Qt::CaseInsensitive) == 0)
 		{
 			QMutexLocker lock(&m_regexMutex);
-			if ((*m_regxLayer).indexIn(formatProfile) >= 0)
+			if (m_regxLayer->indexIn(formatProfile) >= 0)
 			{
-				return ((*m_regxVersion).indexIn(formatVersion) >= 0);
+				return (m_regxVersion->indexIn(formatVersion) >= 0);
 			}
 		}
 	}
