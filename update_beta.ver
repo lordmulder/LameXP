@@ -1,11 +1,11 @@
 [!Update]
-TimestampCreated=2018-12-11
+TimestampCreated=2019-11-11
 
 [LameXP]
-BuildNo=2200
-BuildDate=2018-12-11
+BuildNo=2204
+BuildDate=2019-11-11
 DownloadSite=http://forum.doom9.org/showthread.php?t=157726
 DownloadAddress=http://muldersoft.com/update/
-DownloadFilename=LameXP-ALPHA.2018-12-11.Release-Static.Build-2200.exe
-DownloadFilecode=d06f7ae453accc4473426672ad0708257029e4f6
-DownloadChecksum=DF85A9D1440AE426C647F81BE409E59753F7F67557B2A102B1C0E37738CC7DF1CE7E07360361BEC0F4A6BDFD5531F2A0
+DownloadFilename=LameXP-ALPHA.2019-01-11.Release-Static.Build-2204.exe
+DownloadFilecode=f3a982f3b1eb06b0e5a55a90ca1a9ce9a1ab1fe8
+DownloadChecksum=89A59BBE12373BBA8CF5D820BAD81B95D20661EDFC96F5DFFAEFFEA141487619239C2A5B72E139EB9DE897D37C1F34B4
