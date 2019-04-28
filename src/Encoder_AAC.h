@@ -37,6 +37,7 @@ public:
 	virtual bool encode(const QString &sourceFile, const AudioFileModel_MetaInfo &metaInfo, const unsigned int duration, const unsigned int channels, const QString &outputFile, QAtomicInt &abortFlag);
 	virtual bool isFormatSupported(const QString &containerType, const QString &containerProfile, const QString &formatType, const QString &formatProfile, const QString &formatVersion);
 	virtual const bool needsTimingInfo(void);
+	virtual const unsigned int *supportedSamplerates(void);
 	
 	//Advanced options
 	virtual void setProfile(int profile);

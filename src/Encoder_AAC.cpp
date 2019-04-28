@@ -291,6 +291,12 @@ bool AACEncoder::isFormatSupported(const QString &containerType, const QString &
 	return false;
 }
 
+const unsigned int *AACEncoder::supportedSamplerates(void)
+{
+	static const unsigned int supportedRates[] = { 96000, 48000, 44100, 32000, 24000, 22050, 16000, 12000, 11025, 8000, NULL};
+	return supportedRates;
+}
+
 void AACEncoder::setProfile(int profile)
 {
 	m_configProfile = qBound(0, profile, 3);
