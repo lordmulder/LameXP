@@ -1759,7 +1759,7 @@ void MainWindow::encodeButtonClicked(void)
 			switch(QMessageBox::warning(this, tr("Low Diskspace Warning"), NOBREAK(lowDiskspaceMsg), tr("Abort Encoding Process"), tr("Clean Disk Now"), tr("Ignore")))
 			{
 			case 1:
-				QProcess::startDetached(QString("%1/cleanmgr.exe").arg(MUtils::OS::known_folder(MUtils::OS::FOLDER_SYSTEMFOLDER)), QStringList() << "/D" << tempFolderParts.first());
+				QProcess::startDetached(QString("%1/cleanmgr.exe").arg(MUtils::OS::known_folder(MUtils::OS::FOLDER_SYSTEM_DEF)), QStringList() << "/D" << tempFolderParts.first());
 			case 0:
 				return;
 				break;
@@ -2642,17 +2642,10 @@ void MainWindow::findFileContextActionTriggered(void)
 	QModelIndex index = ui->sourceFileView->currentIndex();
 	if(index.isValid())
 	{
-		QString systemRootPath;
-
-		QDir systemRoot(MUtils::OS::known_folder(MUtils::OS::FOLDER_SYSTEMFOLDER));
-		if(systemRoot.exists() && systemRoot.cdUp())
+		const QString systemToolsPath = MUtils::OS::known_folder(MUtils::OS::FOLDER_SYSROOT);
+		if(!systemToolsPath.isEmpty())
 		{
-			systemRootPath = systemRoot.canonicalPath();
-		}
-
-		if(!systemRootPath.isEmpty())
-		{
-			QFileInfo explorer(QString("%1/explorer.exe").arg(systemRootPath));
+			QFileInfo explorer(QString("%1/explorer.exe").arg(systemToolsPath));
 			if(explorer.exists() && explorer.isFile())
 			{
 				QProcess::execute(explorer.canonicalFilePath(), QStringList() << "/select," << QDir::toNativeSeparators(m_fileListModel->getFile(index).filePath()));
@@ -2661,7 +2654,7 @@ void MainWindow::findFileContextActionTriggered(void)
 		}
 		else
 		{
-			qWarning("SystemRoot directory could not be detected!");
+			qWarning("System tools directory could not be detected!");
 		}
 	}
 }
@@ -2922,7 +2915,7 @@ void MainWindow::gotoDesktopButtonClicked(void)
 		return;
 	}
 	
-	QString desktopPath = QDesktopServices::storageLocation(QDesktopServices::DesktopLocation);
+	const QString desktopPath = MUtils::OS::known_folder(MUtils::OS::FOLDER_DESKTOP_USER);
 	
 	if(!desktopPath.isEmpty() && QDir(desktopPath).exists())
 	{
@@ -2947,8 +2940,8 @@ void MainWindow::gotoHomeFolderButtonClicked(void)
 		return;
 	}
 
-	QString homePath = QDesktopServices::storageLocation(QDesktopServices::HomeLocation);
-	
+	const QString homePath = MUtils::OS::known_folder(MUtils::OS::FOLDER_PROFILE_USER);
+
 	if(!homePath.isEmpty() && QDir(homePath).exists())
 	{
 		ui->outputFolderView->setCurrentIndex(m_fileSystemModel->index(homePath));
@@ -2972,7 +2965,7 @@ void MainWindow::gotoMusicFolderButtonClicked(void)
 		return;
 	}
 
-	QString musicPath = QDesktopServices::storageLocation(QDesktopServices::MusicLocation);
+	const QString musicPath = MUtils::OS::known_folder(MUtils::OS::FOLDER_MUSIC_USER);
 	
 	if(!musicPath.isEmpty() && QDir(musicPath).exists())
 	{

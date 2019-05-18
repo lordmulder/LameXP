@@ -871,14 +871,7 @@ void ProcessingDialog::contextMenuShowFileActionTriggered(void)
 
 	if(QFileInfo(filePath).exists())
 	{
-		QString systemRootPath;
-
-		QDir systemRoot(MUtils::OS::known_folder(MUtils::OS::FOLDER_SYSTEMFOLDER));
-		if(systemRoot.exists() && systemRoot.cdUp())
-		{
-			systemRootPath = systemRoot.canonicalPath();
-		}
-
+		const QString systemRootPath = MUtils::OS::known_folder(MUtils::OS::FOLDER_SYSROOT);
 		if(!systemRootPath.isEmpty())
 		{
 			QFileInfo explorer(QString("%1/explorer.exe").arg(systemRootPath));
