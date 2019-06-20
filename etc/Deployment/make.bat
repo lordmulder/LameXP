@@ -103,6 +103,14 @@ for %%i in (exe,sfx,zip,txt) do (
 rd /S /Q "%TMP_PATH%" 2> NUL
 mkdir "%TMP_PATH%"
 
+if %PATH_VCTOOL% GEQ 142 (
+	set "PATH_REDIST_QT=%~dp0\..\..\..\Prerequisites\Qt4\v%PATH_VCTOOL%"
+	set "PATH_REDIST_VC=%~dp0\..\..\..\Prerequisites\MSVC\redist\vc\v%PATH_VCTOOL%"
+) else (
+	set "PATH_REDIST_QT=%~dp0\..\..\..\Prerequisites\Qt4\v%PATH_VCTOOL%_xp"
+	set "PATH_REDIST_VC=%~dp0\..\..\..\Prerequisites\MSVC\redist\vc\v%PATH_VCTOOL%_xp"
+)
+
 call "%~dp0\_copy.bat" "%BIN_PATH%\LameXP.exe" "%TMP_PATH%"
 call "%~dp0\_copy.bat" "%~dp0\..\..\etc\Manifest\VisualElements.xml" "%TMP_PATH%\LameXP.VisualElementsManifest.xml"
 
@@ -111,12 +119,12 @@ if "%LAMEXP_REDIST%"=="1" (
 	call "%~dp0\_copy.bat" "%BIN_PATH%\MUtils32-?.dll" "%TMP_PATH%"
 	mkdir "%TMP_PATH%\imageformats"
 	for %%i in (Core,Gui,Network,Xml,Svg) do (
-		call "%~dp0\_copy.bat" "%~dp0\..\..\..\Prerequisites\Qt4\v%PATH_VCTOOL%_xp\Shared\bin\Qt%%i4.dll" "%TMP_PATH%"
+		call "%~dp0\_copy.bat" "%PATH_REDIST_QT%\Shared\bin\Qt%%i4.dll" "%TMP_PATH%"
 	)
 	for %%i in (gif,ico,jpeg,mng,svg,tga,tiff) do (
-		call "%~dp0\_copy.bat" "%~dp0\..\..\..\Prerequisites\Qt4\v%PATH_VCTOOL%_xp\Shared\plugins\imageformats\q%%i4.dll" "%TMP_PATH%\imageformats"
+		call "%~dp0\_copy.bat" "%PATH_REDIST_QT%\Shared\plugins\imageformats\q%%i4.dll" "%TMP_PATH%\imageformats"
 	)
-	call "%~dp0\_copy.bat" "%~dp0\..\..\..\Prerequisites\MSVC\redist\vc\v%PATH_VCTOOL%_xp\x86\*.dll" "%TMP_PATH%"
+	call "%~dp0\_copy.bat" "%PATH_REDIST_VC%\x86\*.dll" "%TMP_PATH%"
 	if %PATH_VCTOOL% GEQ 140 (
 		call "%~dp0\_copy.bat" "%~dp0\..\..\..\Prerequisites\MSVC\redist\ucrt\DLLs\x86\*.dll" "%TMP_PATH%"
 	)
