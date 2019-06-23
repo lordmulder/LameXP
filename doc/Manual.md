@@ -621,7 +621,7 @@ LameXP is currently being developed and built using the following development to
 
 * [Visual Studio 2015 Update-1](https://www.visualstudio.com/), running on Windows 10 x64 (v1511)
 
-* [Qt libraries 4.8.7](http://download.qt.io/archive/qt/4.8/) for Windows (our *pre-compiled* Qt libraries for Visual Studio can be found [**here**](https://sourceforge.net/projects/lamexp/files/Miscellaneous/Prerequisites/)
+* [Qt libraries 4.8.7](http://download.qt.io/archive/qt/4.8/) for Windows – our *pre-compiled* Qt libraries for Visual Studio can be found [**here**](https://sourceforge.net/projects/lamexp/files/Miscellaneous/Prerequisites/) or [**here**](http://www.mediafire.com/folder/ygv9qoqv11kvk/Prerequisites)
 
 * [Visual Leak Detector](https://vld.codeplex.com/), open-source memory leak detection system for Visual C++
 
