@@ -130,10 +130,16 @@ if "%LAMEXP_REDIST%"=="1" (
 	)
 )
 
+for %%x in (exe,dll) do (
+	for %%f in (%TMP_PATH%\*.%%x) do (
+		"%~dp0\..\..\..\Prerequisites\RichHeaderEraser\rchhdrrsr.exe" "%%~ff"
+	)
+)
+
 for %%e in (LameXP,Qt,MUtils) do (
 	for %%x in (exe,dll) do (
 		for %%f in (%TMP_PATH%\%%e*.%%x) do (
-			"%~dp0\..\..\..\Prerequisites\UPX\upx.exe" --best "%%f"
+			"%~dp0\..\..\..\Prerequisites\UPX\upx.exe" --best "%%~ff"
 		)
 	)
 )
