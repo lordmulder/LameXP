@@ -87,6 +87,7 @@ g_lamexp_translators[] =
 	{"hu", L"Magyarul",   L"ZityiSoft Team",      "zityisoft@gmail.com"      },
 	{"it", L"Italiano",   L"Roberto",             "Gulliver_69@libero.it"    },
 	{"",   L"",           L"Gianluca Papi",       "johnnyb.goode68@gmail.com"},
+	{"ja", L"日本語",        L"Maboroshin",          "maboroshin@pc.genkaku.in" },
 	{"kr", L"한국어",        L"JaeHyung Lee",        "Kolanp@gmail.com"         },
 	{"pl", L"Polski",     L"Sir Daniel K",        "Sir.Daniel.K@gmail.com"   },
 	{"ru", L"Русский",    L"Neonailol",           "Neonailol@gmail.com"      },

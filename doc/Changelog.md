@@ -14,6 +14,7 @@ LameXP Audio-Encoder Front-End &ndash; Changelog
 * Updated Monkey's Audio binary to v4.73 (2019-05-15), compiled with ICL 19.0 and MSVC 14.16
 * Updated mpg123 decoder to v1.25.11 (2019-07-18) and added *64-Bit* binaries, compiled with GCC 9.1.0
 * Updated MediaInfo to v19.07 (2019-07-16), compiled with ICL 19.0 and MSVC 14.16
+* Added Japanese (日本語) translation, thanks to Maboroshin <<maboroshin@pc.genkaku.in>>
 * Fixed encoding with Nero AAC encoder for input sampling rate less than 8 KHz or greater than 96 KHz
 
 ## LameXP v4.17 [2018-11-10] ## {-}
@@ -241,7 +242,7 @@ LameXP Audio-Encoder Front-End &ndash; Changelog
 ## LameXP v4.05 [2012-09-03] ## {-}
 
 * Added support for Opus Audio Codec, based on Opus-Tools v0.1.4 (2012-08-16) by Xiph.org/Mozilla
-* Added Swedish translation, thanks to Åke Engelbrektson <eson57@gmail.com>
+* Added Swedish translation, thanks to Åke Engelbrektson <<eson57@gmail.com>>
 * Updated Qt runtime libraries to v4.8.2 (2012-05-22), compiled with MSVC 10.0
 * Updated mpg123 decoder to v1.14.4 (2012-07-26), compiled with GCC 4.6.1
 * Updated MediaInfo to v0.7.59 (2012-08-08), compiled with ICL 12.1.7 and MSVC 10.0
@@ -258,8 +259,8 @@ LameXP Audio-Encoder Front-End &ndash; Changelog
 ## LameXP v4.04 [2012-04-26] ## {-}
 
 * Added support for the QAAC Encoder, requires QuickTime v7.7.1 or newer (see [Manual](Manual.html#qaac-apple-aac-encoder) for details)
-* Added Chinese and Taiwanese translations, thanks to 456Vv <123@456vv.com>
-* Added experimental support for DCA Enc, created by Alexander E. Patrakov <patrakov@gmail.com>
+* Added Chinese and Taiwanese translations, thanks to 456Vv <<123@456vv.com>>
+* Added experimental support for DCA Enc, created by Alexander E. Patrakov <<patrakov@gmail.com>>
 * Added CSV export/import for Meta tags (available from the context-menu on the "Source Files" tab)
 * Added a button to modify the current output folder path in an edit box
 * Updated Qt runtime libraries to v4.8.1 (2012-03-14), compiled with MSVC 10.0
@@ -291,7 +292,7 @@ LameXP Audio-Encoder Front-End &ndash; Changelog
 * Added optional support for the FHG AAC Encoder included with Winamp 5.62
 * Added a menu for bookmarking "favorite" output folders to the "output folder" tab
 * Added an option to hibernate the computer (aka "Suspend-to-Disk") instead of shutting it down
-* Added Polish translation, thanks to Sir Daniel K <sir.daniel.k@gmail.com>
+* Added Polish translation, thanks to Sir Daniel K <<sir.daniel.k@gmail.com>>
 * Added channel equalization options to the normalization filter (also fixes multi-channel processing)
 * Added indicators for current CPU usage, RAM usage and free diskspace to the processing window
 * Updated Qt runtime libraries to v4.8.0 RC-1 (2011-10-13), compiled with MSVC 10.0
