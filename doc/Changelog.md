@@ -14,7 +14,7 @@ LameXP Audio-Encoder Front-End &ndash; Changelog
 * Updated Monkey's Audio binary to v4.73 (2019-05-15), compiled with ICL 19.0 and MSVC 14.16
 * Updated mpg123 decoder to v1.25.11 (2019-07-18) and added *64-Bit* binaries, compiled with GCC 9.1.0
 * Updated MediaInfo to v19.07 (2019-07-16), compiled with ICL 19.0 and MSVC 14.16
-* Added Japanese (日本語) translation, thanks to Maboroshin <<maboroshin@pc.genkaku.in>>
+* Added Japanese (日本語) translation, thanks to Maboroshin <[pc.genkaku.in](http://pc.genkaku.in)>
 * Fixed encoding with Nero AAC encoder for input sampling rate less than 8 KHz or greater than 96 KHz
 
 ## LameXP v4.17 [2018-11-10] ## {-}

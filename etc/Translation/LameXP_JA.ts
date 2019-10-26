@@ -1068,12 +1068,12 @@
     <message>
         <location filename="../../gui/MainWindow.ui" line="1171"/>
         <source>Minimum</source>
-        <translation type="unfinished">最高</translation>
+        <translation type="unfinished">最低</translation>
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="1181"/>
         <source>Maximum</source>
-        <translation type="unfinished">最低</translation>
+        <translation type="unfinished">最高</translation>
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="1461"/>
