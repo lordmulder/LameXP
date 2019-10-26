@@ -74,7 +74,7 @@ static const struct
 	char *pcFlag;
 	wchar_t *pcLanguage;
 	wchar_t *pcName;
-	char *pcMail;
+	char *pcContactAddr;
 }
 g_lamexp_translators[] =
 {
@@ -87,7 +87,7 @@ g_lamexp_translators[] =
 	{"hu", L"Magyarul",   L"ZityiSoft Team",      "zityisoft@gmail.com"      },
 	{"it", L"Italiano",   L"Roberto",             "Gulliver_69@libero.it"    },
 	{"",   L"",           L"Gianluca Papi",       "johnnyb.goode68@gmail.com"},
-	{"ja", L"日本語",        L"Maboroshin",          "maboroshin@pc.genkaku.in" },
+	{"ja", L"日本語",        L"Maboroshin",          "pc.genkaku.in"            },
 	{"kr", L"한국어",        L"JaeHyung Lee",        "Kolanp@gmail.com"         },
 	{"pl", L"Polski",     L"Sir Daniel K",        "Sir.Daniel.K@gmail.com"   },
 	{"ru", L"Русский",    L"Neonailol",           "Neonailol@gmail.com"      },
@@ -108,16 +108,18 @@ static const struct
 }
 g_lamexp_specialThanks[] =
 {
-	{ "Doom9's Forum",         "http://forum.doom9.org/"       },
-	{ "Gleitz | German Doom9", "http://forum.gleitz.info/"     },
-	{ "Hydrogenaudio Forums",  "http://www.hydrogenaudio.org/" },
-	{ "RareWares",             "http://www.rarewares.org/"     },
-	{ "GitHub",                "http://github.com/"            },
-	{ "SourceForge",           "http://sourceforge.net/"       },
-	{ "Qt Developer Network",  "https://www.qt.io/developers/" },
-	{ "CodePlex",              "http://www.codeplex.com/"      },
-	{ "Marius Hudea",          "http://savedonthe.net/"        },
-	{ "Codecs.com",            "http://www.codecs.com/"        },
+	{ "Doom9's Forum",         "http://forum.doom9.org/"          },
+	{ "Gleitz | German Doom9", "http://forum.gleitz.info/"        },
+	{ "Portable Freeware",     "http://www.portablefreeware.com/" },
+	{ "Hydrogenaudio Forums",  "http://www.hydrogenaudio.org/"    },
+	{ "RareWares",             "http://www.rarewares.org/"        },
+	{ "GitHub",                "http://github.com/"               },
+	{ "SourceForge",           "http://sourceforge.net/"          },
+	{ "OSDN.net",              "http://osdn.net/"                 },
+	{ "Marius Hudea",          "http://savedonthe.net/"           },
+	{ "Qt Developer Network",  "http://www.qt.io/developers/"     },
+	{ "Codecs.com",            "http://www.codecs.com/"           },
+	{ "VideoHelp",             "http://www.videohelp.com/"        },
 	{ NULL, NULL }
 };
 
@@ -129,12 +131,13 @@ static const struct
 }
 g_lamexp_mirrors[] =
 {
-	{ "GitHub.com",      "https://github.com/lordmulder/LameXP"              },
-	{ "SourceForge.net", "http://sourceforge.net/p/lamexp/code/"             },
-	{ "Bitbucket.org",   "https://bitbucket.org/muldersoft/lamexp"           },
-	{ "GitLab.com"   ,   "https://gitlab.com/lamexp/lamexp"                  },
-	{ "Codeplex.com",    "https://lamexp.codeplex.com/SourceControl/latest"  },
-	{ "Assembla.com",    "https://www.assembla.com/spaces/lamexp/"           },
+	{ "GitHub.com",      "https://github.com/lordmulder/LameXP"             },
+	{ "SourceForge.net", "http://sourceforge.net/p/lamexp/code/"            },
+    { "OSDN.net",        "https://osdn.net/projects/lamexp/scm/git/LameXP/" },
+	{ "Bitbucket.org",   "https://bitbucket.org/muldersoft/lamexp"          },
+	{ "GitLab.com"   ,   "https://gitlab.com/lamexp/lamexp"                 },
+	{ "Assembla.com",    "https://www.assembla.com/spaces/lamexp/"          },
+	{ "repo.or.cz",      "https://repo.or.cz/w/LameXP.git"                  },
 	{ NULL, NULL }
 };
 
@@ -632,16 +635,18 @@ void AboutDialog::initContributorsTab(void)
 	QString icon = QString("<img src=\":/icons/%1.png\">").arg("user_gray");
 	contributorsAboutText += QString("<tr><td valign=\"middle\">%1</td><td>%2</td>").arg(icon, spaces);
 	contributorsAboutText += QString("<td valign=\"middle\">%1</td><td>%2</td>").arg(tr("Project Leader"), spaces);
-	contributorsAboutText += QString("<td valign=\"middle\">%1</td><td>%2</td><td><a href=\"mailto:%3\">&lt;%3&gt;</a></td></tr>").arg("LoRd_MuldeR", spaces, "MuldeR2@GMX.de");
+	contributorsAboutText += QString("<td valign=\"middle\">%1</td><td>%2</td><td><a href=\"mailto:%3?subject=LameXP\">&lt;%3&gt;</a></td></tr>").arg(L1S("LoRd_MuldeR"), spaces, L1S("MuldeR2@GMX.de"));
 	contributorsAboutText += QString("<tr><td colspan=\"7\"><b>&nbsp;</b></td></tr>");
 
 	contributorsAboutText += QString("<tr><td colspan=\"7\"><b>%1</b>%2</td></tr>").arg(tr("Translators:"), extraVSpace);
 	for(int i = 0; g_lamexp_translators[i].pcName; i++)
 	{
-		QString flagIcon = (strlen(g_lamexp_translators[i].pcFlag) > 0) ? QString("<img src=\":/flags/%1.png\">").arg(g_lamexp_translators[i].pcFlag) : QString();
+		const QString flagIcon = (strlen(g_lamexp_translators[i].pcFlag) > 0) ? QString("<img src=\":/flags/%1.png\">").arg(QString::fromLatin1(g_lamexp_translators[i].pcFlag)) : QString();
+		const QString contactAddr = QString::fromLatin1(g_lamexp_translators[i].pcContactAddr);
+		const QString linkUrl = QString(contactAddr.contains('@') ? "mailto:%1?subject=LameXP" : "http://%1").arg(contactAddr);
 		contributorsAboutText += QString("<tr><td valign=\"middle\">%1</td><td>%2</td>").arg(flagIcon, spaces);
 		contributorsAboutText += QString("<td valign=\"middle\">%1</td><td>%2</td>").arg(MUTILS_QSTR(g_lamexp_translators[i].pcLanguage), spaces);
-		contributorsAboutText += QString("<td valign=\"middle\">%1</td><td>%2</td><td><a href=\"mailto:%3\">&lt;%3&gt;</a></td></tr>").arg(MUTILS_QSTR(g_lamexp_translators[i].pcName), spaces, g_lamexp_translators[i].pcMail);
+		contributorsAboutText += QString("<td valign=\"middle\">%1</td><td>%2</td><td><a href=\"%3\">&lt;%4&gt;</a></td></tr>").arg(MUTILS_QSTR(g_lamexp_translators[i].pcName), spaces, linkUrl, contactAddr);
 	}
 
 	contributorsAboutText += QString("<tr><td colspan=\"7\"><b>&nbsp;</b></td></tr>");
