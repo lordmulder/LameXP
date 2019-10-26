@@ -3384,7 +3384,7 @@
     <message>
         <location filename="../../src/ShellIntegration.cpp" line="95"/>
         <source>Convert this file with LameXP v%1</source>
-        <translation>このファイルを LameXP %1 で変換</translation>
+        <translation type="unfinished">このファイルを LameXP v%1 で変換</translation>
     </message>
 </context>
 <context>

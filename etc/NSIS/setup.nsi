@@ -261,12 +261,12 @@ UninstPage Custom un.LockedListShow
 !insertmacro MUI_LANGUAGE "Ukrainian"
 !insertmacro MUI_LANGUAGE "Polish"
 !insertmacro MUI_LANGUAGE "Hungarian"
+!insertmacro MUI_LANGUAGE "Japanese"
 
 ; !insertmacro MUI_LANGUAGE "French"
 ; !insertmacro MUI_LANGUAGE "SpanishInternational"
 ; !insertmacro MUI_LANGUAGE "SimpChinese"
 ; !insertmacro MUI_LANGUAGE "TradChinese"
-; !insertmacro MUI_LANGUAGE "Japanese"
 ; !insertmacro MUI_LANGUAGE "Italian"
 ; !insertmacro MUI_LANGUAGE "Dutch"
 ; !insertmacro MUI_LANGUAGE "Greek"
