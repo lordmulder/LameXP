@@ -176,7 +176,27 @@ quint32 SettingsModel::OPT##Default(void) { return (DEF); }
 } \
 while(0)
 
-#define DIR_EXISTS(PATH) (QFileInfo(PATH).exists() && QFileInfo(PATH).isDir())
+////////////////////////////////////////////////////////////
+// Utility functions
+////////////////////////////////////////////////////////////
+
+static bool dir_exists(const QString &path)
+{
+	const QFileInfo info(path);
+	return info.exists() && info.isDir();
+}
+
+static QString find_existing_ancestor(const QString &path)
+{
+	for (QString parentPath = path; !parentPath.isEmpty(); parentPath = MUtils::parent_path(parentPath))
+	{
+		if (dir_exists(parentPath))
+		{
+			return parentPath; /*existing parent found*/
+		}
+	}
+	return QString();
+}
 
 ////////////////////////////////////////////////////////////
 // Constants
@@ -427,16 +447,18 @@ void SettingsModel::validate(void)
 		}
 	}
 	
-	if(this->outputDir().isEmpty() || (!DIR_EXISTS(this->outputDir())))
+	if(this->outputDir().isEmpty() || (!dir_exists(this->outputDir())))
 	{
-		qWarning("Output directory not set yet or does NOT exist anymore -> Resetting");
-		this->outputDir(defaultDirectory());
+		qWarning("Output directory not set yet or does NOT exist anymore -> resetting!");
+		const QString outputDir = find_existing_ancestor(this->outputDir());
+		this->outputDir((!outputDir.isEmpty()) ? outputDir : defaultDirectory());
 	}
 
-	if(this->mostRecentInputPath().isEmpty() || (!DIR_EXISTS(this->mostRecentInputPath())))
+	if(this->mostRecentInputPath().isEmpty() || (!dir_exists(this->mostRecentInputPath())))
 	{
-		qWarning("Most recent input directory not set yet or does NOT exist anymore -> Resetting");
-		this->mostRecentInputPath(defaultDirectory());
+		qWarning("Most recent input directory not set yet or does NOT exist anymore -> resetting!");
+		const QString inputPath = find_existing_ancestor(this->mostRecentInputPath());
+		this->mostRecentInputPath((!inputPath.isEmpty()) ? inputPath : defaultDirectory());
 	}
 
 	if(!this->currentLanguageFile().isEmpty())
