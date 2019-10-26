@@ -305,6 +305,9 @@ UninstPage Custom un.LockedListShow
 ;Hungarian
 !include "..\Translation\LameXP_HU.nsh"
 
+;Japanese
+!include "..\Translation\LameXP_JA.nsh"
+
 
 ;--------------------------------
 ;LogicLib Extensions
