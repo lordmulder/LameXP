@@ -2001,7 +2001,7 @@
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="1518"/>
         <source>LameXP is free software and release versions won&apos;t expire.</source>
-        <translation type="unfinished">LameXP はフリーソフトでリリース版の有効期限はありません。</translation>
+        <translation>LameXP はフリーソフトで正式リリース版の有効期限はありません。</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="1518"/>
@@ -3410,7 +3410,7 @@
     <message>
         <location filename="../../gui/UpdateDialog.ui" line="349"/>
         <source>Latest version available:</source>
-        <translation>最新版があります :</translation>
+        <translation>利用可能な最新版 :</translation>
     </message>
     <message>
         <location filename="../../gui/UpdateDialog.ui" line="363"/>
@@ -3532,7 +3532,7 @@
     <message>
         <location filename="../../src/Dialog_Update.cpp" line="297"/>
         <source>We highly recommend all users to install this update as soon as possible.</source>
-        <translation type="unfinished">このアップデートを速やかにインストールすることを強く推奨します。</translation>
+        <translation>最新版を速やかにインストールすることをおすすめします。</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_Update.cpp" line="301"/>
@@ -3542,7 +3542,7 @@
     <message>
         <location filename="../../src/Dialog_Update.cpp" line="302"/>
         <source>Your version of LameXP is still up-to-date. Please check for updates regularly!</source>
-        <translation>現在の LameXP はまだ最新版です。定期的にアップデートを確認してください！</translation>
+        <translation>お使いの LameXP はまだ最新版です。定期的にアップデートを確認してください！</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_Update.cpp" line="306"/>
