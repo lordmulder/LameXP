@@ -5,7 +5,7 @@ LameXP Audio-Encoder Front-End &ndash; Changelog
 
 # LameXP v4.xx History #
 
-## LameXP v4.18 [unreleased] ## {-}
+## LameXP v4.18 [2019-12-18] ## {-}
 * Upgraded build environment to Microsoft Visual Studio 2017.9 (MSVC 14.16)
 * Updated LAME encoder to v3.100.1-SVN (2019-07-23), compiled with ICL 19.0 and MSVC 14.16
 * Updated Opus encoder/decoder libraries to v1.3.1 (2019-04-14) and Opus-Tools to v0.2+3 (2018-10-16)
@@ -16,6 +16,7 @@ LameXP Audio-Encoder Front-End &ndash; Changelog
 * Updated MediaInfo to v19.07 (2019-07-16), compiled with ICL 19.0 and MSVC 14.16
 * Added Japanese (日本語) translation, thanks to Maboroshin <[pc.genkaku.in](http://pc.genkaku.in)>
 * Fixed encoding with Nero AAC encoder for input sampling rate less than 8 KHz or greater than 96 KHz
+* Updated language files (big thank-you to all contributors !!!)
 
 ## LameXP v4.17 [2018-11-10] ## {-}
 * Upgraded build environment to Microsoft Visual Studio 2017.8 (MSVC 14.15)
