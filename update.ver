@@ -1,5 +1,5 @@
 [!Update]
-TimestampCreated=2019-10-15
+TimestampCreated=2019-12-18
 
 [MPlayer for Windows]
 BuildNo=140
@@ -10,13 +10,13 @@ DownloadFilecode=aa4a106f15bbb7e5d81e8b72728ac97c86a277f0
 DownloadChecksum=B2C200255861BD8E073C7C3091C2B41E523AD37206A43B7D57F441A2787F0719A38E35DF63E76E622DA28BB7176E9420
 
 [LameXP]
-BuildNo=2188
-BuildDate=2018-11-10
+BuildNo=2240
+BuildDate=2019-12-18
 DownloadSite=http://forum.doom9.org/showthread.php?t=157726
 DownloadAddress=http://muldersoft.com/update/
-DownloadFilename=LameXP.2018-11-10.Release-Static.Build-2188.exe
-DownloadFilecode=3b239760a98a3df90603f5d38f969d55f05ce59c
-DownloadChecksum=385FE9BA2B105CC6E3AD9786866B31F9731440B27489CFF8C5A3BC729B8C1C660435D4220F7A4BB33FB5883F9A2D65A1
+DownloadFilename=LameXP.2019-12-18.Release-Static.Build-2240.exe
+DownloadFilecode=a9d0efc56fe28b3cc2c7246e4a2d31e0c7ddb98f
+DownloadChecksum=6C30B9D9024695613502CEEC9E89D597A45EC28CDBE3841101B5C804A146E45A34E71E14F459E589A74D609231BAFF50
 
 [Simple x264 Launcher]
 BuildNo=1194
