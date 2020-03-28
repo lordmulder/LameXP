@@ -250,19 +250,19 @@ AboutDialog::~AboutDialog(void)
 
 int AboutDialog::exec()
 {
-	if(m_settings->soundsEnabled())
+	if(m_firstStart)
 	{
-		if(m_firstStart)
+		if (m_settings->soundsEnabled())
 		{
-			if(!MUtils::Sound::play_sound_file("imageres.dll", 5080, true))
+			if (!MUtils::Sound::play_sound_file("imageres.dll", 5080, true))
 			{
 				MUtils::Sound::play_system_sound("SystemStart", true);
 			}
 		}
-		else
-		{
-			PLAY_SOUND_OPTIONAL("ghost", true);
-		}
+	}
+	else
+	{
+		PLAY_SOUND_OPTIONAL("ghost", true);
 	}
 	
 	switch(QDialog::exec())
@@ -331,10 +331,7 @@ void AboutDialog::tabChanged(int index, const bool silent)
 	}
 
 	//Play tick sound
-	if(m_settings->soundsEnabled() && (!silent))
-	{
-		PLAY_SOUND_OPTIONAL("tick", true);
-	}
+	PLAY_SOUND_OPTIONAL("tick", true);
 
 	//Scroll to the top
 	if(QWidget *tab = ui->tabWidget->widget(index))
