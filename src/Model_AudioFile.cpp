@@ -1,12 +1,12 @@
 ﻿///////////////////////////////////////////////////////////////////////////////
 // LameXP - Audio Encoder Front-End
-// Copyright (C) 2004-2019 LoRd_MuldeR <MuldeR2@GMX.de>
+// Copyright (C) 2004-2020 LoRd_MuldeR <MuldeR2@GMX.de>
 //
 // This program is free software; you can redistribute it and/or modify
-// it under the terms of the GNU General Public License as published by
+// it under the terms of the GNU GENERAL PUBLIC LICENSE as published by
 // the Free Software Foundation; either version 2 of the License, or
-// (at your option) any later version, but always including the *additional*
-// restrictions defined in the "License.txt" file.
+// (at your option) any later version; always including the non-optional
+// LAMEXP GNU GENERAL PUBLIC LICENSE ADDENDUM. See "License.txt" file!
 //
 // This program is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of

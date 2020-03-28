@@ -1,11 +1,12 @@
 ; ///////////////////////////////////////////////////////////////////////////////
 ; // LameXP - Audio Encoder Front-End
-; // Copyright (C) 2004-2019 LoRd_MuldeR <MuldeR2@GMX.de>
+; // Copyright (C) 2004-2020 LoRd_MuldeR <MuldeR2@GMX.de>
 ; //
 ; // This program is free software; you can redistribute it and/or modify
-; // it under the terms of the GNU General Public License as published by
+; // it under the terms of the GNU GENERAL PUBLIC LICENSE as published by
 ; // the Free Software Foundation; either version 2 of the License, or
-; // (at your option) any later version.
+; // (at your option) any later version; always including the non-optional
+; // LAMEXP GNU GENERAL PUBLIC LICENSE ADDENDUM. See "License.txt" file!
 ; //
 ; // This program is distributed in the hope that it will be useful,
 ; // but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -18,7 +19,6 @@
 ; //
 ; // http://www.gnu.org/licenses/gpl-2.0.txt
 ; ///////////////////////////////////////////////////////////////////////////////
-
 
 ;--------------------------------
 ;Basic Defines
@@ -145,11 +145,11 @@ Var StartMenuFolder
 VIProductVersion "${PRODUCT_VERSION_DATE}.${LAMEXP_BUILD}"
 
 VIAddVersionKey "Author" "LoRd_MuldeR <mulder2@gmx.de>"
-VIAddVersionKey "Comments" "This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation; either version 2 of the License, or (at your option) any later version."
+VIAddVersionKey "Comments" "This program is free software; you can redistribute it and/or modify it under the terms of the GNU GENERAL PUBLIC LICENSE as published by the Free Software Foundation; either version 2 of the License, or (at your option) any later version; always including the non-optional LAMEXP GNU GENERAL PUBLIC LICENSE ADDENDUM."
 VIAddVersionKey "CompanyName" "Free Software Foundation"
 VIAddVersionKey "FileDescription" "LameXP v${LAMEXP_VERSION} ${LAMEXP_INSTTYPE}-${LAMEXP_PATCH} [Build #${LAMEXP_BUILD}]"
 VIAddVersionKey "FileVersion" "${PRODUCT_VERSION_DATE}.${LAMEXP_BUILD} (${LAMEXP_VERSION})"
-VIAddVersionKey "LegalCopyright" "Copyright 2004-2019 LoRd_MuldeR"
+VIAddVersionKey "LegalCopyright" "Copyright 2004-2020 LoRd_MuldeR"
 VIAddVersionKey "LegalTrademarks" "GNU"
 VIAddVersionKey "OriginalFilename" "LameXP.${LAMEXP_DATE}.exe"
 VIAddVersionKey "ProductName" "LameXP - Audio Encoder Frontend"

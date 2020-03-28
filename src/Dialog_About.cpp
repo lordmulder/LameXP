@@ -1,12 +1,12 @@
 ﻿///////////////////////////////////////////////////////////////////////////////
 // LameXP - Audio Encoder Front-End
-// Copyright (C) 2004-2019 LoRd_MuldeR <MuldeR2@GMX.de>
+// Copyright (C) 2004-2020 LoRd_MuldeR <MuldeR2@GMX.de>
 //
 // This program is free software; you can redistribute it and/or modify
-// it under the terms of the GNU General Public License as published by
+// it under the terms of the GNU GENERAL PUBLIC LICENSE as published by
 // the Free Software Foundation; either version 2 of the License, or
-// (at your option) any later version, but always including the *additional*
-// restrictions defined in the "License.txt" file.
+// (at your option) any later version; always including the non-optional
+// LAMEXP GNU GENERAL PUBLIC LICENSE ADDENDUM. See "License.txt" file!
 //
 // This program is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -602,10 +602,10 @@ void AboutDialog::initInformationTab(void)
 	aboutText += "<hr><br>";
 	
 	aboutText += "<tt>This program is free software; you can redistribute it and/or modify<br>";
-	aboutText += "it under the terms of the GNU General Public License as published by<br>";
+	aboutText += "it under the terms of the GNU GENERAL PUBLIC LICENSE as published by<br>";
 	aboutText += "the Free Software Foundation; either version 2 of the License, or<br>";
-	aboutText += "(at your option) any later version, but always including the *additional*<br>";
-	aboutText += "restrictions defined in the \"License.txt\" file (see \"License\" tab).<br><br>";
+	aboutText += "(at your option) any later version; always including the non-optional<br>";
+	aboutText += "refinements defined in the \"License.txt\" file (see \"License\" tab).<br><br>";
 	aboutText += "This program is distributed in the hope that it will be useful,<br>";
 	aboutText += "but WITHOUT ANY WARRANTY; without even the implied warranty of<br>";
 	aboutText += "MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the<br>";
@@ -887,8 +887,8 @@ void AboutDialog::initSoftwareTab(void)
 
 void AboutDialog::initLicenseTab(void)
 {
-	bool bFoundHeader = false;
-	QRegExp header("^(\\s*)(GNU GENERAL PUBLIC LICENSE)(\\s*)$");
+	int headerCount = 0;
+	QRegExp header("^(\\s*)((?:\\w+\\s+)?GNU GENERAL PUBLIC LICENSE(?:\\s+\\w+)?)(\\s*)$");
 
 	QString licenseText;
 	licenseText += ("<tt>");
@@ -901,10 +901,10 @@ void AboutDialog::initLicenseTab(void)
 		{
 			QString line = stream.readLine();
 			line.replace('<', "&lt;").replace('>', "&gt;");
-			if((!bFoundHeader) && (header.indexIn(line) >= 0))
+			if((headerCount < 2) && (header.indexIn(line) >= 0))
 			{
 				line.replace(header, "\\1<b>\\2</b>\\3");
-				bFoundHeader = true;
+				++headerCount;
 			}
 			TRIM_RIGHT(line);
 			licenseText += QString("<nobr>%1</nobr><br>").arg(line.replace(' ', "&nbsp;"));

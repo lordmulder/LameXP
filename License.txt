@@ -1,20 +1,26 @@
+            LAMEXP GNU GENERAL PUBLIC LICENSE ADDENDUM
+                     Version 1.1, March 2020
+
 LameXP is released under the terms of the GNU GENERAL PUBLIC LICENSE
-(Version 2, June 1991) including the following *additional* annotations:
+(Version 2, see below) including the following *additional* refinements:
+
+                            Preamble
+
+It was brought to our attention that some third parties bundle LameXP with
+Adware, Spyware or other forms of PUP (potentially unwanted programs).
+This addendum has been created to protect our users from such harassments.
+
+         TERMS AND CONDITIONS FOR COPYING AND DISTRIBUTION
 
 It is STRICTLY FORBIDDEN to bundle the LameXP software with other software
 in such a way that launching, installing or downloading the LameXP
 software involves the risk of launching, installing or downloading Adware,
 Spyware or other forms of PUP (potentially unwanted programs).
 
-This specifically means that you MUST NOT offer downloads of the LameXP
-software by means of a custom installation program, which - at least
-optionally - involves the execution, installation or download of Adware,
-Spyware or other forms of PUP (potentially unwanted programs).
-
 It is perfectly allowed to bundle the LameXP software with other software,
-provided that the LameXP software still MAY be launched, installed or
-downloaded from the bundle WITHOUT the interference of other components.
-
+provided that the LameXP software still CAN be installed and launched
+from the bundle WITHOUT installing and/or launching any other components.
+Other components contained in the bundle MUST be opt-in, NOT opt-out.
 
 
                     GNU GENERAL PUBLIC LICENSE

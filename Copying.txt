@@ -1,8 +1,10 @@
-LameXP was created from the scratch by LoRd_MuldeR <mulder2@gmx.de>. You may use, distribute and copy LameXP under the terms of an extended variant of the GNU General Public License version 2.
+LameXP was created from the scratch by LoRd_MuldeR <mulder2@gmx.de>.
+
+You may use, distribute and copy LameXP under the terms and conditions of the GNU GENERAL PUBLIC LICENSE (Version 2, June 1991) including the non-optional LAMEXP GNU GENERAL PUBLIC LICENSE ADDENDUM (Version 1.1, March 2020).
 
 Please see the 'License.txt' file for details!
 
-The copyright of all third-party programs included in LameXP belongs to the individual software authors. Please see the "About third-party software" dialog for details!
+The copyright of all third-party programs included in LameXP belongs to the individual software authors. Any third-party code included in LameXP is distributed according to the respective licenses. Please see the "About third-party software" dialog for details!
 
 
 THIRD-PARTY LICENSE INFO:
@@ -20,4 +22,4 @@ The QKeccakHash class, SHA-3/Keccak function for Qt, is Copyright (C) 2013 Emanu
 PATCHES FOR THIRD-PARTY TOOLS:
 ------------------------------
 
-LameXP contains some third-party OpenSource tools with custom modifications and fixes. The respective patches are provided in the "etc/Patches" directory.
+LameXP contains some third-party OpenSource tools with custom modifications/fixes. The respective patches are provided in the "etc/Patches" directory, under the same license as the original tools.

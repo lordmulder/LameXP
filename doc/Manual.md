@@ -104,24 +104,50 @@ Note that LameXP uses a number of *third-party* applications and libraries. The 
 LameXP is [*free software*](http://en.wikipedia.org/wiki/Free_software_movement), released under the terms of the [*GNU General Public License* (GPL), version 2](http://www.gnu.org/licenses/gpl-2.0.html). The licenses for most software and other practical works are designed to take away your freedom to share and change those works. In contrast, the GPL is designed to *guarantee* your freedom to share and change all versions of the software. In other words, the GPL ensures that free software is going to remain free for all of its users until doomsday. LameXP adds some additional terms in order to keep your computer safe from unwanted software. See the *GNU General Public License* for more details!
 
 	LameXP - Audio Encoder Front-End
-	Copyright (C) 2004-2019 LoRd_MuldeR <MuldeR2@GMX.de>
-
-	This program is free software; you can redistribute it and/or
-	modify it under the terms of the GNU General Public License
-	as published by the Free Software Foundation; either version 2
-	of the License, or (at your option) any later version.
+	Copyright (C) 2004-2020 LoRd_MuldeR <MuldeR2@GMX.de>
+	
+	This program is free software; you can redistribute it and/or modify
+	it under the terms of the GNU GENERAL PUBLIC LICENSE as published by
+	the Free Software Foundation; either version 2 of the License, or
+	(at your option) any later version; always including the non-optional
+	LAMEXP GNU GENERAL PUBLIC LICENSE ADDENDUM. See "License.txt" file!
 
 	This program is distributed in the hope that it will be useful,
 	but WITHOUT ANY WARRANTY; without even the implied warranty of
 	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 	GNU General Public License for more details.
 
-	You should have received a copy of the GNU General Public License
-	along with this program; if not, write to the Free Software
-	Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+	You should have received a copy of the GNU General Public License along
+	with this program; if not, write to the Free Software Foundation, Inc.,
+	51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 
-**Addendum:** When distributing binaries of the LameXP software, it is *strictly forbidden* to bundle the LameXP program files and/or the LameXP installation program with any kind of *Adware*, *Spyware* or *PUP (potentially unwanted program)*, including, but not limited to, any downloaders, dialers, browser toolbars/extensions or restricted shareware/demo programs. It is, however, perfectly legitimate to bundle LameXP with other *OpenSource* programs, according to the OSI (Open Source Initiative). Finally, it is also legitimate to bundle LameXP with *commercial software*, as long as that software does *not* meet the criteria of *Adware*, *Spyware* or *PUP*. If you bundle the LameXP software with another software, you are *required* to make sure that the user is provided with an easy way to install and start the LameXP software separately from that other software.
+### GPL Addendum
 
+The *non-optional* LameXP GNU General Public License addendum is defined as follows:
+
+	            LAMEXP GNU GENERAL PUBLIC LICENSE ADDENDUM
+	                     Version 1.1, March 2020
+
+	LameXP is released under the terms of the GNU GENERAL PUBLIC LICENSE
+	(Version 2, see below) including the following *additional* refinements:
+
+	                            Preamble
+
+	It was brought to our attention that some third parties bundle LameXP with
+	Adware, Spyware or other forms of PUP (potentially unwanted programs).
+	This addendum has been created to protect our users from such harassments.
+
+			 TERMS AND CONDITIONS FOR COPYING AND DISTRIBUTION
+
+	It is STRICTLY FORBIDDEN to bundle the LameXP software with other software
+	in such a way that launching, installing or downloading the LameXP
+	software involves the risk of launching, installing or downloading Adware,
+	Spyware or other forms of PUP (potentially unwanted programs).
+
+	It is perfectly allowed to bundle the LameXP software with other software,
+	provided that the LameXP software still CAN be installed and launched
+	from the bundle WITHOUT installing and/or launching any other components.
+	Other components contained in the bundle MUST be opt-in, NOT opt-out.
 
 
 # Anti-Virus Notes #

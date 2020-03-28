@@ -54,308 +54,308 @@
         <translation>Elvetés</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_About.cpp" line="569"/>
+        <location filename="../../src/Dialog_About.cpp" line="570"/>
         <source>LameXP - Audio Encoder Front-end</source>
         <translation>LameXP - Audió kódoló</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_About.cpp" line="573"/>
+        <location filename="../../src/Dialog_About.cpp" line="574"/>
         <source>Please visit %1 for news and updates!</source>
         <translation>Kérjük, keresse fel a %1 oldalt a friss hírekért és naprakész frissítésekért!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_About.cpp" line="585"/>
-        <location filename="../../src/Dialog_About.cpp" line="597"/>
+        <location filename="../../src/Dialog_About.cpp" line="586"/>
+        <location filename="../../src/Dialog_About.cpp" line="598"/>
         <source>Note: This demo (pre-release) version of LameXP will expire at %1. Still %2 days left.</source>
         <translation>Megjegyzés: Ez a demó a LameXP (előzetesen kiadott) verziója le fog járni ekkor: %1. Még %2 napja maradt.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_About.cpp" line="617"/>
+        <location filename="../../src/Dialog_About.cpp" line="618"/>
         <source>Note: LameXP is free software. Do &lt;b&gt;not&lt;/b&gt; pay money to obtain or use LameXP! If some third-party website tries to make you pay for downloading LameXP, you should &lt;b&gt;not&lt;/b&gt; respond to the offer !!!</source>
         <translation>Megjegyzés: A LameXP egy ingyenes szoftver. &lt;b&gt;Ne&lt;/b&gt; fizessen a LameXP beszerzéséért vagy használatáért! Ha egy külső weboldal pénzt kér a LameXP letöltéséért cserébe, semmi esetre &lt;b&gt;se&lt;/b&gt; reagáljon az ajánlatra !!!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_About.cpp" line="631"/>
+        <location filename="../../src/Dialog_About.cpp" line="632"/>
         <source>The following people have contributed to LameXP:</source>
         <translation>A következő személyek működtek közre a LameXP fejlesztésében:</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_About.cpp" line="634"/>
+        <location filename="../../src/Dialog_About.cpp" line="635"/>
         <source>Programmers:</source>
         <translation>Programozók:</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_About.cpp" line="637"/>
+        <location filename="../../src/Dialog_About.cpp" line="638"/>
         <source>Project Leader</source>
         <translation>Projektvezető</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_About.cpp" line="641"/>
+        <location filename="../../src/Dialog_About.cpp" line="642"/>
         <source>Translators:</source>
         <translation>Fordítók:</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_About.cpp" line="653"/>
+        <location filename="../../src/Dialog_About.cpp" line="654"/>
         <source>Special thanks to:</source>
         <translation>Külön köszönet:</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_About.cpp" line="663"/>
+        <location filename="../../src/Dialog_About.cpp" line="664"/>
         <source>Official Mirrors:</source>
         <translation>Hivatalos tüköroldalak:</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_About.cpp" line="673"/>
+        <location filename="../../src/Dialog_About.cpp" line="674"/>
         <source>If you are willing to contribute a LameXP translation, feel free to contact us!</source>
         <translation>Ha részt szeretne venni a LameXP fordításában, nyugodtan lépjen kapcsolatba velünk!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_About.cpp" line="684"/>
+        <location filename="../../src/Dialog_About.cpp" line="685"/>
         <source>The following third-party software is used in LameXP:</source>
         <translation>A következő 3. féltől származó szoftvert használja a LameXP:</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_About.cpp" line="689"/>
+        <location filename="../../src/Dialog_About.cpp" line="690"/>
         <source>LAME - OpenSource mp3 Encoder</source>
         <translation>LAME - OpenSource mp3 kódoló</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_About.cpp" line="691"/>
-        <location filename="../../src/Dialog_About.cpp" line="713"/>
-        <location filename="../../src/Dialog_About.cpp" line="734"/>
-        <location filename="../../src/Dialog_About.cpp" line="755"/>
-        <location filename="../../src/Dialog_About.cpp" line="769"/>
-        <location filename="../../src/Dialog_About.cpp" line="783"/>
-        <location filename="../../src/Dialog_About.cpp" line="797"/>
-        <location filename="../../src/Dialog_About.cpp" line="832"/>
-        <location filename="../../src/Dialog_About.cpp" line="839"/>
-        <location filename="../../src/Dialog_About.cpp" line="846"/>
-        <location filename="../../src/Dialog_About.cpp" line="860"/>
+        <location filename="../../src/Dialog_About.cpp" line="692"/>
+        <location filename="../../src/Dialog_About.cpp" line="714"/>
+        <location filename="../../src/Dialog_About.cpp" line="735"/>
+        <location filename="../../src/Dialog_About.cpp" line="756"/>
+        <location filename="../../src/Dialog_About.cpp" line="770"/>
+        <location filename="../../src/Dialog_About.cpp" line="784"/>
+        <location filename="../../src/Dialog_About.cpp" line="798"/>
+        <location filename="../../src/Dialog_About.cpp" line="833"/>
+        <location filename="../../src/Dialog_About.cpp" line="840"/>
+        <location filename="../../src/Dialog_About.cpp" line="847"/>
+        <location filename="../../src/Dialog_About.cpp" line="861"/>
         <source>Released under the terms of the GNU Lesser General Public License.</source>
         <translation>Kiadva a GNU Kevésbé általános közreadási szerződés feltételei alapján</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_About.cpp" line="696"/>
+        <location filename="../../src/Dialog_About.cpp" line="697"/>
         <source>OggEnc - Vorbis Encoder</source>
         <translation>OggEnc - Vorbis kódoló</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_About.cpp" line="698"/>
+        <location filename="../../src/Dialog_About.cpp" line="699"/>
         <source>Completely open and patent-free audio encoding technology.</source>
         <translation>Teljesen nyílt és szabadalom-mentes hangkódolási technológia.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_About.cpp" line="703"/>
+        <location filename="../../src/Dialog_About.cpp" line="704"/>
         <source>Nero AAC Reference MPEG-4 Encoder</source>
         <translation>Nero AAC referencia MPEG-4 kódoló</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_About.cpp" line="705"/>
+        <location filename="../../src/Dialog_About.cpp" line="706"/>
         <source>Freeware state-of-the-art HE-AAC encoder with 2-Pass support.</source>
         <translation>Ingyenes (freeware) korszerű HE-AAC kódoló 2-menetes támogatással.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_About.cpp" line="707"/>
+        <location filename="../../src/Dialog_About.cpp" line="708"/>
         <source>Available from vendor web-site as free download:</source>
         <translation>Elérhető a gyártó weboldaláról ingyenesen letölthető formában:</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_About.cpp" line="711"/>
+        <location filename="../../src/Dialog_About.cpp" line="712"/>
         <source>Aften - A/52 audio encoder</source>
         <translation>Aften - A/52 audió kódoló</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_About.cpp" line="718"/>
+        <location filename="../../src/Dialog_About.cpp" line="719"/>
         <source>FLAC - Free Lossless Audio Codec</source>
         <translation>FLAC - Ingyenes veszteségmentes hangkódek</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_About.cpp" line="720"/>
+        <location filename="../../src/Dialog_About.cpp" line="721"/>
         <source>Open and patent-free lossless audio compression technology.</source>
         <translation>Nyílt és szabadalom-mentes veszteségmentes hangtömörítési technológia.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_About.cpp" line="725"/>
+        <location filename="../../src/Dialog_About.cpp" line="726"/>
         <source>Opus Audio Codec</source>
         <translation>Opus audió kódek</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_About.cpp" line="727"/>
+        <location filename="../../src/Dialog_About.cpp" line="728"/>
         <source>Totally open, royalty-free, highly versatile audio codec.</source>
         <translation>Teljesen nyílt forrású, jogdíj-mentes, sokoldalú audió kódek.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_About.cpp" line="732"/>
+        <location filename="../../src/Dialog_About.cpp" line="733"/>
         <source>mpg123 - Fast Console MPEG Audio Player/Decoder</source>
         <translation>mpg123 - Gyors konzolos MPEG audió lejátszó/dekódoló</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_About.cpp" line="739"/>
+        <location filename="../../src/Dialog_About.cpp" line="740"/>
         <source>FAAD - OpenSource MPEG-4 and MPEG-2 AAC Decoder</source>
         <translation>FAAD - Nyílt forráskódú MPEG-4 és MPEG-2 AAC dekódoló</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_About.cpp" line="741"/>
+        <location filename="../../src/Dialog_About.cpp" line="742"/>
         <source>Released under the terms of the GNU General Public License.</source>
         <translation>Kiadva a GNU Általános közreadási szerződés feltételei alapján</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_About.cpp" line="746"/>
+        <location filename="../../src/Dialog_About.cpp" line="747"/>
         <source>OggDec - Vorbis Decoder</source>
         <translation>OggDec - Vorbis dekóder</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_About.cpp" line="748"/>
+        <location filename="../../src/Dialog_About.cpp" line="749"/>
         <source>Command line Ogg Vorbis decoder created by John33.</source>
         <translation>John33 által készített parancssori Ogg Vorbis dekóder.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_About.cpp" line="753"/>
+        <location filename="../../src/Dialog_About.cpp" line="754"/>
         <source>Valdec from AC3Filter Tools - AC3/DTS Decoder</source>
         <translation>Valdec az AC3Filter eszközökből - AC3/DTS dekóder</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_About.cpp" line="760"/>
+        <location filename="../../src/Dialog_About.cpp" line="761"/>
         <source>WavPack - Hybrid Lossless Compression</source>
         <translation>WavPack - Hibrid veszteségmentes tömörítés</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_About.cpp" line="762"/>
+        <location filename="../../src/Dialog_About.cpp" line="763"/>
         <source>Completely open audio compression format.</source>
         <translation>Teljesen nyílt hangtömörítési formátum.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_About.cpp" line="767"/>
+        <location filename="../../src/Dialog_About.cpp" line="768"/>
         <source>Musepack - Living Audio Compression</source>
         <translation>Musepack - Hangtömörítő</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_About.cpp" line="774"/>
+        <location filename="../../src/Dialog_About.cpp" line="775"/>
         <source>Monkey&apos;s Audio - Lossless Audio Compressor</source>
         <translation>Monkey&apos;s Audio - Veszteségmentes hangtömörítő</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_About.cpp" line="776"/>
+        <location filename="../../src/Dialog_About.cpp" line="777"/>
         <source>Freely available source code, simple SDK and non-restrictive licensing.</source>
         <translation>Szabadon elérhető forráskód, egyszerű SDK, és korlátozás mentes licenckezelés.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_About.cpp" line="781"/>
+        <location filename="../../src/Dialog_About.cpp" line="782"/>
         <source>Shorten - Lossless Audio Compressor</source>
         <translation>Shorten - Veszteségmentes hangtömörítő</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_About.cpp" line="788"/>
+        <location filename="../../src/Dialog_About.cpp" line="789"/>
         <source>Speex - Free Codec For Free Speech</source>
         <translation>Speex - Ingyenes kódek a Free Speech-hez</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_About.cpp" line="790"/>
+        <location filename="../../src/Dialog_About.cpp" line="791"/>
         <source>Open Source patent-free audio format designed for speech.</source>
         <translation>Nyílt forráskódú beszédhez tervezett szabadalom-mentes hangformátum.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_About.cpp" line="795"/>
+        <location filename="../../src/Dialog_About.cpp" line="796"/>
         <source>The True Audio - Lossless Audio Codec</source>
         <translation>The True Audio - Veszteségmentes hangkódek</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_About.cpp" line="802"/>
+        <location filename="../../src/Dialog_About.cpp" line="803"/>
         <source>refalac - Win32 command line ALAC encoder/decoder</source>
         <translation>refalac - Win32 parancssori ALAC kódoló/dekódoló</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_About.cpp" line="804"/>
+        <location filename="../../src/Dialog_About.cpp" line="805"/>
         <source>The ALAC reference implementation by Apple is available under the Apache license.</source>
         <translation>Az ALAC referencia implementáció az Apple által elérhető az Apache licenc alatt.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_About.cpp" line="809"/>
+        <location filename="../../src/Dialog_About.cpp" line="810"/>
         <source>wma2wav - Dump WMA files to Wave Audio</source>
         <translation>wma2wav - WMA fájlok kiírása Wave audióba</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_About.cpp" line="811"/>
+        <location filename="../../src/Dialog_About.cpp" line="812"/>
         <source>Copyright (c) 2011 LoRd_MuldeR &amp;lt;mulder2@gmx.de&amp;gt;. Some rights reserved.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_About.cpp" line="818"/>
+        <location filename="../../src/Dialog_About.cpp" line="819"/>
         <source>By Jory Stone &amp;lt;jcsston@toughguy.net&amp;gt; and LoRd_MuldeR &amp;lt;mulder2@gmx.de&amp;gt;.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_About.cpp" line="851"/>
+        <location filename="../../src/Dialog_About.cpp" line="852"/>
         <source>cURL - Curl URL Request Library</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_About.cpp" line="853"/>
+        <location filename="../../src/Dialog_About.cpp" line="854"/>
         <source>By Daniel Stenberg, released under the terms of the MIT/X Derivate License.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_About.cpp" line="816"/>
+        <location filename="../../src/Dialog_About.cpp" line="817"/>
         <source>avs2wav - Avisynth to Wave Audio converter</source>
         <translation>avs2wav - Avisynth a Wave Audio konvertálóhoz</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_About.cpp" line="823"/>
+        <location filename="../../src/Dialog_About.cpp" line="824"/>
         <source>dcaenc</source>
         <translation>dcaenc</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_About.cpp" line="825"/>
+        <location filename="../../src/Dialog_About.cpp" line="826"/>
         <source>Copyright (c) 2008-2011 Alexander E. Patrakov. Distributed under the LGPL.</source>
         <translation>Szerzői jog (c) 2008-2011 Alexander E. Patrakov. Terjesztve az LGPL alatt.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_About.cpp" line="830"/>
+        <location filename="../../src/Dialog_About.cpp" line="831"/>
         <source>MediaInfo - Media File Analysis Tool</source>
         <translation>MediaInfo - Médiafájl elemző eszköz</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_About.cpp" line="837"/>
+        <location filename="../../src/Dialog_About.cpp" line="838"/>
         <source>SoX - Sound eXchange</source>
         <translation>SoX - Hangváltó</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_About.cpp" line="844"/>
+        <location filename="../../src/Dialog_About.cpp" line="845"/>
         <source>GnuPG - The GNU Privacy Guard</source>
         <translation>GnuPG - A GNU adatvédelmi őr</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_About.cpp" line="858"/>
+        <location filename="../../src/Dialog_About.cpp" line="859"/>
         <source>UPX - The Ultimate Packer for eXecutables</source>
         <translation>UPX - Végrehajtható állomány tömörítő</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_About.cpp" line="865"/>
+        <location filename="../../src/Dialog_About.cpp" line="866"/>
         <source>Silk Icons - Over 700 icons in PNG format</source>
         <translation>Silk ikonok - Több mint 700 ikon PNG formátumban</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_About.cpp" line="867"/>
+        <location filename="../../src/Dialog_About.cpp" line="868"/>
         <source>By Mark James, released under the Creative Commons &apos;BY&apos; License.</source>
         <translation>Mark James által közzétéve a Creative Commons &apos;BY&apos; licenc alatt.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_About.cpp" line="872"/>
+        <location filename="../../src/Dialog_About.cpp" line="873"/>
         <source>Angry Chicken and Ghost Scream sound</source>
         <translation>Angry Chicken és Ghost Scream hang</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_About.cpp" line="874"/>
+        <location filename="../../src/Dialog_About.cpp" line="875"/>
         <source>By Alexander, released under the Creative Commons &apos;BY&apos; License.</source>
         <translation>Alexander által közzétéve a Creative Commons &apos;BY&apos; licenc alatt.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_About.cpp" line="879"/>
+        <location filename="../../src/Dialog_About.cpp" line="880"/>
         <source>The copyright of LameXP as a whole belongs to LoRd_MuldeR. The copyright of third-party software used in LameXP belongs to the individual authors.</source>
         <translation>A LameXP szerzői joga teljes egészében LoRd_MuldeR-hez tartozik. A LameXP-ben használt 3. féltől szármató szoftverek szerzői jogai az egyes szerzőkhöz tartoznak.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_About.cpp" line="934"/>
+        <location filename="../../src/Dialog_About.cpp" line="935"/>
         <source>n/a</source>
         <translation>n/a</translation>
     </message>
