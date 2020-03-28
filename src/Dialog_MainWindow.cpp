@@ -1469,7 +1469,7 @@ void MainWindow::windowShown(void)
 			{
 				m_settings->licenseAccepted(1);
 				m_settings->syncNow();
-				MUtils::Sound::play_sound("woohoo", false);
+				PLAY_SOUND_OPTIONAL("woohoo", false);
 				if (lamexp_version_demo())
 				{
 					showAnnounceBox();
@@ -1492,7 +1492,7 @@ void MainWindow::windowShown(void)
 	if(m_settings->licenseAccepted() <= 0)
 	{
 		QApplication::processEvents();
-		MUtils::Sound::play_sound("whammy", false);
+		PLAY_SOUND_OPTIONAL("whammy", false);
 		QMessageBox::critical(this, tr("License Declined"), tr("You have declined the license. Consequently the application will exit now!"), tr("Goodbye!"));
 		QFileInfo uninstallerInfo = QFileInfo(QString("%1/Uninstall.exe").arg(QApplication::applicationDirPath()));
 		if(uninstallerInfo.exists())
@@ -1514,7 +1514,7 @@ void MainWindow::windowShown(void)
 		if(MUtils::OS::current_date() >= lamexp_version_expires())
 		{
 			qWarning("Binary has expired !!!");
-			MUtils::Sound::play_sound("whammy", false);
+			PLAY_SOUND_OPTIONAL("whammy", false);
 			if(QMessageBox::warning(this, tr("LameXP - Expired"), NOBREAK(QString("%1<br>%2").arg(tr("This demo (pre-release) version of LameXP has expired at %1.").arg(lamexp_version_expires().toString(Qt::ISODate)), tr("LameXP is free software and release versions won't expire."))), tr("Check for Updates"), tr("Exit Program")) == 0)
 			{
 				checkForUpdates();
@@ -1557,7 +1557,7 @@ void MainWindow::windowShown(void)
 			return;
 		default:
 			QEventLoop loop; QTimer::singleShot(7000, &loop, SLOT(quit()));
-			MUtils::Sound::play_sound("waiting", true);
+			PLAY_SOUND_OPTIONAL("waiting", true);
 			showBanner(tr("Skipping update check this time, please be patient..."), &loop);
 			break;
 		}

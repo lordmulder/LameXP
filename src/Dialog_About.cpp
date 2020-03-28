@@ -62,6 +62,7 @@
 //Helper macros
 #define LINK(URL) QString("<a href=\"%1\">%2</a>").arg(URL).arg(QString(URL).replace("-", "&minus;"))
 #define TRIM_RIGHT(STR) do { while(STR.endsWith(QChar(' ')) || STR.endsWith(QChar('\t')) || STR.endsWith(QChar('\r')) || STR.endsWith(QChar('\n'))) STR.chop(1); } while(0)
+#define PLAY_SOUND_OPTIONAL(NAME, ASYNC) do { if(m_settings->soundsEnabled()) MUtils::Sound::play_sound((NAME), (ASYNC)); } while(0)
 #define MAKE_TRANSPARENT(WIDGET) do { QPalette _p = (WIDGET)->palette(); _p.setColor(QPalette::Background, Qt::transparent); (WIDGET)->setPalette(_p); } while(0)
 
 //Constants
@@ -260,7 +261,7 @@ int AboutDialog::exec()
 		}
 		else
 		{
-			MUtils::Sound::play_sound("ghost", true);
+			PLAY_SOUND_OPTIONAL("ghost", true);
 		}
 	}
 	
@@ -332,7 +333,7 @@ void AboutDialog::tabChanged(int index, const bool silent)
 	//Play tick sound
 	if(m_settings->soundsEnabled() && (!silent))
 	{
-		MUtils::Sound::play_sound("tick", true);
+		PLAY_SOUND_OPTIONAL("tick", true);
 	}
 
 	//Scroll to the top
@@ -513,7 +514,7 @@ bool AboutDialog::eventFilter(QObject *obj, QEvent *event)
 {
 	if((!m_disque.isNull()) && (obj == m_disque.data()) && (event->type() == QEvent::MouseButtonPress))
 	{
-		MUtils::Sound::play_sound("chicken", true);
+		PLAY_SOUND_OPTIONAL("chicken", true);
 		if (!m_cartoon[0])
 		{
 			QPixmap cartoon(":/images/Cartoon.png");
