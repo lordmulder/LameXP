@@ -1,8 +1,14 @@
-% ![](img/lamexp/banner.png)  
-LameXP Audio-Encoder Front-End &ndash; Changelog
+---
+title: "![LameXP](img/lamexp/banner.png)"
+subtitle: "Audio-Encoder Front-End &ndash; Changelog"
+---
 
 
 # LameXP v4.xx History #
+
+## LameXP v4.19 [unreleased] ## {-}
+* Updated cURL to v7.69.1 (2020-03-11), with libcurl v7.69.1 and OpenSSL v1.1.0k
+* Added command-line switch `--no-splash`, which can be used to hide the "splash" screen at startup
 
 ## LameXP v4.18 [2019-12-18] ## {-}
 * Upgraded build environment to Microsoft Visual Studio 2017.9 (MSVC 14.16)

@@ -1,5 +1,7 @@
-% ![](img/lamexp/banner.png)  
-LameXP Audio-Encoder Front-End &ndash; Manual
+---
+title: "![LameXP](img/lamexp/banner.png)"
+subtitle: "Audio-Encoder Front-End &ndash; Manual"
+---
 
 
 # Introduction #
@@ -504,11 +506,14 @@ Command-line options that are intended for testing and debugging:
 
 Miscellaneous command-line options that may come in handy in certain situations:
 
+* ``--no-splash``
+  Do **not** show the "splash" screen while application is starting up. Be aware that this will *not*  (considerably) improve the application startup time, because the same initialization work still needs to be performed!
+
 * ``--kill``
   Exit all running instances of LameXP.
 
 * ``--force-kill``
-  Exit all running instances of LameXP as quickly as possible, even if that incurs data loss. Use with extreme care!
+  Exit all running instances of LameXP as quickly as possible, even if that incurs data loss!
 
 
 
