@@ -45,6 +45,7 @@ public:
 	bool getSuccess(void) { return !isRunning() && m_bSuccess; }
 	bool getSlowIndicator(void) { return m_slowIndicator; }
 
+	void runSyncronized(void);
 	static void selfTest(void);
 
 protected:

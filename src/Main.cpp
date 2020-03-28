@@ -113,14 +113,19 @@ static int lamexp_initialize_ipc(MUtils::IPCChannel *const ipcChannel)
 	return 1;
 }
 
-static void lamexp_show_splash(const MUtils::CPUFetaures::cpu_info_t &cpuFeatures, SettingsModel *const settingsModel)
+static void initialize_lamexp(const MUtils::OS::ArgumentMap &arguments, const MUtils::CPUFetaures::cpu_info_t &cpuFeatures, SettingsModel *const settingsModel)
 {
 	QScopedPointer<InitializationThread> poInitializationThread(new InitializationThread(cpuFeatures));
+	if (arguments.contains("no-splash"))
+	{
+		poInitializationThread->runSyncronized();
+		return;
+	}
 	SplashScreen::showSplash(poInitializationThread.data());
 	settingsModel->slowStartup(poInitializationThread->getSlowIndicator());
 }
 
-static int lamexp_main_loop(const MUtils::CPUFetaures::cpu_info_t &cpuFeatures, MUtils::IPCChannel *const ipcChannel, int &iShutdown)
+static int lamexp_main_loop(const MUtils::OS::ArgumentMap &arguments, const MUtils::CPUFetaures::cpu_info_t &cpuFeatures, MUtils::IPCChannel *const ipcChannel, int &iShutdown)
 {
 	int iResult = -1;
 	bool bAccepted = true;
@@ -131,7 +136,7 @@ static int lamexp_main_loop(const MUtils::CPUFetaures::cpu_info_t &cpuFeatures, 
 	QScopedPointer<SettingsModel>           settingsModel(new SettingsModel()          );
 
 	//Show splash screen
-	lamexp_show_splash(cpuFeatures, settingsModel.data());
+	initialize_lamexp(arguments, cpuFeatures, settingsModel.data());
 
 	//Validate settings
 	settingsModel->validate();
@@ -260,7 +265,7 @@ static int lamexp_main(int &argc, char **argv)
 	}
 
 	//Main application loop
-	iResult = lamexp_main_loop(cpuFeatures, ipcChannel.data(), iShutdown);
+	iResult = lamexp_main_loop(arguments, cpuFeatures, ipcChannel.data(), iShutdown);
 
 	//Final clean-up
 	qDebug("Shutting down, please wait...\n");
