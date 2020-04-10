@@ -7,8 +7,8 @@
 set "ISO_DATE="
 set "ISO_TIME="
 
-if exist "%~dp0\..\..\..\Prerequisites\GnuWin32\date.exe" (
-	for /F "usebackq tokens=1,2" %%a in (`start /B "date" "%~dp0\..\..\..\Prerequisites\GnuWin32\date.exe" +"%%Y-%%m-%%d %%H:%%M:%%S"`) do (
+if exist "%~dp0\..\..\..\Prerequisites\MSYS\1.0\bin\date.exe" (
+	for /F "usebackq tokens=1,2" %%a in (`start /B "date" "%~dp0\..\..\..\Prerequisites\MSYS\1.0\bin\date.exe" +"%%Y-%%m-%%d %%H:%%M:%%S"`) do (
 		set "ISO_DATE=%%a"
 		set "ISO_TIME=%%b"
 	)

@@ -187,14 +187,14 @@ echo ---------------------------------------------------------------------------
 echo README.TXT>> "%OUT_FILE%.txt"
 echo ------------------------------------------------------------------------------>> "%OUT_FILE%.txt"
 echo.>> "%OUT_FILE%.txt"
-"%~dp0\..\..\..\Prerequisites\GnuWin32\cat.exe" "%~dp0\..\..\ReadMe.txt" >> "%OUT_FILE%.txt"
+"%~dp0\..\..\..\Prerequisites\MSYS\1.0\bin\cat.exe" "%~dp0\..\..\ReadMe.txt" >> "%OUT_FILE%.txt"
 echo.>> "%OUT_FILE%.txt"
 
 echo ------------------------------------------------------------------------------>> "%OUT_FILE%.txt"
 echo LICENSE.TXT>> "%OUT_FILE%.txt"
 echo ------------------------------------------------------------------------------>> "%OUT_FILE%.txt"
 echo.>> "%OUT_FILE%.txt"
-"%~dp0\..\..\..\Prerequisites\GnuWin32\cat.exe" "%~dp0\..\..\License.txt" >> "%OUT_FILE%.txt"
+"%~dp0\..\..\..\Prerequisites\MSYS\1.0\bin\cat.exe" "%~dp0\..\..\License.txt" >> "%OUT_FILE%.txt"
 echo.>> "%OUT_FILE%.txt"
 
 :: ---------------------------------------------------------------------------
@@ -206,7 +206,7 @@ echo.>> "%OUT_FILE%.txt"
 "%~dp0\..\..\..\Prerequisites\CEcho\cecho.exe" cyan "===========================================================================\n"
 
 pushd "%TMP_PATH%"
-"%~dp0\..\..\..\Prerequisites\GnuWin32\zip.exe" -r -9 -z "%OUT_FILE%.zip" "*.*" < "%OUT_FILE%.txt"
+"%~dp0\..\..\..\Prerequisites\InfoZip\zip.exe" -r -9 -z "%OUT_FILE%.zip" "*.*" < "%OUT_FILE%.txt"
 popd
 
 "%~dp0\..\..\..\Prerequisites\NSIS\makensis.exe" "/DLAMEXP_DATE=%ISO_DATE%" "/DLAMEXP_VERSION=%VER_LAMEXP_MAJOR%.%VER_LAMEXP_MINOR_HI%%VER_LAMEXP_MINOR_LO%" "/DLAMEXP_BUILD=%VER_LAMEXP_BUILD%" "/DLAMEXP_INSTTYPE=%VER_LAMEXP_TYPE%" "/DLAMEXP_PATCH=%VER_LAMEXP_PATCH%" "/DLAMEXP_OUTPUT_FILE=%OUT_FILE%.sfx" "/DLAMEXP_SOURCE_PATH=%TMP_PATH%" "%~dp0\..\NSIS\setup.nsi"
