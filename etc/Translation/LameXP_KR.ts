@@ -4,17 +4,17 @@
 <context>
     <name>AboutDialog</name>
     <message>
-        <location filename="../../src/Dialog_About.cpp" line="570"/>
+        <location filename="../../src/Dialog_About.cpp" line="567"/>
         <source>LameXP - Audio Encoder Front-end</source>
         <translation type="unfinished">LameXP - 오디오 인코더 프런트-엔드</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_About.cpp" line="574"/>
+        <location filename="../../src/Dialog_About.cpp" line="571"/>
         <source>Please visit %1 for news and updates!</source>
         <translation type="unfinished">새로운 소식과 업데이트를 위해 %1로 방문하여 주십시오!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_About.cpp" line="618"/>
+        <location filename="../../src/Dialog_About.cpp" line="615"/>
         <source>Note: LameXP is free software. Do &lt;b&gt;not&lt;/b&gt; pay money to obtain or use LameXP! If some third-party website tries to make you pay for downloading LameXP, you should &lt;b&gt;not&lt;/b&gt; respond to the offer !!!</source>
         <translation type="unfinished">알림: LameXP는 무료 소프트웨어입니다. LameXP를 내려받거나 사용하기 위해서 &lt;b&gt;돈을 지불하지 마십시오&lt;/b&gt;. 일부 타 웹사이트에서 LameXP를 내려받기 위해서 지불을 요구한다면 &lt;b&gt;절대로&lt;/b&gt; 내려받지 마십시오!!!</translation>
     </message>
@@ -49,218 +49,218 @@
         <translation type="unfinished">닫기</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_About.cpp" line="632"/>
+        <location filename="../../src/Dialog_About.cpp" line="629"/>
         <source>The following people have contributed to LameXP:</source>
         <translation type="unfinished">다음 분들이 LameXP 번역에 도움을 주셨습니다:</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_About.cpp" line="642"/>
+        <location filename="../../src/Dialog_About.cpp" line="639"/>
         <source>Translators:</source>
         <translation type="unfinished">번역 도우미:</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_About.cpp" line="674"/>
+        <location filename="../../src/Dialog_About.cpp" line="671"/>
         <source>If you are willing to contribute a LameXP translation, feel free to contact us!</source>
         <translation type="unfinished">LameXP 번역에 도움을 주실 분들은 연락주시기 바랍니다!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_About.cpp" line="685"/>
+        <location filename="../../src/Dialog_About.cpp" line="682"/>
         <source>The following third-party software is used in LameXP:</source>
         <translation type="unfinished">다음과 같은 타사 소프트웨어가 LameXP에 사용되었습니다:</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_About.cpp" line="690"/>
+        <location filename="../../src/Dialog_About.cpp" line="687"/>
         <source>LAME - OpenSource mp3 Encoder</source>
         <translation type="unfinished">LAME - 오픈소스 MP3 인코더</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_About.cpp" line="692"/>
-        <location filename="../../src/Dialog_About.cpp" line="714"/>
-        <location filename="../../src/Dialog_About.cpp" line="735"/>
-        <location filename="../../src/Dialog_About.cpp" line="756"/>
-        <location filename="../../src/Dialog_About.cpp" line="770"/>
-        <location filename="../../src/Dialog_About.cpp" line="784"/>
-        <location filename="../../src/Dialog_About.cpp" line="798"/>
-        <location filename="../../src/Dialog_About.cpp" line="833"/>
-        <location filename="../../src/Dialog_About.cpp" line="840"/>
-        <location filename="../../src/Dialog_About.cpp" line="847"/>
-        <location filename="../../src/Dialog_About.cpp" line="861"/>
+        <location filename="../../src/Dialog_About.cpp" line="689"/>
+        <location filename="../../src/Dialog_About.cpp" line="711"/>
+        <location filename="../../src/Dialog_About.cpp" line="732"/>
+        <location filename="../../src/Dialog_About.cpp" line="753"/>
+        <location filename="../../src/Dialog_About.cpp" line="767"/>
+        <location filename="../../src/Dialog_About.cpp" line="781"/>
+        <location filename="../../src/Dialog_About.cpp" line="795"/>
+        <location filename="../../src/Dialog_About.cpp" line="830"/>
+        <location filename="../../src/Dialog_About.cpp" line="837"/>
+        <location filename="../../src/Dialog_About.cpp" line="844"/>
+        <location filename="../../src/Dialog_About.cpp" line="858"/>
         <source>Released under the terms of the GNU Lesser General Public License.</source>
         <translation type="unfinished">GNU 약소 일반 공중 사용 허가서의 약관 하에 출시됨.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_About.cpp" line="699"/>
+        <location filename="../../src/Dialog_About.cpp" line="696"/>
         <source>Completely open and patent-free audio encoding technology.</source>
         <translation type="unfinished">완전 공개되고 특허 받은 무료 오디오 인코딩 기술.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_About.cpp" line="704"/>
+        <location filename="../../src/Dialog_About.cpp" line="701"/>
         <source>Nero AAC Reference MPEG-4 Encoder</source>
         <translation type="unfinished">Nero AAC 레퍼런스 MPEG-4 인코더</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_About.cpp" line="706"/>
+        <location filename="../../src/Dialog_About.cpp" line="703"/>
         <source>Freeware state-of-the-art HE-AAC encoder with 2-Pass support.</source>
         <translation type="unfinished">2-패스를 지원하는 최신 기술의 프리웨어 HE-AAC encoder.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_About.cpp" line="708"/>
+        <location filename="../../src/Dialog_About.cpp" line="705"/>
         <source>Available from vendor web-site as free download:</source>
         <translation type="unfinished">무료 다운로드를 제공하는 웹사이트에서 사용 가능:</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_About.cpp" line="719"/>
+        <location filename="../../src/Dialog_About.cpp" line="716"/>
         <source>FLAC - Free Lossless Audio Codec</source>
         <translation type="unfinished">FLAC - 무료 무손실 오디오 코덱</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_About.cpp" line="721"/>
+        <location filename="../../src/Dialog_About.cpp" line="718"/>
         <source>Open and patent-free lossless audio compression technology.</source>
         <translation type="unfinished">공개 및 특허 받은 무료 무손실 오디오 압축 기술.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_About.cpp" line="733"/>
+        <location filename="../../src/Dialog_About.cpp" line="730"/>
         <source>mpg123 - Fast Console MPEG Audio Player/Decoder</source>
         <translation type="unfinished">mpg123 - 빠른 콘솔 MPEG 오디오 플레이어/디코더</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_About.cpp" line="740"/>
+        <location filename="../../src/Dialog_About.cpp" line="737"/>
         <source>FAAD - OpenSource MPEG-4 and MPEG-2 AAC Decoder</source>
         <translation type="unfinished">FAAD - 오픈소스 MPEG-4 및 MPEG-2 AAC 디코더</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_About.cpp" line="742"/>
+        <location filename="../../src/Dialog_About.cpp" line="739"/>
         <source>Released under the terms of the GNU General Public License.</source>
         <translation type="unfinished">GNU 일반 공중 사용 허가서의 약관 하에 줄시됨.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_About.cpp" line="761"/>
+        <location filename="../../src/Dialog_About.cpp" line="758"/>
         <source>WavPack - Hybrid Lossless Compression</source>
         <translation type="unfinished">WavPack - 하이브리드 무손실 압축</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_About.cpp" line="763"/>
+        <location filename="../../src/Dialog_About.cpp" line="760"/>
         <source>Completely open audio compression format.</source>
         <translation type="unfinished">완전 공개된 오디오 압축 형식.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_About.cpp" line="768"/>
+        <location filename="../../src/Dialog_About.cpp" line="765"/>
         <source>Musepack - Living Audio Compression</source>
         <translation type="unfinished">Musepack - 실시간 오디오 압축</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_About.cpp" line="775"/>
+        <location filename="../../src/Dialog_About.cpp" line="772"/>
         <source>Monkey&apos;s Audio - Lossless Audio Compressor</source>
         <translation type="unfinished">Monkey&apos;s Audio - 무손실 오디오 압축기</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_About.cpp" line="777"/>
+        <location filename="../../src/Dialog_About.cpp" line="774"/>
         <source>Freely available source code, simple SDK and non-restrictive licensing.</source>
         <translation type="unfinished">자유롭게 사용 가능한 소스 코드, 간소한 SDK와 비제한 라이센스.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_About.cpp" line="782"/>
+        <location filename="../../src/Dialog_About.cpp" line="779"/>
         <source>Shorten - Lossless Audio Compressor</source>
         <translation type="unfinished">Shorten - 무손실 오디오 압축기</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_About.cpp" line="789"/>
+        <location filename="../../src/Dialog_About.cpp" line="786"/>
         <source>Speex - Free Codec For Free Speech</source>
         <translation type="unfinished">Speex - 음성화를 위한 무료 코덱</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_About.cpp" line="791"/>
+        <location filename="../../src/Dialog_About.cpp" line="788"/>
         <source>Open Source patent-free audio format designed for speech.</source>
         <translation type="unfinished">음성화 제작을 위해 설계된 공개 무료 오디오 형식.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_About.cpp" line="796"/>
+        <location filename="../../src/Dialog_About.cpp" line="793"/>
         <source>The True Audio - Lossless Audio Codec</source>
         <translation type="unfinished">The True Audio - 무손실 오디오 코덱</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_About.cpp" line="812"/>
+        <location filename="../../src/Dialog_About.cpp" line="809"/>
         <source>Copyright (c) 2011 LoRd_MuldeR &amp;lt;mulder2@gmx.de&amp;gt;. Some rights reserved.</source>
         <translation type="unfinished">저작권 (c) 2011 LoRd_MuldeR &amp;lt;mulder2@gmx.de&amp;gt;. Some rights reserved.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_About.cpp" line="819"/>
+        <location filename="../../src/Dialog_About.cpp" line="816"/>
         <source>By Jory Stone &amp;lt;jcsston@toughguy.net&amp;gt; and LoRd_MuldeR &amp;lt;mulder2@gmx.de&amp;gt;.</source>
         <translation type="unfinished">By Jory Stone &amp;lt;jcsston@toughguy.net&amp;gt; 및 LoRd_MuldeR &amp;lt;mulder2@gmx.de&amp;gt;.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_About.cpp" line="831"/>
+        <location filename="../../src/Dialog_About.cpp" line="828"/>
         <source>MediaInfo - Media File Analysis Tool</source>
         <translation type="unfinished">MediaInfo - 미디어 파일 분석 도구</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_About.cpp" line="838"/>
+        <location filename="../../src/Dialog_About.cpp" line="835"/>
         <source>SoX - Sound eXchange</source>
         <translation type="unfinished">SoX - 사운드 교환</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_About.cpp" line="845"/>
+        <location filename="../../src/Dialog_About.cpp" line="842"/>
         <source>GnuPG - The GNU Privacy Guard</source>
         <translation type="unfinished">GnuPG - GNU 개인정보 보호</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_About.cpp" line="866"/>
+        <location filename="../../src/Dialog_About.cpp" line="863"/>
         <source>Silk Icons - Over 700 icons in PNG format</source>
         <translation type="unfinished">Silk 아이콘 - PNG 형식의 700 이상의 아이콘</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_About.cpp" line="868"/>
+        <location filename="../../src/Dialog_About.cpp" line="865"/>
         <source>By Mark James, released under the Creative Commons &apos;BY&apos; License.</source>
         <translation type="unfinished">By Mark James, 크리에이티브 커먼즈 &apos;BY&apos; 라이선스에 의해 공개됨.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_About.cpp" line="873"/>
+        <location filename="../../src/Dialog_About.cpp" line="870"/>
         <source>Angry Chicken and Ghost Scream sound</source>
         <translation type="unfinished">성난 닭과 귀신 울음 소리</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_About.cpp" line="875"/>
+        <location filename="../../src/Dialog_About.cpp" line="872"/>
         <source>By Alexander, released under the Creative Commons &apos;BY&apos; License.</source>
         <translation type="unfinished">By Alexander, 크리에이티브 커먼즈 &apos;BY&apos; 라이선스에 의해 공개됨.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_About.cpp" line="880"/>
+        <location filename="../../src/Dialog_About.cpp" line="877"/>
         <source>The copyright of LameXP as a whole belongs to LoRd_MuldeR. The copyright of third-party software used in LameXP belongs to the individual authors.</source>
         <translation type="unfinished">LameXP 전체의 저작권은 LoRd_MuldeR에게 있습니다. LameXP에 사용된 타사 소프트웨어는 각 소프트웨어의 저작자에게 저작권이 있습니다.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_About.cpp" line="935"/>
+        <location filename="../../src/Dialog_About.cpp" line="932"/>
         <source>n/a</source>
         <translation type="unfinished">없음</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_About.cpp" line="586"/>
-        <location filename="../../src/Dialog_About.cpp" line="598"/>
+        <location filename="../../src/Dialog_About.cpp" line="583"/>
+        <location filename="../../src/Dialog_About.cpp" line="595"/>
         <source>Note: This demo (pre-release) version of LameXP will expire at %1. Still %2 days left.</source>
         <translation type="unfinished">알림: LameXP의 이 데모(pre-release) 버전은 %1에 만료됩니다. 아직 %2일 남음.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_About.cpp" line="712"/>
+        <location filename="../../src/Dialog_About.cpp" line="709"/>
         <source>Aften - A/52 audio encoder</source>
         <translation type="unfinished">Aften - A/52 오디오 인코더</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_About.cpp" line="810"/>
+        <location filename="../../src/Dialog_About.cpp" line="807"/>
         <source>wma2wav - Dump WMA files to Wave Audio</source>
         <translation type="unfinished">wma2wav - WMA 파일을 Wave 오디오로 덤프</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_About.cpp" line="817"/>
+        <location filename="../../src/Dialog_About.cpp" line="814"/>
         <source>avs2wav - Avisynth to Wave Audio converter</source>
         <translation type="unfinished">avs2wav - Avisynth를 Wave로 오디오 변환</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_About.cpp" line="824"/>
+        <location filename="../../src/Dialog_About.cpp" line="821"/>
         <source>dcaenc</source>
         <translation type="unfinished">dcaenc</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_About.cpp" line="826"/>
+        <location filename="../../src/Dialog_About.cpp" line="823"/>
         <source>Copyright (c) 2008-2011 Alexander E. Patrakov. Distributed under the LGPL.</source>
         <translation type="unfinished">저작권 (c) 2008-2011 Alexander E. Patrakov. Distributed under the LGPL.</translation>
     </message>
@@ -275,22 +275,22 @@
         <translation type="unfinished">라이센스</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_About.cpp" line="635"/>
+        <location filename="../../src/Dialog_About.cpp" line="632"/>
         <source>Programmers:</source>
         <translation type="unfinished">프로그래머:</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_About.cpp" line="638"/>
+        <location filename="../../src/Dialog_About.cpp" line="635"/>
         <source>Project Leader</source>
         <translation type="unfinished">프로젝트 리더</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_About.cpp" line="726"/>
+        <location filename="../../src/Dialog_About.cpp" line="723"/>
         <source>Opus Audio Codec</source>
         <translation type="unfinished">Opus 오디오 코덱</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_About.cpp" line="728"/>
+        <location filename="../../src/Dialog_About.cpp" line="725"/>
         <source>Totally open, royalty-free, highly versatile audio codec.</source>
         <translation type="unfinished">완전 오픈 소스, 저작권 사용료 무료, 매우 다목적 오디오 코덱.</translation>
     </message>
@@ -305,57 +305,57 @@
         <translation type="unfinished">Qt에 대해...</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_About.cpp" line="654"/>
+        <location filename="../../src/Dialog_About.cpp" line="651"/>
         <source>Special thanks to:</source>
         <translation type="unfinished">특별히 감사합니다:</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_About.cpp" line="852"/>
+        <location filename="../../src/Dialog_About.cpp" line="849"/>
         <source>cURL - Curl URL Request Library</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_About.cpp" line="854"/>
+        <location filename="../../src/Dialog_About.cpp" line="851"/>
         <source>By Daniel Stenberg, released under the terms of the MIT/X Derivate License.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_About.cpp" line="859"/>
+        <location filename="../../src/Dialog_About.cpp" line="856"/>
         <source>UPX - The Ultimate Packer for eXecutables</source>
         <translation type="unfinished">UPX - The Ultimate Packer for eXecutables</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_About.cpp" line="803"/>
+        <location filename="../../src/Dialog_About.cpp" line="800"/>
         <source>refalac - Win32 command line ALAC encoder/decoder</source>
         <translation type="unfinished">refalac - Win32 command line ALAC encoder/decoder</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_About.cpp" line="805"/>
+        <location filename="../../src/Dialog_About.cpp" line="802"/>
         <source>The ALAC reference implementation by Apple is available under the Apache license.</source>
         <translation type="unfinished">애플 ALAC 참조 구현은 아파치 라이센스에 따라 사용 가능함.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_About.cpp" line="754"/>
+        <location filename="../../src/Dialog_About.cpp" line="751"/>
         <source>Valdec from AC3Filter Tools - AC3/DTS Decoder</source>
         <translation type="unfinished">AC3Filter Tools의 Valdec - AC3/DTS Decoder</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_About.cpp" line="664"/>
+        <location filename="../../src/Dialog_About.cpp" line="661"/>
         <source>Official Mirrors:</source>
         <translation type="unfinished">공식 미러:</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_About.cpp" line="697"/>
+        <location filename="../../src/Dialog_About.cpp" line="694"/>
         <source>OggEnc - Vorbis Encoder</source>
         <translation type="unfinished">OggEnc - Vorbis Encoder</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_About.cpp" line="747"/>
+        <location filename="../../src/Dialog_About.cpp" line="744"/>
         <source>OggDec - Vorbis Decoder</source>
         <translation type="unfinished">OggDec - Vorbis Decoder</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_About.cpp" line="749"/>
+        <location filename="../../src/Dialog_About.cpp" line="746"/>
         <source>Command line Ogg Vorbis decoder created by John33.</source>
         <translation type="unfinished">Command line Ogg Vorbis decoder created by John33.</translation>
     </message>
