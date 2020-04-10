@@ -116,13 +116,15 @@ static int lamexp_initialize_ipc(MUtils::IPCChannel *const ipcChannel)
 static void initialize_lamexp(const MUtils::OS::ArgumentMap &arguments, const MUtils::CPUFetaures::cpu_info_t &cpuFeatures, SettingsModel *const settingsModel)
 {
 	QScopedPointer<InitializationThread> poInitializationThread(new InitializationThread(cpuFeatures));
-	if (arguments.contains("no-splash"))
+	if (!arguments.contains("no-splash"))
 	{
-		poInitializationThread->runSyncronized();
-		return;
+		SplashScreen::showSplash(poInitializationThread.data());
+		settingsModel->slowStartup(poInitializationThread->getSlowIndicator());
 	}
-	SplashScreen::showSplash(poInitializationThread.data());
-	settingsModel->slowStartup(poInitializationThread->getSlowIndicator());
+	else
+	{
+		poInitializationThread->runSyncronized(); /*no splash*/
+	}
 }
 
 static int lamexp_main_loop(const MUtils::OS::ArgumentMap &arguments, const MUtils::CPUFetaures::cpu_info_t &cpuFeatures, MUtils::IPCChannel *const ipcChannel, int &iShutdown)
