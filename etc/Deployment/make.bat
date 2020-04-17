@@ -221,7 +221,7 @@ if %ERRORLEVEL% NEQ 0 (
 	pause && exit
 )
 
-call "%~dp0\..\..\..\Prerequisites\SevenZip\7zSD.cmd" "%OUT_FILE%.sfx" "%OUT_FILE%.exe" "LameXP Setup" "LameXP-Setup-r%VER_LAMEXP_BUILD%"
+call "%~dp0\..\..\..\Prerequisites\SevenZip\7zSDex.cmd" "%OUT_FILE%.sfx" "%OUT_FILE%.exe" "LameXP Setup" "LameXP-Setup-r%VER_LAMEXP_BUILD%"
 if %ERRORLEVEL% NEQ 0 (
 	"%~dp0\..\..\..\Prerequisites\CEcho\cecho.exe" red "\nFailed to build installer^!\n"
 	pause && exit
@@ -275,6 +275,7 @@ attrib +R "%OUT_FILE%.exe"
 
 attrib +R "%OUT_FILE%.exe.sig"
 attrib +R "%OUT_FILE%.exe.sig2"
+attrib +R "%OUT_FILE%.zip.sig2"
 
 :: ---------------------------------------------------------------------------
 :: COMPLETED
