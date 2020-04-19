@@ -356,7 +356,7 @@ SettingsModel::SettingsModel(void)
 
 	//Create settings
 	QSettings *configFile = new QSettings(configPath, QSettings::IniFormat);
-	const QString groupKey = QString().sprintf("LameXP_%u%02u%05u", lamexp_version_major(), lamexp_version_minor(), lamexp_version_confg());
+	const QString groupKey = QString().sprintf("LameXP.%04X", lamexp_version_confg());
 	const QStringList childGroups = configFile->childGroups();
 
 	//Clean-up settings
