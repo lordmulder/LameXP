@@ -305,6 +305,7 @@ void CueSplitter::splitFile(const QString &output, const int trackNo, const QStr
 	QProcess process;
 	MUtils::init_process(process, m_outputDir);
 
+	qDebug("SoX args: \"%s\"", MUTILS_UTF8(args.join(QLatin1String("\", \""))));
 	process.start(m_soxBin, args);
 		
 	if(!process.waitForStarted())
@@ -335,59 +336,74 @@ void CueSplitter::splitFile(const QString &output, const int trackNo, const QStr
 		while(process.bytesAvailable() > 0)
 		{
 			QByteArray line = process.readLine();
-			QString text = QString::fromUtf8(line.constData()).simplified();
-			if(rxProgress.lastIndexIn(text) >= 0)
+			if (line.size() > 0)
 			{
-				bool ok = false;
-				int progress = rxProgress.cap(1).toInt(&ok);
-				if(ok)
+				QString text = QString::fromUtf8(line.constData()).simplified();
+				if (!text.isEmpty())
 				{
-					const int newProgress = baseProgress + qRound(static_cast<double>(qBound(0, progress, 100)) / 10.0);
-					if(newProgress > prevProgress)
+					if (rxProgress.lastIndexIn(text) >= 0)
 					{
-						emit progressValChanged(newProgress);
-						prevProgress = newProgress;
+						int progress;
+						if (MUtils::regexp_parse_int32(rxProgress, progress))
+						{
+							const int newProgress = baseProgress + qRound(static_cast<double>(qBound(0, progress, 100)) / 10.0);
+							if (newProgress > prevProgress)
+							{
+								emit progressValChanged(newProgress);
+								prevProgress = newProgress;
+							}
+						}
 					}
-				}
-			}
-			else if(rxChannels.lastIndexIn(text) >= 0)
-			{
-				bool ok = false;
-				unsigned int channels = rxChannels.cap(1).toUInt(&ok);
-				if(ok) outFileInfo.techInfo().setAudioChannels(channels);
-			}
-			else if(rxSamplerate.lastIndexIn(text) >= 0)
-			{
-				bool ok = false;
-				unsigned int samplerate = rxSamplerate.cap(1).toUInt(&ok);
-				if(ok) outFileInfo.techInfo().setAudioSamplerate(samplerate);
-			}
-			else if(rxPrecision.lastIndexIn(text) >= 0)
-			{
-				bool ok = false;
-				unsigned int precision = rxPrecision.cap(1).toUInt(&ok);
-				if(ok) outFileInfo.techInfo().setAudioBitdepth(precision);
-			}
-			else if(rxDuration.lastIndexIn(text) >= 0)
-			{
-				bool ok1 = false, ok2 = false, ok3 = false;
-				unsigned int hh = rxDuration.cap(1).toUInt(&ok1);
-				unsigned int mm = rxDuration.cap(2).toUInt(&ok2);
-				unsigned int ss = rxDuration.cap(3).toUInt(&ok3);
-				if(ok1 && ok2 && ok3)
-				{
-					unsigned intputLen = (hh * 3600) + (mm * 60) + ss;
-					if(length == std::numeric_limits<double>::infinity())
+					else if (rxChannels.lastIndexIn(text) >= 0)
 					{
-						qDebug("Duration updated from SoX info!");
-						int duration = intputLen - static_cast<int>(floor(offset + 0.5));
-						if(duration < 0) qWarning("Track is out of bounds: Track offset exceeds input file duration!");
-						outFileInfo.techInfo().setDuration(qMax(0, duration));
+						unsigned int channels;
+						if (MUtils::regexp_parse_uint32(rxChannels, channels))
+						{
+							outFileInfo.techInfo().setAudioChannels(channels);
+						}
+					}
+					else if (rxSamplerate.lastIndexIn(text) >= 0)
+					{
+						unsigned int samplerate;
+						if (MUtils::regexp_parse_uint32(rxSamplerate, samplerate))
+						{
+							outFileInfo.techInfo().setAudioSamplerate(samplerate);
+						}
+					}
+					else if (rxPrecision.lastIndexIn(text) >= 0)
+					{
+						unsigned int precision;
+						if (MUtils::regexp_parse_uint32(rxPrecision, precision))
+						{
+							outFileInfo.techInfo().setAudioBitdepth(precision);
+						}
+					}
+					else if (rxDuration.lastIndexIn(text) >= 0)
+					{
+						unsigned int duration[3U];
+						if (MUtils::regexp_parse_uint32(rxDuration, duration, 3U))
+						{
+							unsigned intputLen = (duration[0U] * 3600) + (duration[1U] * 60) + duration[2U];
+							if (length == std::numeric_limits<double>::infinity())
+							{
+								qDebug("Duration updated from SoX info!");
+								int duration = intputLen - static_cast<int>(floor(offset + 0.5));
+								if (duration < 0)
+								{
+									qWarning("Track is out of bounds: Track offset exceeds input file duration!");
+								}
+								outFileInfo.techInfo().setDuration(qMax(0, duration));
+							}
+							else
+							{
+								unsigned int trackEnd = static_cast<unsigned int>(floor(offset + 0.5)) + static_cast<unsigned int>(floor(length + 0.5));
+								if (trackEnd > intputLen) qWarning("Track is out of bounds: End of track exceeds input file duration!");
+							}
+						}
 					}
 					else
 					{
-						unsigned int trackEnd = static_cast<unsigned int>(floor(offset + 0.5)) + static_cast<unsigned int>(floor(length + 0.5));
-						if(trackEnd > intputLen) qWarning("Track is out of bounds: End of track exceeds input file duration!");
+						qDebug("SoX line: %s", MUTILS_UTF8(text));
 					}
 				}
 			}
@@ -401,6 +417,7 @@ void CueSplitter::splitFile(const QString &output, const int trackNo, const QStr
 		process.waitForFinished(-1);
 	}
 
+	qDebug("SoX exit code: %d", process.exitCode());
 	if(process.exitCode() != EXIT_SUCCESS || QFileInfo(output).size() == 0)
 	{
 		qWarning("Splitting has failed !!!");

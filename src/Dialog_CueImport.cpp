@@ -423,18 +423,18 @@ void CueImportDialog::splitFiles(void)
 {
 	QString baseName = QFileInfo(m_cueFileName).completeBaseName().replace(".", " ").simplified();
 
-	WorkingBanner *progress = new WorkingBanner(this);
-	CueSplitter *splitter  = new CueSplitter(m_outputDir, baseName, m_model, m_fileInfo);
+	QScopedPointer<WorkingBanner> progress(new WorkingBanner(this));
+	QScopedPointer<CueSplitter> splitter(new CueSplitter(m_outputDir, baseName, m_model, m_fileInfo));
 
-	connect(splitter, SIGNAL(fileSelected(QString)), progress, SLOT(setText(QString)), Qt::QueuedConnection);
-	connect(splitter, SIGNAL(fileSplit(AudioFileModel)), m_fileList, SLOT(addFile(AudioFileModel)), Qt::QueuedConnection);
-	connect(splitter, SIGNAL(progressValChanged(unsigned int)), progress, SLOT(setProgressVal(unsigned int)), Qt::QueuedConnection);
-	connect(splitter, SIGNAL(progressMaxChanged(unsigned int)), progress, SLOT(setProgressMax(unsigned int)), Qt::QueuedConnection);
-	connect(progress, SIGNAL(userAbort()), splitter, SLOT(abortProcess()), Qt::DirectConnection);
+	connect(splitter.data(), SIGNAL(fileSelected(QString)), progress.data(), SLOT(setText(QString)), Qt::QueuedConnection);
+	connect(splitter.data(), SIGNAL(fileSplit(AudioFileModel)), m_fileList, SLOT(addFile(AudioFileModel)), Qt::QueuedConnection);
+	connect(splitter.data(), SIGNAL(progressValChanged(unsigned int)), progress.data(), SLOT(setProgressVal(unsigned int)), Qt::QueuedConnection);
+	connect(splitter.data(), SIGNAL(progressMaxChanged(unsigned int)), progress.data(), SLOT(setProgressMax(unsigned int)), Qt::QueuedConnection);
+	connect(progress.data(), SIGNAL(userAbort()), splitter.data(), SLOT(abortProcess()), Qt::DirectConnection);
 
 	DecoderRegistry::configureDecoders(m_settings);
 
-	progress->show(tr("Splitting file(s), please wait..."), splitter);
+	progress->show(tr("Splitting file(s), please wait..."), splitter.data());
 	progress->close();
 
 	if(splitter->getAborted())
@@ -450,7 +450,4 @@ void CueImportDialog::splitFiles(void)
 		QString text = QString("<nobr>%1 %2</nobr>").arg(tr("Imported %n track(s) from the Cue Sheet.", "", splitter->getTracksSuccess()), tr("Skipped %n track(s).", "", splitter->getTracksSkipped()));
 		QMessageBox::information(this, tr("Cue Sheet Completed"), text);
 	}
-
-	MUTILS_DELETE(splitter);
-	MUTILS_DELETE(progress);
 }
