@@ -55,7 +55,7 @@
 class SettingsCache
 {
 public:
-	SettingsCache(QSettings *configFile)
+	SettingsCache(QSettings *const configFile)
 	:
 		m_configFile(configFile),
 		m_cache(new cache_data_t()),
@@ -284,7 +284,7 @@ LAMEXP_MAKE_ID(neroAACEnable2Pass,           "AdvancedOptions/AACEnc/Enable2Pass
 LAMEXP_MAKE_ID(neroAacNotificationsEnabled,  "Flags/EnableNeroAacNotifications");
 LAMEXP_MAKE_ID(normalizationFilterEnabled,   "AdvancedOptions/VolumeNormalization/Enabled");
 LAMEXP_MAKE_ID(normalizationFilterDynamic,   "AdvancedOptions/VolumeNormalization/UseDynAudNorm");
-LAMEXP_MAKE_ID(normalizationFilterCoupled,    "AdvancedOptions/VolumeNormalization/ChannelCoupling");
+LAMEXP_MAKE_ID(normalizationFilterCoupled,   "AdvancedOptions/VolumeNormalization/ChannelCoupling");
 LAMEXP_MAKE_ID(normalizationFilterMaxVolume, "AdvancedOptions/VolumeNormalization/MaxVolume");
 LAMEXP_MAKE_ID(normalizationFilterSize,      "AdvancedOptions/VolumeNormalization/FilterLength");
 LAMEXP_MAKE_ID(opusComplexity,               "AdvancedOptions/Opus/EncodingComplexity");
@@ -355,28 +355,42 @@ SettingsModel::SettingsModel(void)
 	}
 
 	//Create settings
-	QSettings *configFile = new QSettings(configPath, QSettings::IniFormat);
-	const QString groupKey = QString().sprintf("LameXP.%04X", lamexp_version_confg());
+	const QString groupKey = QString().sprintf("LameXP.%u", lamexp_version_confg());
+	QScopedPointer<QSettings> configFile(new QSettings(configPath, QSettings::IniFormat));
 	const QStringList childGroups = configFile->childGroups();
+
+	//Import legacy settings
+	if ((lamexp_version_confg() == 2188U) && (!childGroups.contains(groupKey, Qt::CaseInsensitive)))
+	{
+		const char* const LEGACY_GROUPS[] = { "LameXP_41802188", "LameXP_41702188", NULL };
+		for (size_t i = 0; LEGACY_GROUPS[i]; ++i)
+		{
+			const QString legacyGroupName = QString::fromLatin1(LEGACY_GROUPS[i]);
+			if (childGroups.contains(legacyGroupName))
+			{
+				qWarning("Importing legay settings: %s -> %s", MUTILS_UTF8(legacyGroupName), MUTILS_UTF8(groupKey));
+				configFile->beginGroup(legacyGroupName);
+				const QStringList existingKeys = configFile->allKeys();
+				configFile->endGroup();
+				for (QStringList::ConstIterator iter = existingKeys.constBegin(); iter != existingKeys.constEnd(); iter++)
+				{
+					configFile->setValue(QString("%1/%2").arg(groupKey, *iter), configFile->value(QString("%1/%2").arg(legacyGroupName, *iter)));
+				}
+				break;
+			}
+		}
+	}
 
 	//Clean-up settings
 	if (!childGroups.empty())
 	{
-		static const int MAX_GROUPS = 3;
-		QRegExp filter("^LameXP_(\\d+)(\\d\\d)(\\d\\d\\d\\d\\d)$");
+		static const int MAX_GROUPS = 5;
 		QStringList obsoleteGroups;
 		for (QStringList::ConstIterator iter = childGroups.constBegin(); iter != childGroups.constEnd(); iter++)
 		{
-			if (filter.indexIn(*iter) >= 0)
+			if (iter->compare(groupKey, Qt::CaseInsensitive) != 0)
 			{
-				quint32 temp[3] = { 0, 0, 0 };
-				if (MUtils::regexp_parse_uint32(filter, temp, 3))
-				{
-					if ((temp[0] < lamexp_version_major()) || ((temp[0] == lamexp_version_major()) && ((temp[1] < lamexp_version_minor()) || ((temp[1] == lamexp_version_minor()) && (temp[2] < lamexp_version_confg())))))
-					{
-						obsoleteGroups.append(*iter);
-					}
-				}
+				obsoleteGroups.append(*iter);
 			}
 		}
 		if (obsoleteGroups.count() > MAX_GROUPS)
@@ -400,7 +414,7 @@ SettingsModel::SettingsModel(void)
 	configFile->sync();
 
 	//Create the cache
-	m_configCache = new SettingsCache(configFile);
+	m_configCache = new SettingsCache(configFile.take());
 }
 
 ////////////////////////////////////////////////////////////
