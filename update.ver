@@ -1,13 +1,13 @@
 [!Update]
-TimestampCreated=2020-04-17
+TimestampCreated=2020-04-25
 
 [MPlayer for Windows]
-BuildNo=140
+BuildNo=141
 DownloadSite=http://forum.doom9.org/showthread.php?t=138725
 DownloadAddress=http://muldersoft.com/update/
-DownloadFilename=MPUI.2019-10-15.exe
-DownloadFilecode=aa4a106f15bbb7e5d81e8b72728ac97c86a277f0
-DownloadChecksum=B2C200255861BD8E073C7C3091C2B41E523AD37206A43B7D57F441A2787F0719A38E35DF63E76E622DA28BB7176E9420
+DownloadFilename=MPUI.2020-04-25.exe
+DownloadFilecode=e05dd2ebc544827b329fd449d5025ffc356cafb8
+DownloadChecksum=0783264600FE3F22BCF0B92B39C6D938A1BE0E2264D3A9491440F3AF810A2BF5BE05E1343F9FF07CEA1DA6C76BA2C193
 
 [LameXP]
 BuildNo=2240
