@@ -58,6 +58,7 @@
 
 //CRT
 #include <math.h>
+#include <typeinfo>
 
 //Helper macros
 #define LINK(URL) QString("<a href=\"%1\">%2</a>").arg(URL).arg(QString(URL).replace("-", "&minus;"))
