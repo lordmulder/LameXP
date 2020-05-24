@@ -4,17 +4,17 @@
 <context>
     <name>AboutDialog</name>
     <message>
-        <location filename="../../src/Dialog_About.cpp" line="567"/>
+        <location filename="../../src/Dialog_About.cpp" line="568"/>
         <source>LameXP - Audio Encoder Front-end</source>
         <translation>LameXP - Audio Encoder Front-end</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_About.cpp" line="571"/>
+        <location filename="../../src/Dialog_About.cpp" line="572"/>
         <source>Please visit %1 for news and updates!</source>
         <translation>Будь ласка, відвідайте %1, щоб дізнатись про оновлення і новини!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_About.cpp" line="615"/>
+        <location filename="../../src/Dialog_About.cpp" line="616"/>
         <source>Note: LameXP is free software. Do &lt;b&gt;not&lt;/b&gt; pay money to obtain or use LameXP! If some third-party website tries to make you pay for downloading LameXP, you should &lt;b&gt;not&lt;/b&gt; respond to the offer !!!</source>
         <translation>Примітка: LameXP є вільним ПЗ. &lt;b&gt;Не&lt;/b&gt; надавайте грошей за його отримання або використання! Якщо хтось хоче отримати гроші за завантаження LameXP, ви &lt;b&gt;не&lt;/b&gt; повинні відповідати на такий запит !!!</translation>
     </message>
@@ -49,219 +49,219 @@
         <translation>Вийти</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_About.cpp" line="629"/>
+        <location filename="../../src/Dialog_About.cpp" line="630"/>
         <source>The following people have contributed to LameXP:</source>
         <translation>Наступні люди допомогали перекладати LameXP:</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_About.cpp" line="639"/>
+        <location filename="../../src/Dialog_About.cpp" line="640"/>
         <source>Translators:</source>
         <translation>Перекладачі:</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_About.cpp" line="671"/>
+        <location filename="../../src/Dialog_About.cpp" line="672"/>
         <source>If you are willing to contribute a LameXP translation, feel free to contact us!</source>
         <translation>Якщо ви хочете допомогти перекласти інтерфейс LameXP, можете вільно зв&apos;язатись з нами!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_About.cpp" line="682"/>
+        <location filename="../../src/Dialog_About.cpp" line="683"/>
         <source>The following third-party software is used in LameXP:</source>
         <translation>Наступне стороннє ПЗ використовується в LameXP:</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_About.cpp" line="687"/>
+        <location filename="../../src/Dialog_About.cpp" line="688"/>
         <source>LAME - OpenSource mp3 Encoder</source>
         <translation>LAME - OpenSource mp3 Encoder</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_About.cpp" line="689"/>
-        <location filename="../../src/Dialog_About.cpp" line="711"/>
-        <location filename="../../src/Dialog_About.cpp" line="732"/>
-        <location filename="../../src/Dialog_About.cpp" line="753"/>
-        <location filename="../../src/Dialog_About.cpp" line="767"/>
-        <location filename="../../src/Dialog_About.cpp" line="781"/>
-        <location filename="../../src/Dialog_About.cpp" line="795"/>
-        <location filename="../../src/Dialog_About.cpp" line="830"/>
-        <location filename="../../src/Dialog_About.cpp" line="837"/>
-        <location filename="../../src/Dialog_About.cpp" line="844"/>
-        <location filename="../../src/Dialog_About.cpp" line="858"/>
+        <location filename="../../src/Dialog_About.cpp" line="690"/>
+        <location filename="../../src/Dialog_About.cpp" line="712"/>
+        <location filename="../../src/Dialog_About.cpp" line="733"/>
+        <location filename="../../src/Dialog_About.cpp" line="754"/>
+        <location filename="../../src/Dialog_About.cpp" line="768"/>
+        <location filename="../../src/Dialog_About.cpp" line="782"/>
+        <location filename="../../src/Dialog_About.cpp" line="796"/>
+        <location filename="../../src/Dialog_About.cpp" line="831"/>
+        <location filename="../../src/Dialog_About.cpp" line="838"/>
+        <location filename="../../src/Dialog_About.cpp" line="845"/>
+        <location filename="../../src/Dialog_About.cpp" line="859"/>
         <source>Released under the terms of the GNU Lesser General Public License.</source>
         <translation>Випущено під ліцензією GNU Lesser General Public License.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_About.cpp" line="696"/>
+        <location filename="../../src/Dialog_About.cpp" line="697"/>
         <source>Completely open and patent-free audio encoding technology.</source>
         <translation>Повністю відкрита і вільна від патентних зборів технологія кодування аудіо.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_About.cpp" line="701"/>
+        <location filename="../../src/Dialog_About.cpp" line="702"/>
         <source>Nero AAC Reference MPEG-4 Encoder</source>
         <translation>Nero AAC Reference MPEG-4 Encoder</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_About.cpp" line="703"/>
+        <location filename="../../src/Dialog_About.cpp" line="704"/>
         <source>Freeware state-of-the-art HE-AAC encoder with 2-Pass support.</source>
         <translation>Безкоштовний сучасний HE-AAC кодер з підтримкою обробки в 2 проходи.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_About.cpp" line="705"/>
+        <location filename="../../src/Dialog_About.cpp" line="706"/>
         <source>Available from vendor web-site as free download:</source>
         <translation>Доступний на веб-сторінці вендора для безкоштовного завантаження:</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_About.cpp" line="716"/>
+        <location filename="../../src/Dialog_About.cpp" line="717"/>
         <source>FLAC - Free Lossless Audio Codec</source>
         <translation>FLAC - Free Lossless Audio Codec</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_About.cpp" line="718"/>
+        <location filename="../../src/Dialog_About.cpp" line="719"/>
         <source>Open and patent-free lossless audio compression technology.</source>
         <translation>Відкрита і вільна від патентних зборів технологія кодування аудіо без втрат.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_About.cpp" line="730"/>
+        <location filename="../../src/Dialog_About.cpp" line="731"/>
         <source>mpg123 - Fast Console MPEG Audio Player/Decoder</source>
         <translation>mpg123 - Fast Console MPEG Audio Player/Decoder</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_About.cpp" line="737"/>
+        <location filename="../../src/Dialog_About.cpp" line="738"/>
         <source>FAAD - OpenSource MPEG-4 and MPEG-2 AAC Decoder</source>
         <translation>FAAD - OpenSource MPEG-4 and MPEG-2 AAC Decoder</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_About.cpp" line="739"/>
+        <location filename="../../src/Dialog_About.cpp" line="740"/>
         <source>Released under the terms of the GNU General Public License.</source>
         <translation>Випущено під ліцензією GNU Lesser General Public License.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_About.cpp" line="758"/>
+        <location filename="../../src/Dialog_About.cpp" line="759"/>
         <source>WavPack - Hybrid Lossless Compression</source>
         <translation>WavPack - Hybrid Lossless Compression</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_About.cpp" line="760"/>
+        <location filename="../../src/Dialog_About.cpp" line="761"/>
         <source>Completely open audio compression format.</source>
         <translation>Повністю відкритий формат стиснення аудіо.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_About.cpp" line="765"/>
+        <location filename="../../src/Dialog_About.cpp" line="766"/>
         <source>Musepack - Living Audio Compression</source>
         <translation>Musepack - Living Audio Compression</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_About.cpp" line="772"/>
+        <location filename="../../src/Dialog_About.cpp" line="773"/>
         <source>Monkey&apos;s Audio - Lossless Audio Compressor</source>
         <translation>Monkey&apos;s Audio - Lossless Audio Compressor</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_About.cpp" line="774"/>
+        <location filename="../../src/Dialog_About.cpp" line="775"/>
         <source>Freely available source code, simple SDK and non-restrictive licensing.</source>
         <translation>Відкритий програмний код, простий SDK і ліцензія без обмежень.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_About.cpp" line="779"/>
+        <location filename="../../src/Dialog_About.cpp" line="780"/>
         <source>Shorten - Lossless Audio Compressor</source>
         <translation>Shorten - Lossless Audio Compressor</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_About.cpp" line="786"/>
+        <location filename="../../src/Dialog_About.cpp" line="787"/>
         <source>Speex - Free Codec For Free Speech</source>
         <translation>Speex - Free Codec For Free Speech</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_About.cpp" line="788"/>
+        <location filename="../../src/Dialog_About.cpp" line="789"/>
         <source>Open Source patent-free audio format designed for speech.</source>
         <translation>Відкритий і вільний від патентних зборів формат аудіо, призначений для обробки розмовного звукового матеріалу.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_About.cpp" line="793"/>
+        <location filename="../../src/Dialog_About.cpp" line="794"/>
         <source>The True Audio - Lossless Audio Codec</source>
         <translation>The True Audio - Lossless Audio Codec</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_About.cpp" line="809"/>
+        <location filename="../../src/Dialog_About.cpp" line="810"/>
         <source>Copyright (c) 2011 LoRd_MuldeR &amp;lt;mulder2@gmx.de&amp;gt;. Some rights reserved.</source>
         <translation>Авторське право (c) зберігається за 2011 LoRd_MuldeR &amp;lt;mulder2@gmx.de&amp;gt;. Деякі права захищено.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_About.cpp" line="816"/>
+        <location filename="../../src/Dialog_About.cpp" line="817"/>
         <source>By Jory Stone &amp;lt;jcsston@toughguy.net&amp;gt; and LoRd_MuldeR &amp;lt;mulder2@gmx.de&amp;gt;.</source>
         <translation>Створено Jory Stone &amp;lt;jcsston@toughguy.net&amp;gt; і LoRd_MuldeR &amp;lt;mulder2@gmx.de&amp;gt;.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_About.cpp" line="828"/>
+        <location filename="../../src/Dialog_About.cpp" line="829"/>
         <source>MediaInfo - Media File Analysis Tool</source>
         <translation>MediaInfo - Media File Analysis Tool</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_About.cpp" line="835"/>
+        <location filename="../../src/Dialog_About.cpp" line="836"/>
         <source>SoX - Sound eXchange</source>
         <translation>SoX - Sound eXchange</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_About.cpp" line="842"/>
+        <location filename="../../src/Dialog_About.cpp" line="843"/>
         <source>GnuPG - The GNU Privacy Guard</source>
         <translation>GnuPG - The GNU Privacy Guard</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_About.cpp" line="863"/>
+        <location filename="../../src/Dialog_About.cpp" line="864"/>
         <source>Silk Icons - Over 700 icons in PNG format</source>
         <translation>Silk Icons - Більш ніж 700 іконок у форматі PNG</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_About.cpp" line="865"/>
+        <location filename="../../src/Dialog_About.cpp" line="866"/>
         <source>By Mark James, released under the Creative Commons &apos;BY&apos; License.</source>
         <translation>Випущено Mark James під ліцензією Creative Commons &apos;BY&apos; License.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_About.cpp" line="870"/>
+        <location filename="../../src/Dialog_About.cpp" line="871"/>
         <source>Angry Chicken and Ghost Scream sound</source>
         <translation>Звук Angry Chicken and Ghost Scream</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_About.cpp" line="872"/>
+        <location filename="../../src/Dialog_About.cpp" line="873"/>
         <source>By Alexander, released under the Creative Commons &apos;BY&apos; License.</source>
         <translation>Випущено Alexander під ліцензією Creative Commons &apos;BY&apos; License.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_About.cpp" line="877"/>
+        <location filename="../../src/Dialog_About.cpp" line="878"/>
         <source>The copyright of LameXP as a whole belongs to LoRd_MuldeR. The copyright of third-party software used in LameXP belongs to the individual authors.</source>
         <translation>Всі права на LameXP належать LoRd_MuldeR. Права на стороннє ПЗ, що використовується в LameXP, належать авторам цього ПЗ.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_About.cpp" line="932"/>
+        <location filename="../../src/Dialog_About.cpp" line="933"/>
         <source>n/a</source>
         <translation>не доступно</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_About.cpp" line="583"/>
-        <location filename="../../src/Dialog_About.cpp" line="595"/>
+        <location filename="../../src/Dialog_About.cpp" line="584"/>
+        <location filename="../../src/Dialog_About.cpp" line="596"/>
         <source>Note: This demo (pre-release) version of LameXP will expire at %1. Still %2 days left.</source>
         <translation>Примітка: Строк дії цієї демо (тестової) версії LameXP закінчиться %1. Ще %2 днів.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_About.cpp" line="709"/>
+        <location filename="../../src/Dialog_About.cpp" line="710"/>
         <source>Aften - A/52 audio encoder</source>
         <translatorcomment>Aften - A/52 audio encoder</translatorcomment>
         <translation>Aften - A/52 audio encoder</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_About.cpp" line="807"/>
+        <location filename="../../src/Dialog_About.cpp" line="808"/>
         <source>wma2wav - Dump WMA files to Wave Audio</source>
         <translation>wma2wav - Декодує файли WMA у Wave аудіо</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_About.cpp" line="814"/>
+        <location filename="../../src/Dialog_About.cpp" line="815"/>
         <source>avs2wav - Avisynth to Wave Audio converter</source>
         <translation>avs2wav - аудіоконвертер у Wave аудіо, що базується на Avisynth</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_About.cpp" line="821"/>
+        <location filename="../../src/Dialog_About.cpp" line="822"/>
         <source>dcaenc</source>
         <translation>dcaenc</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_About.cpp" line="823"/>
+        <location filename="../../src/Dialog_About.cpp" line="824"/>
         <source>Copyright (c) 2008-2011 Alexander E. Patrakov. Distributed under the LGPL.</source>
         <translation>Всі права належать 2008-2011 Alexander E. Patrakov. Розповсюджується під ліцензією LGPL.</translation>
     </message>
@@ -276,22 +276,22 @@
         <translation>Ліцензія</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_About.cpp" line="632"/>
+        <location filename="../../src/Dialog_About.cpp" line="633"/>
         <source>Programmers:</source>
         <translation>Програмувальники:</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_About.cpp" line="635"/>
+        <location filename="../../src/Dialog_About.cpp" line="636"/>
         <source>Project Leader</source>
         <translation>Керівник проекту</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_About.cpp" line="723"/>
+        <location filename="../../src/Dialog_About.cpp" line="724"/>
         <source>Opus Audio Codec</source>
         <translation>Opus Audio Codec</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_About.cpp" line="725"/>
+        <location filename="../../src/Dialog_About.cpp" line="726"/>
         <source>Totally open, royalty-free, highly versatile audio codec.</source>
         <translation>Повністю відкритий, вільний від ліцензійних виплат, універсальний кодек аудіо.</translation>
     </message>
@@ -306,57 +306,57 @@
         <translation>Про Qt...</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_About.cpp" line="651"/>
+        <location filename="../../src/Dialog_About.cpp" line="652"/>
         <source>Special thanks to:</source>
         <translation>Окрема подяка:</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_About.cpp" line="849"/>
+        <location filename="../../src/Dialog_About.cpp" line="850"/>
         <source>cURL - Curl URL Request Library</source>
         <translation>cURL - Curl URL Request Library</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_About.cpp" line="851"/>
+        <location filename="../../src/Dialog_About.cpp" line="852"/>
         <source>By Daniel Stenberg, released under the terms of the MIT/X Derivate License.</source>
         <translation>Випущено Daniel Stenberg під ліцензією MIT/X Derivate License.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_About.cpp" line="856"/>
+        <location filename="../../src/Dialog_About.cpp" line="857"/>
         <source>UPX - The Ultimate Packer for eXecutables</source>
         <translation>UPX - The Ultimate Packer for eXecutables</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_About.cpp" line="800"/>
+        <location filename="../../src/Dialog_About.cpp" line="801"/>
         <source>refalac - Win32 command line ALAC encoder/decoder</source>
         <translation>refalac - ALAC кодер/декодер для Win32, що використовує інтерфейс командного рядка</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_About.cpp" line="802"/>
+        <location filename="../../src/Dialog_About.cpp" line="803"/>
         <source>The ALAC reference implementation by Apple is available under the Apache license.</source>
         <translation>Оригінальна реалізація ALAC від Apple доступна під ліцензією Apache.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_About.cpp" line="751"/>
+        <location filename="../../src/Dialog_About.cpp" line="752"/>
         <source>Valdec from AC3Filter Tools - AC3/DTS Decoder</source>
         <translation>Valdec зі складу AC3Filter Tools - декодер AC3/DTS</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_About.cpp" line="661"/>
+        <location filename="../../src/Dialog_About.cpp" line="662"/>
         <source>Official Mirrors:</source>
         <translation>Офіційні дзеркала:</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_About.cpp" line="694"/>
+        <location filename="../../src/Dialog_About.cpp" line="695"/>
         <source>OggEnc - Vorbis Encoder</source>
         <translation>OggEnc - кодер Vorbis</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_About.cpp" line="744"/>
+        <location filename="../../src/Dialog_About.cpp" line="745"/>
         <source>OggDec - Vorbis Decoder</source>
         <translation>OggEnc - декодер Vorbis</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_About.cpp" line="746"/>
+        <location filename="../../src/Dialog_About.cpp" line="747"/>
         <source>Command line Ogg Vorbis decoder created by John33.</source>
         <translation>Ogg Vorbis декодер, що використовує інтерфейс командного рядка, створений John33.</translation>
     </message>
