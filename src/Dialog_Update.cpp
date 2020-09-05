@@ -79,6 +79,7 @@ UpdateDialog::UpdateDialog(const SettingsModel *const settings, QWidget *parent)
 	m_logFile(new QStringList()),
 	m_betaUpdates(settings ? (settings->autoUpdateCheckBeta() || lamexp_version_demo()) : lamexp_version_demo()),
 	m_success(false),
+	m_haveNewVersion(false),
 	m_firstShow(true),
 	m_updateReadyToInstall(false),
 	m_updaterProcess(NULL),
@@ -357,9 +358,9 @@ void UpdateDialog::threadFinished(void)
 	}
 	else
 	{
-		const bool bHaveUpdate = (m_thread->getUpdateStatus() == MUtils::UpdateChecker::UpdateStatus_CompletedUpdateAvailable);
-		ui->installButton->setEnabled(bHaveUpdate);
-		MUtils::Sound::beep(bHaveUpdate ? MUtils::Sound::BEEP_NFO : MUtils::Sound::BEEP_WRN);
+		const bool bHaveNewVersion = (m_thread->getUpdateStatus() == MUtils::UpdateChecker::UpdateStatus_CompletedUpdateAvailable);
+		ui->installButton->setEnabled(bHaveNewVersion);
+		MUtils::Sound::beep(bHaveNewVersion ? MUtils::Sound::BEEP_NFO : MUtils::Sound::BEEP_WRN);
 
 		if(const MUtils::UpdateCheckerInfo *const updateInfo = m_thread->getUpdateInfo())
 		{
@@ -369,6 +370,7 @@ void UpdateDialog::threadFinished(void)
 		}
 
 		m_success = true;
+		m_haveNewVersion = bHaveNewVersion;
 	}
 
 	ui->retryButton->setVisible(!bSuccess);

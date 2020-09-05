@@ -208,7 +208,7 @@ private:
 
 	void addFiles(const QStringList &files);
 	void addFolder(const QString &path, bool recursive = false, bool delayed = false, QString filter = QString());
-	bool checkForUpdates(void);
+	bool MainWindow::checkForUpdates(bool &haveNewVersion);
 	void initializeTranslation(void);
 	void refreshFavorites(void);
 	void openDocumentLink(QAction *const action);

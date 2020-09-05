@@ -51,6 +51,7 @@ public:
 
 	bool getSuccess(void) { return m_success; }
 	bool updateReadyToInstall(void) { return m_updateReadyToInstall; }
+	bool haveNewVersion(void) { return m_haveNewVersion; }
 
 private slots:
 	void updateInit(void);
@@ -90,6 +91,7 @@ private:
 	unsigned long m_updaterProcess;
 
 	bool m_success;
+	bool m_haveNewVersion;
 	bool m_updateReadyToInstall;
 	bool m_firstShow;
 	

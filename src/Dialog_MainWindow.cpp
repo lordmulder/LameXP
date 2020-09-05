@@ -937,8 +937,9 @@ void MainWindow::addFolder(const QString &path, bool recursive, bool delayed, QS
 /*
  * Check for updates
  */
-bool MainWindow::checkForUpdates(void)
+bool MainWindow::checkForUpdates(bool &haveNewVersion)
 {
+	haveNewVersion = false;
 	bool bReadyToInstall = false;
 	
 	UpdateDialog *updateDialog = new UpdateDialog(m_settings, this);
@@ -948,6 +949,7 @@ bool MainWindow::checkForUpdates(void)
 	{
 		SHOW_CORNER_WIDGET(false);
 		m_settings->autoUpdateLastCheck(QDate::currentDate().toString(Qt::ISODate));
+		haveNewVersion = updateDialog->haveNewVersion();
 		bReadyToInstall = updateDialog->updateReadyToInstall();
 	}
 
@@ -1513,14 +1515,22 @@ void MainWindow::windowShown(void)
 	{
 		if(MUtils::OS::current_date() >= lamexp_version_expires())
 		{
-			qWarning("Binary has expired !!!");
+			qWarning("Binary expired !!!");
 			PLAY_SOUND_OPTIONAL("whammy", false);
+			bool haveNewVersion = true;
 			if(QMessageBox::warning(this, tr("LameXP - Expired"), NOBREAK(QString("%1<br>%2").arg(tr("This demo (pre-release) version of LameXP has expired at %1.").arg(lamexp_version_expires().toString(Qt::ISODate)), tr("LameXP is free software and release versions won't expire."))), tr("Check for Updates"), tr("Exit Program")) == 0)
 			{
-				checkForUpdates();
+				if (checkForUpdates(haveNewVersion))
+				{
+					QApplication::quit();
+					return;
+				}
 			}
-			QApplication::quit();
-			return;
+			if(haveNewVersion)
+			{
+				QApplication::quit();
+				return;
+			}
 		}
 	}
 
@@ -1546,7 +1556,8 @@ void MainWindow::windowShown(void)
 		switch(ret)
 		{
 		case 0:
-			if(checkForUpdates())
+			bool haveNewVersion;
+			if(checkForUpdates(haveNewVersion))
 			{
 				QApplication::quit();
 				return;
@@ -1572,7 +1583,8 @@ void MainWindow::windowShown(void)
 			{
 				if(QMessageBox::information(this, tr("Update Reminder"), NOBREAK(lastUpdateCheck.isValid() ? tr("Your last update check was more than 14 days ago. Check for updates now?") : tr("Your did not check for LameXP updates yet. Check for updates now?")), tr("Check for Updates"), tr("Postpone")) == 0)
 				{
-					if(checkForUpdates())
+					bool haveNewVersion;
+					if(checkForUpdates(haveNewVersion))
 					{
 						QApplication::quit();
 						return;
@@ -2266,7 +2278,8 @@ void MainWindow::checkForBetaUpdatesActionTriggered(bool checked)
 
 	if(checkUpdatesNow)
 	{
-		if(checkForUpdates())
+		bool haveNewVersion;
+		if(checkForUpdates(haveNewVersion))
 		{
 			QApplication::quit();
 		}
@@ -2369,7 +2382,8 @@ void MainWindow::checkUpdatesActionActivated(void)
 	ABORT_IF_BUSY;
 	WidgetHideHelper hiderHelper(m_dropBox.data());
 	
-	if(checkForUpdates())
+	bool haveNewVersion;
+	if(checkForUpdates(haveNewVersion))
 	{
 		QApplication::quit();
 	}
