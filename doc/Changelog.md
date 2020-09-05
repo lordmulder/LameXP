@@ -8,9 +8,9 @@ subtitle: "Audio-Encoder Front-End &ndash; Changelog"
 
 ## LameXP v4.19 [unreleased] ## {-}
 * Updated Vorbis encoder to OggEnc v2.88 (2020-07-07), using libvorbis v1.3.7 with aoTuV beta-6.03
-* Updated Monkey's Audio binary to v5.28 (2020-04-02), compiled with ICL 19.1 and MSVC 14.16
+* Updated Monkey's Audio binary to v5.54 (2020-08-24), compiled with ICL 19.1 and MSVC 15.9
 * Updated mpg123 decoder to v1.26.2 (2020-07-05), compiled with GCC 10.1.0
-* Updated MediaInfo to v20.03 (2020-04-03), compiled with ICL 19.1 and MSVC 14.16
+* Updated MediaInfo to v20.08 (2020-08-11), compiled with ICL 19.1 and MSVC 15.9
 * Updated cURL to v7.71.1 (2020-07-01), with libcurl v7.71.1 and OpenSSL v1.1.1g
 * Added command-line switch `--no-splash`, which can be used to hide the "splash" screen at startup
 
