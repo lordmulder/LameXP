@@ -11,7 +11,7 @@ subtitle: "Audio-Encoder Front-End &ndash; Changelog"
 * Updated Monkey's Audio binary to v5.54 (2020-08-24), compiled with ICL 19.1 and MSVC 15.9
 * Updated mpg123 decoder to v1.26.3 (2020-07-16), compiled with GCC 10.1.0
 * Updated MediaInfo to v20.08 (2020-08-11), compiled with ICL 19.1 and MSVC 15.9
-* Updated cURL to v7.71.1 (2020-07-01), with libcurl v7.71.1 and OpenSSL v1.1.1g
+* Updated cURL to v7.72.0 (2020-08-19), with libcurl v7.72.0 and OpenSSL v1.1.1g
 * Added command-line switch `--no-splash`, which can be used to hide the "splash" screen at startup
 
 ## LameXP v4.18 [2019-12-18] ## {-}
