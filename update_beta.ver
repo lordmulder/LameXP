@@ -1,11 +1,11 @@
 [!Update]
-TimestampCreated=2020-09-05
+TimestampCreated=2020-09-21
 
 [LameXP]
-BuildNo=2278
-BuildDate=2020-09-05
+BuildNo=2280
+BuildDate=2020-09-21
 DownloadSite=http://forum.doom9.org/showthread.php?t=157726
 DownloadAddress=http://muldersoft.com/update/
-DownloadFilename=LameXP-BETA.2020-09-05.Release-Static.Build-2278.exe
-DownloadFilecode=3434714f4c907f29a971f919c2d50f08cc60c4a8
-DownloadChecksum=A4CAF1D3864CC5D5C12C03CF9C2861633A40DAF8498791C9B703D740AA907545A7A5F9D7762965ED74E17B3CF6E1766C
+DownloadFilename=LameXP-BETA.2020-09-21.Release-Static.Build-2280.exe
+DownloadFilecode=79e997f0cce140f75cb2564b4256b50bdc13b096
+DownloadChecksum=7407B1FFAF4E42D5F5C409BD23D16AF28DFEA558AA5F3356101A013BFC08C99D23B144B323B1275CA52BBFCDEE782A27
