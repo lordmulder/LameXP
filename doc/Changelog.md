@@ -7,6 +7,7 @@ subtitle: "Audio-Encoder Front-End &ndash; Changelog"
 # LameXP v4.xx History #
 
 ## LameXP v4.19 [unreleased] ## {-}
+* Updated LAME encoder to v3.100.1-SVN (2020-08-25), compiled with ICL 19.1 and MSVC 15.9
 * Updated Vorbis encoder to OggEnc v2.88 (2020-07-07), using libvorbis v1.3.7 with aoTuV beta-6.03
 * Updated Monkey's Audio binary to v5.54 (2020-08-24), compiled with ICL 19.1 and MSVC 15.9
 * Updated mpg123 decoder to v1.26.3 (2020-07-16), compiled with GCC 10.1.0
