@@ -887,7 +887,7 @@
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="242"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1239"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1241"/>
         <source>Show Details</source>
         <translation>詳細を表示</translation>
     </message>
@@ -1690,10 +1690,10 @@
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="4906"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1237"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1518"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1545"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1573"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1239"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1521"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1555"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1584"/>
         <source>Check for Updates</source>
         <translation>アップデートの確認</translation>
     </message>
@@ -1734,13 +1734,13 @@
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="4975"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2075"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2087"/>
         <source>Disable Update Reminder</source>
         <translation>アップデートの確認を促さない</translation>
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="4983"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2101"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2113"/>
         <source>Disable Sound Effects</source>
         <translation type="unfinished">効果音を無効にする</translation>
     </message>
@@ -1841,7 +1841,7 @@
     </message>
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="859"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="4278"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="4292"/>
         <source>Access Denied</source>
         <translation type="unfinished">アクセス亜拒否されました</translation>
     </message>
@@ -1919,751 +1919,751 @@
         <translation type="unfinished">フォルダをスキャン中、お待ちください...</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1229"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1231"/>
         <source>DEMO VERSION</source>
         <translation type="unfinished">デモ版</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1233"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1235"/>
         <source>Initializing directory outline, please be patient...</source>
         <translation type="unfinished">フォルダ構成の取得中、お待ちください...</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1234"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1236"/>
         <source>You can drop in audio files here!</source>
         <translation>ここに音声ファイルをドロップ！</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1240"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1242"/>
         <source>Open File in External Application</source>
         <translation type="unfinished">関連付けされたプログラムでファイルを開く</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1241"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1243"/>
         <source>Browse File Location</source>
         <translation>ファイルのあるフォルダを開く</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1242"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1244"/>
         <source>Browse Selected Folder</source>
         <translation>選択したフォルダを開く</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1243"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1245"/>
         <source>Refresh Directory Outline</source>
         <translation>フォルダ構成の情報を更新</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1244"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1246"/>
         <source>Go To Parent Directory</source>
         <translation>上のフォルダ</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1245"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1247"/>
         <source>Bookmark Current Output Folder</source>
         <translation>現在の出力フォルダをお気に入りに登録</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1246"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1248"/>
         <source>Export Meta Tags to CSV File</source>
         <translation>メタタグをCSVファイルでエクスポート</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1247"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1249"/>
         <source>Import Meta Tags from CSV File</source>
         <translation>メタタグをCSVファイルでインポート</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1496"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1498"/>
         <source>License Declined</source>
         <translation type="unfinished">ライセンス条項の拒否</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1496"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1498"/>
         <source>You have declined the license. Consequently the application will exit now!</source>
         <translation type="unfinished">ライセンス条項の受託を拒否しましたね。なのですぐに終了します！</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1496"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1498"/>
         <source>Goodbye!</source>
         <translation type="unfinished">さようなら！</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1518"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1521"/>
         <source>LameXP - Expired</source>
         <translation type="unfinished">LameXP - 期限</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1518"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1521"/>
         <source>This demo (pre-release) version of LameXP has expired at %1.</source>
         <translation type="unfinished">この LameXP のデモ版 (正式公開前) です。有効期限は %1 です。</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1518"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1521"/>
         <source>LameXP is free software and release versions won&apos;t expire.</source>
         <translation>LameXP はフリーソフトで正式リリース版の有効期限はありません。</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1518"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1545"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1521"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1555"/>
         <source>Exit Program</source>
         <translation>プログラム終了</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1531"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1541"/>
         <source>It seems that a bogus anti-virus software is slowing down the startup of LameXP.</source>
         <translation type="unfinished">インチキなウイルス対策ソフトが LameXP の起動を遅くしているようです。</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1532"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1542"/>
         <source>Please refer to the %1 document for details and solutions!</source>
         <translation type="unfinished">詳細と解決策については、%1 を参照してください！</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1532"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1542"/>
         <source>Manual</source>
         <translation type="unfinished">マニュアル</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1533"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1543"/>
         <source>Slow Startup</source>
         <translation type="unfinished">起動が遅いです</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1533"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1598"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1677"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2248"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="4188"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1543"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1610"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1689"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2260"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="4202"/>
         <source>Discard</source>
         <translation type="unfinished">閉じる</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1533"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1598"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1543"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1610"/>
         <source>Don&apos;t Show Again</source>
         <translation type="unfinished">再び表示しない</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1545"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1555"/>
         <source>Urgent Update</source>
         <translation type="unfinished">緊急アップデート</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1545"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1555"/>
         <source>Your version of LameXP is more than a year old. Time for an update!</source>
         <translation type="unfinished">お使いの LameXP のバージョンは1年以上前のものです。アップデートしましょう！</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1545"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1759"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1555"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1771"/>
         <source>Ignore</source>
         <translation>無視</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1561"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1572"/>
         <source>Skipping update check this time, please be patient...</source>
         <translation type="unfinished">今回のアップデート確認は省略します、お待ちください...</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1573"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2077"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2087"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1584"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2089"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2099"/>
         <source>Update Reminder</source>
         <translation type="unfinished">アップデートリマインダー</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1573"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1584"/>
         <source>Your last update check was more than 14 days ago. Check for updates now?</source>
         <translation type="unfinished">前回のアップデート確認は14日以上前です。今すぐ更新確認をしますか？</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1573"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1584"/>
         <source>Your did not check for LameXP updates yet. Check for updates now?</source>
         <translation type="unfinished">LameXP のアップデートをまだ確認していません。今すぐ更新確認をしますか？</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1573"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1584"/>
         <source>Postpone</source>
         <translation type="unfinished">延期する</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1591"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1603"/>
         <source>The Nero AAC encoder could not be found. AAC encoding support will be disabled.</source>
         <translation type="unfinished">Nero AAC が見つかりません。 AAC エンコードの対応は無効化されています。</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1592"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1604"/>
         <source>Please put &apos;neroAacEnc.exe&apos;, &apos;neroAacDec.exe&apos; and &apos;neroAacTag.exe&apos; into the LameXP directory!</source>
         <translation type="unfinished">LameXP のフォルダに neroAacEnc.exe neroAacDec.exe neroAacTag.exe を入れてください！</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1593"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1605"/>
         <source>Your LameXP install directory is located here:</source>
         <translation type="unfinished">LameXP のインストール先 :</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1595"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1607"/>
         <source>You can download the Nero AAC encoder for free from this website:</source>
         <translation type="unfinished">Nero AAC encoder fore free の入手先 :</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1597"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1609"/>
         <source>Note: Nero AAC encoder version %1 or newer is required to enable AAC encoding support!</source>
         <translation type="unfinished">注: Nero AAC エンコーダーのバージョン %1 以上が、 AAC エンコードの対応に必要です！</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1598"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1610"/>
         <source>AAC Support Disabled</source>
         <translation type="unfinished">AAC への対応が有効になっていません</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1729"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1786"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1796"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1741"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1798"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1808"/>
         <source>LameXP</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1729"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1741"/>
         <source>You must add at least one file to the list before proceeding!</source>
         <translation type="unfinished">少なくとも、一覧にファイルを追加してからですよ！</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1737"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1749"/>
         <source>Not Found</source>
         <translation type="unfinished">見つかりません</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1737"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1749"/>
         <source>Your currently selected TEMP folder does not exist anymore:</source>
         <translation type="unfinished">選択した TEMPフォルダがありません:</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1737"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1749"/>
         <source>Restore Default</source>
         <translation type="unfinished">初期設定に戻す</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1737"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1749"/>
         <source>Cancel</source>
         <translation>キャンセル</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1754"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1766"/>
         <source>There are less than %1 GB of free diskspace available on your system&apos;s TEMP folder.</source>
         <translation type="unfinished">システムのTEMPフォルダの使用可能な空き容量は %1 GB未満です。</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1755"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1767"/>
         <source>It is highly recommend to free up more diskspace before proceeding with the encode!</source>
         <translation type="unfinished">エンコードする前に空き容量を増やすことを強く推奨します！</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1756"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1768"/>
         <source>Your TEMP folder is located at:</source>
         <translation type="unfinished">TEMPフォルダの場所:</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1759"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1771"/>
         <source>Low Diskspace Warning</source>
         <translation type="unfinished">空き容量の警告</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1759"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1771"/>
         <source>Abort Encoding Process</source>
         <translation type="unfinished">エンコード処理を中止</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1759"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1771"/>
         <source>Clean Disk Now</source>
         <translation type="unfinished">今すぐディスクをクリーンアップ</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1767"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1779"/>
         <source>Low Diskspace</source>
         <translation type="unfinished">空き容量が少ない</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1767"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1779"/>
         <source>You are proceeding with low diskspace. Problems might occur!</source>
         <translation type="unfinished">空き容量が少ないため、問題が発生するかもしれません！</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1786"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1798"/>
         <source>Sorry, an unsupported encoder has been chosen!</source>
         <translation type="unfinished">対応していないエンコーダーが選択されました！</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1796"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1808"/>
         <source>Cannot write to the selected output directory.</source>
         <translation type="unfinished">選択した出力フォルダに書き込めません。</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1796"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1808"/>
         <source>Please choose a different directory!</source>
         <translation type="unfinished">別のフォルダを選択してください！</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2039"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2051"/>
         <source>Load Translation</source>
         <translation>翻訳の読み込み</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2041"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2053"/>
         <source>Translation Files</source>
         <translation>翻訳ファイル</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2075"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2087"/>
         <source>Do you really want to disable the update reminder?</source>
         <translation type="unfinished">本当にアップデートリマインダーを無効にしますか？</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2075"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2101"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2127"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2153"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2246"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2283"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2309"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2087"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2113"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2139"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2165"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2258"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2296"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2322"/>
         <source>Yes</source>
         <translation>はい</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2075"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2101"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2127"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2153"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2246"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2283"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2309"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2087"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2113"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2139"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2165"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2258"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2296"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2322"/>
         <source>No</source>
         <translation>いいえ</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2077"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2089"/>
         <source>The update reminder has been disabled.</source>
         <translation type="unfinished">アップデートリマインダーは無効になっています。</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2077"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2089"/>
         <source>Please remember to check for updates at regular intervals!</source>
         <translation type="unfinished">定期的にアップデートを確認してください！</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2087"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2099"/>
         <source>The update reminder has been re-enabled.</source>
         <translation type="unfinished">アップデートリマインダーは再び有効にされました。</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2101"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2113"/>
         <source>Do you really want to disable all sound effects?</source>
         <translation type="unfinished">本当にすべての効果音を無効にしますか？</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2103"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2113"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2115"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2125"/>
         <source>Sound Effects</source>
         <translation>効果音</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2103"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2115"/>
         <source>All sound effects have been disabled.</source>
         <translation type="unfinished">すべての効果音は無効に設定されました。</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2113"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2125"/>
         <source>The sound effects have been re-enabled.</source>
         <translation type="unfinished">効果音は再び有効にされました。</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2127"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2129"/>
         <location filename="../../src/Dialog_MainWindow.cpp" line="2139"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2141"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2151"/>
         <source>Nero AAC Notifications</source>
         <translation type="unfinished">Nero AACの通知</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2127"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2139"/>
         <source>Do you really want to disable all Nero AAC Encoder notifications?</source>
         <translation type="unfinished">本当にNero AACエンコーダーの通知を無効にしますか？</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2129"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2141"/>
         <source>All Nero AAC Encoder notifications have been disabled.</source>
         <translation type="unfinished">すべてのNero AACエンコーダーの通知は無効に設定されました。</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2139"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2151"/>
         <source>The Nero AAC Encoder notifications have been re-enabled.</source>
         <translation type="unfinished">Nero AACエンコーダーの通知は再び有効にされました。</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2153"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2155"/>
         <location filename="../../src/Dialog_MainWindow.cpp" line="2165"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2167"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2177"/>
         <source>Slow Startup Notifications</source>
         <translation type="unfinished">起動が遅い場合の通知</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2153"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2165"/>
         <source>Do you really want to disable the slow startup notifications?</source>
         <translation type="unfinished">本当に起動が遅い場合の通知を無効にしますか？</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2155"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2167"/>
         <source>The slow startup notifications have been disabled.</source>
         <translation type="unfinished">起動が遅い場合の通知は無効に設定されました。</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2165"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2177"/>
         <source>The slow startup notifications have been re-enabled.</source>
         <translation type="unfinished">起動が遅い場合の通知は再び有効にされました。</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2187"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2191"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2199"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2203"/>
         <source>Open Cue Sheet</source>
         <translation type="unfinished">キューシートを開く</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2187"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2193"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2199"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2205"/>
         <source>Cue Sheet File</source>
         <translation type="unfinished">キューシート</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2246"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2248"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2261"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2258"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2260"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2273"/>
         <source>Beta Updates</source>
         <translation type="unfinished">ベータ版アップデート</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2246"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2258"/>
         <source>Do you really want LameXP to check for Beta (pre-release) updates?</source>
         <translation type="unfinished">本当に LameXP のベータ版 (正式リリース前) のアップデートを確認しますか？</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2248"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2260"/>
         <source>LameXP will check for Beta (pre-release) updates from now on.</source>
         <translation type="unfinished">これからは、ベータ版 (正式リリース前) のアップデートを確認します。</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2248"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2260"/>
         <source>Check Now</source>
         <translation>今すぐ確認</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2261"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2273"/>
         <source>LameXP will &lt;i&gt;not&lt;/i&gt; check for Beta (pre-release) updates from now on.</source>
         <translation type="unfinished">これからは、ベータ版 (正式リリース前) のアップデートを確認&lt;i&gt;しません&lt;/i&gt;。</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2283"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2285"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2295"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2296"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2298"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2308"/>
         <source>Hibernate Computer</source>
         <translation type="unfinished">パソコンの休止状態の設定</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2283"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2296"/>
         <source>Do you really want the computer to be hibernated on shutdown?</source>
         <translation type="unfinished">本当にシャットダウン時にパソコンを休止状態をしますか？</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2285"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2298"/>
         <source>LameXP will hibernate the computer on shutdown from now on.</source>
         <translation type="unfinished">LameXP はシャットダウン時にパソコンを休止状態にします。</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2295"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2308"/>
         <source>LameXP will &lt;i&gt;not&lt;/i&gt; hibernate the computer on shutdown from now on.</source>
         <translation type="unfinished">LameXP はシャットダウン時にパソコンを休止状態に&lt;i&gt;しません&lt;/i&gt;。</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2309"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2312"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2323"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2322"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2325"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2336"/>
         <source>Shell Integration</source>
         <translation type="unfinished">シェルへの統合</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2309"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2322"/>
         <source>Do you really want to disable the LameXP shell integration?</source>
         <translation type="unfinished">本当に LameXP のシェルへの統合を無効にしますか？</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2312"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2325"/>
         <source>The LameXP shell integration has been disabled.</source>
         <translation type="unfinished">シェルへの統合を無効にしました。</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2323"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2336"/>
         <source>The LameXP shell integration has been re-enabled.</source>
         <translation type="unfinished">シェルへの統合を再び有効にしました。</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2393"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2402"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2407"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2416"/>
         <source>Add file(s)</source>
         <translation>ファイルの追加</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2432"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2436"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2446"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2450"/>
         <source>Add Folder</source>
         <translation>フォルダの追加</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2454"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2468"/>
         <source>Filter Files</source>
         <translation type="unfinished">ファイルフィルター</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2454"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2468"/>
         <source>Select filename filter:</source>
         <translation type="unfinished">ファイル名フィルターの選択:</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2670"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2684"/>
         <source>Loading dropped files or folders, please wait...</source>
         <translation type="unfinished">ドロップされたファイルやフォルダを読み込んでいます...</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2766"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2770"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2780"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2784"/>
         <source>Save CSV file</source>
         <translation>CSV ファイルを保存</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2766"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2773"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2816"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2822"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2780"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2787"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2830"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2836"/>
         <source>CSV File</source>
         <translation>CSV ファイル</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2787"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2790"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2793"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2796"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2801"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2804"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2807"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2810"/>
         <source>CSV Export</source>
         <translation type="unfinished">CSV でエクスポート</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2787"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2801"/>
         <source>Sorry, there are no meta tags that can be exported!</source>
         <translation type="unfinished">エクスポート可能なメタタグがありません！</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2790"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2804"/>
         <source>Sorry, failed to open CSV file for writing!</source>
         <translation type="unfinished">書き込み時にCSVファイルが開けませんでした！</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2793"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2807"/>
         <source>Sorry, failed to write to the CSV file!</source>
         <translation type="unfinished">CSVファイルへの書き込みに失敗しました！</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2796"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2810"/>
         <source>The CSV files was created successfully!</source>
         <translation type="unfinished">CSVファイルが正常に作成されました！</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2816"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2820"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2830"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2834"/>
         <source>Open CSV file</source>
         <translation type="unfinished">CSV ファイルを開く</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2836"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2839"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2842"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2845"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2848"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2850"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2853"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2856"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2859"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2862"/>
         <source>CSV Import</source>
         <translation type="unfinished">CSV のインポート</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2836"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2850"/>
         <source>Sorry, failed to open CSV file for reading!</source>
         <translation type="unfinished">読み込み時にCSVファイルを開くのに失敗しました！</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2839"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2853"/>
         <source>Sorry, failed to read from the CSV file!</source>
         <translation type="unfinished">CSVファイルからの読み込みに失敗しました！</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2842"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2856"/>
         <source>Sorry, the CSV file does not contain any known fields!</source>
         <translation type="unfinished">CSVファイルに認識フィールドがありません！</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2845"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2859"/>
         <source>CSV file is incomplete. Not all files were updated!</source>
         <translation type="unfinished">CSVファイルが不完全です。更新されていないファイルがあります！</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2848"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2862"/>
         <source>The CSV files was imported successfully!</source>
         <translation>CSVファイルのインポートに成功しました！</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3027"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3072"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3041"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3086"/>
         <source>New Folder</source>
         <translation type="unfinished">新規フォルダ</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3072"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3086"/>
         <source>Enter the name of the new folder:</source>
         <translation type="unfinished">新しいフォルダの名前を入力:</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3105"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3119"/>
         <source>Failed to create folder</source>
         <translation type="unfinished">フォルダ作成に失敗しました</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3105"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3119"/>
         <source>The new folder could not be created:</source>
         <translation type="unfinished">新しいフォルダを作成できませんでした:</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3105"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3119"/>
         <source>Drive is read-only or insufficient access rights!</source>
         <translation type="unfinished">ドライブが読み取り専用か、アクセス権限がありません！</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3582"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3596"/>
         <source>Current Encoder: %1</source>
         <translation>現在のエンコーダー: %1</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3686"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3689"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3700"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3703"/>
         <source>Quality Level %1</source>
         <translation>品質レベル %1</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3692"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3706"/>
         <source>Compression %1</source>
         <translation>圧縮 %1</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3695"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3709"/>
         <source>Uncompressed</source>
         <translation>非圧縮</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3738"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3752"/>
         <source>Best Quality (Slow)</source>
         <translation>最高品質 (遅い)</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3741"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3755"/>
         <source>High Quality (Recommended)</source>
         <translation>高品質 (推奨)</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3744"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3758"/>
         <source>Acceptable Quality (Fast)</source>
         <translation>容認可能な品質 (早い)</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3747"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3761"/>
         <source>Poor Quality (Very Fast)</source>
         <translation>低品質 (高速)</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="4177"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="4191"/>
         <source>File name without extension</source>
         <translation>拡張子を除くファイル名</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="4178"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="4192"/>
         <source>Track number with leading zero</source>
         <translation>先頭に 0 を付与したトラック番号</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="4179"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="4193"/>
         <source>Track title</source>
         <translation>トラックのタイトル</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="4180"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="4194"/>
         <source>Artist name</source>
         <translation>アーティスト名</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="4181"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="4195"/>
         <source>Album name</source>
         <translation>アルバム名</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="4182"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="4196"/>
         <source>Year with (at least) four digits</source>
         <translation>トラックのタイトル</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="4183"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="4197"/>
         <source>Comment</source>
         <translation>コメント</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="4185"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="4199"/>
         <source>Characters forbidden in file names:</source>
         <translation>ファイル名に使えない文字:</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="4188"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="4202"/>
         <source>Rename Macros</source>
         <translation>改名用マクロ</translation>
     </message>
     <message numerus="yes">
-        <location filename="../../src/Dialog_MainWindow.cpp" line="4235"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="4249"/>
         <source>%n Instance(s)</source>
         <translation>
             <numerusform>%n インスタンス</numerusform>
         </translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="4278"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="4292"/>
         <source>Cannot write to the selected directory. Please choose another directory!</source>
         <translation type="unfinished">選択したフォルダに書き込めません。 違うフォルダを選択してください！</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="4415"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="4429"/>
         <source>Overwrite Mode</source>
         <translation>上書きモード</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="4415"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="4429"/>
         <source>Warning: This mode may overwrite existing files with no way to revert!</source>
         <translation>警告: この方法では元に戻せない方法で既存のファイルが上書きされます！</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="4415"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="4429"/>
         <source>Continue</source>
         <translation>続行</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="4415"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="4429"/>
         <source>Revert</source>
         <translation>元に戻す</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="4508"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="4522"/>
         <source>Already Running</source>
         <translation>既に起動中</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="4508"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="4522"/>
         <source>LameXP is already running, please use the running instance!</source>
         <translation type="unfinished">LameXP は既に起動中です。 そちらをご利用ください！</translation>
     </message>
@@ -3443,139 +3443,139 @@
         <translation>閉じる</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="162"/>
-        <location filename="../../src/Dialog_Update.cpp" line="367"/>
+        <location filename="../../src/Dialog_Update.cpp" line="163"/>
+        <location filename="../../src/Dialog_Update.cpp" line="368"/>
         <source>Build</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="163"/>
+        <location filename="../../src/Dialog_Update.cpp" line="164"/>
         <source>Unknown</source>
         <translation>不明</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="252"/>
+        <location filename="../../src/Dialog_Update.cpp" line="253"/>
         <source>Sorry, but only users in the &quot;Administrators&quot; group can install updates.</source>
         <translation type="unfinished">すみません。管理者グループのユーザーのみがアップデートをインストールできます。</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="253"/>
+        <location filename="../../src/Dialog_Update.cpp" line="254"/>
         <source>Please start application from an administrator account and try again!</source>
         <translation type="unfinished">管理者アカウントからソフトウェアを実行しもう一度試してください！</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="290"/>
+        <location filename="../../src/Dialog_Update.cpp" line="291"/>
         <source>Testing your internet connection, please wait...</source>
         <translation>インターネット接続を確認中。お待ちください...</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="311"/>
+        <location filename="../../src/Dialog_Update.cpp" line="312"/>
         <source>It appears that the computer currently is offline!</source>
         <translation>パソコンがオフラインのようです！</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="312"/>
-        <location filename="../../src/Dialog_Update.cpp" line="317"/>
+        <location filename="../../src/Dialog_Update.cpp" line="313"/>
+        <location filename="../../src/Dialog_Update.cpp" line="318"/>
         <source>Please make sure your computer is connected to the internet and try again.</source>
         <translation>パソコンがインターネットに接続されているか確認し、もう一度お試しください。</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="316"/>
+        <location filename="../../src/Dialog_Update.cpp" line="317"/>
         <source>Network connectivity test has failed!</source>
         <translation type="unfinished">ネットワーク接続テストが失敗しました！</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="293"/>
+        <location filename="../../src/Dialog_Update.cpp" line="294"/>
         <source>Checking for new updates online, please wait...</source>
         <translation>アップデートをオンラインで確認中...</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="321"/>
+        <location filename="../../src/Dialog_Update.cpp" line="322"/>
         <source>Failed to fetch update information from server!</source>
         <translation type="unfinished">サーバーからの更新情報の取得に失敗しました！</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="322"/>
+        <location filename="../../src/Dialog_Update.cpp" line="323"/>
         <source>Sorry, the update server might be busy at this time. Plase try again later.</source>
         <translation type="unfinished">すみません。ただいま更新サーバーに接続できないようです。後でお試しください。</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="366"/>
+        <location filename="../../src/Dialog_Update.cpp" line="367"/>
         <source>More information available at:</source>
         <translation type="unfinished">詳しい情報はこちらにあります :</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="296"/>
+        <location filename="../../src/Dialog_Update.cpp" line="297"/>
         <source>A new version of LameXP is available!</source>
         <translation type="unfinished">LameXP の新しいバージョンがあります！</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="207"/>
+        <location filename="../../src/Dialog_Update.cpp" line="208"/>
         <source>Stopping update check, please wait...</source>
         <translation type="unfinished">更新チェックを停止中...</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="254"/>
+        <location filename="../../src/Dialog_Update.cpp" line="255"/>
         <source>Discard</source>
         <translation type="unfinished">閉じる</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="254"/>
+        <location filename="../../src/Dialog_Update.cpp" line="255"/>
         <source>Ignore</source>
         <translation>無視</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="287"/>
+        <location filename="../../src/Dialog_Update.cpp" line="288"/>
         <source>Initializing, please wait...</source>
         <translation type="unfinished">初期化中...</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="297"/>
+        <location filename="../../src/Dialog_Update.cpp" line="298"/>
         <source>We highly recommend all users to install this update as soon as possible.</source>
         <translation>最新版を速やかにインストールすることをおすすめします。</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="301"/>
+        <location filename="../../src/Dialog_Update.cpp" line="302"/>
         <source>No new updates available at this time.</source>
         <translation>アップデートはありません。</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="302"/>
+        <location filename="../../src/Dialog_Update.cpp" line="303"/>
         <source>Your version of LameXP is still up-to-date. Please check for updates regularly!</source>
         <translation>お使いの LameXP はまだ最新版です。定期的にアップデートを確認してください！</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="306"/>
+        <location filename="../../src/Dialog_Update.cpp" line="307"/>
         <source>Your version appears to be newer than the latest release.</source>
         <translation type="unfinished">最新版よりも新しいものを使用しているようです。</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="307"/>
+        <location filename="../../src/Dialog_Update.cpp" line="308"/>
         <source>This usually indicates your are currently using a pre-release version of LameXP.</source>
         <translation type="unfinished">正式公開前のバージョンの LameXP をお使いかもしれません。</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="326"/>
+        <location filename="../../src/Dialog_Update.cpp" line="327"/>
         <source>Update check has been cancelled!</source>
         <translation type="unfinished">アップデートの確認はキャンセルされました！</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="327"/>
+        <location filename="../../src/Dialog_Update.cpp" line="328"/>
         <source>The update check has been cancelled by the user. Please try again later.</source>
         <translation type="unfinished">更新確認はあなたによってキャンセルされました。後ほど再びお試しください。</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="395"/>
+        <location filename="../../src/Dialog_Update.cpp" line="397"/>
         <source>Update is being downloaded, please be patient...</source>
         <translation type="unfinished">アップデートをダウンロードしています。少々お待ちください...</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="443"/>
+        <location filename="../../src/Dialog_Update.cpp" line="445"/>
         <source>Update ready to install. Applicaion will quit...</source>
         <translation type="unfinished">アップデートをインストールできます。いったん終了します...</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="451"/>
+        <location filename="../../src/Dialog_Update.cpp" line="453"/>
         <source>Update failed. Please try again or download manually!</source>
         <translation type="unfinished">アップデートに失敗しました。もう一度試すか手動で更新してください！</translation>
     </message>
