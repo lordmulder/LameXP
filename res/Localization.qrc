@@ -1,6 +1,8 @@
 <!DOCTYPE RCC>
 <RCC version="1.0">
   <qresource>
+    <file>localization/LameXP_BG.qm</file>
+    <file>localization/LameXP_BG.qm.txt</file>
     <file>localization/LameXP_DE.qm</file>
     <file>localization/LameXP_DE.qm.txt</file>
     <file>localization/LameXP_EN.qm</file>

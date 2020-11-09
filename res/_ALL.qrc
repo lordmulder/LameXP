@@ -6,12 +6,14 @@
     <file>../doc/Manual.html</file>
     <file>../doc/Translate.html</file>
     <file>../License.txt</file>
+    <file>flags/bg.png</file>
     <file>flags/de.png</file>
     <file>flags/en.png</file>
     <file>flags/es.png</file>
     <file>flags/fr.png</file>
     <file>flags/hu.png</file>
     <file>flags/it.png</file>
+    <file>flags/ja.png</file>
     <file>flags/kr.png</file>
     <file>flags/pl.png</file>
     <file>flags/ru.png</file>
@@ -171,6 +173,8 @@
     <file>images/Thumb.png</file>
     <file>images/Wizard.png</file>
     <file>images/Working.gif</file>
+    <file>localization/LameXP_BG.qm</file>
+    <file>localization/LameXP_BG.qm.txt</file>
     <file>localization/LameXP_DE.qm</file>
     <file>localization/LameXP_DE.qm.txt</file>
     <file>localization/LameXP_EN.qm</file>
@@ -181,6 +185,8 @@
     <file>localization/LameXP_HU.qm.txt</file>
     <file>localization/LameXP_IT.qm</file>
     <file>localization/LameXP_IT.qm.txt</file>
+    <file>localization/LameXP_JA.qm</file>
+    <file>localization/LameXP_JA.qm.txt</file>
     <file>localization/LameXP_ES.qm</file>
     <file>localization/LameXP_ES.qm.txt</file>
     <file>localization/LameXP_KR.qm</file>

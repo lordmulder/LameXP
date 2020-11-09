@@ -1,6 +1,7 @@
 <!DOCTYPE RCC>
 <RCC version="1.0">
   <qresource>
+    <file>flags/bg.png</file>
     <file>flags/de.png</file>
     <file>flags/en.png</file>
     <file>flags/es.png</file>
