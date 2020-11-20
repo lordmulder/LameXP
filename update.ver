@@ -1,5 +1,5 @@
 [!Update]
-TimestampCreated=2020-06-25
+TimestampCreated=2020-11-19
 
 [MPlayer for Windows]
 BuildNo=141
@@ -19,10 +19,10 @@ DownloadFilecode=a9d0efc56fe28b3cc2c7246e4a2d31e0c7ddb98f
 DownloadChecksum=6C30B9D9024695613502CEEC9E89D597A45EC28CDBE3841101B5C804A146E45A34E71E14F459E589A74D609231BAFF50
 
 [Simple x264 Launcher]
-BuildNo=1208
-BuildDate=2020-06-25
+BuildNo=1210
+BuildDate=2020-11-19
 DownloadSite=http://forum.doom9.org/showthread.php?t=144140
 DownloadAddress=http://muldersoft.com/update/
-DownloadFilename=x264_launcher.2020-06-25.exe
-DownloadFilecode=999fbc4cf00b0ec620c2289a7166e25b4233ec8c
-DownloadChecksum=6F4AF7DB5EE91BA3A6BB6ED8C6013E3075146CA4AE075F5F309EE74B8AA4C039EB402118205EC375019313A538027CCE
+DownloadFilename=x264_launcher.2020-11-19.exe
+DownloadFilecode=a226b73f9992312bca0a14e5bac5c7dae93aca05
+DownloadChecksum=C6E0DA1BA53FCEF41D6CC95E933E961C1DFB583179DC29F9EDDBDA22B614EA41B4186ECC7F051D916AF08A71C308B37A
