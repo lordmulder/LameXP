@@ -422,28 +422,28 @@
     <message>
         <location filename="../../src/Dialog_CueImport.cpp" line="94"/>
         <source>Import Cue Sheet</source>
-        <translation type="unfinished"></translation>
+        <translation>Вмъкни cue списък</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_CueImport.cpp" line="94"/>
         <source>The following Cue Sheet will be split and imported into LameXP.</source>
-        <translation type="unfinished"></translation>
+        <translation>Следният cue списък ще бъде разделен и внесен в LameXP.</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_CueImport.cpp" line="120"/>
         <source>Loading Cue Sheet file, please be patient...</source>
-        <translation type="unfinished"></translation>
+        <translation>Зареждане на файла с cue списъка, моля изчакайте...</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_CueImport.cpp" line="125"/>
         <location filename="../../src/Dialog_CueImport.cpp" line="226"/>
         <source>Failed to load the Cue Sheet file:</source>
-        <translation type="unfinished"></translation>
+        <translation>Зареждането на файла с cue списъка се провали:</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_CueImport.cpp" line="125"/>
         <source>The specified file could not be found!</source>
-        <translation type="unfinished"></translation>
+        <translation>Зададеният файл не може да бъде намерен!</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_CueImport.cpp" line="126"/>
@@ -452,180 +452,180 @@
         <location filename="../../src/Dialog_CueImport.cpp" line="442"/>
         <location filename="../../src/Dialog_CueImport.cpp" line="446"/>
         <source>Cue Sheet Error</source>
-        <translation type="unfinished"></translation>
+        <translation>Грешка в cue списъка</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_CueImport.cpp" line="154"/>
         <source>(System Default)</source>
-        <translation type="unfinished">(по подразбиране от системата)</translation>
+        <translation>(по подразбиране от операционната система)</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_CueImport.cpp" line="161"/>
         <source>Select ANSI Codepage for Cue Sheet file:</source>
-        <translation type="unfinished"></translation>
+        <translation>Избери ANSI кодова таблица за файла с cue списъка:</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_CueImport.cpp" line="162"/>
         <source>OK</source>
-        <translation type="unfinished">Добре</translation>
+        <translation>Добре</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_CueImport.cpp" line="163"/>
         <source>Cancel</source>
-        <translation type="unfinished">Отказ</translation>
+        <translation>Отказ</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_CueImport.cpp" line="195"/>
         <source>New Folder</source>
-        <translation type="unfinished"></translation>
+        <translation>Нова папка</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_CueImport.cpp" line="208"/>
         <source>An unknown error has occured!</source>
-        <translation type="unfinished"></translation>
+        <translation>Възникна неизвестна грешка!</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_CueImport.cpp" line="213"/>
         <source>The file could not be opened for reading. Make sure you have the required rights!</source>
-        <translation type="unfinished"></translation>
+        <translation>Файлът не може да бъде отворен за четене. Уверете се, че разполагате с необходимите права!</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_CueImport.cpp" line="216"/>
         <source>The provided file does not look like a valid Cue Sheet disc image file!</source>
-        <translation type="unfinished"></translation>
+        <translation>Предоставеният файл не прилича особено на валиден образ на файл с cue списък!</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_CueImport.cpp" line="219"/>
         <source>Could not find any supported audio track in the Cue Sheet image!</source>
-        <translation type="unfinished"></translation>
+        <translation>Не бе открита нито една поддържана аудио пътечка в cue списъка!</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_CueImport.cpp" line="219"/>
         <source>Note that LameXP can not handle &quot;binary&quot; Cue Sheet images.</source>
-        <translation type="unfinished"></translation>
+        <translation>Имай предвид, че LameXP не може да борави с „бинарни“ образи на cue списъци.</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_CueImport.cpp" line="222"/>
         <source>The selected Cue Sheet file contains inconsistent information. Take care!</source>
-        <translation type="unfinished"></translation>
+        <translation>Избраният файл с cue списък съдържа нелогична информация. Оправи го!</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_CueImport.cpp" line="244"/>
         <source>Unknown Artist</source>
-        <translation type="unfinished"></translation>
+        <translation>Неизвестен изпълнител</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_CueImport.cpp" line="245"/>
         <source>Unknown Album</source>
-        <translation type="unfinished"></translation>
+        <translation>Неизвестен албум</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_CueImport.cpp" line="266"/>
         <location filename="../../src/Dialog_CueImport.cpp" line="270"/>
         <source>Choose Output Directory</source>
-        <translation type="unfinished"></translation>
+        <translation>Избери изходна директория</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_CueImport.cpp" line="296"/>
         <location filename="../../src/Dialog_CueImport.cpp" line="303"/>
         <source>LameXP</source>
-        <translation type="unfinished"></translation>
+        <translation>LameXP</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_CueImport.cpp" line="296"/>
         <source>Error: The selected output directory could not be created!</source>
-        <translation type="unfinished"></translation>
+        <translation>Грешка: Избраната изходна директория не може да бъде създадена!</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_CueImport.cpp" line="303"/>
         <source>Error: The selected output directory is not writable!</source>
-        <translation type="unfinished"></translation>
+        <translation>Грешка: В избраната изходна директория не може да се пише!</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_CueImport.cpp" line="317"/>
         <source>Low Diskspace Warning</source>
-        <translation type="unfinished"></translation>
+        <translation>Предупреждение за намаляващо дисково пространство</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_CueImport.cpp" line="317"/>
         <source>There are less than %1 GB of free diskspace available in the selected output directory.</source>
-        <translation type="unfinished"></translation>
+        <translation>Има по-малко от %1 ГБ свободно дисково пространство в избраната изходна директория.</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_CueImport.cpp" line="317"/>
         <source>It is highly recommend to free up more diskspace before proceeding with the import!</source>
-        <translation type="unfinished"></translation>
+        <translation>Силно препоръчително е да освободите малко дисково пространство преди да продължите с импортирането!</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_CueImport.cpp" line="369"/>
         <source>Warning: Some of the required input files could not be found!</source>
-        <translation type="unfinished"></translation>
+        <translation>Предупреждение: Някои от нужните файлове-източници не могат да бъдат намерени!</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_CueImport.cpp" line="405"/>
         <source>Analyzing file(s), please wait...</source>
-        <translation type="unfinished"></translation>
+        <translation>Анализиране на файл(ове), моля изчакайте...</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_CueImport.cpp" line="410"/>
         <source>Analysis Failed</source>
-        <translation type="unfinished"></translation>
+        <translation>Анализът се провали</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_CueImport.cpp" line="410"/>
         <source>Warning: The format of some of the input files could not be determined!</source>
-        <translation type="unfinished"></translation>
+        <translation>Предупреждение: Форматът на някои от файловете-източници не може да бъде определен!</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_CueImport.cpp" line="369"/>
         <location filename="../../src/Dialog_CueImport.cpp" line="410"/>
         <source>Continue Anyway</source>
-        <translation type="unfinished"></translation>
+        <translation>Продължи все пак</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_CueImport.cpp" line="369"/>
         <location filename="../../src/Dialog_CueImport.cpp" line="410"/>
         <source>Abort</source>
-        <translation type="unfinished"></translation>
+        <translation>Прекрати</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_CueImport.cpp" line="437"/>
         <source>Splitting file(s), please wait...</source>
-        <translation type="unfinished"></translation>
+        <translation>Разделяне на файл(ове), моля изчакайте...</translation>
     </message>
     <message numerus="yes">
         <location filename="../../src/Dialog_CueImport.cpp" line="442"/>
         <source>Process was aborted by the user after %n track(s)!</source>
-        <translation type="unfinished">
-            <numerusform></numerusform>
-            <numerusform></numerusform>
+        <translation>
+            <numerusform>Прецесът бе прекратен от потребителя след %n песен!</numerusform>
+            <numerusform>Прецесът бе прекратен от потребителя след %n песни!</numerusform>
         </translation>
     </message>
     <message>
         <location filename="../../src/Dialog_CueImport.cpp" line="446"/>
         <source>An unexpected error has occured while splitting the Cue Sheet!</source>
-        <translation type="unfinished"></translation>
+        <translation>Възникна неочаквана грешка по време на разделянето на cue списъка!</translation>
     </message>
     <message numerus="yes">
         <location filename="../../src/Dialog_CueImport.cpp" line="450"/>
         <source>Imported %n track(s) from the Cue Sheet.</source>
-        <translation type="unfinished">
-            <numerusform></numerusform>
-            <numerusform></numerusform>
+        <translation>
+            <numerusform>Добавена %n пътечка от cue списъка.</numerusform>
+            <numerusform>Добавени %n пътечки от cue списъка.</numerusform>
         </translation>
     </message>
     <message numerus="yes">
         <location filename="../../src/Dialog_CueImport.cpp" line="450"/>
         <source>Skipped %n track(s).</source>
-        <translation type="unfinished">
-            <numerusform></numerusform>
-            <numerusform></numerusform>
+        <translation>
+            <numerusform>Пропусната %n пътечка.</numerusform>
+            <numerusform>Пропуснати %n пътечки.</numerusform>
         </translation>
     </message>
     <message>
         <location filename="../../src/Dialog_CueImport.cpp" line="451"/>
         <source>Cue Sheet Completed</source>
-        <translation type="unfinished"></translation>
+        <translation>Cue списъка е готов</translation>
     </message>
 </context>
 <context>
@@ -634,47 +634,47 @@
         <location filename="../../gui/CueSheetImport.ui" line="14"/>
         <location filename="../../gui/CueSheetImport.ui" line="664"/>
         <source>Import Cue Sheet</source>
-        <translation type="unfinished"></translation>
+        <translation>Вмъкване на cue списък</translation>
     </message>
     <message>
         <location filename="../../gui/CueSheetImport.ui" line="189"/>
         <source>Artist:</source>
-        <translation type="unfinished"></translation>
+        <translation>Изпълнител:</translation>
     </message>
     <message>
         <location filename="../../gui/CueSheetImport.ui" line="241"/>
         <source>Album:</source>
-        <translation type="unfinished"></translation>
+        <translation>Албум:</translation>
     </message>
     <message>
         <location filename="../../gui/CueSheetImport.ui" line="415"/>
         <source>Existing Source File</source>
-        <translation type="unfinished"></translation>
+        <translation>Съществуващ файл-източник</translation>
     </message>
     <message>
         <location filename="../../gui/CueSheetImport.ui" line="543"/>
         <source>Missing Source File (Tracks will be skipped!)</source>
-        <translation type="unfinished"></translation>
+        <translation>Липсващ файл-източник (песните ще бъдат пропуснати!)</translation>
     </message>
     <message>
         <location filename="../../gui/CueSheetImport.ui" line="570"/>
         <source> Output Directory </source>
-        <translation type="unfinished"></translation>
+        <translation> Изходна директория </translation>
     </message>
     <message>
         <location filename="../../gui/CueSheetImport.ui" line="594"/>
         <source>Browse...</source>
-        <translation type="unfinished"></translation>
+        <translation>Разгледай...</translation>
     </message>
     <message>
         <location filename="../../gui/CueSheetImport.ui" line="631"/>
         <source>Load a different Cue Sheet</source>
-        <translation type="unfinished"></translation>
+        <translation>Зареди друг cue списък</translation>
     </message>
     <message>
         <location filename="../../gui/CueSheetImport.ui" line="687"/>
         <source>Discard</source>
-        <translation type="unfinished">Затвори</translation>
+        <translation>Отхвърли</translation>
     </message>
 </context>
 <context>
@@ -682,44 +682,44 @@
     <message>
         <location filename="../../src/Model_CueSheet.cpp" line="207"/>
         <source>No.</source>
-        <translation type="unfinished"></translation>
+        <translation>№</translation>
     </message>
     <message>
         <location filename="../../src/Model_CueSheet.cpp" line="210"/>
         <source>File / Track</source>
-        <translation type="unfinished"></translation>
+        <translation>Файл / Песен</translation>
     </message>
     <message>
         <location filename="../../src/Model_CueSheet.cpp" line="213"/>
         <source>Index</source>
-        <translation type="unfinished"></translation>
+        <translation>Индекс</translation>
     </message>
     <message>
         <location filename="../../src/Model_CueSheet.cpp" line="216"/>
         <source>Duration</source>
-        <translation type="unfinished"></translation>
+        <translation>Продължителност</translation>
     </message>
     <message>
         <location filename="../../src/Model_CueSheet.cpp" line="242"/>
         <source>File %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Файл %1</translation>
     </message>
     <message>
         <location filename="../../src/Model_CueSheet.cpp" line="258"/>
         <source>Track %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Песен %1</translation>
     </message>
     <message>
         <location filename="../../src/Model_CueSheet.cpp" line="267"/>
         <location filename="../../src/Model_CueSheet.cpp" line="275"/>
         <source>Unknown Artist</source>
-        <translation type="unfinished"></translation>
+        <translation>Неисвестен изпълнител</translation>
     </message>
     <message>
         <location filename="../../src/Model_CueSheet.cpp" line="271"/>
         <location filename="../../src/Model_CueSheet.cpp" line="275"/>
         <source>Unknown Title</source>
-        <translation type="unfinished"></translation>
+        <translation>Неизвестно заглавие</translation>
     </message>
 </context>
 <context>
@@ -832,32 +832,32 @@
     <message>
         <location filename="../../gui/LogViewDialog.ui" line="23"/>
         <source>Log View</source>
-        <translation type="unfinished"></translation>
+        <translation>Преглед на дневника</translation>
     </message>
     <message>
         <location filename="../../gui/LogViewDialog.ui" line="308"/>
         <source>Discard</source>
-        <translation type="unfinished">Затвори</translation>
+        <translation>Отхвърли</translation>
     </message>
     <message>
         <location filename="../../gui/LogViewDialog.ui" line="331"/>
         <source>Save to File...</source>
-        <translation type="unfinished"></translation>
+        <translation>Запиши във файл...</translation>
     </message>
     <message>
         <location filename="../../gui/LogViewDialog.ui" line="367"/>
         <source>Copy to Clipboard</source>
-        <translation type="unfinished"></translation>
+        <translation>Копирай в клипборда</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_LogView.cpp" line="53"/>
         <source>Log File</source>
-        <translation type="unfinished"></translation>
+        <translation>Дневник</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_LogView.cpp" line="53"/>
         <source>The log file shows detailed information about the selected job.</source>
-        <translation type="unfinished"></translation>
+        <translation>Дневникът показва детайлна информация относно текущата задача.</translation>
     </message>
 </context>
 <context>
@@ -938,7 +938,7 @@
     <message>
         <location filename="../../gui/MainWindow.ui" line="567"/>
         <source>Save output files to the same location where the input file is located</source>
-        <translation>Съхрани изходния файл в папката на източника</translation>
+        <translation>Запиши преформатираните файлове в същата папка като на източника</translation>
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="590"/>
@@ -1218,87 +1218,87 @@
     <message>
         <location filename="../../gui/MainWindow.ui" line="2105"/>
         <source>AAC Encoder-Options</source>
-        <translation>AAC Енкодер – Options</translation>
+        <translation>AAC Енкодер – Опции</translation>
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="2113"/>
         <source>Enable 2-Pass Processing (ABR Mode)</source>
-        <translation type="unfinished"></translation>
+        <translation>Включи 2-стъпкова обработка (ABR режим)</translation>
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="2149"/>
         <source>Select AAC Profile:</source>
-        <translation type="unfinished"></translation>
+        <translation>Избери AAC профил:</translation>
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="2163"/>
         <source>Auto Select (Recommended)</source>
-        <translation type="unfinished"></translation>
+        <translation>Автоматично (препоръчва се)</translation>
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="2168"/>
         <source>Enforce LC-AAC</source>
-        <translation type="unfinished"></translation>
+        <translation>Наложи LC-AAC</translation>
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="2173"/>
         <source>Enforce HE-AAC (AAC + SBR)</source>
-        <translation type="unfinished"></translation>
+        <translation>Наложи HE-AAC (AAC + SBR)</translation>
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="2178"/>
         <source>Enforce HE-AAC v2 (AAC + SBR + PS)</source>
-        <translation type="unfinished"></translation>
+        <translation>Наложи HE-AAC v2 (AAC + SBR + PS)</translation>
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="2258"/>
         <source> Volume Normalization </source>
-        <translation type="unfinished"></translation>
+        <translation> Нормализиране на силата на звука </translation>
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="2266"/>
         <source>Enable Normalization Filter</source>
-        <translation type="unfinished"></translation>
+        <translation>Включи нормализационен филтър</translation>
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="2327"/>
         <source>Peak Volume (dB):</source>
-        <translation type="unfinished"></translation>
+        <translation>Пикова сила (dB):</translation>
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="2430"/>
         <source>Enable Dynamic Normalization</source>
-        <translation type="unfinished"></translation>
+        <translation>Включи нормализиране на динамиката</translation>
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="2437"/>
         <source>Window Size:</source>
-        <translation type="unfinished"></translation>
+        <translation>Размер на прозореца:</translation>
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="2469"/>
         <source>Enable channel-coupling, i.e. amplify all channels of a multi-channel file by the same amount</source>
-        <translation type="unfinished"></translation>
+        <translation>Включване на канално чифтосване, т.е. еднакво усилване на каналите от много-канален файл</translation>
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="2490"/>
         <source> Tone Adjustment </source>
-        <translation type="unfinished"></translation>
+        <translation> Настройка на тона </translation>
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="2588"/>
         <source>Adjust Treble (dB):</source>
-        <translation type="unfinished"></translation>
+        <translation>Нагласяне на требъла (dB):</translation>
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="2598"/>
         <source>Adjust Bass (dB):</source>
-        <translation type="unfinished"></translation>
+        <translation>Нагласяне на баса (dB):</translation>
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="2668"/>
         <source> Custom Encoder Parameters </source>
-        <translation type="unfinished"></translation>
+        <translation> Допълнителни параметри на енкодера </translation>
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="2684"/>
@@ -1308,162 +1308,162 @@
         <location filename="../../gui/MainWindow.ui" line="2882"/>
         <location filename="../../gui/MainWindow.ui" line="2976"/>
         <source>You can enter custom parameters here!</source>
-        <translation type="unfinished"></translation>
+        <translation>Тук можеш да въведеш параметри по избор!</translation>
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="2736"/>
         <source>Lame MP3:</source>
-        <translation type="unfinished"></translation>
+        <translation>Lame MP3:</translation>
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="2743"/>
         <source>OggEnc2:</source>
-        <translation type="unfinished"></translation>
+        <translation>OggEnc2</translation>
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="2750"/>
         <source>MPEG-4 AAC:</source>
-        <translation type="unfinished"></translation>
+        <translation>MPEG-4 AAC:</translation>
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="2757"/>
         <source>FLAC:</source>
-        <translation type="unfinished"></translation>
+        <translation>FLAC:</translation>
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="2846"/>
         <source>Warning: Custom parameters won&apos;t be checked at all. Use them at your own risk !!!</source>
-        <translation type="unfinished"></translation>
+        <translation>Внимание: Допълнителните параметри няма да бъдат проверени. Използвай ги на своя отговорност!!!</translation>
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="2889"/>
         <source>Aften A/52:</source>
-        <translation type="unfinished"></translation>
+        <translation>Aften A/52:</translation>
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="2961"/>
         <source>OpusEnc:</source>
-        <translation type="unfinished"></translation>
+        <translation>OpusEnc:</translation>
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="3007"/>
         <source> Multi-Threading </source>
-        <translation type="unfinished"></translation>
+        <translation> Паралелизиране на процесите </translation>
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="3104"/>
         <source>Choose the number of parallel instances based on the number of CPU cores (Recommended)</source>
-        <translation type="unfinished"></translation>
+        <translation>Избери броя паралелни инстанции на базата на броя ядра в процесора (препоръчва се)</translation>
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="3111"/>
         <source>Fewer Instances</source>
-        <translation type="unfinished"></translation>
+        <translation>По-малко инстанции</translation>
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="3134"/>
         <source>More Instances</source>
-        <translation type="unfinished"></translation>
+        <translation>Повече инстанции</translation>
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="3171"/>
         <source> Temp Directory </source>
-        <translation type="unfinished"></translation>
+        <translation> Временна директория </translation>
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="3186"/>
         <source>Browse...</source>
-        <translation type="unfinished"></translation>
+        <translation>Избери...</translation>
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="3203"/>
         <source>Store temporary files in your system&apos;s default TEMP directory (Recommended)</source>
-        <translation type="unfinished"></translation>
+        <translation>Съхранявай временните файлове в TEMP директорията на системата (препоръчва се)</translation>
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="3301"/>
         <source> Aften A/52 Options </source>
-        <translation type="unfinished"></translation>
+        <translation> Aften A/52 – Опции </translation>
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="3313"/>
         <source>Film Light</source>
-        <translation type="unfinished"></translation>
+        <translation>Филм, леко</translation>
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="3318"/>
         <source>Film Standard</source>
-        <translation type="unfinished"></translation>
+        <translation>Филм нормално</translation>
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="3323"/>
         <source>Music Light</source>
-        <translation type="unfinished"></translation>
+        <translation>Музика, леко</translation>
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="3328"/>
         <source>Music Standard</source>
-        <translation type="unfinished"></translation>
+        <translation>Музика нормално</translation>
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="3333"/>
         <source>Speech</source>
-        <translation type="unfinished"></translation>
+        <translation>Говор</translation>
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="3338"/>
         <source>None (Default)</source>
-        <translation type="unfinished"></translation>
+        <translation>Без (по подразбиране)</translation>
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="3350"/>
         <source>Auto Select</source>
-        <translation type="unfinished"></translation>
+        <translation>Избери автоматично</translation>
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="3355"/>
         <source>1+1 (Ch1,Ch2)</source>
-        <translation type="unfinished"></translation>
+        <translation>1+1 (Кн1,Кн2)</translation>
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="3360"/>
         <source>1/0 (C)</source>
-        <translation type="unfinished"></translation>
+        <translation>1/0 (Ц)</translation>
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="3365"/>
         <source>2/0 (L,R)</source>
-        <translation type="unfinished"></translation>
+        <translation>2/0 (Л,Д)</translation>
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="3370"/>
         <source>3/0 (L,R,C)</source>
-        <translation type="unfinished"></translation>
+        <translation>3/0 (Л,Д,Ц)</translation>
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="3375"/>
         <source>2/1 (L,R,S)</source>
-        <translation type="unfinished"></translation>
+        <translation>2/1 (Л,Д,S)</translation>
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="3380"/>
         <source>3/1 (L,R,C,S)</source>
-        <translation type="unfinished"></translation>
+        <translation>3/1 (Л,Д,Ц,S)</translation>
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="3385"/>
         <source>2/2 (L,R,SL,SR)</source>
-        <translation type="unfinished"></translation>
+        <translation>2/2 (Л,Д,SЛ,SД)</translation>
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="3390"/>
         <source>3/2 (L,R,C,SL,SR)</source>
-        <translation type="unfinished"></translation>
+        <translation>3/2(Л,Д,Ц,SЛ,SД)</translation>
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="3398"/>
         <source>Audio Coding Mode:</source>
-        <translation type="unfinished"></translation>
+        <translation>Режим на аудио кодиране:</translation>
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="3405"/>
@@ -1568,57 +1568,57 @@
     <message>
         <location filename="../../gui/MainWindow.ui" line="4109"/>
         <source> Opus Encoder Options </source>
-        <translation type="unfinished"></translation>
+        <translation> Opus Енкодер – Опции</translation>
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="4149"/>
         <source>Encoding Complexity:</source>
-        <translation type="unfinished"></translation>
+        <translation>Сложност на кодирането:</translation>
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="4191"/>
         <source>Frame Size:</source>
-        <translation type="unfinished"></translation>
+        <translation>Размер на кадъра:</translation>
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="4279"/>
         <source>Disable Opus-Decoder Resampling (i.e. always output as 48.000 Hz)</source>
-        <translation type="unfinished"></translation>
+        <translation>Изключи предискретизирането в Opus декодера (т.е. винаги изкарвай 48 kHz)</translation>
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="4329"/>
         <source> File Operations </source>
-        <translation type="unfinished"></translation>
+        <translation> Файлови операции </translation>
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="4350"/>
         <source>Overwrite Existing File</source>
-        <translation type="unfinished"></translation>
+        <translation>Презапиши го с новия</translation>
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="4357"/>
         <source>Skip File</source>
-        <translation type="unfinished"></translation>
+        <translation>Пропусни го</translation>
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="4367"/>
         <source>Keep Both Files (Default)</source>
-        <translation type="unfinished"></translation>
+        <translation>Запази и двата</translation>
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="4377"/>
         <source>If Target File Already Exists:</source>
-        <translation type="unfinished"></translation>
+        <translation>Ако целевият файл вече съществува:</translation>
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="4487"/>
         <source>Apply the &quot;creation&quot; and &quot;last modified&quot; date/time of the original file to the converted file</source>
-        <translation type="unfinished"></translation>
+        <translation>Приложи дата/час за „създаден“ и „последно модифициран“ от оригиналния файл към конвертирания</translation>
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="4547"/>
         <source>Reset Advanced Options </source>
-        <translation type="unfinished"></translation>
+        <translation>Нулирай разширените опции</translation>
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="4613"/>
@@ -1810,7 +1810,7 @@
     <message>
         <location filename="../../gui/MainWindow.ui" line="5112"/>
         <source>Import Cue Sheet</source>
-        <translation type="unfinished"></translation>
+        <translation>Вмъкване на Cue списък</translation>
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="5120"/>
@@ -2043,7 +2043,7 @@
         <location filename="../../src/Dialog_MainWindow.cpp" line="2260"/>
         <location filename="../../src/Dialog_MainWindow.cpp" line="4202"/>
         <source>Discard</source>
-        <translation type="unfinished">Затвори</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="1543"/>
@@ -2065,7 +2065,7 @@
         <location filename="../../src/Dialog_MainWindow.cpp" line="1555"/>
         <location filename="../../src/Dialog_MainWindow.cpp" line="1771"/>
         <source>Ignore</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Игнорирай</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="1572"/>
@@ -2129,7 +2129,7 @@
         <location filename="../../src/Dialog_MainWindow.cpp" line="1798"/>
         <location filename="../../src/Dialog_MainWindow.cpp" line="1808"/>
         <source>LameXP</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">LameXP</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="1741"/>
@@ -2174,7 +2174,7 @@
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="1771"/>
         <source>Low Diskspace Warning</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Предупреждение за намаляващо дисково пространство</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="1771"/>
@@ -2235,7 +2235,7 @@
         <location filename="../../src/Dialog_MainWindow.cpp" line="2296"/>
         <location filename="../../src/Dialog_MainWindow.cpp" line="2322"/>
         <source>Yes</source>
-        <translation type="unfinished"></translation>
+        <translation>Да</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="2087"/>
@@ -2246,7 +2246,7 @@
         <location filename="../../src/Dialog_MainWindow.cpp" line="2296"/>
         <location filename="../../src/Dialog_MainWindow.cpp" line="2322"/>
         <source>No</source>
-        <translation type="unfinished"></translation>
+        <translation>Не</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="2089"/>
@@ -2415,13 +2415,13 @@
         <location filename="../../src/Dialog_MainWindow.cpp" line="2407"/>
         <location filename="../../src/Dialog_MainWindow.cpp" line="2416"/>
         <source>Add file(s)</source>
-        <translation type="unfinished"></translation>
+        <translation>Добави файл(ове)</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="2446"/>
         <location filename="../../src/Dialog_MainWindow.cpp" line="2450"/>
         <source>Add Folder</source>
-        <translation type="unfinished"></translation>
+        <translation>Дабави папка</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="2468"/>
@@ -2524,7 +2524,7 @@
         <location filename="../../src/Dialog_MainWindow.cpp" line="3041"/>
         <location filename="../../src/Dialog_MainWindow.cpp" line="3086"/>
         <source>New Folder</source>
-        <translation type="unfinished"></translation>
+        <translation>Нова папка</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="3086"/>
@@ -2549,83 +2549,83 @@
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="3596"/>
         <source>Current Encoder: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Текущ енкодер: %1</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="3700"/>
         <location filename="../../src/Dialog_MainWindow.cpp" line="3703"/>
         <source>Quality Level %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Ниво на качеството: %1</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="3706"/>
         <source>Compression %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Компресия: %1</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="3709"/>
         <source>Uncompressed</source>
-        <translation type="unfinished"></translation>
+        <translation>Некомпресирано</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="3752"/>
         <source>Best Quality (Slow)</source>
-        <translation type="unfinished"></translation>
+        <translation>Най-добро качество (бавно)</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="3755"/>
         <source>High Quality (Recommended)</source>
-        <translation type="unfinished"></translation>
+        <translation>Високо качество (препоръчва се)</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="3758"/>
         <source>Acceptable Quality (Fast)</source>
-        <translation type="unfinished"></translation>
+        <translation>Приемливо качество (бързо)</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="3761"/>
         <source>Poor Quality (Very Fast)</source>
-        <translation type="unfinished"></translation>
+        <translation>Лошо качество (много бързо)</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="4191"/>
         <source>File name without extension</source>
-        <translation type="unfinished"></translation>
+        <translation>Име на файла без разширение</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="4192"/>
         <source>Track number with leading zero</source>
-        <translation type="unfinished"></translation>
+        <translation>Номер на песента с водеща нула</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="4193"/>
         <source>Track title</source>
-        <translation type="unfinished"></translation>
+        <translation>Заглавие на песента</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="4194"/>
         <source>Artist name</source>
-        <translation type="unfinished"></translation>
+        <translation>Име на изпълнителя</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="4195"/>
         <source>Album name</source>
-        <translation type="unfinished"></translation>
+        <translation>Име на албума</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="4196"/>
         <source>Year with (at least) four digits</source>
-        <translation type="unfinished"></translation>
+        <translation>Година с (поне) четири цифри</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="4197"/>
         <source>Comment</source>
-        <translation type="unfinished"></translation>
+        <translation>Коментар</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="4199"/>
         <source>Characters forbidden in file names:</source>
-        <translation type="unfinished"></translation>
+        <translation>Символи, забранени във файлови имена:</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="4202"/>
@@ -2764,204 +2764,204 @@
         <location filename="../../src/Model_MetaInfo.cpp" line="60"/>
         <location filename="../../src/Model_MetaInfo.cpp" line="450"/>
         <source>Unknown</source>
-        <translation type="unfinished"></translation>
+        <translation>Неизвестно</translation>
     </message>
     <message>
         <location filename="../../src/Model_MetaInfo.cpp" line="51"/>
         <location filename="../../src/Model_MetaInfo.cpp" line="61"/>
         <location filename="../../src/Model_MetaInfo.cpp" line="451"/>
         <source>Not Specified</source>
-        <translation type="unfinished"></translation>
+        <translation>Не е посочено</translation>
     </message>
     <message>
         <location filename="../../src/Model_MetaInfo.cpp" line="89"/>
         <source>Full Path</source>
-        <translation type="unfinished">Пълен път</translation>
+        <translation>Пълен път</translation>
     </message>
     <message>
         <location filename="../../src/Model_MetaInfo.cpp" line="92"/>
         <source>Format</source>
-        <translation type="unfinished"></translation>
+        <translation>Формат</translation>
     </message>
     <message>
         <location filename="../../src/Model_MetaInfo.cpp" line="95"/>
         <source>Container</source>
-        <translation type="unfinished"></translation>
+        <translation>Контейнер</translation>
     </message>
     <message>
         <location filename="../../src/Model_MetaInfo.cpp" line="98"/>
         <source>Compression</source>
-        <translation type="unfinished">Компресия</translation>
+        <translation>Компресия</translation>
     </message>
     <message>
         <location filename="../../src/Model_MetaInfo.cpp" line="101"/>
         <source>Duration</source>
-        <translation type="unfinished"></translation>
+        <translation>Продължителност</translation>
     </message>
     <message>
         <location filename="../../src/Model_MetaInfo.cpp" line="104"/>
         <source>Title</source>
-        <translation type="unfinished">Заглавие</translation>
+        <translation>Заглавие</translation>
     </message>
     <message>
         <location filename="../../src/Model_MetaInfo.cpp" line="107"/>
         <source>Artist</source>
-        <translation type="unfinished"></translation>
+        <translation>Изпълнител</translation>
     </message>
     <message>
         <location filename="../../src/Model_MetaInfo.cpp" line="110"/>
         <source>Album</source>
-        <translation type="unfinished"></translation>
+        <translation>Албум</translation>
     </message>
     <message>
         <location filename="../../src/Model_MetaInfo.cpp" line="113"/>
         <source>Genre</source>
-        <translation type="unfinished"></translation>
+        <translation>Жанр</translation>
     </message>
     <message>
         <location filename="../../src/Model_MetaInfo.cpp" line="116"/>
         <source>Year</source>
-        <translation type="unfinished"></translation>
+        <translation>Година</translation>
     </message>
     <message>
         <location filename="../../src/Model_MetaInfo.cpp" line="119"/>
         <source>Position</source>
-        <translation type="unfinished"></translation>
+        <translation>Позиция</translation>
     </message>
     <message>
         <location filename="../../src/Model_MetaInfo.cpp" line="119"/>
         <location filename="../../src/Model_MetaInfo.cpp" line="409"/>
         <source>Generate from list position</source>
-        <translation type="unfinished"></translation>
+        <translation>Генерирай от позицията в списъка</translation>
     </message>
     <message>
         <location filename="../../src/Model_MetaInfo.cpp" line="122"/>
         <source>Comment</source>
-        <translation type="unfinished"></translation>
+        <translation>Коментар</translation>
     </message>
     <message>
         <location filename="../../src/Model_MetaInfo.cpp" line="234"/>
         <source>Property</source>
-        <translation type="unfinished"></translation>
+        <translation>Свойство</translation>
     </message>
     <message>
         <location filename="../../src/Model_MetaInfo.cpp" line="237"/>
         <source>Value</source>
-        <translation type="unfinished"></translation>
+        <translation>Стойност</translation>
     </message>
     <message>
         <location filename="../../src/Model_MetaInfo.cpp" line="309"/>
         <source>Unspecified</source>
-        <translation type="unfinished"></translation>
+        <translation>Неуточнено</translation>
     </message>
     <message>
         <location filename="../../src/Model_MetaInfo.cpp" line="313"/>
         <source>OK</source>
-        <translation type="unfinished">Добре</translation>
+        <translation>ОК</translation>
     </message>
     <message>
         <location filename="../../src/Model_MetaInfo.cpp" line="314"/>
         <source>Cancel</source>
-        <translation type="unfinished">Отказ</translation>
+        <translation>Отказ</translation>
     </message>
     <message>
         <location filename="../../src/Model_MetaInfo.cpp" line="320"/>
         <location filename="../../src/Model_MetaInfo.cpp" line="328"/>
         <source>Edit Title</source>
-        <translation type="unfinished"></translation>
+        <translation>Редактиране на заглавие</translation>
     </message>
     <message>
         <location filename="../../src/Model_MetaInfo.cpp" line="321"/>
         <source>Please enter the title for this file:</source>
-        <translation type="unfinished"></translation>
+        <translation>Моля, въведете заглавието за този файл:</translation>
     </message>
     <message>
         <location filename="../../src/Model_MetaInfo.cpp" line="328"/>
         <source>The title must not be empty. Generating title from file name!</source>
-        <translation type="unfinished"></translation>
+        <translation>Заглавието не може да бъде оставено празно. Генериране на заглавие от името на файла!</translation>
     </message>
     <message>
         <location filename="../../src/Model_MetaInfo.cpp" line="339"/>
         <source>Edit Artist</source>
-        <translation type="unfinished"></translation>
+        <translation>Редактиране на изпълнителя</translation>
     </message>
     <message>
         <location filename="../../src/Model_MetaInfo.cpp" line="340"/>
         <source>Please enter the artist for this file:</source>
-        <translation type="unfinished"></translation>
+        <translation>Моля, въведете изпълнителя за този файл:</translation>
     </message>
     <message>
         <location filename="../../src/Model_MetaInfo.cpp" line="351"/>
         <source>Edit Album</source>
-        <translation type="unfinished"></translation>
+        <translation>Редактиране на албум</translation>
     </message>
     <message>
         <location filename="../../src/Model_MetaInfo.cpp" line="352"/>
         <source>Please enter the album for this file:</source>
-        <translation type="unfinished"></translation>
+        <translation>Моля, въведете албума за този файл:</translation>
     </message>
     <message>
         <location filename="../../src/Model_MetaInfo.cpp" line="363"/>
         <source>Edit Genre</source>
-        <translation type="unfinished"></translation>
+        <translation>Редактиране на жанр</translation>
     </message>
     <message>
         <location filename="../../src/Model_MetaInfo.cpp" line="364"/>
         <source>Please enter the genre for this file:</source>
-        <translation type="unfinished"></translation>
+        <translation>Моля, въведете жанра за този файл:</translation>
     </message>
     <message>
         <location filename="../../src/Model_MetaInfo.cpp" line="377"/>
         <source>Edit Year</source>
-        <translation type="unfinished"></translation>
+        <translation>Редактиране на година</translation>
     </message>
     <message>
         <location filename="../../src/Model_MetaInfo.cpp" line="378"/>
         <source>Please enter the year for this file:</source>
-        <translation type="unfinished"></translation>
+        <translation>Моля, въведете годината за този файл:</translation>
     </message>
     <message>
         <location filename="../../src/Model_MetaInfo.cpp" line="393"/>
         <location filename="../../src/Model_MetaInfo.cpp" line="410"/>
         <source>Edit Position</source>
-        <translation type="unfinished"></translation>
+        <translation>Редактиране на позиция</translation>
     </message>
     <message>
         <location filename="../../src/Model_MetaInfo.cpp" line="394"/>
         <location filename="../../src/Model_MetaInfo.cpp" line="411"/>
         <source>Please enter the position (track no.) for this file:</source>
-        <translation type="unfinished"></translation>
+        <translation>Моля въведете позицията (№ на песента) за този файл:</translation>
     </message>
     <message>
         <location filename="../../src/Model_MetaInfo.cpp" line="409"/>
         <source>Unspecified (copy from source file)</source>
-        <translation type="unfinished"></translation>
+        <translation>Неуточнено (копирай от файла-източник)</translation>
     </message>
     <message>
         <location filename="../../src/Model_MetaInfo.cpp" line="424"/>
         <source>Edit Comment</source>
-        <translation type="unfinished"></translation>
+        <translation>Редактиране на коментар</translation>
     </message>
     <message>
         <location filename="../../src/Model_MetaInfo.cpp" line="425"/>
         <source>Please enter the comment for this file:</source>
-        <translation type="unfinished"></translation>
+        <translation>Моля въведи коментара за този файл:</translation>
     </message>
     <message>
         <location filename="../../src/Model_MetaInfo.cpp" line="426"/>
         <location filename="../../src/Model_MetaInfo.cpp" line="461"/>
         <source>Encoded with LameXP</source>
-        <translation type="unfinished"></translation>
+        <translation>Кодирано с LameXP</translation>
     </message>
     <message>
         <location filename="../../src/Model_MetaInfo.cpp" line="436"/>
         <source>Not editable</source>
-        <translation type="unfinished"></translation>
+        <translation>Нередактируемо</translation>
     </message>
     <message>
         <location filename="../../src/Model_MetaInfo.cpp" line="436"/>
         <source>Sorry, this property of the source file cannot be edited!</source>
-        <translation type="unfinished"></translation>
+        <translation>Съжаляваме, това свойство на файла-източник не може да бъде редактирано!</translation>
     </message>
 </context>
 <context>
@@ -2969,7 +2969,7 @@
     <message>
         <location filename="../../src/Thread_Process.cpp" line="116"/>
         <source>Starting...</source>
-        <translation type="unfinished"></translation>
+        <translation>Стартиране...</translation>
     </message>
     <message>
         <location filename="../../src/Thread_Process.cpp" line="153"/>
@@ -2979,78 +2979,78 @@
     <message>
         <location filename="../../src/Thread_Process.cpp" line="158"/>
         <source>Not found!</source>
-        <translation type="unfinished"></translation>
+        <translation>Не е намерено!</translation>
     </message>
     <message>
         <location filename="../../src/Thread_Process.cpp" line="233"/>
         <source>WARNING: Decoded file size exceeds 4 GB, problems might occur!
 </source>
-        <translation type="unfinished"></translation>
+        <translation>ВНИМАНИЕ: Декодираният файл превишава 4ГБ, може да възникнат проблеми!</translation>
     </message>
     <message>
         <location filename="../../src/Thread_Process.cpp" line="242"/>
         <source>The format of this file is NOT supported:</source>
-        <translation type="unfinished"></translation>
+        <translation>Форматът на този файл НЕ се поддържа:</translation>
     </message>
     <message>
         <location filename="../../src/Thread_Process.cpp" line="242"/>
         <source>Container Format:</source>
-        <translation type="unfinished"></translation>
+        <translation>Формат на контейнера:</translation>
     </message>
     <message>
         <location filename="../../src/Thread_Process.cpp" line="242"/>
         <source>Audio Format:</source>
-        <translation type="unfinished"></translation>
+        <translation>Аудио формат:</translation>
     </message>
     <message>
         <location filename="../../src/Thread_Process.cpp" line="243"/>
         <source>Unsupported!</source>
-        <translation type="unfinished"></translation>
+        <translation>Неподдържано!</translation>
     </message>
     <message>
         <location filename="../../src/Thread_Process.cpp" line="349"/>
         <source>Aborted!</source>
-        <translation type="unfinished"></translation>
+        <translation>Прекратено!</translation>
     </message>
     <message>
         <location filename="../../src/Thread_Process.cpp" line="349"/>
         <source>Done.</source>
-        <translation type="unfinished"></translation>
+        <translation>Готово.</translation>
     </message>
     <message>
         <location filename="../../src/Thread_Process.cpp" line="349"/>
         <source>Failed!</source>
-        <translation type="unfinished"></translation>
+        <translation>Безуспешно!</translation>
     </message>
     <message>
         <location filename="../../src/Thread_Process.cpp" line="366"/>
         <source>Encoding</source>
-        <translation type="unfinished"></translation>
+        <translation>Кодиране</translation>
     </message>
     <message>
         <location filename="../../src/Thread_Process.cpp" line="369"/>
         <source>Analyzing</source>
-        <translation type="unfinished"></translation>
+        <translation>Анализиране</translation>
     </message>
     <message>
         <location filename="../../src/Thread_Process.cpp" line="372"/>
         <source>Filtering</source>
-        <translation type="unfinished"></translation>
+        <translation>Филтриране</translation>
     </message>
     <message>
         <location filename="../../src/Thread_Process.cpp" line="375"/>
         <source>Decoding</source>
-        <translation type="unfinished"></translation>
+        <translation>Декодиране</translation>
     </message>
     <message>
         <location filename="../../src/Thread_Process.cpp" line="399"/>
         <source>The source audio file could not be found:</source>
-        <translation type="unfinished"></translation>
+        <translation>Файлът с аудио източника не може да бъде намерен:</translation>
     </message>
     <message>
         <location filename="../../src/Thread_Process.cpp" line="407"/>
         <source>The source audio file could not be opened for reading:</source>
-        <translation type="unfinished"></translation>
+        <translation>Файлът с аудио източника не може да бъде отворен за четене:</translation>
     </message>
     <message>
         <location filename="../../src/Thread_Process.cpp" line="441"/>
@@ -3075,7 +3075,7 @@
     <message>
         <location filename="../../src/Thread_Process.cpp" line="513"/>
         <source>Unknown Title</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Неизвестно заглавие</translation>
     </message>
     <message>
         <location filename="../../src/Thread_Process.cpp" line="514"/>
@@ -3085,7 +3085,7 @@
     <message>
         <location filename="../../src/Thread_Process.cpp" line="515"/>
         <source>Unknown Album</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Неизвестен албум</translation>
     </message>
     <message>
         <location filename="../../src/Thread_Process.cpp" line="517"/>
@@ -3118,45 +3118,45 @@
     <message>
         <location filename="../../gui/ProcessingDialog.ui" line="14"/>
         <source>LameXP - Processing</source>
-        <translation type="unfinished"></translation>
+        <translation>LameXP - обработване</translation>
     </message>
     <message>
         <location filename="../../gui/ProcessingDialog.ui" line="268"/>
         <source>Initializing, please wait...</source>
-        <translation type="unfinished"></translation>
+        <translation>Инициализиране, моля изчакайте...</translation>
     </message>
     <message>
         <location filename="../../gui/ProcessingDialog.ui" line="337"/>
         <source>Shutdown the computer as soon as all files have been converted</source>
-        <translation type="unfinished"></translation>
+        <translation>Изключи компютъра веднага щом всички файлове са конвертирани</translation>
     </message>
     <message>
         <location filename="../../gui/ProcessingDialog.ui" line="360"/>
         <location filename="../../gui/ProcessingDialog.ui" line="416"/>
         <source>CPU Usage (Overall)</source>
-        <translation type="unfinished"></translation>
+        <translation>Използване на процесора (общо)</translation>
     </message>
     <message>
         <location filename="../../gui/ProcessingDialog.ui" line="445"/>
         <location filename="../../gui/ProcessingDialog.ui" line="495"/>
         <source>Physical RAM Usage</source>
-        <translation type="unfinished"></translation>
+        <translation>Използване на физическа RAM памет</translation>
     </message>
     <message>
         <location filename="../../gui/ProcessingDialog.ui" line="524"/>
         <location filename="../../gui/ProcessingDialog.ui" line="574"/>
         <source>Free Disk Space (Temp Folder)</source>
-        <translation type="unfinished"></translation>
+        <translation>Свободно дисково пространство (временна папка)</translation>
     </message>
     <message>
         <location filename="../../gui/ProcessingDialog.ui" line="679"/>
         <source>Abort</source>
-        <translation type="unfinished"></translation>
+        <translation>Прекрати</translation>
     </message>
     <message>
         <location filename="../../gui/ProcessingDialog.ui" line="702"/>
         <source>Close</source>
-        <translation type="unfinished">Затвори</translation>
+        <translation>Затвори</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_Processing.cpp" line="213"/>
@@ -3275,9 +3275,9 @@
     <message numerus="yes">
         <location filename="../../src/Dialog_Processing.cpp" line="719"/>
         <source>%n file(s) skipped</source>
-        <translation type="unfinished">
-            <numerusform></numerusform>
-            <numerusform></numerusform>
+        <translation>
+            <numerusform>%n файл е пропуснат</numerusform>
+            <numerusform>%n файла са пропуснати</numerusform>
         </translation>
     </message>
     <message numerus="yes">
@@ -3315,7 +3315,7 @@
     <message>
         <location filename="../../src/Dialog_Processing.cpp" line="743"/>
         <source>LameXP - Done</source>
-        <translation type="unfinished"></translation>
+        <translation>LameXP - Готово</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_Processing.cpp" line="930"/>
@@ -3335,46 +3335,46 @@
     <message>
         <location filename="../../src/Dialog_Processing.cpp" line="1105"/>
         <source>Warning: Computer will shutdown in %1 seconds...</source>
-        <translation type="unfinished"></translation>
+        <translation>Внимание: Компютърът ще се изключи след %1 секунди...</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_Processing.cpp" line="1109"/>
         <location filename="../../src/Dialog_Processing.cpp" line="1110"/>
         <source>Cancel Shutdown</source>
-        <translation type="unfinished"></translation>
+        <translation>Отмени изключването</translation>
     </message>
     <message numerus="yes">
         <location filename="../../src/Dialog_Processing.cpp" line="1205"/>
         <source>%n hour(s)</source>
-        <translation type="unfinished">
-            <numerusform></numerusform>
-            <numerusform></numerusform>
+        <translation>
+            <numerusform>%n час</numerusform>
+            <numerusform>%n часа</numerusform>
         </translation>
     </message>
     <message numerus="yes">
         <location filename="../../src/Dialog_Processing.cpp" line="1206"/>
         <location filename="../../src/Dialog_Processing.cpp" line="1210"/>
         <source>%n minute(s)</source>
-        <translation type="unfinished">
-            <numerusform></numerusform>
-            <numerusform></numerusform>
+        <translation>
+            <numerusform>%n минута</numerusform>
+            <numerusform>%n минути</numerusform>
         </translation>
     </message>
     <message numerus="yes">
         <location filename="../../src/Dialog_Processing.cpp" line="1211"/>
         <location filename="../../src/Dialog_Processing.cpp" line="1215"/>
         <source>%n second(s)</source>
-        <translation type="unfinished">
-            <numerusform></numerusform>
-            <numerusform></numerusform>
+        <translation>
+            <numerusform>%n секунда</numerusform>
+            <numerusform>%n секунди</numerusform>
         </translation>
     </message>
     <message numerus="yes">
         <location filename="../../src/Dialog_Processing.cpp" line="1216"/>
         <source>%n millisecond(s)</source>
-        <translation type="unfinished">
-            <numerusform></numerusform>
-            <numerusform></numerusform>
+        <translation>
+            <numerusform>%n милисекунда</numerusform>
+            <numerusform>%n милисекунди</numerusform>
         </translation>
     </message>
 </context>
@@ -3417,7 +3417,7 @@
     <message>
         <location filename="../../gui/UpdateDialog.ui" line="14"/>
         <source>LameXP Update Manager</source>
-        <translation type="unfinished"></translation>
+        <translation>LameXP мениджър на актуализациите</translation>
     </message>
     <message>
         <location filename="../../gui/UpdateDialog.ui" line="164"/>
@@ -3427,174 +3427,174 @@
     <message>
         <location filename="../../gui/UpdateDialog.ui" line="349"/>
         <source>Latest version available:</source>
-        <translation type="unfinished"></translation>
+        <translation>Най-новата налична версия:</translation>
     </message>
     <message>
         <location filename="../../gui/UpdateDialog.ui" line="363"/>
         <source>Currently installed version:</source>
-        <translation type="unfinished"></translation>
+        <translation>Текущо инсталирана версия:</translation>
     </message>
     <message>
         <location filename="../../gui/UpdateDialog.ui" line="478"/>
         <source>Retry</source>
-        <translation type="unfinished"></translation>
+        <translation>Опитай пак</translation>
     </message>
     <message>
         <location filename="../../gui/UpdateDialog.ui" line="501"/>
         <source>Show Log</source>
-        <translation type="unfinished"></translation>
+        <translation>Покажи дневника</translation>
     </message>
     <message>
         <location filename="../../gui/UpdateDialog.ui" line="573"/>
         <source>Press Esc button to cancel update check...</source>
-        <translation type="unfinished"></translation>
+        <translation>Натисни бутона Esc за да прекратиш проверката за актуализации...</translation>
     </message>
     <message>
         <location filename="../../gui/UpdateDialog.ui" line="602"/>
         <source>Download &amp;&amp; Install</source>
-        <translation type="unfinished"></translation>
+        <translation>Изтегли и инсталирай</translation>
     </message>
     <message>
         <location filename="../../gui/UpdateDialog.ui" line="625"/>
         <source>Close</source>
-        <translation type="unfinished">Затвори</translation>
+        <translation>Затвори</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_Update.cpp" line="163"/>
         <location filename="../../src/Dialog_Update.cpp" line="368"/>
         <source>Build</source>
-        <translation type="unfinished"></translation>
+        <translation>Билд</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_Update.cpp" line="164"/>
         <source>Unknown</source>
-        <translation type="unfinished"></translation>
+        <translation>Неизвестно</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_Update.cpp" line="253"/>
         <source>Sorry, but only users in the &quot;Administrators&quot; group can install updates.</source>
-        <translation type="unfinished"></translation>
+        <translation>Съжаляваме, но само потребители от групата „Администратори“ могат да инсталират актуализации.</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_Update.cpp" line="254"/>
         <source>Please start application from an administrator account and try again!</source>
-        <translation type="unfinished"></translation>
+        <translation>Моля, стартирайте приложението от администраторски акаунт и опитайте пак!</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_Update.cpp" line="291"/>
         <source>Testing your internet connection, please wait...</source>
-        <translation type="unfinished"></translation>
+        <translation>Проверяваме свързаността ви с интернет, моля изчакайте...</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_Update.cpp" line="312"/>
         <source>It appears that the computer currently is offline!</source>
-        <translation type="unfinished"></translation>
+        <translation>Изглежда в момента компютърът ви е офлайн!</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_Update.cpp" line="313"/>
         <location filename="../../src/Dialog_Update.cpp" line="318"/>
         <source>Please make sure your computer is connected to the internet and try again.</source>
-        <translation type="unfinished"></translation>
+        <translation>Уверете се, че компютърът ви е свързан с интернет и опитайте отново.</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_Update.cpp" line="317"/>
         <source>Network connectivity test has failed!</source>
-        <translation type="unfinished"></translation>
+        <translation>Тестът за мрежова свързаност се провали!</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_Update.cpp" line="294"/>
         <source>Checking for new updates online, please wait...</source>
-        <translation type="unfinished"></translation>
+        <translation>Проверяване за нови актуализации онлайн, моля изчакайте...</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_Update.cpp" line="322"/>
         <source>Failed to fetch update information from server!</source>
-        <translation type="unfinished"></translation>
+        <translation>Неуспешно извличане на информация за актуализация от сървъра!</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_Update.cpp" line="323"/>
         <source>Sorry, the update server might be busy at this time. Plase try again later.</source>
-        <translation type="unfinished"></translation>
+        <translation>Съжаляваме, но сървърът за актуализации може би е претоварен в момента. Моля опитайте отново по-късно.</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_Update.cpp" line="367"/>
         <source>More information available at:</source>
-        <translation type="unfinished"></translation>
+        <translation>Повече информация е налична на:</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_Update.cpp" line="297"/>
         <source>A new version of LameXP is available!</source>
-        <translation type="unfinished"></translation>
+        <translation>Налична е нова версия на LameXP!</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_Update.cpp" line="208"/>
         <source>Stopping update check, please wait...</source>
-        <translation type="unfinished"></translation>
+        <translation>Спиране на проверката за актуализация, моля изчакайте...</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_Update.cpp" line="255"/>
         <source>Discard</source>
-        <translation type="unfinished">Затвори</translation>
+        <translation>Отхвърли</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_Update.cpp" line="255"/>
         <source>Ignore</source>
-        <translation type="unfinished"></translation>
+        <translation>Игнорирай</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_Update.cpp" line="288"/>
         <source>Initializing, please wait...</source>
-        <translation type="unfinished"></translation>
+        <translation>Инициализиране, моля изчакайте...</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_Update.cpp" line="298"/>
         <source>We highly recommend all users to install this update as soon as possible.</source>
-        <translation type="unfinished"></translation>
+        <translation>Силно препоръчително е всички потребители да инсталират тази актуализация възможно най-скоро.</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_Update.cpp" line="302"/>
         <source>No new updates available at this time.</source>
-        <translation type="unfinished"></translation>
+        <translation>Няма налични нови актуализации към момента.</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_Update.cpp" line="303"/>
         <source>Your version of LameXP is still up-to-date. Please check for updates regularly!</source>
-        <translation type="unfinished"></translation>
+        <translation>Версията ви на LameXP е все още актуална. Моля, проверявайте редовно за актуализации!</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_Update.cpp" line="307"/>
         <source>Your version appears to be newer than the latest release.</source>
-        <translation type="unfinished"></translation>
+        <translation>Изглежда сте с по-нова версия от тази на последния релийз.</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_Update.cpp" line="308"/>
         <source>This usually indicates your are currently using a pre-release version of LameXP.</source>
-        <translation type="unfinished"></translation>
+        <translation>Това обикновено е индикация, че в момента използвате пред-релийз версия на LameXP.</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_Update.cpp" line="327"/>
         <source>Update check has been cancelled!</source>
-        <translation type="unfinished"></translation>
+        <translation>Проверката за актуализации бе прекратена!</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_Update.cpp" line="328"/>
         <source>The update check has been cancelled by the user. Please try again later.</source>
-        <translation type="unfinished"></translation>
+        <translation>Проверката за актуализации бе прекратена от потребителя. Може да опитате отново по-късно.</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_Update.cpp" line="397"/>
         <source>Update is being downloaded, please be patient...</source>
-        <translation type="unfinished"></translation>
+        <translation>Актуализацията се изтегля, моля бъдете търпеливи...</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_Update.cpp" line="445"/>
         <source>Update ready to install. Applicaion will quit...</source>
-        <translation type="unfinished"></translation>
+        <translation>Актуализацията е готова да се инсталира. Приложението ще се затвори...</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_Update.cpp" line="453"/>
         <source>Update failed. Please try again or download manually!</source>
-        <translation type="unfinished"></translation>
+        <translation>Актуализацията се провали. Опитай пак или изтегли ръчно!</translation>
     </message>
 </context>
 </TS>
