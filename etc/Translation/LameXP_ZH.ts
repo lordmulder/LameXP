@@ -111,12 +111,12 @@
     <message>
         <location filename="../../src/Dialog_About.cpp" line="850"/>
         <source>cURL - Curl URL Request Library</source>
-        <translation type="unfinished"></translation>
+        <translation>cURL - Curl URL请求库</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_About.cpp" line="852"/>
         <source>By Daniel Stenberg, released under the terms of the MIT/X Derivate License.</source>
-        <translation type="unfinished"></translation>
+        <translation>作者Daniel Stenberg，在MIT/X衍生许可证下发布。</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_About.cpp" line="864"/>
