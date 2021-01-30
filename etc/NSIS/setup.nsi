@@ -255,29 +255,30 @@ UninstPage Custom un.LockedListShow
 ;--------------------------------
  
 !insertmacro MUI_LANGUAGE "English" ;first language is the default language
+!insertmacro MUI_LANGUAGE "Bulgarian"
 !insertmacro MUI_LANGUAGE "German"
-!insertmacro MUI_LANGUAGE "Spanish"
-!insertmacro MUI_LANGUAGE "Russian"
-!insertmacro MUI_LANGUAGE "Ukrainian"
-!insertmacro MUI_LANGUAGE "Polish"
 !insertmacro MUI_LANGUAGE "Hungarian"
 !insertmacro MUI_LANGUAGE "Japanese"
+!insertmacro MUI_LANGUAGE "Polish"
+!insertmacro MUI_LANGUAGE "Russian"
+!insertmacro MUI_LANGUAGE "Spanish"
+!insertmacro MUI_LANGUAGE "Ukrainian"
 
-; !insertmacro MUI_LANGUAGE "French"
-; !insertmacro MUI_LANGUAGE "SpanishInternational"
-; !insertmacro MUI_LANGUAGE "SimpChinese"
-; !insertmacro MUI_LANGUAGE "TradChinese"
-; !insertmacro MUI_LANGUAGE "Italian"
+; !insertmacro MUI_LANGUAGE "Afrikaans"
+; !insertmacro MUI_LANGUAGE "Arabic"
 ; !insertmacro MUI_LANGUAGE "Dutch"
+; !insertmacro MUI_LANGUAGE "French"
 ; !insertmacro MUI_LANGUAGE "Greek"
+; !insertmacro MUI_LANGUAGE "Indonesian"
+; !insertmacro MUI_LANGUAGE "Italian"
+; !insertmacro MUI_LANGUAGE "Malay"
+; !insertmacro MUI_LANGUAGE "Portuguese"
 ; !insertmacro MUI_LANGUAGE "Romanian"
 ; !insertmacro MUI_LANGUAGE "Serbian"
 ; !insertmacro MUI_LANGUAGE "SerbianLatin"
-; !insertmacro MUI_LANGUAGE "Arabic"
-; !insertmacro MUI_LANGUAGE "Portuguese"
-; !insertmacro MUI_LANGUAGE "Afrikaans"
-; !insertmacro MUI_LANGUAGE "Malay"
-; !insertmacro MUI_LANGUAGE "Indonesian"
+; !insertmacro MUI_LANGUAGE "SimpChinese"
+; !insertmacro MUI_LANGUAGE "SpanishInternational"
+; !insertmacro MUI_LANGUAGE "TradChinese"
 
 
 ;--------------------------------
@@ -285,28 +286,31 @@ UninstPage Custom un.LockedListShow
 ;--------------------------------
 
 ;English
-!include "..\Translation\Blank.nsh"
+!include "..\Translation\Blank.nsh" ;first language is the default language
+
+;Bulgarian
+!include "..\Translation\LameXP_BG.nsh"
 
 ;German
 !include "..\Translation\LameXP_DE.nsh"
-
-;Spanish
-!include "..\Translation\LameXP_ES.nsh"
-
-;Russian
-!include "..\Translation\LameXP_RU.nsh"
-
-;Ukrainian
-!include "..\Translation\LameXP_UK.nsh"
-
-;Polish
-!include "..\Translation\LameXP_PL.nsh"
 
 ;Hungarian
 !include "..\Translation\LameXP_HU.nsh"
 
 ;Japanese
 !include "..\Translation\LameXP_JA.nsh"
+
+;Polish
+!include "..\Translation\LameXP_PL.nsh"
+
+;Russian
+!include "..\Translation\LameXP_RU.nsh"
+
+;Spanish
+!include "..\Translation\LameXP_ES.nsh"
+
+;Ukrainian
+!include "..\Translation\LameXP_UK.nsh"
 
 
 ;--------------------------------
