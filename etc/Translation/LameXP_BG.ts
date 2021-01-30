@@ -61,7 +61,7 @@
     <message>
         <location filename="../../src/Dialog_About.cpp" line="572"/>
         <source>Please visit %1 for news and updates!</source>
-        <translation>Моля посети %1 за новини и актуализации!</translation>
+        <translation>Моля, посети %1 за новини и актуализации!</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_About.cpp" line="584"/>
@@ -72,7 +72,7 @@
     <message>
         <location filename="../../src/Dialog_About.cpp" line="616"/>
         <source>Note: LameXP is free software. Do &lt;b&gt;not&lt;/b&gt; pay money to obtain or use LameXP! If some third-party website tries to make you pay for downloading LameXP, you should &lt;b&gt;not&lt;/b&gt; respond to the offer !!!</source>
-        <translation>Бележка: LameXP е безплатен софтуер. &lt;b&gt;Не&lt;/b&gt; плащай пари за да получиш или използваш LameXP! Ако някой сайт се опита да те накара да платиш за да изтеглиш LameXP, &lt;b&gt;не&lt;/b&gt; му се връзвай!!!</translation>
+        <translation>Бележка: LameXP е безплатен софтуер. &lt;b&gt;Не&lt;/b&gt; плащай пари, за да получиш или използваш LameXP! Ако някой сайт се опита да те накара да платиш за да изтеглиш LameXP, &lt;b&gt;не&lt;/b&gt; му се връзвай!!!</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_About.cpp" line="630"/>
@@ -753,12 +753,12 @@
     <message>
         <location filename="../../gui/DropBox.ui" line="14"/>
         <source>LameXP - DropBox</source>
-        <translation>LameXP - DropBox</translation>
+        <translation>LameXP - Кутия за довлачване</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_DropBox.cpp" line="134"/>
         <source>LameXP DropBox</source>
-        <translation>LameXP DropBox</translation>
+        <translation>Кутия за довлачване  на LameXP</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_DropBox.cpp" line="134"/>
@@ -768,7 +768,7 @@
     <message>
         <location filename="../../src/Dialog_DropBox.cpp" line="134"/>
         <source>(Right-click to close the DropBox)</source>
-        <translation>(Кликни с десен бутон за да затвориш DropBox-а)</translation>
+        <translation>(Кликни с десен бутон, за да затвориш кутията за довлачване)</translation>
     </message>
 </context>
 <context>
@@ -857,7 +857,7 @@
     <message>
         <location filename="../../src/Dialog_LogView.cpp" line="53"/>
         <source>The log file shows detailed information about the selected job.</source>
-        <translation>Дневникът показва детайлна информация относно текущата задача.</translation>
+        <translation>Дневникът показва подробна информация относно текущата задача.</translation>
     </message>
 </context>
 <context>
@@ -892,7 +892,7 @@
         <location filename="../../gui/MainWindow.ui" line="242"/>
         <location filename="../../src/Dialog_MainWindow.cpp" line="1241"/>
         <source>Show Details</source>
-        <translation>Покажи детайли</translation>
+        <translation>Покажи подробности</translation>
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="274"/>
@@ -943,7 +943,8 @@
     <message>
         <location filename="../../gui/MainWindow.ui" line="590"/>
         <source>Prepend relative source file path to output file</source>
-        <translation type="unfinished"></translation>
+        <translatorcomment>Тук преводът има нужда от подобряваня: хем да е кратък, хем ясен. Prepend няма точен превод.</translatorcomment>
+        <translation>Ползвай пътя на източника за префикс</translation>
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="606"/>
@@ -954,7 +955,7 @@
     <message>
         <location filename="../../gui/MainWindow.ui" line="620"/>
         <source> Meta Information </source>
-        <translation>Мета информация</translation>
+        <translation>Мета информация </translation>
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="654"/>
@@ -1318,7 +1319,7 @@
     <message>
         <location filename="../../gui/MainWindow.ui" line="2743"/>
         <source>OggEnc2:</source>
-        <translation>OggEnc2</translation>
+        <translation>OggEnc2:</translation>
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="2750"/>
@@ -1513,12 +1514,12 @@
     <message>
         <location filename="../../gui/MainWindow.ui" line="3776"/>
         <source>Replacement:</source>
-        <translation type="unfinished"></translation>
+        <translation>Заместител:</translation>
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="3789"/>
         <source>Search Pattern:</source>
-        <translation type="unfinished"></translation>
+        <translation>Шаблон за търсене:</translation>
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="3818"/>
@@ -1528,27 +1529,28 @@
     <message>
         <location filename="../../gui/MainWindow.ui" line="3844"/>
         <source>Replace all Matching Elements</source>
-        <translation type="unfinished"></translation>
+        <translation>Замени всички съвпадащи елементи</translation>
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="3894"/>
         <source>Enter the desired search pattern (regular expression) here!</source>
-        <translation type="unfinished"></translation>
+        <translation>Тук въведи желания шаблон за търсене (регулярен израз)!</translation>
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="3941"/>
         <source>Enter replacement text here! It may contain backreferences.</source>
-        <translation type="unfinished"></translation>
+        <translatorcomment>Превод на backreferences</translatorcomment>
+        <translation>Тук въведи текст за заместване! Backreferences са позволени.</translation>
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="3992"/>
         <source>Add Overwrite </source>
-        <translation type="unfinished"></translation>
+        <translation>Добави презапис</translation>
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="4003"/>
         <source>Remove Overwrite </source>
-        <translation type="unfinished"></translation>
+        <translation>Премахни презапис</translation>
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="4040"/>
@@ -1684,7 +1686,7 @@
     <message>
         <location filename="../../gui/MainWindow.ui" line="4894"/>
         <source>Official LameXP Project Web-Site</source>
-        <translation>Официалния уебсайт на проекта LameXP</translation>
+        <translation>Официален уебсайт на проекта LameXP</translation>
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="4897"/>
@@ -1815,115 +1817,115 @@
     <message>
         <location filename="../../gui/MainWindow.ui" line="5120"/>
         <source>Disable Slow Startup Notifications</source>
-        <translation type="unfinished"></translation>
+        <translation>Изключи известията за бавно стартиране</translation>
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="5128"/>
         <source>Hibernate Computer On Shutdown</source>
-        <translation type="unfinished"></translation>
+        <translation>При спиране – хибернирай компютъра</translation>
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="5137"/>
         <source>MuldeR&apos;s OpenSource Projects</source>
-        <translation type="unfinished"></translation>
+        <translation>Проектите с отворен код на MuldeR</translation>
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="5146"/>
         <source>Report a Bug (GitHub)</source>
-        <translation type="unfinished"></translation>
+        <translation>Докладвай бъг (GitHub)</translation>
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="5155"/>
         <source>Hydrogenaudio Knowledgebase</source>
-        <translation type="unfinished"></translation>
+        <translation>База знания за Hydrogenaudio</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="848"/>
         <source>Adding file(s), please wait...</source>
-        <translation type="unfinished"></translation>
+        <translation>Добавяне на файл(ове), моля изчакайте...</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="859"/>
         <location filename="../../src/Dialog_MainWindow.cpp" line="4292"/>
         <source>Access Denied</source>
-        <translation type="unfinished"></translation>
+        <translation>Достъпът отказан</translation>
     </message>
     <message numerus="yes">
         <location filename="../../src/Dialog_MainWindow.cpp" line="859"/>
         <source>%n file(s) have been rejected, because read access was not granted!</source>
-        <translation type="unfinished">
-            <numerusform></numerusform>
-            <numerusform></numerusform>
+        <translation>
+            <numerusform>%n файл бе отхвърлен, защото не е предоставен достъп за четене!</numerusform>
+            <numerusform>%n файла са отхвърлени, защото не е предоставен достъп за четене!</numerusform>
         </translation>
     </message>
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="859"/>
         <source>This usually means the file is locked by another process.</source>
-        <translation type="unfinished"></translation>
+        <translation>Това обикновено означава, че файлът е блокиран от друг процес.</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="863"/>
         <source>CDDA Files</source>
-        <translation type="unfinished"></translation>
+        <translation>CDDA файлове</translation>
     </message>
     <message numerus="yes">
         <location filename="../../src/Dialog_MainWindow.cpp" line="863"/>
         <source>%n file(s) have been rejected, because they are dummy CDDA files!</source>
-        <translation type="unfinished">
-            <numerusform></numerusform>
-            <numerusform></numerusform>
+        <translation>
+            <numerusform>%n файл бе отхвърлен, защото е dummy CDDA файл!</numerusform>
+            <numerusform>%n файла са отхвърлени, защото са dummy CDDA файлове!</numerusform>
         </translation>
     </message>
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="863"/>
         <source>Sorry, LameXP cannot extract audio tracks from an Audio-CD at present.</source>
-        <translation type="unfinished"></translation>
+        <translation>За съжаление, понастоящем LameXP не може да извлече аудио записи от аудио компактдиск.</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="863"/>
         <source>We recommend using %1 for that purpose.</source>
-        <translation type="unfinished"></translation>
+        <translation>Препоръчваме използването на %1 за целта.</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="867"/>
         <source>Cue Sheet</source>
-        <translation type="unfinished"></translation>
+        <translation>Cue Sheet</translation>
     </message>
     <message numerus="yes">
         <location filename="../../src/Dialog_MainWindow.cpp" line="867"/>
         <source>%n file(s) have been rejected, because they appear to be Cue Sheet images!</source>
-        <translation type="unfinished">
-            <numerusform></numerusform>
-            <numerusform></numerusform>
+        <translation>
+            <numerusform>%n файл е отхвърлен, защото изглежда е Cue Sheet образ!</numerusform>
+            <numerusform>%n файла са отхвърлени, защото изглежда са Cue Sheet образи!</numerusform>
         </translation>
     </message>
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="867"/>
         <source>Please use LameXP&apos;s Cue Sheet wizard for importing Cue Sheet files.</source>
-        <translation type="unfinished"></translation>
+        <translation>Моля, използвайте Cue Sheet съветника на LameXP за импортиране на Cue Sheet файлове.</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="871"/>
         <source>Files Rejected</source>
-        <translation type="unfinished"></translation>
+        <translation>Отхвърлени файлове</translation>
     </message>
     <message numerus="yes">
         <location filename="../../src/Dialog_MainWindow.cpp" line="871"/>
         <source>%n file(s) have been rejected, because the file format could not be recognized!</source>
-        <translation type="unfinished">
-            <numerusform></numerusform>
-            <numerusform></numerusform>
+        <translation>
+            <numerusform>%n файл е отхвърлен, защото файловият формат не може да бъде разпознат!</numerusform>
+            <numerusform>%n файла са отхвърлени, защото файловият формат не може да бъде разпознат!</numerusform>
         </translation>
     </message>
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="871"/>
         <source>This usually means the file is damaged or the file format is not supported.</source>
-        <translation type="unfinished"></translation>
+        <translation>Това обикновено означава, че файлът е повреден или файловият формат не се поддържа.</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="886"/>
         <source>Scanning folder(s) for files, please wait...</source>
-        <translation type="unfinished"></translation>
+        <translation>Сканиране на папки за файлове, моля изчакайте...</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="1231"/>
@@ -1938,57 +1940,57 @@
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="1236"/>
         <source>You can drop in audio files here!</source>
-        <translation type="unfinished"></translation>
+        <translation>Можеш да пуснеш аудио файловете тук!</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="1242"/>
         <source>Open File in External Application</source>
-        <translation type="unfinished"></translation>
+        <translation>Отвори файла във външно приложение</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="1243"/>
         <source>Browse File Location</source>
-        <translation type="unfinished"></translation>
+        <translation>Преглед на местоположението на файла</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="1244"/>
         <source>Browse Selected Folder</source>
-        <translation type="unfinished"></translation>
+        <translation>Преглед на избраната папка</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="1245"/>
         <source>Refresh Directory Outline</source>
-        <translation type="unfinished"></translation>
+        <translation>Обновяване на директорията</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="1246"/>
         <source>Go To Parent Directory</source>
-        <translation type="unfinished"></translation>
+        <translation>Отиди в родителската директория</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="1247"/>
         <source>Bookmark Current Output Folder</source>
-        <translation type="unfinished"></translation>
+        <translation>Отметка на текущата изходна папка</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="1248"/>
         <source>Export Meta Tags to CSV File</source>
-        <translation type="unfinished"></translation>
+        <translation>Експортиране на мета тагове в CSV файл</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="1249"/>
         <source>Import Meta Tags from CSV File</source>
-        <translation type="unfinished"></translation>
+        <translation>Импортиране на мета тагове от CSV файл</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="1498"/>
         <source>License Declined</source>
-        <translation type="unfinished"></translation>
+        <translation>Лицензът е отхвърлен</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="1498"/>
         <source>You have declined the license. Consequently the application will exit now!</source>
-        <translation type="unfinished"></translation>
+        <translation>Отхвърлихте лиценза. Вследствие на това, приложението ще се затвори!</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="1498"/>
@@ -1998,43 +2000,43 @@
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="1521"/>
         <source>LameXP - Expired</source>
-        <translation type="unfinished"></translation>
+        <translation>LameXP – изтекъл</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="1521"/>
         <source>This demo (pre-release) version of LameXP has expired at %1.</source>
-        <translation type="unfinished"></translation>
+        <translation>Тази демо (пред-релийз) версия на LameXP изтече на %1.</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="1521"/>
         <source>LameXP is free software and release versions won&apos;t expire.</source>
-        <translation type="unfinished"></translation>
+        <translation>LameXP е безплатен софтуер и релийз версиите не изтичат.</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="1521"/>
         <location filename="../../src/Dialog_MainWindow.cpp" line="1555"/>
         <source>Exit Program</source>
-        <translation type="unfinished"></translation>
+        <translation>Изход от програмата</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="1541"/>
         <source>It seems that a bogus anti-virus software is slowing down the startup of LameXP.</source>
-        <translation type="unfinished"></translation>
+        <translation>Изглежда някаква шантава антивирусна забавя стартирането на LameXP.</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="1542"/>
         <source>Please refer to the %1 document for details and solutions!</source>
-        <translation type="unfinished"></translation>
+        <translation>Моля, вижте документа %1 за подробна информация и решения!</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="1542"/>
         <source>Manual</source>
-        <translation type="unfinished"></translation>
+        <translation>Ръководство</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="1543"/>
         <source>Slow Startup</source>
-        <translation type="unfinished"></translation>
+        <translation>Бавно стартиране</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="1543"/>
@@ -2043,7 +2045,7 @@
         <location filename="../../src/Dialog_MainWindow.cpp" line="2260"/>
         <location filename="../../src/Dialog_MainWindow.cpp" line="4202"/>
         <source>Discard</source>
-        <translation type="unfinished"></translation>
+        <translation>Отхвърли</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="1543"/>
@@ -2054,12 +2056,12 @@
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="1555"/>
         <source>Urgent Update</source>
-        <translation type="unfinished"></translation>
+        <translation>Спешна актуализация</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="1555"/>
         <source>Your version of LameXP is more than a year old. Time for an update!</source>
-        <translation>Версията ти на LameXP е от преди повече от година. Време е за актуализация!</translation>
+        <translation>Версията ви на LameXP е от преди повече от година. Време е за актуализация!</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="1555"/>
@@ -2070,24 +2072,24 @@
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="1572"/>
         <source>Skipping update check this time, please be patient...</source>
-        <translation type="unfinished"></translation>
+        <translation>Пропускане на проверката за актуализация този път, бъдете търпеливи...</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="1584"/>
         <location filename="../../src/Dialog_MainWindow.cpp" line="2089"/>
         <location filename="../../src/Dialog_MainWindow.cpp" line="2099"/>
         <source>Update Reminder</source>
-        <translation type="unfinished"></translation>
+        <translation>Напомняне за актуализация</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="1584"/>
         <source>Your last update check was more than 14 days ago. Check for updates now?</source>
-        <translation type="unfinished"></translation>
+        <translation>Последната проверка за актуализации беше преди повече от 14 дни. Искате ли сега да проверим за актуализации?</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="1584"/>
         <source>Your did not check for LameXP updates yet. Check for updates now?</source>
-        <translation type="unfinished"></translation>
+        <translation>Не е правена проверка за актуализации на LameXP. Искате ли сега да проверим за актуализации?</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="1584"/>
@@ -2097,32 +2099,32 @@
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="1603"/>
         <source>The Nero AAC encoder could not be found. AAC encoding support will be disabled.</source>
-        <translation type="unfinished"></translation>
+        <translation>Енкодерът Nero AAC не може да бъде намерен. Поддръжката за кодиране на AAC ще бъде изключена.</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="1604"/>
         <source>Please put &apos;neroAacEnc.exe&apos;, &apos;neroAacDec.exe&apos; and &apos;neroAacTag.exe&apos; into the LameXP directory!</source>
-        <translation type="unfinished"></translation>
+        <translation>Моля, сложи „neroAacEnc.exe“, „neroAacDec.exe“ и „neroAacTag.exe“ в директорията на LameXP!</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="1605"/>
         <source>Your LameXP install directory is located here:</source>
-        <translation type="unfinished"></translation>
+        <translation>Инсталационната директория на LameXP се намира тук:</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="1607"/>
         <source>You can download the Nero AAC encoder for free from this website:</source>
-        <translation type="unfinished"></translation>
+        <translation>Може безплатно да изтеглиш Nero AAC енкодера от този уебсайт:</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="1609"/>
         <source>Note: Nero AAC encoder version %1 or newer is required to enable AAC encoding support!</source>
-        <translation type="unfinished"></translation>
+        <translation>Бележка: Необходим е Nero AAC енкодер, версия %1 или по-нова, за да се активира поддръжката за AAC кодиране!</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="1610"/>
         <source>AAC Support Disabled</source>
-        <translation type="unfinished"></translation>
+        <translation>AAC поддръжката е изключена</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="1741"/>
@@ -2134,22 +2136,22 @@
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="1741"/>
         <source>You must add at least one file to the list before proceeding!</source>
-        <translation type="unfinished"></translation>
+        <translation>Трябва да добавите поне един файл към списъка, преди да продължите!</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="1749"/>
         <source>Not Found</source>
-        <translation type="unfinished"></translation>
+        <translation>Не е намерено</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="1749"/>
         <source>Your currently selected TEMP folder does not exist anymore:</source>
-        <translation type="unfinished"></translation>
+        <translation>Избраната в момента временна папка вече не съществува:</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="1749"/>
         <source>Restore Default</source>
-        <translation type="unfinished"></translation>
+        <translation>Възстанови по подразбиране</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="1749"/>
@@ -2159,52 +2161,52 @@
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="1766"/>
         <source>There are less than %1 GB of free diskspace available on your system&apos;s TEMP folder.</source>
-        <translation type="unfinished"></translation>
+        <translation>Има по-малко от %1 ГБ свободно дисково пространство при временната папка на системата.</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="1767"/>
         <source>It is highly recommend to free up more diskspace before proceeding with the encode!</source>
-        <translation type="unfinished"></translation>
+        <translation>Силно препоръчително е да освободите повече дисково пространство, преди да започнете да кодирате!</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="1768"/>
         <source>Your TEMP folder is located at:</source>
-        <translation type="unfinished"></translation>
+        <translation>Временната папка се намира на:</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="1771"/>
         <source>Low Diskspace Warning</source>
-        <translation type="unfinished">Предупреждение за намаляващо дисково пространство</translation>
+        <translation>Предупреждение за привършващо дисково пространство</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="1771"/>
         <source>Abort Encoding Process</source>
-        <translation type="unfinished"></translation>
+        <translation>Прекъсни процеса на кодиране</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="1771"/>
         <source>Clean Disk Now</source>
-        <translation type="unfinished"></translation>
+        <translation>Почисти диска сега</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="1779"/>
         <source>Low Diskspace</source>
-        <translation type="unfinished"></translation>
+        <translation>Недостатъчно място на диска</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="1779"/>
         <source>You are proceeding with low diskspace. Problems might occur!</source>
-        <translation type="unfinished"></translation>
+        <translation>Продължавате с оскъдно дисково пространство. Може да възникнат проблеми!</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="1798"/>
         <source>Sorry, an unsupported encoder has been chosen!</source>
-        <translation type="unfinished"></translation>
+        <translation>Съжаляваме, беше избран неподдържан енкодер!</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="1808"/>
         <source>Cannot write to the selected output directory.</source>
-        <translation type="unfinished"></translation>
+        <translation>Грешка при запис в избраната изходна директория.</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="1808"/>
@@ -2214,17 +2216,17 @@
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="2051"/>
         <source>Load Translation</source>
-        <translation type="unfinished"></translation>
+        <translation>Зареждане на превод</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="2053"/>
         <source>Translation Files</source>
-        <translation type="unfinished"></translation>
+        <translation>Файлове за превод</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="2087"/>
         <source>Do you really want to disable the update reminder?</source>
-        <translation type="unfinished"></translation>
+        <translation>Наистина ли искате да деактивирате напомнянето за актуализации?</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="2087"/>
@@ -2261,12 +2263,12 @@
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="2099"/>
         <source>The update reminder has been re-enabled.</source>
-        <translation type="unfinished"></translation>
+        <translation>Напомнянето за актуализации е отново включено.</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="2113"/>
         <source>Do you really want to disable all sound effects?</source>
-        <translation type="unfinished"></translation>
+        <translation>Наистина ли искате да изключите всички звукови ефекти?</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="2115"/>
@@ -2277,139 +2279,139 @@
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="2115"/>
         <source>All sound effects have been disabled.</source>
-        <translation type="unfinished"></translation>
+        <translation>Всички звукови ефекти бяха изключени.</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="2125"/>
         <source>The sound effects have been re-enabled.</source>
-        <translation type="unfinished"></translation>
+        <translation>Звуковите ефекти са отново включени.</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="2139"/>
         <location filename="../../src/Dialog_MainWindow.cpp" line="2141"/>
         <location filename="../../src/Dialog_MainWindow.cpp" line="2151"/>
         <source>Nero AAC Notifications</source>
-        <translation type="unfinished"></translation>
+        <translation>Nero AAC известия</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="2139"/>
         <source>Do you really want to disable all Nero AAC Encoder notifications?</source>
-        <translation type="unfinished"></translation>
+        <translation>Наистина ли искате да изключите всички известия от Nero AAC Encoder?</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="2141"/>
         <source>All Nero AAC Encoder notifications have been disabled.</source>
-        <translation type="unfinished"></translation>
+        <translation>Всички известия от Nero AAC Encoder бяха изключени.</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="2151"/>
         <source>The Nero AAC Encoder notifications have been re-enabled.</source>
-        <translation type="unfinished"></translation>
+        <translation>Известията от Nero AAC Encoder са отново включени.</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="2165"/>
         <location filename="../../src/Dialog_MainWindow.cpp" line="2167"/>
         <location filename="../../src/Dialog_MainWindow.cpp" line="2177"/>
         <source>Slow Startup Notifications</source>
-        <translation type="unfinished"></translation>
+        <translation>Известия за бавно стартиране</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="2165"/>
         <source>Do you really want to disable the slow startup notifications?</source>
-        <translation type="unfinished"></translation>
+        <translation>Наистина ли искате да изключите известията за бавно стартиране?</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="2167"/>
         <source>The slow startup notifications have been disabled.</source>
-        <translation type="unfinished"></translation>
+        <translation>Известията за бавно стартиране бяха деактивирани.</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="2177"/>
         <source>The slow startup notifications have been re-enabled.</source>
-        <translation type="unfinished"></translation>
+        <translation>Известията за бавно стартиране са отново активирани.</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="2199"/>
         <location filename="../../src/Dialog_MainWindow.cpp" line="2203"/>
         <source>Open Cue Sheet</source>
-        <translation type="unfinished"></translation>
+        <translation>Отвори Cue Sheet</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="2199"/>
         <location filename="../../src/Dialog_MainWindow.cpp" line="2205"/>
         <source>Cue Sheet File</source>
-        <translation type="unfinished"></translation>
+        <translation>Cue Sheet файл</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="2258"/>
         <location filename="../../src/Dialog_MainWindow.cpp" line="2260"/>
         <location filename="../../src/Dialog_MainWindow.cpp" line="2273"/>
         <source>Beta Updates</source>
-        <translation type="unfinished"></translation>
+        <translation>Бета актуализации</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="2258"/>
         <source>Do you really want LameXP to check for Beta (pre-release) updates?</source>
-        <translation type="unfinished"></translation>
+        <translation>Наистина ли искате LameXP да проверява за бета (пред-релийз) актуализации?</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="2260"/>
         <source>LameXP will check for Beta (pre-release) updates from now on.</source>
-        <translation type="unfinished"></translation>
+        <translation>От сега нататък LameXP ще проверява за бета (пред-релийз) актуализации.</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="2260"/>
         <source>Check Now</source>
-        <translation type="unfinished"></translation>
+        <translation>Провери сега</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="2273"/>
         <source>LameXP will &lt;i&gt;not&lt;/i&gt; check for Beta (pre-release) updates from now on.</source>
-        <translation type="unfinished"></translation>
+        <translation>От сега нататък LameXP &lt;i&gt;няма&lt;/i&gt; да проверява за бета (пред-релийз) актуализации.</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="2296"/>
         <location filename="../../src/Dialog_MainWindow.cpp" line="2298"/>
         <location filename="../../src/Dialog_MainWindow.cpp" line="2308"/>
         <source>Hibernate Computer</source>
-        <translation type="unfinished"></translation>
+        <translation>Хибернация на компютъра</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="2296"/>
         <source>Do you really want the computer to be hibernated on shutdown?</source>
-        <translation type="unfinished"></translation>
+        <translation>Наистина ли искате компютърът да се хибернира при изключване на програмата?</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="2298"/>
         <source>LameXP will hibernate the computer on shutdown from now on.</source>
-        <translation type="unfinished"></translation>
+        <translation>От сега нататък при изход от LameXP, компютърът ще се хибернира.</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="2308"/>
         <source>LameXP will &lt;i&gt;not&lt;/i&gt; hibernate the computer on shutdown from now on.</source>
-        <translation type="unfinished"></translation>
+        <translation>От сега нататък при изход от LameXP, компютърът &lt;i&gt;няма&lt;/i&gt; да  се хибернира.</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="2322"/>
         <location filename="../../src/Dialog_MainWindow.cpp" line="2325"/>
         <location filename="../../src/Dialog_MainWindow.cpp" line="2336"/>
         <source>Shell Integration</source>
-        <translation type="unfinished"></translation>
+        <translation>Shell интеграция</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="2322"/>
         <source>Do you really want to disable the LameXP shell integration?</source>
-        <translation type="unfinished"></translation>
+        <translation>Наистина ли искате да изключите shell интеграцията на LameXP?</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="2325"/>
         <source>The LameXP shell integration has been disabled.</source>
-        <translation type="unfinished"></translation>
+        <translation>Shell интеграцията на LameXP бе изключена.</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="2336"/>
         <source>The LameXP shell integration has been re-enabled.</source>
-        <translation type="unfinished"></translation>
+        <translation>Shell интеграцията на LameXP е отново включена.</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="2407"/>
@@ -2426,23 +2428,23 @@
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="2468"/>
         <source>Filter Files</source>
-        <translation type="unfinished"></translation>
+        <translation>Филтриране на файлове</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="2468"/>
         <source>Select filename filter:</source>
-        <translation type="unfinished"></translation>
+        <translation>Избери филтър за файлово име:</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="2684"/>
         <source>Loading dropped files or folders, please wait...</source>
-        <translation type="unfinished"></translation>
+        <translation>Зареждане на довлачени файлове или папки, моля изчакайте...</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="2780"/>
         <location filename="../../src/Dialog_MainWindow.cpp" line="2784"/>
         <source>Save CSV file</source>
-        <translation type="unfinished"></translation>
+        <translation>Запиши CSV файл</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="2780"/>
@@ -2450,7 +2452,7 @@
         <location filename="../../src/Dialog_MainWindow.cpp" line="2830"/>
         <location filename="../../src/Dialog_MainWindow.cpp" line="2836"/>
         <source>CSV File</source>
-        <translation type="unfinished"></translation>
+        <translation>CSV файл</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="2801"/>
@@ -2458,33 +2460,33 @@
         <location filename="../../src/Dialog_MainWindow.cpp" line="2807"/>
         <location filename="../../src/Dialog_MainWindow.cpp" line="2810"/>
         <source>CSV Export</source>
-        <translation type="unfinished"></translation>
+        <translation>Експортиране на CSV</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="2801"/>
         <source>Sorry, there are no meta tags that can be exported!</source>
-        <translation type="unfinished"></translation>
+        <translation>За съжаление, няма мета тагове, които да бъдат експортирани!</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="2804"/>
         <source>Sorry, failed to open CSV file for writing!</source>
-        <translation type="unfinished"></translation>
+        <translation>Съжаляваме, CSV файлът не може да бъде отворен за писане!</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="2807"/>
         <source>Sorry, failed to write to the CSV file!</source>
-        <translation type="unfinished"></translation>
+        <translation>Грешка при опит за писане в CSV файла!</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="2810"/>
         <source>The CSV files was created successfully!</source>
-        <translation type="unfinished"></translation>
+        <translation>CSV файловете са създадени успешно!</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="2830"/>
         <location filename="../../src/Dialog_MainWindow.cpp" line="2834"/>
         <source>Open CSV file</source>
-        <translation type="unfinished"></translation>
+        <translation>Отваряне на CSV файл</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="2850"/>
@@ -2493,32 +2495,32 @@
         <location filename="../../src/Dialog_MainWindow.cpp" line="2859"/>
         <location filename="../../src/Dialog_MainWindow.cpp" line="2862"/>
         <source>CSV Import</source>
-        <translation type="unfinished"></translation>
+        <translation>Импортиране на CSV</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="2850"/>
         <source>Sorry, failed to open CSV file for reading!</source>
-        <translation type="unfinished"></translation>
+        <translation>Съжаляваме, CSV файлът не може да бъде отворен за четене!</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="2853"/>
         <source>Sorry, failed to read from the CSV file!</source>
-        <translation type="unfinished"></translation>
+        <translation>Съжаляваме, CSV файлът не може да бъде прочетен!</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="2856"/>
         <source>Sorry, the CSV file does not contain any known fields!</source>
-        <translation type="unfinished"></translation>
+        <translation>Съжаляваме, но нито едно от полетата в CSV файла не бе разпознато!</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="2859"/>
         <source>CSV file is incomplete. Not all files were updated!</source>
-        <translation type="unfinished"></translation>
+        <translation>CSV файлът е непълен. Не всички файлове са актуализирани!</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="2862"/>
         <source>The CSV files was imported successfully!</source>
-        <translation type="unfinished"></translation>
+        <translation>CSV файловете бяха импортирани успешно!</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="3041"/>
@@ -2544,7 +2546,7 @@
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="3119"/>
         <source>Drive is read-only or insufficient access rights!</source>
-        <translation type="unfinished"></translation>
+        <translation>Дискът е само за четене или няма достатъчно права за достъп!</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="3596"/>
@@ -2630,7 +2632,7 @@
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="4202"/>
         <source>Rename Macros</source>
-        <translation type="unfinished"></translation>
+        <translation>Преименуване на макроси</translation>
     </message>
     <message numerus="yes">
         <location filename="../../src/Dialog_MainWindow.cpp" line="4249"/>
@@ -2643,17 +2645,17 @@
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="4292"/>
         <source>Cannot write to the selected directory. Please choose another directory!</source>
-        <translation type="unfinished"></translation>
+        <translation>Грешка при запис в избраната директория. Моля, изберете друга!</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="4429"/>
         <source>Overwrite Mode</source>
-        <translation type="unfinished"></translation>
+        <translation>Режим на презапис</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="4429"/>
         <source>Warning: This mode may overwrite existing files with no way to revert!</source>
-        <translation type="unfinished"></translation>
+        <translation>Предупреждение: Този режим може да презапише съществуващи файлове без възможност за възстановяване!</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="4429"/>
@@ -2663,17 +2665,17 @@
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="4429"/>
         <source>Revert</source>
-        <translation type="unfinished"></translation>
+        <translation>Върни</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="4522"/>
         <source>Already Running</source>
-        <translation type="unfinished"></translation>
+        <translation>Вече се изпълнява</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="4522"/>
         <source>LameXP is already running, please use the running instance!</source>
-        <translation type="unfinished"></translation>
+        <translation>LameXP вече се изпълнява, моля използвайте вече стартираната инстанция!</translation>
     </message>
 </context>
 <context>
@@ -3166,37 +3168,37 @@
     <message>
         <location filename="../../src/Dialog_Processing.cpp" line="214"/>
         <source>Browse Output File Location</source>
-        <translation type="unfinished"></translation>
+        <translation>Преглед на местоположението на изходния файл</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_Processing.cpp" line="220"/>
         <source>Filter Log Items</source>
-        <translation type="unfinished"></translation>
+        <translation>Филтриране на log елементи</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_Processing.cpp" line="222"/>
         <source>Show Running Only</source>
-        <translation type="unfinished"></translation>
+        <translation>Покажи само изпълняващите се</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_Processing.cpp" line="223"/>
         <source>Show Succeeded Only</source>
-        <translation type="unfinished"></translation>
+        <translation>Покажи само успешните</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_Processing.cpp" line="224"/>
         <source>Show Failed Only</source>
-        <translation type="unfinished"></translation>
+        <translation>Покажи само провалилите се</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_Processing.cpp" line="225"/>
         <source>Show Skipped Only</source>
-        <translation type="unfinished"></translation>
+        <translation>Покажи само пропуснатите</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_Processing.cpp" line="226"/>
         <source>Show All Items</source>
-        <translation></translation>
+        <translation>Покажи всички елементи</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_Processing.cpp" line="282"/>
@@ -3216,32 +3218,32 @@
     <message>
         <location filename="../../src/Dialog_Processing.cpp" line="523"/>
         <source>Multi-threading enabled: Running %1 instances in parallel!</source>
-        <translation type="unfinished"></translation>
+        <translation>Многопоточен режим включен: %1 инстанции се изпълняват успоредно!</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_Processing.cpp" line="655"/>
         <source>Aborted! Waiting for running jobs to terminate...</source>
-        <translation type="unfinished"></translation>
+        <translation>Прекратено! Изчакване на текущите задачи да приключат...</translation>
     </message>
     <message numerus="yes">
         <location filename="../../src/Dialog_Processing.cpp" line="666"/>
         <source>Encoding: %n file(s) of %1 completed so far, please wait...</source>
-        <translation type="unfinished">
-            <numerusform></numerusform>
-            <numerusform></numerusform>
+        <translation>
+            <numerusform>Кодиране: %n от %1 файла е готов, моля изчакайте...</numerusform>
+            <numerusform>Кодиране: %n от %1 файла са готови, моля изчакайте...</numerusform>
         </translation>
     </message>
     <message>
         <location filename="../../src/Dialog_Processing.cpp" line="688"/>
         <source>Creating the playlist file, please wait...</source>
-        <translation type="unfinished"></translation>
+        <translation>Създаване на плейлист файла, моля изчакайте...</translation>
     </message>
     <message numerus="yes">
         <location filename="../../src/Dialog_Processing.cpp" line="698"/>
         <source>Process was aborted by the user after %n file(s)!</source>
-        <translation type="unfinished">
-            <numerusform></numerusform>
-            <numerusform></numerusform>
+        <translation>
+            <numerusform>Процесът бе прекъснат от потребителя след %n файл!</numerusform>
+            <numerusform>Процесът бе прекъснат от потребителя след %n файла!</numerusform>
         </translation>
     </message>
     <message>
@@ -3447,7 +3449,7 @@
     <message>
         <location filename="../../gui/UpdateDialog.ui" line="573"/>
         <source>Press Esc button to cancel update check...</source>
-        <translation>Натисни бутона Esc за да прекратиш проверката за актуализации...</translation>
+        <translation>Натисни бутона Esc, за да прекратиш проверката за актуализации...</translation>
     </message>
     <message>
         <location filename="../../gui/UpdateDialog.ui" line="602"/>
@@ -3559,7 +3561,7 @@
     <message>
         <location filename="../../src/Dialog_Update.cpp" line="303"/>
         <source>Your version of LameXP is still up-to-date. Please check for updates regularly!</source>
-        <translation>Версията ви на LameXP е все още актуална. Моля, проверявайте редовно за актуализации!</translation>
+        <translation>Версията ви на LameXP е актуална. Проверявайте редовно за актуализации!</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_Update.cpp" line="307"/>
