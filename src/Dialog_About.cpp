@@ -80,7 +80,7 @@ static const struct
 }
 g_lamexp_translators[] =
 {
-	{"en", L"Englisch",   L"LoRd_MuldeR",         "MuldeR2@GMX.de"           },
+	{"en", L"English",    L"LoRd_MuldeR",         "MuldeR2@GMX.de"           },
 	{"de", L"Deutsch",    L"LoRd_MuldeR",         "MuldeR2@GMX.de"           },
 	{"",   L"",           L"Bodo Thevissen",      "Bodo@thevissen.de"        },
 	{"es", L"Español",    L"Rub3nCT",             "Rub3nCT@gmail.com"        },
