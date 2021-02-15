@@ -59,6 +59,8 @@
 ;Web-Site
 !define MyWebSite "http://muldersoft.com/"
 
+;Prerequisites
+!define PrerequisitesDir "..\..\..\Prerequisites"
 
 ;--------------------------------
 ;Check for Pre-Release
@@ -79,7 +81,7 @@
 ;--------------------------------
 
 !tempfile PACKHDRTEMP
-!packhdr "${PACKHDRTEMP}" '"..\..\..\Prerequisites\MSVC\redist\bin\mt.exe" -manifest "setup.manifest" -outputresource:"${PACKHDRTEMP};1" && "..\..\..\Prerequisites\UPX\upx.exe" --brute "${PACKHDRTEMP}"'
+!packhdr "${PACKHDRTEMP}" '"${PrerequisitesDir}\MSVC\redist\bin\mt.exe" -manifest "setup.manifest" -outputresource:"${PACKHDRTEMP};1" && "${PrerequisitesDir}\UPX\upx.exe" --brute "${PACKHDRTEMP}"'
 
 
 ;--------------------------------
@@ -593,15 +595,22 @@ Section "!Install Files"
 	File /a /r `${LAMEXP_SOURCE_PATH}\*.png`
 SectionEnd
 
-# Section "-Install VCRedist"
-# 	!insertmacro PrintProgress "$(LAMEXP_LANG_STATUS_VCREDIST)"
-# 	File /a `/oname=$PLUGINSDIR\vcredist_x86.exe` `${LAMEXP_SOURCE_PATH}\redist\vcredist_x86.exe`
-# 	ExecWait '"$PLUGINSDIR\vcredist_x86.exe" /install /passive /norestart'
-# SectionEnd
-
 Section "-Write Uninstaller"
 	!insertmacro PrintProgress "$(LAMEXP_LANG_STATUS_MAKEUNINST)"
 	WriteUninstaller "$INSTDIR\Uninstall.exe"
+SectionEnd
+
+Section "-Install Runtime Libraries"
+	${If} ${AtMostWinXP}
+	${AndIfNot} ${FileExists} `$SYSDIR\normaliz.dll`
+		!insertmacro PrintProgress "$(LAMEXP_LANG_STATUS_VCREDIST)"
+		File /a `/oname=$PLUGINSDIR\idndl.x86.exe` `${PrerequisitesDir}\IDNMInstaller\idndl.x86.exe`
+		ExecWait `"$PLUGINSDIR\idndl.x86.exe" /passive`
+		${If} ${RunningX64}
+			File /a `/oname=$PLUGINSDIR\idndl.x64.exe` `${PrerequisitesDir}\IDNMInstaller\idndl.x64.exe`
+			ExecWait `"$PLUGINSDIR\idndl.x64.exe" /passive`
+		${EndIf}
+	${EndIf}
 SectionEnd
 
 Section "-Create Shortcuts"
