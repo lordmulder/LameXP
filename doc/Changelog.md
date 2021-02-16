@@ -10,11 +10,12 @@ subtitle: "Audio-Encoder Front-End &ndash; Changelog"
 * Updated LAME encoder to v3.100.1-SVN (2020-08-25), compiled with ICL 19.1 and MSVC 15.9
 * Updated Vorbis encoder to OggEnc v2.88 (2020-07-07), using libvorbis v1.3.7 with aoTuV beta-6.03
 * Updated Monkey's Audio binary to v5.54 (2020-08-24), compiled with ICL 19.1 and MSVC 15.9
-* Updated mpg123 decoder to v1.26.3 (2020-07-16), compiled with GCC 10.1.0
+* Updated mpg123 decoder to v1.26.4 (2020-12-24), compiled with GCC 10.2.0
 * Updated MediaInfo to v20.08 (2020-08-11), compiled with ICL 19.1 and MSVC 15.9
-* Updated cURL to v7.72.0 (2020-08-19), with libcurl v7.72.0 and OpenSSL v1.1.1g
-* Added Bulgarian (български) translation, thanks to Симеон Илиянов Цветков <<sicvetkov@uni-sofia.bg>>
+* Updated cURL to v7.75.0 (2021-02-03), with libcurl v7.75.0 and OpenSSL v1.1.1i
+* Added Bulgarian (български) translation, thanks to Симеон Илиянов Цветков [<sicvetkov@uni-sofia.bg>](mailto:sicvetkov@uni-sofia.bg)
 * Added command-line switch `--no-splash`, which can be used to hide the "splash" screen at startup
+* Added workaround for missing `normaliz.dll` on Windows XP to the installer
 
 ## LameXP v4.18 [2019-12-18] ## {-}
 * Upgraded build environment to Microsoft Visual Studio 2017.9 (MSVC 14.16)
@@ -25,7 +26,7 @@ subtitle: "Audio-Encoder Front-End &ndash; Changelog"
 * Updated Monkey's Audio binary to v4.73 (2019-05-15), compiled with ICL 19.0 and MSVC 14.16
 * Updated mpg123 decoder to v1.25.11 (2019-07-18) and added *64-Bit* binaries, compiled with GCC 9.1.0
 * Updated MediaInfo to v19.07 (2019-07-16), compiled with ICL 19.0 and MSVC 14.16
-* Added Japanese (日本語) translation, thanks to Maboroshin <[pc.genkaku.in](http://pc.genkaku.in)>
+* Added Japanese (日本語) translation, thanks to Maboroshin [<pc.genkaku.in>](http://pc.genkaku.in)
 * Fixed encoding with Nero AAC encoder for input sampling rate less than 8 KHz or greater than 96 KHz
 * Updated language files (big thank-you to all contributors !!!)
 
@@ -113,7 +114,7 @@ subtitle: "Audio-Encoder Front-End &ndash; Changelog"
 * Upgraded build environment to Microsoft Visual Studio 2013 with Update-5
 * Updated Qt runtime libraries to v4.8.7 Final (2015-05-25), compiled with MSVC 12.0
 * Added support for building LameXP and MUtilities with Visual Studio 2015
-* Added Hungarian translation, contributed by Zityi's Translator Team <<zityisoft@gmail.com>>
+* Added Hungarian translation, contributed by Zityi's Translator Team [<zityisoft@gmail.com>](mailto:zityisoft@gmail.com)
 * Added optional support for the *libfdk-aac* encoder, using the [fdkaac](https://github.com/nu774/fdkaac) front-end by nu774
 * Added detection of the *64-Bit* version of QAAC encoder, requires 64-Bit Apple Application Support
 * Added enhanced file renaming option: Default file extensions can now be overwritten
