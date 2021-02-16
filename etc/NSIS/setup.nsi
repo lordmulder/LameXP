@@ -555,6 +555,11 @@ FunctionEnd
 	RMDir /r ${options} "$INSTDIR\redist"
 !macroend
 
+!macro InstallRedist srcdir filename
+	File /a `/oname=$PLUGINSDIR\${filename}` `${srcdir}\${filename}`
+	ExecWait `"$PLUGINSDIR\${filename}" /passive`
+!macroend
+
 ;--------------------------------
 ;Install Files
 ;--------------------------------
@@ -604,11 +609,10 @@ Section "-Install Runtime Libraries"
 	${If} ${AtMostWinXP}
 	${AndIfNot} ${FileExists} `$SYSDIR\normaliz.dll`
 		!insertmacro PrintProgress "$(LAMEXP_LANG_STATUS_VCREDIST)"
-		File /a `/oname=$PLUGINSDIR\idndl.x86.exe` `${PrerequisitesDir}\IDNMInstaller\idndl.x86.exe`
-		ExecWait `"$PLUGINSDIR\idndl.x86.exe" /passive`
 		${If} ${RunningX64}
-			File /a `/oname=$PLUGINSDIR\idndl.x64.exe` `${PrerequisitesDir}\IDNMInstaller\idndl.x64.exe`
-			ExecWait `"$PLUGINSDIR\idndl.x64.exe" /passive`
+			!insertmacro InstallRedist '${PrerequisitesDir}\IDNMInstaller' 'idndl.x64.exe'
+		${Else}
+			!insertmacro InstallRedist '${PrerequisitesDir}\IDNMInstaller' 'idndl.x86.exe'
 		${EndIf}
 	${EndIf}
 SectionEnd
