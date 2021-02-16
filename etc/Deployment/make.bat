@@ -124,21 +124,23 @@ if "%LAMEXP_REDIST%"=="1" (
 	for %%i in (gif,ico,jpeg,mng,svg,tga,tiff) do (
 		call "%~dp0\_copy.bat" "%PATH_REDIST_QT%\Shared\plugins\imageformats\q%%i4.dll" "%TMP_PATH%\imageformats"
 	)
-	call "%~dp0\_copy.bat" "%PATH_REDIST_VC%\x86\*.dll" "%TMP_PATH%"
+	for %%i in ("%PATH_REDIST_VC%\x86\*.dll") do call "%~dp0\_copy.bat" "%%~i" "%TMP_PATH%"
 	if %PATH_VCTOOL% GEQ 140 (
-		call "%~dp0\_copy.bat" "%~dp0\..\..\..\Prerequisites\MSVC\redist\ucrt\DLLs\x86\*.dll" "%TMP_PATH%"
+		for %%i in ("%~dp0\..\..\..\Prerequisites\MSVC\redist\ucrt\DLLs\x86\*.dll") do (
+			call "%~dp0\_copy.bat" "%%~i" "%TMP_PATH%"
+		)
 	)
 )
 
 for %%x in (exe,dll) do (
-	for %%f in (%TMP_PATH%\*.%%x) do (
+	for %%f in ("%TMP_PATH%\*.%%x") do (
 		"%~dp0\..\..\..\Prerequisites\RichHeaderEraser\rchhdrrsr.exe" "%%~ff"
 	)
 )
 
 for %%e in (LameXP,Qt,MUtils) do (
 	for %%x in (exe,dll) do (
-		for %%f in (%TMP_PATH%\%%e*.%%x) do (
+		for %%f in ("%TMP_PATH%\%%e*.%%x") do (
 			"%~dp0\..\..\..\Prerequisites\UPX\upx.exe" --best "%%~ff"
 		)
 	)
@@ -152,7 +154,9 @@ call "%~dp0\_copy.bat" "%~dp0\..\..\doc\Translate.html"   "%TMP_PATH%"
 call "%~dp0\_copy.bat" "%~dp0\..\..\doc\Manual.html"      "%TMP_PATH%"
 
 mkdir "%TMP_PATH%\img\lamexp"
-call "%~dp0\_copy.bat" "%~dp0\..\..\doc\img\lamexp\*.png" "%TMP_PATH%\img\lamexp"
+for %%f in ("%~dp0\..\..\doc\img\lamexp\*.png") do (
+	call "%~dp0\_copy.bat" "%%~f" "%TMP_PATH%\img\lamexp"
+)
 
 if not "%VER_LAMEXP_TYPE%" == "Final" (
 	if not "%VER_LAMEXP_TYPE%" == "Hotfix" (
