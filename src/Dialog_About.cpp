@@ -331,8 +331,11 @@ void AboutDialog::tabChanged(int index, const bool silent)
 		qApp->restoreOverrideCursor();
 	}
 
-	//Play tick sound
-	PLAY_SOUND_OPTIONAL("tick", true);
+	//Play tick sound, unless silent
+	if (!silent)
+	{
+		PLAY_SOUND_OPTIONAL("tick", true);
+	}
 
 	//Scroll to the top
 	if(QWidget *tab = ui->tabWidget->widget(index))
