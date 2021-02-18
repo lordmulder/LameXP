@@ -57,7 +57,7 @@ unsigned int lamexp_version_build    (void);
 unsigned int lamexp_version_confg    (void);
 const char*  lamexp_version_release  (void);
 bool         lamexp_version_portable (void);
-bool         lamexp_version_demo     (void);
+bool         lamexp_version_test     (void);
 const QDate& lamexp_version_expires  (void);
 unsigned int lamexp_toolver_neroaac  (void);
 unsigned int lamexp_toolver_fhgaacenc(void);

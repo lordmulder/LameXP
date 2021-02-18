@@ -97,9 +97,9 @@ const char *lamexp_support_url(void) { return g_lamexp_support_url; }
 const char *lamexp_tracker_url(void) { return g_lamexp_tracker_url; }
 
 /*
- * Check for Demo (pre-release) version
+ * Check for test (pre-release) version
  */
-bool lamexp_version_demo(void)
+bool lamexp_version_test(void)
 {
 	QReadLocker readLock(&g_lamexp_version_lock);
 

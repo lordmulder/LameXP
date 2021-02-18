@@ -712,8 +712,8 @@ MainWindow::MainWindow(MUtils::IPCChannel *const ipcChannel, FileListModel *cons
 	ui->actionDisableSlowStartupNotifications->setChecked(!m_settings->antivirNotificationsEnabled());
 	ui->actionDisableShellIntegration->setChecked(!m_settings->shellIntegrationEnabled());
 	ui->actionDisableShellIntegration->setDisabled(lamexp_version_portable() && ui->actionDisableShellIntegration->isChecked());
-	ui->actionCheckForBetaUpdates->setChecked(m_settings->autoUpdateCheckBeta() || lamexp_version_demo());
-	ui->actionCheckForBetaUpdates->setEnabled(!lamexp_version_demo());
+	ui->actionCheckForBetaUpdates->setChecked(m_settings->autoUpdateCheckBeta() || lamexp_version_test());
+	ui->actionCheckForBetaUpdates->setEnabled(!lamexp_version_test());
 	ui->actionHibernateComputer->setChecked(m_settings->hibernateComputer());
 	ui->actionHibernateComputer->setEnabled(MUtils::OS::is_hibernation_supported());
 	connect(ui->actionDisableUpdateReminder, SIGNAL(triggered(bool)), this, SLOT(disableUpdateReminderActionTriggered(bool)));
@@ -937,11 +937,14 @@ void MainWindow::addFolder(const QString &path, bool recursive, bool delayed, QS
 /*
  * Check for updates
  */
-bool MainWindow::checkForUpdates(bool &haveNewVersion)
+bool MainWindow::checkForUpdates(bool *const haveNewVersion)
 {
-	haveNewVersion = false;
 	bool bReadyToInstall = false;
-	
+	if (haveNewVersion)
+	{
+		*haveNewVersion = false;
+	}
+
 	UpdateDialog *updateDialog = new UpdateDialog(m_settings, this);
 	updateDialog->exec();
 
@@ -949,8 +952,11 @@ bool MainWindow::checkForUpdates(bool &haveNewVersion)
 	{
 		SHOW_CORNER_WIDGET(false);
 		m_settings->autoUpdateLastCheck(QDate::currentDate().toString(Qt::ISODate));
-		haveNewVersion = updateDialog->haveNewVersion();
 		bReadyToInstall = updateDialog->updateReadyToInstall();
+		if (haveNewVersion)
+		{
+			*haveNewVersion = updateDialog->haveNewVersion();
+		}
 	}
 
 	MUTILS_DELETE(updateDialog);
@@ -1226,7 +1232,7 @@ void MainWindow::changeEvent(QEvent *e)
 	{
 		setWindowTitle(QString("%1 [!!! DEBUG BUILD !!!]").arg(windowTitle()));
 	}
-	else if(lamexp_version_demo())
+	else if(lamexp_version_test())
 	{
 		setWindowTitle(QString("%1 [%2]").arg(windowTitle(), tr("DEMO VERSION")));
 	}
@@ -1472,7 +1478,7 @@ void MainWindow::windowShown(void)
 				m_settings->licenseAccepted(1);
 				m_settings->syncNow();
 				PLAY_SOUND_OPTIONAL("woohoo", false);
-				if (lamexp_version_demo())
+				if (lamexp_version_test())
 				{
 					showAnnounceBox();
 				}
@@ -1511,7 +1517,7 @@ void MainWindow::windowShown(void)
 	}
 	
 	//Check for expiration
-	if(lamexp_version_demo())
+	if(lamexp_version_test())
 	{
 		if(MUtils::OS::current_date() >= lamexp_version_expires())
 		{
@@ -1520,7 +1526,7 @@ void MainWindow::windowShown(void)
 			bool haveNewVersion = true;
 			if(QMessageBox::warning(this, tr("LameXP - Expired"), NOBREAK(QString("%1<br>%2").arg(tr("This demo (pre-release) version of LameXP has expired at %1.").arg(lamexp_version_expires().toString(Qt::ISODate)), tr("LameXP is free software and release versions won't expire."))), tr("Check for Updates"), tr("Exit Program")) == 0)
 			{
-				if (checkForUpdates(haveNewVersion))
+				if (checkForUpdates(&haveNewVersion))
 				{
 					QApplication::quit();
 					return;
@@ -1548,7 +1554,7 @@ void MainWindow::windowShown(void)
 	}
 
 	//Update reminder
-	if(MUtils::OS::current_date() >= MUtils::Version::app_build_date().addYears(1))
+	if(MUtils::OS::current_date() >= MUtils::Version::app_build_date().addYears(1).addMonths(3))
 	{
 		qWarning("Binary is more than a year old, time to update!");
 		SHOW_CORNER_WIDGET(true);
@@ -1556,8 +1562,7 @@ void MainWindow::windowShown(void)
 		switch(ret)
 		{
 		case 0:
-			bool haveNewVersion;
-			if(checkForUpdates(haveNewVersion))
+			if(checkForUpdates())
 			{
 				QApplication::quit();
 				return;
@@ -1583,8 +1588,7 @@ void MainWindow::windowShown(void)
 			{
 				if(QMessageBox::information(this, tr("Update Reminder"), NOBREAK(lastUpdateCheck.isValid() ? tr("Your last update check was more than 14 days ago. Check for updates now?") : tr("Your did not check for LameXP updates yet. Check for updates now?")), tr("Check for Updates"), tr("Postpone")) == 0)
 				{
-					bool haveNewVersion;
-					if(checkForUpdates(haveNewVersion))
+					if(checkForUpdates(NULL))
 					{
 						QApplication::quit();
 						return;
@@ -2278,8 +2282,7 @@ void MainWindow::checkForBetaUpdatesActionTriggered(bool checked)
 
 	if(checkUpdatesNow)
 	{
-		bool haveNewVersion;
-		if(checkForUpdates(haveNewVersion))
+		if(checkForUpdates())
 		{
 			QApplication::quit();
 		}
@@ -2382,8 +2385,7 @@ void MainWindow::checkUpdatesActionActivated(void)
 	ABORT_IF_BUSY;
 	WidgetHideHelper hiderHelper(m_dropBox.data());
 	
-	bool haveNewVersion;
-	if(checkForUpdates(haveNewVersion))
+	if(checkForUpdates())
 	{
 		QApplication::quit();
 	}

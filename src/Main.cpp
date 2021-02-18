@@ -237,14 +237,14 @@ static int lamexp_main(int &argc, char **argv)
 	lamexp_initialize_resources();
 
 	//Check for expiration
-	if(lamexp_version_demo())
+	if(lamexp_version_test())
 	{
 		const QDate currentDate = MUtils::OS::current_date();
 		if(currentDate.addDays(1) < MUtils::Version::app_build_date())
 		{
 			qFatal("System's date (%s) is before LameXP build date (%s). Huh?", currentDate.toString(Qt::ISODate).toLatin1().constData(), MUtils::Version::app_build_date().toString(Qt::ISODate).toLatin1().constData());
 		}
-		qWarning(QString("Note: This demo (pre-release) version of LameXP will expire at %1.\n").arg(lamexp_version_expires().toString(Qt::ISODate)).toLatin1().constData());
+		qWarning(QString("Note: This test (pre-release) version of LameXP will expire at %1.\n").arg(lamexp_version_expires().toString(Qt::ISODate)).toLatin1().constData());
 	}
 
 	//Initialize IPC
@@ -291,5 +291,5 @@ static int lamexp_main(int &argc, char **argv)
 
 int main(int argc, char* argv[])
 {
-	return MUtils::Startup::startup(argc, argv, lamexp_main, "LameXP", lamexp_version_demo());
+	return MUtils::Startup::startup(argc, argv, lamexp_main, "LameXP", lamexp_version_test());
 }

@@ -77,7 +77,7 @@ UpdateDialog::UpdateDialog(const SettingsModel *const settings, QWidget *parent)
 	m_taskbar(new MUtils::Taskbar7(parent)),
 	m_settings(settings),
 	m_logFile(new QStringList()),
-	m_betaUpdates(settings ? (settings->autoUpdateCheckBeta() || lamexp_version_demo()) : lamexp_version_demo()),
+	m_betaUpdates(settings ? (settings->autoUpdateCheckBeta() || lamexp_version_test()) : lamexp_version_test()),
 	m_success(false),
 	m_haveNewVersion(false),
 	m_firstShow(true),

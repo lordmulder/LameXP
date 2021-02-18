@@ -581,7 +581,7 @@ void AboutDialog::initInformationTab(void)
 		int daysLeft = qMax(currentDate.daysTo(lamexp_version_expires()), 0);
 		aboutText += QString("<hr><font color=\"crimson\">%1</font>").arg(QString("!!! --- DEBUG BUILD --- Expires at: %1 &middot; Days left: %2 --- DEBUG BUILD --- !!!").arg(lamexp_version_expires().toString(Qt::ISODate), QString::number(daysLeft)));
 	}
-	else if(lamexp_version_demo())
+	else if(lamexp_version_test())
 	{
 		int daysLeft = qMax(currentDate.daysTo(lamexp_version_expires()), 0);
 		aboutText += QString("<hr><font color=\"crimson\">%1</font>").arg(tr("Note: This demo (pre-release) version of LameXP will expire at %1. Still %2 days left.").arg(lamexp_version_expires().toString(Qt::ISODate), QString::number(daysLeft)));
