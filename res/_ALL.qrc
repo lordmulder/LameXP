@@ -267,7 +267,6 @@
     <file>tools/sox.i686.exe</file>
     <file>tools/sox.sse2.exe</file>
     <file>tools/speexdec.exe</file>
-    <file>tools/tag.exe</file>
     <file>tools/tta.exe</file>
     <file>tools/valdec.exe</file>
     <file>tools/vorbiscomment.exe</file>

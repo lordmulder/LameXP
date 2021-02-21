@@ -227,7 +227,7 @@ bool MP3Encoder::encode(const QString &sourceFile, const AudioFileModel_MetaInfo
 
 	if(!metaInfo.title().isEmpty())   args << L1S("--tt") << cleanTag(metaInfo.title());
 	if(!metaInfo.artist().isEmpty())  args << L1S("--ta") << cleanTag(metaInfo.artist());
-	if(!metaInfo.album().isEmpty())   args << L1S("--tl") << cleanTag( metaInfo.album());
+	if(!metaInfo.album().isEmpty())   args << L1S("--tl") << cleanTag(metaInfo.album());
 	if(!metaInfo.genre().isEmpty())   args << L1S("--tg") << cleanTag(metaInfo.genre());
 	if(!metaInfo.comment().isEmpty()) args << L1S("--tc") << cleanTag(metaInfo.comment());
 	if(metaInfo.year())               args << L1S("--ty") << QString::number(metaInfo.year());

@@ -128,7 +128,8 @@ bool AbstractEncoder::isUnicode(const QString &original)
 QString AbstractEncoder::cleanTag(const QString &text)
 {
 	QString result(text);
-	result.replace(QChar('"'), "'");
+	result.replace(QChar('"'),  "'");
 	result.replace(QChar('\\'), "/");
+	result.replace(QChar('|'),  "/");
 	return result;
 }
