@@ -759,13 +759,13 @@ void InitAacEncTask::initAacEncImpl(const char *const toolName, const char *cons
 
 void InitializationThread::selfTest(void)
 {
-	const unsigned int cpu[7] = {CPU_TYPE_X86_GEN, CPU_TYPE_X86_SSE, CPU_TYPE_X86_AVX, CPU_TYPE_X64_GEN, CPU_TYPE_X64_SSE, CPU_TYPE_X64_AVX, 0 };
+	static const unsigned int CPU[7] = { CPU_TYPE_X86_GEN, CPU_TYPE_X86_SSE, CPU_TYPE_X86_AVX, CPU_TYPE_X64_GEN, CPU_TYPE_X64_SSE, CPU_TYPE_X64_AVX, 0U };
 
-	unsigned int expectedCount = UINT_MAX;
-	for(size_t k = 0; cpu[k]; k++)
+	unsigned int count = 0U, expectedCount = UINT_MAX;
+	for(size_t k = 0U; CPU[k]; count = 0U, ++k)
 	{
-		qDebug("[TEST]");
-		switch(cpu[k])
+		qDebug("[SELF-TEST]");
+		switch(CPU[k])
 		{
 			PRINT_CPU_TYPE(CPU_TYPE_X86_GEN); break;
 			PRINT_CPU_TYPE(CPU_TYPE_X86_SSE); break;
@@ -776,20 +776,15 @@ void InitializationThread::selfTest(void)
 		default:
 			MUTILS_THROW("CPU support undefined!");
 		}
-		unsigned int n = 0;
-		for(int i = 0; true; i++)
+		for (int i = 0; g_lamexp_tools[i].pcName || g_lamexp_tools[i].pcHash || g_lamexp_tools[i].uiVersion; ++i)
 		{
-			if(!(g_lamexp_tools[i].pcName || g_lamexp_tools[i].pcHash  || g_lamexp_tools[i].uiVersion))
-			{
-				break;
-			}
-			else if(g_lamexp_tools[i].pcName && g_lamexp_tools[i].pcHash && g_lamexp_tools[i].uiVersion)
+			if (g_lamexp_tools[i].pcName && g_lamexp_tools[i].pcHash && g_lamexp_tools[i].uiVersion)
 			{
 				const QString toolName = QString::fromLatin1(g_lamexp_tools[i].pcName);
 				const QByteArray expectedHash = QByteArray(g_lamexp_tools[i].pcHash);
-				if(g_lamexp_tools[i].uiCpuType & cpu[k])
+				if(g_lamexp_tools[i].uiCpuType & CPU[k])
 				{
-					qDebug("%02i -> %s", ++n, MUTILS_UTF8(toolName));
+					qDebug("%2u -> %s", ++count, MUTILS_UTF8(toolName));
 					QFile resource(QString(":/tools/%1").arg(toolName));
 					if(!resource.open(QIODevice::ReadOnly))
 					{
@@ -810,16 +805,16 @@ void InitializationThread::selfTest(void)
 				qFatal("Inconsistent checksum data detected. Take care!");
 			}
 		}
-		if (expectedCount != UINT_MAX)
+		if (k != 0U)
 		{
-			if (n != expectedCount)
+			if (count != expectedCount)
 			{
-				qFatal("Tool count mismatch for CPU type %u. Should be %u, but got %u !!!", cpu[k], expectedCount, n);
+				qFatal("Tool count mismatch for CPU type %u. Should be %u, but got %u !!!", CPU[k], expectedCount, count);
 			}
 		}
 		else
 		{
-			expectedCount = n; /*remember count*/
+			expectedCount = count; /*remember count*/
 		}
 		qDebug("Done.\n");
 	}
