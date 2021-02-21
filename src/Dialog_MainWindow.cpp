@@ -1554,7 +1554,7 @@ void MainWindow::windowShown(void)
 	}
 
 	//Update reminder
-	if(MUtils::OS::current_date() >= MUtils::Version::app_build_date().addYears(1).addMonths(3))
+	if (MUtils::OS::current_date() >= MUtils::Version::app_build_date().addMonths(18))
 	{
 		qWarning("Binary is more than a year old, time to update!");
 		SHOW_CORNER_WIDGET(true);
