@@ -88,4 +88,5 @@ const QString lamexp_version2string(const QString &pattern, unsigned int version
 ///////////////////////////////////////////////////////////////////////////////
 
 #define L1S(STR) (QLatin1String((STR)))
+#define L1C(CHR) (QLatin1Char((CHR)))
 #define NOBREAK(STR) (QString("<div style='white-space:pre'>%1</div>").arg((STR)))

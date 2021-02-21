@@ -42,6 +42,7 @@ public:
 	static const AbstractEncoderInfo *getEncoderInfo(void);
 
 private:
-	const QString m_binary_enc;
-	const QString m_binary_tag;
+	const QString m_binary;
+
+	QString createApeTags(const AudioFileModel_MetaInfo &metaInfo);
 };

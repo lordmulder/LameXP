@@ -28,6 +28,13 @@
 #include <QProcess>
 #include <QDir>
 
+#define APPEND_TAG(NAME, VALUE) do \
+{ \
+	if (!buffer.isEmpty()) buffer += L1C('|'); \
+	buffer += QString("%1=%2").arg((NAME), (VALUE)); \
+} \
+while(0)
+
 ///////////////////////////////////////////////////////////////////////////////
 // Encoder Info
 ///////////////////////////////////////////////////////////////////////////////
@@ -123,12 +130,11 @@ static const g_macEncoderInfo;
 
 MACEncoder::MACEncoder(void)
 :
-	m_binary_enc(lamexp_tools_lookup(L1S("mac.exe"))),
-	m_binary_tag(lamexp_tools_lookup(L1S("tag.exe")))
+	m_binary(lamexp_tools_lookup(L1S("mac.exe")))
 {
-	if(m_binary_enc.isEmpty() || m_binary_tag.isEmpty())
+	if (m_binary.isEmpty())
 	{
-		MUTILS_THROW("Error initializing MAC encoder. Tool 'mac.exe' or 'tag.exe' is not registred!");
+		MUTILS_THROW("Error initializing MAC encoder. Tool 'mac.exe' is not registred!");
 	}
 }
 
@@ -156,7 +162,16 @@ bool MACEncoder::encode(const QString &sourceFile, const AudioFileModel_MetaInfo
 		break;
 	}
 
-	if(!startProcess(process, m_binary_enc, args))
+	if (!metaInfo.empty(true))
+	{
+		const QString apeTagsData = createApeTags(metaInfo);
+		if (!apeTagsData.isEmpty())
+		{
+			args << "-t" << apeTagsData;
+		}
+	}
+
+	if(!startProcess(process, m_binary, args))
 	{
 		return false;
 	}
@@ -182,37 +197,7 @@ bool MACEncoder::encode(const QString &sourceFile, const AudioFileModel_MetaInfo
 		return false;
 	});
 
-	if(result != RESULT_SUCCESS)
-	{
-		return false;
-	}
-
-	if(metaInfo.empty(true))
-	{
-		return true;
-	}
-
-	emit messageLogged(L1S("\n-------------------------------\n"));
-	
-	args.clear();
-	args << L1S("APE2") << QDir::toNativeSeparators(outputFile);
-
-	if(!metaInfo.title().isEmpty())   args << QString("Title=%1").arg(cleanTag(metaInfo.title()));
-	if(!metaInfo.artist().isEmpty())  args << QString("Artist=%1").arg(cleanTag(metaInfo.artist()));
-	if(!metaInfo.album().isEmpty())   args << QString("Album=%1").arg(cleanTag(metaInfo.album()));
-	if(!metaInfo.genre().isEmpty())   args << QString("Genre=%1").arg(cleanTag(metaInfo.genre()));
-	if(!metaInfo.comment().isEmpty()) args << QString("Comment=%1").arg(cleanTag(metaInfo.comment()));
-	if(metaInfo.year())               args << QString("Year=%1").arg(QString::number(metaInfo.year()));
-	if(metaInfo.position())           args << QString("Track=%1").arg(QString::number(metaInfo.position()));
-	
-	//if(!metaInfo.cover().isEmpty()) args << QString("-add-cover:%1:%2").arg("front", metaInfo.cover());
-	
-	if(!startProcess(process, m_binary_tag, args))
-	{
-		return false;
-	}
-
-	return (awaitProcess(process, abortFlag) == RESULT_SUCCESS);
+	return (result == RESULT_SUCCESS);
 }
 
 bool MACEncoder::isFormatSupported(const QString &containerType, const QString &containerProfile, const QString &formatType, const QString &formatProfile, const QString &formatVersion)
@@ -231,4 +216,19 @@ bool MACEncoder::isFormatSupported(const QString &containerType, const QString &
 const AbstractEncoderInfo *MACEncoder::getEncoderInfo(void)
 {
 	return &g_macEncoderInfo;
+}
+
+QString MACEncoder::createApeTags(const AudioFileModel_MetaInfo &metaInfo)
+{
+	QString buffer;
+
+	if (!metaInfo.title().isEmpty())   APPEND_TAG(L1S("Title"),   cleanTag(metaInfo.title()));
+	if (!metaInfo.artist().isEmpty())  APPEND_TAG(L1S("Artist"),  cleanTag(metaInfo.artist()));
+	if (!metaInfo.album().isEmpty())   APPEND_TAG(L1S("Album"),   cleanTag(metaInfo.album()));
+	if (!metaInfo.genre().isEmpty())   APPEND_TAG(L1S("Genre"),   cleanTag(metaInfo.genre()));
+	if (!metaInfo.comment().isEmpty()) APPEND_TAG(L1S("Comment"), cleanTag(metaInfo.comment()));
+	if (metaInfo.year())               APPEND_TAG(L1S("Year"),    QString::number(metaInfo.year()));
+	if (metaInfo.position())           APPEND_TAG(L1S("Track"),   QString::number(metaInfo.position()));
+
+	return buffer;
 }
