@@ -263,7 +263,7 @@ int AboutDialog::exec()
 	}
 	else
 	{
-		PLAY_SOUND_OPTIONAL("ghost", true);
+		PLAY_SOUND_OPTIONAL("slunk", true);
 	}
 	
 	switch(QDialog::exec())
