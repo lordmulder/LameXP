@@ -1,11 +1,11 @@
 [!Update]
-TimestampCreated=2021-04-22
+TimestampCreated=2021-05-22
 
 [LameXP]
-BuildNo=2305
-BuildDate=2021-04-22
+BuildNo=2306
+BuildDate=2021-05-22
 DownloadSite=http://forum.doom9.org/showthread.php?t=157726
 DownloadAddress=http://muldersoft.com/update/
-DownloadFilename=LameXP-RC5.2021-04-22.Release-Static.Build-2305.exe
-DownloadFilecode=2b1f9ff1c6c47d9634255c0451ea6eb833058265
-DownloadChecksum=42A805A23C371F4D2FB1AD1493D25004611334EA0EA0DFC00994AF761A65E68549B850501480A07314F8BD19A8568049
+DownloadFilename=LameXP-RC6.2021-05-22.Release-Static.Build-2306.exe
+DownloadFilecode=f8104efa586ea78815a16d01fed602536038793c
+DownloadChecksum=FF17B470D680D77358C633C9CAA1871A1B66B9D14CD9D3F6CE27C94A4AD9940DD11623424C74B8F26496B444F1A0F266
