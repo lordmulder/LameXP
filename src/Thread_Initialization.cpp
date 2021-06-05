@@ -150,7 +150,7 @@ protected:
 			{
 				strncpy_s(s_errMsg, BUFF_SIZE, e.what(), _TRUNCATE);
 			}
-			qWarning("OptionalInitTask exception error:\n%s\n\n", e.what());
+			qWarning("BaseTask exception error:\n%s\n\n", e.what());
 		}
 		catch(...)
 		{
@@ -158,7 +158,7 @@ protected:
 			{
 				strncpy_s(s_errMsg, BUFF_SIZE, "Unknown exception error!", _TRUNCATE);
 			}
-			qWarning("OptionalInitTask encountered an unknown exception!");
+			qWarning("BaseTask encountered an unknown exception!");
 		}
 	}
 

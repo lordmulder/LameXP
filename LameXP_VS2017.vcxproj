@@ -107,8 +107,8 @@
     <PostBuildEvent>
       <Message>Copy DLL's</Message>
       <Command>mkdir "$(OutDir)\imageformats" 2&gt; NUL
-copy /Y "$(SolutionDir)\..\Prerequisites\Qt4\$(PlatformToolset)\Debug\bin\Qt*.dll" "$(OutDir)"
-copy /Y "$(SolutionDir)\..\Prerequisites\Qt4\$(PlatformToolset)\Debug\plugins\imageformats\*.dll" "$(OutDir)\imageformats"
+copy /Y "$(SolutionDir)\..\Prerequisites\Qt4\v141_xp\Debug\bin\Qt*.dll" "$(OutDir)"
+copy /Y "$(SolutionDir)\..\Prerequisites\Qt4\v141_xp\Debug\plugins\imageformats\*.dll" "$(OutDir)\imageformats"
 copy /Y "$(SolutionDir)\..\Prerequisites\VisualLeakDetector\bin\Win32\*.dll" "$(OutDir)"
 copy /Y "$(SolutionDir)\..\Prerequisites\VisualLeakDetector\bin\Win32\*.manifest" "$(OutDir)"
 </Command>
@@ -187,8 +187,8 @@ copy /Y "$(SolutionDir)\..\Prerequisites\VisualLeakDetector\bin\Win32\*.manifest
     <PostBuildEvent>
       <Message>Copy DLL's</Message>
       <Command>mkdir "$(OutDir)\imageformats" 2&gt; NUL
-copy /Y "$(SolutionDir)\..\Prerequisites\Qt4\$(PlatformToolset)\Shared\bin\Qt*.dll" "$(OutDir)"
-copy /Y "$(SolutionDir)\..\Prerequisites\Qt4\$(PlatformToolset)\Shared\plugins\imageformats\*.dll" "$(OutDir)\imageformats"
+copy /Y "$(SolutionDir)\..\Prerequisites\Qt4\v141_xp\Shared\bin\Qt*.dll" "$(OutDir)"
+copy /Y "$(SolutionDir)\..\Prerequisites\Qt4\v141_xp\Shared\plugins\imageformats\*.dll" "$(OutDir)\imageformats"
 </Command>
     </PostBuildEvent>
     <ResourceCompile>
