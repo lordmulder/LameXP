@@ -210,8 +210,8 @@
     <file>sounds/chicken.wav</file>
     <file>sounds/drop.wav</file>
     <file>sounds/error.wav</file>
-    <file>sounds/ghost.wav</file>
     <file>sounds/shutdown.wav</file>
+    <file>sounds/slunk.wav</file>
     <file>sounds/success.wav</file>
     <file>sounds/tick.wav</file>
     <file>sounds/waiting.wav</file>
