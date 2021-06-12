@@ -26,15 +26,16 @@ In addition to that, LameXP provides full support for *meta information*, includ
 **Tier #2:** The following platforms should work too, but aren't tested extensively:
 
 * Microsoft Windows 8.1, 32-Bit and 64-Bit editions
-* Microsoft Windows 8.0, 32-Bit and 64-Bit editions
 * Microsoft Windows Vista with Service Pack 2, 32-Bit and 64-Bit editions
 * Microsoft Windows XP x64 Edition with Service Pack 2
-* Microsoft Windows Server 2008 with Service Pack 2
-* Microsoft Windows Server 2008 R2 with Service Pack 1
 * GNU/Linux (e.g. Ubuntu 12.04), using Wine v1.4+
 
 The following *legacy* platforms are **not** actively supported any longer:
 
+* Microsoft Windows 7 *without* Service Pack 1
+* Microsoft Windows 8.0
+* Microsoft Windows Vista *without* Service Pack 2
+* Microsoft Windows XP *without* Service Pack 3
 * Microsoft Windows 2000
 * Microsoft Windows NT 4.0
 * Microsoft Windows Millennium Edition
