@@ -222,7 +222,7 @@
     <file>tools/aften.x64.exe</file>
     <file>tools/avs2wav.exe</file>
     <file>tools/curl.exe</file>
-    <file>tools/curl-ca-bundle.crt</file>
+    <file>tools/curl.crt</file>
     <file>tools/dcaenc.exe</file>
     <file>tools/faad.i686.exe</file>
     <file>tools/faad.sse2.exe</file>

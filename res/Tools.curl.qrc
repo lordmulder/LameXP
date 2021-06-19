@@ -2,6 +2,6 @@
 <RCC version="1.0">
   <qresource>
     <file>tools/curl.exe</file>
-    <file>tools/curl-ca-bundle.crt</file>
+    <file>tools/curl.crt</file>
   </qresource>
 </RCC>
