@@ -3442,139 +3442,139 @@
         <translation>關閉</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="163"/>
-        <location filename="../../src/Dialog_Update.cpp" line="368"/>
+        <location filename="../../src/Dialog_Update.cpp" line="162"/>
+        <location filename="../../src/Dialog_Update.cpp" line="367"/>
         <source>Build</source>
         <translation>生成</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="164"/>
+        <location filename="../../src/Dialog_Update.cpp" line="163"/>
         <source>Unknown</source>
         <translation>未知</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="291"/>
+        <location filename="../../src/Dialog_Update.cpp" line="290"/>
         <source>Testing your internet connection, please wait...</source>
         <translation>測試您的 Internet 連接,請稍候...</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="317"/>
+        <location filename="../../src/Dialog_Update.cpp" line="316"/>
         <source>Network connectivity test has failed!</source>
         <translation>網絡連接測試失敗 !</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="294"/>
+        <location filename="../../src/Dialog_Update.cpp" line="293"/>
         <source>Checking for new updates online, please wait...</source>
         <translation>在線更新檢查新的版本,請稍候...</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="322"/>
+        <location filename="../../src/Dialog_Update.cpp" line="321"/>
         <source>Failed to fetch update information from server!</source>
         <translation>無法從服務器獲取更新信息 !</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="323"/>
+        <location filename="../../src/Dialog_Update.cpp" line="322"/>
         <source>Sorry, the update server might be busy at this time. Plase try again later.</source>
         <translation>抱歉,更新服務器可能在這一次忙.請稍后再試.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="367"/>
+        <location filename="../../src/Dialog_Update.cpp" line="366"/>
         <source>More information available at:</source>
         <translation>在可用的詳細信息:</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="297"/>
+        <location filename="../../src/Dialog_Update.cpp" line="296"/>
         <source>A new version of LameXP is available!</source>
         <translation>發現一個可用的新版本 LameXP  !</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="208"/>
+        <location filename="../../src/Dialog_Update.cpp" line="207"/>
         <source>Stopping update check, please wait...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="298"/>
+        <location filename="../../src/Dialog_Update.cpp" line="297"/>
         <source>We highly recommend all users to install this update as soon as possible.</source>
         <translation>我們強烈建議所有的用戶,要盡快安裝此更新.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="302"/>
+        <location filename="../../src/Dialog_Update.cpp" line="301"/>
         <source>No new updates available at this time.</source>
         <translation>這個時候沒有發現新的可用更新.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="303"/>
+        <location filename="../../src/Dialog_Update.cpp" line="302"/>
         <source>Your version of LameXP is still up-to-date. Please check for updates regularly!</source>
         <translation>您的 LameXP 版本是仍然最新的.請定期檢查更新 !</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="307"/>
+        <location filename="../../src/Dialog_Update.cpp" line="306"/>
         <source>Your version appears to be newer than the latest release.</source>
         <translation>您的版本似乎是比最新的版本新.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="308"/>
+        <location filename="../../src/Dialog_Update.cpp" line="307"/>
         <source>This usually indicates your are currently using a pre-release version of LameXP.</source>
         <translation>這通常表示您當前正在使用的 LameXP 預發布版.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="327"/>
+        <location filename="../../src/Dialog_Update.cpp" line="326"/>
         <source>Update check has been cancelled!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="328"/>
+        <location filename="../../src/Dialog_Update.cpp" line="327"/>
         <source>The update check has been cancelled by the user. Please try again later.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="397"/>
+        <location filename="../../src/Dialog_Update.cpp" line="396"/>
         <source>Update is being downloaded, please be patient...</source>
         <translation>正在下載更新,請耐心等待...</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="445"/>
+        <location filename="../../src/Dialog_Update.cpp" line="444"/>
         <source>Update ready to install. Applicaion will quit...</source>
         <translation>準備好安裝更新.應用程序將退出...</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="453"/>
+        <location filename="../../src/Dialog_Update.cpp" line="452"/>
         <source>Update failed. Please try again or download manually!</source>
         <translation>更新失敗.請再試一次或手動下載 !</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="312"/>
+        <location filename="../../src/Dialog_Update.cpp" line="311"/>
         <source>It appears that the computer currently is offline!</source>
         <translation>看來,目前的計算機處于脫機狀態!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="313"/>
-        <location filename="../../src/Dialog_Update.cpp" line="318"/>
+        <location filename="../../src/Dialog_Update.cpp" line="312"/>
+        <location filename="../../src/Dialog_Update.cpp" line="317"/>
         <source>Please make sure your computer is connected to the internet and try again.</source>
         <translation>請確保您的計算機連接到 Internet,然后重試.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="288"/>
+        <location filename="../../src/Dialog_Update.cpp" line="287"/>
         <source>Initializing, please wait...</source>
         <translation>正在初始化,請稍候...</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="255"/>
+        <location filename="../../src/Dialog_Update.cpp" line="254"/>
         <source>Discard</source>
         <translation>放棄</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="255"/>
+        <location filename="../../src/Dialog_Update.cpp" line="254"/>
         <source>Ignore</source>
         <translation>忽略</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="253"/>
+        <location filename="../../src/Dialog_Update.cpp" line="252"/>
         <source>Sorry, but only users in the &quot;Administrators&quot; group can install updates.</source>
         <translation>抱歉，只有&quot;Administrators&quot;組的用戶能夠安裝更新。</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="254"/>
+        <location filename="../../src/Dialog_Update.cpp" line="253"/>
         <source>Please start application from an administrator account and try again!</source>
         <translation>請以管理員身份運行程序并重試！</translation>
     </message>

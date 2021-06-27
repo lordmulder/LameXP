@@ -3462,139 +3462,139 @@
         <translation>Затвори</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="163"/>
-        <location filename="../../src/Dialog_Update.cpp" line="368"/>
+        <location filename="../../src/Dialog_Update.cpp" line="162"/>
+        <location filename="../../src/Dialog_Update.cpp" line="367"/>
         <source>Build</source>
         <translation>Билд</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="164"/>
+        <location filename="../../src/Dialog_Update.cpp" line="163"/>
         <source>Unknown</source>
         <translation>Неизвестно</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="253"/>
+        <location filename="../../src/Dialog_Update.cpp" line="252"/>
         <source>Sorry, but only users in the &quot;Administrators&quot; group can install updates.</source>
         <translation>Съжаляваме, но само потребители от групата „Администратори“ могат да инсталират актуализации.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="254"/>
+        <location filename="../../src/Dialog_Update.cpp" line="253"/>
         <source>Please start application from an administrator account and try again!</source>
         <translation>Моля, стартирайте приложението от администраторски акаунт и опитайте пак!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="291"/>
+        <location filename="../../src/Dialog_Update.cpp" line="290"/>
         <source>Testing your internet connection, please wait...</source>
         <translation>Проверяваме свързаността ви с интернет, моля изчакайте...</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="312"/>
+        <location filename="../../src/Dialog_Update.cpp" line="311"/>
         <source>It appears that the computer currently is offline!</source>
         <translation>Изглежда в момента компютърът ви е офлайн!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="313"/>
-        <location filename="../../src/Dialog_Update.cpp" line="318"/>
+        <location filename="../../src/Dialog_Update.cpp" line="312"/>
+        <location filename="../../src/Dialog_Update.cpp" line="317"/>
         <source>Please make sure your computer is connected to the internet and try again.</source>
         <translation>Уверете се, че компютърът ви е свързан с интернет и опитайте отново.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="317"/>
+        <location filename="../../src/Dialog_Update.cpp" line="316"/>
         <source>Network connectivity test has failed!</source>
         <translation>Тестът за мрежова свързаност се провали!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="294"/>
+        <location filename="../../src/Dialog_Update.cpp" line="293"/>
         <source>Checking for new updates online, please wait...</source>
         <translation>Проверяване за нови актуализации онлайн, моля изчакайте...</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="322"/>
+        <location filename="../../src/Dialog_Update.cpp" line="321"/>
         <source>Failed to fetch update information from server!</source>
         <translation>Неуспешно извличане на информация за актуализация от сървъра!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="323"/>
+        <location filename="../../src/Dialog_Update.cpp" line="322"/>
         <source>Sorry, the update server might be busy at this time. Plase try again later.</source>
         <translation>Съжаляваме, но сървърът за актуализации може би е претоварен в момента. Моля опитайте отново по-късно.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="367"/>
+        <location filename="../../src/Dialog_Update.cpp" line="366"/>
         <source>More information available at:</source>
         <translation>Повече информация е налична на:</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="297"/>
+        <location filename="../../src/Dialog_Update.cpp" line="296"/>
         <source>A new version of LameXP is available!</source>
         <translation>Налична е нова версия на LameXP!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="208"/>
+        <location filename="../../src/Dialog_Update.cpp" line="207"/>
         <source>Stopping update check, please wait...</source>
         <translation>Спиране на проверката за актуализация, моля изчакайте...</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="255"/>
+        <location filename="../../src/Dialog_Update.cpp" line="254"/>
         <source>Discard</source>
         <translation>Отхвърли</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="255"/>
+        <location filename="../../src/Dialog_Update.cpp" line="254"/>
         <source>Ignore</source>
         <translation>Игнорирай</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="288"/>
+        <location filename="../../src/Dialog_Update.cpp" line="287"/>
         <source>Initializing, please wait...</source>
         <translation>Инициализиране, моля изчакайте...</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="298"/>
+        <location filename="../../src/Dialog_Update.cpp" line="297"/>
         <source>We highly recommend all users to install this update as soon as possible.</source>
         <translation>Силно препоръчително е всички потребители да инсталират тази актуализация възможно най-скоро.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="302"/>
+        <location filename="../../src/Dialog_Update.cpp" line="301"/>
         <source>No new updates available at this time.</source>
         <translation>Няма налични нови актуализации към момента.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="303"/>
+        <location filename="../../src/Dialog_Update.cpp" line="302"/>
         <source>Your version of LameXP is still up-to-date. Please check for updates regularly!</source>
         <translation>Версията ви на LameXP е актуална. Проверявайте редовно за актуализации!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="307"/>
+        <location filename="../../src/Dialog_Update.cpp" line="306"/>
         <source>Your version appears to be newer than the latest release.</source>
         <translation>Изглежда сте с по-нова версия от тази на последния релийз.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="308"/>
+        <location filename="../../src/Dialog_Update.cpp" line="307"/>
         <source>This usually indicates your are currently using a pre-release version of LameXP.</source>
         <translation>Това обикновено е индикация, че в момента използвате пред-релийз версия на LameXP.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="327"/>
+        <location filename="../../src/Dialog_Update.cpp" line="326"/>
         <source>Update check has been cancelled!</source>
         <translation>Проверката за актуализации бе прекратена!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="328"/>
+        <location filename="../../src/Dialog_Update.cpp" line="327"/>
         <source>The update check has been cancelled by the user. Please try again later.</source>
         <translation>Проверката за актуализации бе прекратена от потребителя. Може да опитате отново по-късно.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="397"/>
+        <location filename="../../src/Dialog_Update.cpp" line="396"/>
         <source>Update is being downloaded, please be patient...</source>
         <translation>Актуализацията се изтегля, моля бъдете търпеливи...</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="445"/>
+        <location filename="../../src/Dialog_Update.cpp" line="444"/>
         <source>Update ready to install. Applicaion will quit...</source>
         <translation>Актуализацията е готова да се инсталира. Приложението ще се затвори...</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="453"/>
+        <location filename="../../src/Dialog_Update.cpp" line="452"/>
         <source>Update failed. Please try again or download manually!</source>
         <translation>Актуализацията се провали. Опитай пак или изтегли ръчно!</translation>
     </message>

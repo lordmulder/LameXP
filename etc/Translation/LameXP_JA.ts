@@ -3443,139 +3443,139 @@
         <translation>閉じる</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="163"/>
-        <location filename="../../src/Dialog_Update.cpp" line="368"/>
+        <location filename="../../src/Dialog_Update.cpp" line="162"/>
+        <location filename="../../src/Dialog_Update.cpp" line="367"/>
         <source>Build</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="164"/>
+        <location filename="../../src/Dialog_Update.cpp" line="163"/>
         <source>Unknown</source>
         <translation>不明</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="253"/>
+        <location filename="../../src/Dialog_Update.cpp" line="252"/>
         <source>Sorry, but only users in the &quot;Administrators&quot; group can install updates.</source>
         <translation type="unfinished">すみません。管理者グループのユーザーのみがアップデートをインストールできます。</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="254"/>
+        <location filename="../../src/Dialog_Update.cpp" line="253"/>
         <source>Please start application from an administrator account and try again!</source>
         <translation type="unfinished">管理者アカウントからソフトウェアを実行しもう一度試してください！</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="291"/>
+        <location filename="../../src/Dialog_Update.cpp" line="290"/>
         <source>Testing your internet connection, please wait...</source>
         <translation>インターネット接続を確認中。お待ちください...</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="312"/>
+        <location filename="../../src/Dialog_Update.cpp" line="311"/>
         <source>It appears that the computer currently is offline!</source>
         <translation>パソコンがオフラインのようです！</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="313"/>
-        <location filename="../../src/Dialog_Update.cpp" line="318"/>
+        <location filename="../../src/Dialog_Update.cpp" line="312"/>
+        <location filename="../../src/Dialog_Update.cpp" line="317"/>
         <source>Please make sure your computer is connected to the internet and try again.</source>
         <translation>パソコンがインターネットに接続されているか確認し、もう一度お試しください。</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="317"/>
+        <location filename="../../src/Dialog_Update.cpp" line="316"/>
         <source>Network connectivity test has failed!</source>
         <translation type="unfinished">ネットワーク接続テストが失敗しました！</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="294"/>
+        <location filename="../../src/Dialog_Update.cpp" line="293"/>
         <source>Checking for new updates online, please wait...</source>
         <translation>アップデートをオンラインで確認中...</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="322"/>
+        <location filename="../../src/Dialog_Update.cpp" line="321"/>
         <source>Failed to fetch update information from server!</source>
         <translation type="unfinished">サーバーからの更新情報の取得に失敗しました！</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="323"/>
+        <location filename="../../src/Dialog_Update.cpp" line="322"/>
         <source>Sorry, the update server might be busy at this time. Plase try again later.</source>
         <translation type="unfinished">すみません。ただいま更新サーバーに接続できないようです。後でお試しください。</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="367"/>
+        <location filename="../../src/Dialog_Update.cpp" line="366"/>
         <source>More information available at:</source>
         <translation type="unfinished">詳しい情報はこちらにあります :</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="297"/>
+        <location filename="../../src/Dialog_Update.cpp" line="296"/>
         <source>A new version of LameXP is available!</source>
         <translation type="unfinished">LameXP の新しいバージョンがあります！</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="208"/>
+        <location filename="../../src/Dialog_Update.cpp" line="207"/>
         <source>Stopping update check, please wait...</source>
         <translation type="unfinished">更新チェックを停止中...</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="255"/>
+        <location filename="../../src/Dialog_Update.cpp" line="254"/>
         <source>Discard</source>
         <translation type="unfinished">閉じる</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="255"/>
+        <location filename="../../src/Dialog_Update.cpp" line="254"/>
         <source>Ignore</source>
         <translation>無視</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="288"/>
+        <location filename="../../src/Dialog_Update.cpp" line="287"/>
         <source>Initializing, please wait...</source>
         <translation type="unfinished">初期化中...</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="298"/>
+        <location filename="../../src/Dialog_Update.cpp" line="297"/>
         <source>We highly recommend all users to install this update as soon as possible.</source>
         <translation>最新版を速やかにインストールすることをおすすめします。</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="302"/>
+        <location filename="../../src/Dialog_Update.cpp" line="301"/>
         <source>No new updates available at this time.</source>
         <translation>アップデートはありません。</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="303"/>
+        <location filename="../../src/Dialog_Update.cpp" line="302"/>
         <source>Your version of LameXP is still up-to-date. Please check for updates regularly!</source>
         <translation>お使いの LameXP はまだ最新版です。定期的にアップデートを確認してください！</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="307"/>
+        <location filename="../../src/Dialog_Update.cpp" line="306"/>
         <source>Your version appears to be newer than the latest release.</source>
         <translation type="unfinished">最新版よりも新しいものを使用しているようです。</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="308"/>
+        <location filename="../../src/Dialog_Update.cpp" line="307"/>
         <source>This usually indicates your are currently using a pre-release version of LameXP.</source>
         <translation type="unfinished">正式公開前のバージョンの LameXP をお使いかもしれません。</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="327"/>
+        <location filename="../../src/Dialog_Update.cpp" line="326"/>
         <source>Update check has been cancelled!</source>
         <translation type="unfinished">アップデートの確認はキャンセルされました！</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="328"/>
+        <location filename="../../src/Dialog_Update.cpp" line="327"/>
         <source>The update check has been cancelled by the user. Please try again later.</source>
         <translation type="unfinished">更新確認はあなたによってキャンセルされました。後ほど再びお試しください。</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="397"/>
+        <location filename="../../src/Dialog_Update.cpp" line="396"/>
         <source>Update is being downloaded, please be patient...</source>
         <translation type="unfinished">アップデートをダウンロードしています。少々お待ちください...</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="445"/>
+        <location filename="../../src/Dialog_Update.cpp" line="444"/>
         <source>Update ready to install. Applicaion will quit...</source>
         <translation type="unfinished">アップデートをインストールできます。いったん終了します...</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="453"/>
+        <location filename="../../src/Dialog_Update.cpp" line="452"/>
         <source>Update failed. Please try again or download manually!</source>
         <translation type="unfinished">アップデートに失敗しました。もう一度試すか手動で更新してください！</translation>
     </message>
