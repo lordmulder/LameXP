@@ -230,8 +230,6 @@
     <file>tools/flac.x64-sse2.exe</file>
     <file>tools/flac.x86-i686.exe</file>
     <file>tools/flac.x86-sse2.exe</file>
-    <file>tools/gpgv.exe</file>
-    <file>tools/keyring.gpg</file>
     <file>tools/lame.x64-avx.exe</file>
     <file>tools/lame.x64-sse2.exe</file>
     <file>tools/lame.x86-i686.exe</file>
@@ -270,6 +268,7 @@
     <file>tools/speexdec.exe</file>
     <file>tools/tta.exe</file>
     <file>tools/valdec.exe</file>
+    <file>tools/verify.exe</file>
     <file>tools/vorbiscomment.exe</file>
     <file>tools/wma2wav.exe</file>
     <file>tools/wupdate.exe</file>

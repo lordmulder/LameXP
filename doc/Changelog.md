@@ -16,6 +16,7 @@ subtitle: "Audio-Encoder Front-End &ndash; Changelog"
 * Added Bulgarian (български) translation, thanks to Симеон Илиянов Цветков [<sicvetkov@uni-sofia.bg>](mailto:sicvetkov@uni-sofia.bg)
 * Added command-line switch `--no-splash`, which can be used to hide the "splash" screen at startup
 * Added a workaround for missing `normaliz.dll` to the installer (Windows XP only)
+* GnuPG has been replaced by CodeSign verification tool for checking the auto-update signatures
 
 ## LameXP v4.18 [2019-12-18] ## {-}
 * Upgraded build environment to Microsoft Visual Studio 2017.9 (MSVC 14.16)

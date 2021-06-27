@@ -78,10 +78,9 @@ private:
 	Ui::UpdateDialog *const ui; //for Qt UIC
 	const SettingsModel *const m_settings;
 
-	const QString m_binaryCurl;
-	const QString m_binaryGnuPG;
-	const QString m_binaryKeys;
 	const QString m_binaryUpdater;
+	const QString m_binaryCurl;
+	const QString m_binaryVerify;
 
 	QScopedPointer<MUtils::Taskbar7> m_taskbar;
 	QScopedPointer<MUtils::UpdateChecker> m_thread;
