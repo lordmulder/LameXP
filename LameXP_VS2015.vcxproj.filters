@@ -424,12 +424,6 @@
     <ClCompile Include="tmp\LameXP\QRC_Tools.flac-x86-sse2.cpp">
       <Filter>Generated Files\QRC</Filter>
     </ClCompile>
-    <ClCompile Include="tmp\LameXP\QRC_Tools.gpgv.cpp">
-      <Filter>Generated Files\QRC</Filter>
-    </ClCompile>
-    <ClCompile Include="tmp\LameXP\QRC_Tools.keyring.cpp">
-      <Filter>Generated Files\QRC</Filter>
-    </ClCompile>
     <ClCompile Include="tmp\LameXP\QRC_Tools.lame-x64-avx.cpp">
       <Filter>Generated Files\QRC</Filter>
     </ClCompile>
@@ -572,6 +566,9 @@
       <Filter>Generated Files\QRC</Filter>
     </ClCompile>
     <ClCompile Include="tmp\LameXP\QRC_Tools.mpg123-x64-avx.cpp">
+      <Filter>Generated Files\QRC</Filter>
+    </ClCompile>
+    <ClCompile Include="tmp\LameXP\QRC_Tools.verify.cpp">
       <Filter>Generated Files\QRC</Filter>
     </ClCompile>
   </ItemGroup>
@@ -929,12 +926,6 @@
     <CustomBuild Include="res\Tools.flac-x86-sse2.qrc">
       <Filter>Resources</Filter>
     </CustomBuild>
-    <CustomBuild Include="res\Tools.gpgv.qrc">
-      <Filter>Resources</Filter>
-    </CustomBuild>
-    <CustomBuild Include="res\Tools.keyring.qrc">
-      <Filter>Resources</Filter>
-    </CustomBuild>
     <CustomBuild Include="res\Tools.lame-x64-avx.qrc">
       <Filter>Resources</Filter>
     </CustomBuild>
@@ -1080,6 +1071,9 @@
       <Filter>Resources</Filter>
     </CustomBuild>
     <CustomBuild Include="res\Tools.mpg123-x64-avx.qrc">
+      <Filter>Resources</Filter>
+    </CustomBuild>
+    <CustomBuild Include="res\Tools.verify.qrc">
       <Filter>Resources</Filter>
     </CustomBuild>
   </ItemGroup>
