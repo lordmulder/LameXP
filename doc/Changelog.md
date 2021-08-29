@@ -6,17 +6,18 @@ subtitle: "Audio-Encoder Front-End &ndash; Changelog"
 
 # LameXP v4.xx History #
 
-## LameXP v4.19 [unreleased] ## {-}
+## LameXP v4.19 [2021-08-29] ## {-}
 * Updated LAME encoder to v3.100.1-SVN (2020-08-25), compiled with ICL 19.1 and MSVC 15.9
 * Updated Vorbis encoder to OggEnc v2.88 (2020-07-07), using libvorbis v1.3.7 with aoTuV beta-6.03
 * Updated Monkey's Audio binary to v6.29 (2021-05-25), compiled with ICL 19.2 and MSVC 15.9
 * Updated mpg123 decoder to v1.26.4 (2020-12-24), compiled with GCC 10.2.0
 * Updated MediaInfo to v21.03 (2021-03-26), compiled with ICL 2021.2 and MSVC 15.9
 * Updated cURL to v7.77.0 (2021-05-26), with libcurl v7.77.0 and OpenSSL v1.1.1k
+* Updated the Windows SDK version used for release builds (Visual Studio 2017) to 10.0.14393.0
 * Added Bulgarian (български) translation, thanks to Симеон Илиянов Цветков [<sicvetkov@uni-sofia.bg>](mailto:sicvetkov@uni-sofia.bg)
 * Added command-line switch `--no-splash`, which can be used to hide the "splash" screen at startup
 * Added a workaround for missing `normaliz.dll` to the installer (Windows XP only)
-* GnuPG has been replaced by CodeSign verification tool for checking the auto-update signatures
+* GnuPG has been replaced by [CodeSign](https://bitbucket.org/muldersoft/codesign/) verification tool for checking the auto-update signatures
 
 ## LameXP v4.18 [2019-12-18] ## {-}
 * Upgraded build environment to Microsoft Visual Studio 2017.9 (MSVC 14.16)
