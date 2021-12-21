@@ -424,7 +424,7 @@ bool ProcessingDialog::eventFilter(QObject *obj, QEvent *event)
 
 bool ProcessingDialog::event(QEvent *e)
 {
-	switch(e->type())
+	switch(static_cast<qint32>(e->type()))
 	{
 	case MUtils::GUI::USER_EVENT_QUERYENDSESSION:
 		qWarning("System is shutting down, preparing to abort...");
@@ -491,9 +491,10 @@ void ProcessingDialog::initEncoding(void)
 	ui->checkBox_shutdownComputer->setEnabled(true);
 	ui->checkBox_shutdownComputer->setChecked(false);
 
+	QIcon defaultIcon(":/icons/control_play_blue.png");
 	m_taskbar->setTaskbarState(MUtils::Taskbar7::TASKBAR_STATE_NORMAL);
 	m_taskbar->setTaskbarProgress(0, m_pendingJobs.count());
-	m_taskbar->setOverlayIcon(&QIcon(":/icons/control_play_blue.png"));
+	m_taskbar->setOverlayIcon(&defaultIcon);
 
 	if(!m_diskObserver)
 	{
@@ -579,7 +580,7 @@ void ProcessingDialog::startNextJob(void)
 	if(m_settings->samplingRate() > 0)
 	{
 		const int targetRate = SettingsModel::samplingRates[qBound(1, m_settings->samplingRate(), 6)];
-		if((targetRate != currentFile.techInfo().audioSamplerate()) || (currentFile.techInfo().audioSamplerate() == 0))
+		if((targetRate != static_cast<int>(currentFile.techInfo().audioSamplerate())) || (currentFile.techInfo().audioSamplerate() == 0))
 		{
 			if (encoder->toEncoderInfo()->isResamplingSupported())
 			{
@@ -692,9 +693,10 @@ void ProcessingDialog::doneEncoding(void)
 	
 	if(m_userAborted)
 	{
+		QIcon errorIcon(":/icons/error.png");
 		CHANGE_BACKGROUND_COLOR(ui->frame_header, QColor("#FFFFE0"));
 		m_taskbar->setTaskbarState(MUtils::Taskbar7::TASKBAR_STATE_ERROR);
-		m_taskbar->setOverlayIcon(&QIcon(":/icons/error.png"));
+		m_taskbar->setOverlayIcon(&errorIcon);
 		SET_PROGRESS_TEXT((m_succeededJobs.count() > 0) ? tr("Process was aborted by the user after %n file(s)!", "", m_succeededJobs.count()) : tr("Process was aborted prematurely by the user!"));
 		m_systemTray->showMessage(tr("LameXP - Aborted"), tr("Process was aborted by the user."), QSystemTrayIcon::Warning);
 		m_systemTray->setIcon(QIcon(":/icons/cd_delete.png"));
@@ -711,9 +713,10 @@ void ProcessingDialog::doneEncoding(void)
 
 		if(m_failedJobs.count() > 0)
 		{
+			QIcon warningIcon(":/icons/exclamation.png");
 			CHANGE_BACKGROUND_COLOR(ui->frame_header, QColor("#FFF0F0"));
 			m_taskbar->setTaskbarState(MUtils::Taskbar7::TASKBAR_STATE_ERROR);
-			m_taskbar->setOverlayIcon(&QIcon(":/icons/exclamation.png"));
+			m_taskbar->setOverlayIcon(&warningIcon);
 			if(m_skippedJobs.count() > 0)
 			{
 				SET_PROGRESS_TEXT(tr("Error: %1 of %n file(s) failed (%2). Double-click failed items for detailed information!", "", m_failedJobs.count() + m_succeededJobs.count() + m_skippedJobs.count()).arg(QString::number(m_failedJobs.count()), tr("%n file(s) skipped", "", m_skippedJobs.count())));
@@ -729,9 +732,10 @@ void ProcessingDialog::doneEncoding(void)
 		}
 		else
 		{
+			QIcon successIcon(":/icons/accept.png");
 			CHANGE_BACKGROUND_COLOR(ui->frame_header, QColor("#F0FFF0"));
 			m_taskbar->setTaskbarState(MUtils::Taskbar7::TASKBAR_STATE_NORMAL);
-			m_taskbar->setOverlayIcon(&QIcon(":/icons/accept.png"));
+			m_taskbar->setOverlayIcon(&successIcon);
 			if(m_skippedJobs.count() > 0)
 			{
 				SET_PROGRESS_TEXT(tr("All files completed successfully. Skipped %n file(s).", "", m_skippedJobs.count()));
@@ -829,7 +833,7 @@ void ProcessingDialog::logViewDoubleClicked(const QModelIndex &index)
 	}
 }
 
-void ProcessingDialog::logViewSectionSizeChanged(int logicalIndex, int oldSize, int newSize)
+void ProcessingDialog::logViewSectionSizeChanged(int logicalIndex, int /*oldSize*/, int /*newSize*/)
 {
 	if(logicalIndex == 1)
 	{

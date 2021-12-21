@@ -92,7 +92,7 @@ bool AACDecoder::decode(const QString &sourceFile, const QString &outputFile, QA
 	return (result == RESULT_SUCCESS);
 }
 
-bool AACDecoder::isFormatSupported(const QString &containerType, const QString &containerProfile, const QString &formatType, const QString &formatProfile, const QString &formatVersion)
+bool AACDecoder::isFormatSupported(const QString &containerType, const QString& /*containerProfile*/, const QString &formatType, const QString &formatProfile, const QString &formatVersion)
 {
 	if((containerType.compare(QLatin1String("ADTS"), Qt::CaseInsensitive) == 0) || (containerType.compare(QLatin1String("MPEG-4"), Qt::CaseInsensitive) == 0))
 	{

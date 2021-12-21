@@ -52,5 +52,5 @@ private:
 
 	static playlist_t isPlaylist(const QString &fileName);
 	static void fixFilePath(QFileInfo &filename, const QDir &baseDir, const QDir &rootDir);
-	static QString &unescapeXml(QString &str);
+	static QString unescapeXml(QString str);
 };

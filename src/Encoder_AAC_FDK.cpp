@@ -148,7 +148,7 @@ FDKAACEncoder::~FDKAACEncoder(void)
 {
 }
 
-bool FDKAACEncoder::encode(const QString &sourceFile, const AudioFileModel_MetaInfo &metaInfo, const unsigned int duration, const unsigned int channels, const QString &outputFile, QAtomicInt &abortFlag)
+bool FDKAACEncoder::encode(const QString &sourceFile, const AudioFileModel_MetaInfo &metaInfo, const unsigned int /*duration*/, const unsigned int /*channels*/, const QString &outputFile, QAtomicInt &abortFlag)
 {
 	QProcess process;
 	QStringList args;
@@ -225,7 +225,7 @@ bool FDKAACEncoder::encode(const QString &sourceFile, const AudioFileModel_MetaI
 	return (result == RESULT_SUCCESS);
 }
 
-bool FDKAACEncoder::isFormatSupported(const QString &containerType, const QString &containerProfile, const QString &formatType, const QString &formatProfile, const QString &formatVersion)
+bool FDKAACEncoder::isFormatSupported(const QString &containerType, const QString& /*containerProfile*/, const QString &formatType, const QString& /*formatProfile*/, const QString& /*formatVersion*/)
 {
 	if(containerType.compare(L1S("Wave"), Qt::CaseInsensitive) == 0)
 	{

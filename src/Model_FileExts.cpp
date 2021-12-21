@@ -86,12 +86,12 @@ FileExtsModel::~FileExtsModel(void)
 // Public Functions
 ////////////////////////////////////////////////////////////
 
-int FileExtsModel::columnCount(const QModelIndex &parent) const
+int FileExtsModel::columnCount(const QModelIndex& /*parent*/) const
 {
 	return 2;
 }
 
-int FileExtsModel::rowCount(const QModelIndex &parent) const
+int FileExtsModel::rowCount(const QModelIndex& /*parent*/) const
 {
 	return m_fileExt.count();
 }
@@ -155,12 +155,12 @@ QVariant FileExtsModel::headerData(int section, Qt::Orientation orientation, int
 	}
 }
 
-QModelIndex FileExtsModel::index(int row, int column, const QModelIndex & parent) const
+QModelIndex FileExtsModel::index(int row, int column, const QModelIndex& /*parent*/) const
 {
 	return createIndex(row, column, qHash((qint64(row) << 32)| qint64(column)));
 }
 
-QModelIndex  FileExtsModel::parent(const QModelIndex & index) const
+QModelIndex  FileExtsModel::parent(const QModelIndex& /*index*/) const
 {
 	return QModelIndex();
 }

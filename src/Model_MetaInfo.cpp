@@ -69,12 +69,12 @@ MetaInfoModel::~MetaInfoModel(void)
 // Public Functions
 ////////////////////////////////////////////////////////////
 
-int MetaInfoModel::columnCount(const QModelIndex &parent) const
+int MetaInfoModel::columnCount(const QModelIndex& /*parent*/) const
 {
 	return 2;
 }
 
-int MetaInfoModel::rowCount(const QModelIndex &parent) const
+int MetaInfoModel::rowCount(const QModelIndex& /*parent*/) const
 {
 	return MODEL_ROW_COUNT - m_offset;
 }
@@ -304,7 +304,6 @@ bool MetaInfoModel::setData (const QModelIndex &index, const QVariant &value, in
 
 void MetaInfoModel::editItem(const QModelIndex &index, QWidget *parent)
 {
-	bool ok = false;
 	int val = -1;
 	QStringList generes(QString("(%1)").arg(tr("Unspecified")));
 	QString temp;
@@ -327,8 +326,8 @@ void MetaInfoModel::editItem(const QModelIndex &index, QWidget *parent)
 			{
 				QMessageBox::warning(parent, tr("Edit Title"), tr("The title must not be empty. Generating title from file name!"));
 				temp = QFileInfo(m_fullInfo->filePath()).completeBaseName().replace("_", " ").simplified();
-				int index = temp.lastIndexOf(" - ");
-				if(index >= 0) temp = temp.mid(index + 3).trimmed();
+				const int idx = temp.lastIndexOf(" - ");
+				if(idx >= 0) temp = temp.mid(idx + 3).trimmed();
 			}
 			beginResetModel();
 			m_metaInfo->setTitle(temp.isEmpty() ? QString() : temp);

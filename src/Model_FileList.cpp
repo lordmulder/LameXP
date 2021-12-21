@@ -69,12 +69,12 @@ FileListModel::~FileListModel(void)
 // Public Functions
 ////////////////////////////////////////////////////////////
 
-int FileListModel::columnCount(const QModelIndex &parent) const
+int FileListModel::columnCount(const QModelIndex& /*parent*/) const
 {
 	return 2;
 }
 
-int FileListModel::rowCount(const QModelIndex &parent) const
+int FileListModel::rowCount(const QModelIndex& /*parent*/) const
 {
 	return m_fileList.count();
 }

@@ -129,7 +129,7 @@ public:
 	{
 		if(s_errMsg[0])
 		{
-			strncpy_s(buffer, BUFF_SIZE, s_errMsg, _TRUNCATE);
+			strncpy_s(buffer, buffSize, s_errMsg, _TRUNCATE);
 			return true;
 		}
 		return false;
@@ -294,6 +294,8 @@ public:
 protected:
 	void taskMain(void)
 	{
+		QRegExp regExpVer = MAKE_REGEXP(m_encoder_info->regExpVer);
+		QRegExp regExpSig = MAKE_REGEXP(m_encoder_info->regExpSig);
 		initAacEncImpl
 		(
 			m_encoder_info->toolName,
@@ -303,13 +305,13 @@ protected:
 			m_encoder_info->verDigits,
 			m_encoder_info->verShift,
 			m_encoder_info->verStr,
-			MAKE_REGEXP(m_encoder_info->regExpVer),
-			MAKE_REGEXP(m_encoder_info->regExpSig),
+			regExpVer,
+			regExpSig,
 			m_encoder_info->regExpLib[0] ? createRegExpList(m_encoder_info->regExpLib) : QList<QRegExp>()
 		);
 	}
 
-	static void initAacEncImpl(const char *const toolName, const char *const fileNames[], const QStringList &checkArgs, const quint32 &toolMinVersion, const quint32 &verDigits, const quint32 &verShift, const char *const verStr, QRegExp &regExpVer, QRegExp &regExpSig = QRegExp(), const QList<QRegExp> &regExpLib = QList<QRegExp>());
+	static void initAacEncImpl(const char *const toolName, const char *const fileNames[], const QStringList &checkArgs, const quint32 &toolMinVersion, const quint32 &verDigits, const quint32 &verShift, const char *const verStr, QRegExp &regExpVer, QRegExp &regExpSig, const QList<QRegExp> &regExpLib = QList<QRegExp>());
 
 private:
 	const aac_encoder_t *const m_encoder_info;

@@ -75,7 +75,7 @@ bool SpeexDecoder::decode(const QString &sourceFile, const QString &outputFile, 
 	return (result == RESULT_SUCCESS);
 }
 
-bool SpeexDecoder::isFormatSupported(const QString &containerType, const QString &containerProfile, const QString &formatType, const QString &formatProfile, const QString &formatVersion)
+bool SpeexDecoder::isFormatSupported(const QString &containerType, const QString& /*containerProfile*/, const QString &formatType, const QString& /*formatProfile*/, const QString& /*formatVersion*/)
 {
 	static const QLatin1String speex("Speex");
 	if(containerType.compare(speex, Qt::CaseInsensitive) == 0 || containerType.compare(QLatin1String("OGG"), Qt::CaseInsensitive) == 0)

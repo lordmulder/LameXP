@@ -86,7 +86,7 @@ bool TTADecoder::decode(const QString &sourceFile, const QString &outputFile, QA
 	return (result == RESULT_SUCCESS);
 }
 
-bool TTADecoder::isFormatSupported(const QString &containerType, const QString &containerProfile, const QString &formatType, const QString &formatProfile, const QString &formatVersion)
+bool TTADecoder::isFormatSupported(const QString &containerType, const QString& /*containerProfile*/, const QString &formatType, const QString& /*formatProfile*/, const QString& /*formatVersion*/)
 {
 	static const QLatin1String tta("TTA");
 	if(containerType.compare(tta, Qt::CaseInsensitive) == 0)

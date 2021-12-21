@@ -211,7 +211,7 @@ static inline void MAKE_TRANSPARENT(QWidget *const widget, const bool &flag)
 }
 
 template <typename T>
-static QList<T>& INVERT_LIST(QList<T> &list)
+static QList<T> INVERT_LIST(QList<T> list)
 {
 	if(!list.isEmpty())
 	{
@@ -1401,7 +1401,7 @@ bool MainWindow::eventFilter(QObject *obj, QEvent *event)
 
 bool MainWindow::event(QEvent *e)
 {
-	switch(e->type())
+	switch(static_cast<qint32>(e->type()))
 	{
 	case MUtils::GUI::USER_EVENT_QUERYENDSESSION:
 		qWarning("System is shutting down, main window prepares to close...");
@@ -1946,7 +1946,7 @@ void MainWindow::tabActionActivated(QAction *action)
 /*
  * Handle corner widget Event
  */
-void MainWindow::cornerWidgetEventOccurred(QWidget *sender, QEvent *event)
+void MainWindow::cornerWidgetEventOccurred(QWidget* /*sender*/, QEvent *const event)
 {
 	if(event->type() == QEvent::MouseButtonPress)
 	{
@@ -2050,7 +2050,7 @@ void MainWindow::languageActionActivated(QAction *action)
 /*
  * Load language from file action triggered
  */
-void MainWindow::languageFromFileActionActivated(bool checked)
+void MainWindow::languageFromFileActionActivated(bool /*checked*/)
 {
 	QFileDialog dialog(this, tr("Load Translation"));
 	dialog.setFileMode(QFileDialog::ExistingFile);
@@ -2188,7 +2188,7 @@ void MainWindow::disableSlowStartupNotificationsActionTriggered(bool checked)
 /*
  * Import a Cue Sheet file
  */
-void MainWindow::importCueSheetActionTriggered(bool checked)
+void MainWindow::importCueSheetActionTriggered(bool /*checked*/)
 {
 	ABORT_IF_BUSY;
 	WidgetHideHelper hiderHelper(m_dropBox.data());
@@ -2237,7 +2237,7 @@ void MainWindow::importCueSheetActionTriggered(bool checked)
 /*
  * Show the "drop box" widget
  */
-void MainWindow::showDropBoxWidgetActionTriggered(bool checked)
+void MainWindow::showDropBoxWidgetActionTriggered(bool /*checked*/)
 {
 	m_settings->dropBoxWidgetEnabled(true);
 	
@@ -3375,7 +3375,7 @@ void MainWindow::centerOutputFolderModel_doAsync(void)
 /*
  * File system model asynchronously loaded a dir
  */
-void MainWindow::outputFolderDirectoryLoaded(const QString &path)
+void MainWindow::outputFolderDirectoryLoaded(const QString& /*path*/)
 {
 	if(m_outputFolderViewCentering)
 	{
@@ -3386,7 +3386,7 @@ void MainWindow::outputFolderDirectoryLoaded(const QString &path)
 /*
  * File system model inserted new items
  */
-void MainWindow::outputFolderRowsInserted(const QModelIndex &parent, int start, int end)
+void MainWindow::outputFolderRowsInserted(const QModelIndex& /*parent*/, int /*start*/, int /*end*/)
 {
 	if(m_outputFolderViewCentering)
 	{
@@ -3397,7 +3397,7 @@ void MainWindow::outputFolderRowsInserted(const QModelIndex &parent, int start, 
 /*
  * Directory view item was expanded by user
  */
-void MainWindow::outputFolderItemExpanded(const QModelIndex &item)
+void MainWindow::outputFolderItemExpanded(const QModelIndex& /*item*/)
 {
 	//We need to stop centering as soon as the user has expanded an item manually!
 	m_outputFolderViewCentering = false;
@@ -3406,7 +3406,7 @@ void MainWindow::outputFolderItemExpanded(const QModelIndex &item)
 /*
  * View event for output folder control occurred
  */
-void MainWindow::outputFolderViewEventOccurred(QWidget *sender, QEvent *event)
+void MainWindow::outputFolderViewEventOccurred(QWidget* /*sender*/, QEvent *event)
 {
 	switch(event->type())
 	{

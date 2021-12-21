@@ -83,7 +83,7 @@ void WaveDecoder::updateProgress(const double &progress)
 	emit statusUpdated(qBound(0, qRound(progress * 100.0), 100));
 }
 
-bool WaveDecoder::isFormatSupported(const QString &containerType, const QString &containerProfile, const QString &formatType, const QString &formatProfile, const QString &formatVersion)
+bool WaveDecoder::isFormatSupported(const QString &containerType, const QString& /*containerProfile*/, const QString &formatType, const QString& /*formatProfile*/, const QString& /*formatVersion*/)
 {
 	if(containerType.compare(QLatin1String("Wave"), Qt::CaseInsensitive) == 0)
 	{

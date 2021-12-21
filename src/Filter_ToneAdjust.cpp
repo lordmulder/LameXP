@@ -51,7 +51,7 @@ ToneAdjustFilter::~ToneAdjustFilter(void)
 {
 }
 
-AbstractFilter::FilterResult ToneAdjustFilter::apply(const QString &sourceFile, const QString &outputFile, AudioFileModel_TechInfo *const formatInfo, QAtomicInt &abortFlag)
+AbstractFilter::FilterResult ToneAdjustFilter::apply(const QString &sourceFile, const QString &outputFile, AudioFileModel_TechInfo* /*formatInfo*/, QAtomicInt &abortFlag)
 {
 	QProcess process;
 	QStringList args;

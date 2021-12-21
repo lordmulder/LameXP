@@ -135,7 +135,7 @@ void DropBox::changeEvent(QEvent *e)
 	}
 }
 
-void DropBox::showEvent(QShowEvent *event)
+void DropBox::showEvent(QShowEvent* /*event*/)
 {
 	m_screenGeometry = SCREEN_GEOMETRY();
 	setFixedSize(ui->dropBoxLabel->pixmap()->size());

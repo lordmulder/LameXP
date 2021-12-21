@@ -142,7 +142,7 @@ MACEncoder::~MACEncoder(void)
 {
 }
 
-bool MACEncoder::encode(const QString &sourceFile, const AudioFileModel_MetaInfo &metaInfo, const unsigned int duration, const unsigned int channels, const QString &outputFile, QAtomicInt &abortFlag)
+bool MACEncoder::encode(const QString &sourceFile, const AudioFileModel_MetaInfo &metaInfo, const unsigned int /*duration*/, const unsigned int /*channels*/, const QString &outputFile, QAtomicInt &abortFlag)
 {
 	QProcess process;
 	QStringList args;
@@ -200,7 +200,7 @@ bool MACEncoder::encode(const QString &sourceFile, const AudioFileModel_MetaInfo
 	return (result == RESULT_SUCCESS);
 }
 
-bool MACEncoder::isFormatSupported(const QString &containerType, const QString &containerProfile, const QString &formatType, const QString &formatProfile, const QString &formatVersion)
+bool MACEncoder::isFormatSupported(const QString &containerType, const QString& /*containerProfile*/, const QString &formatType, const QString& /*formatProfile*/, const QString& /*formatVersion*/)
 {
 	if(containerType.compare(L1S("Wave"), Qt::CaseInsensitive) == 0)
 	{

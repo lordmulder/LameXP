@@ -36,7 +36,7 @@ AbstractDecoder::~AbstractDecoder(void)
  * Default implementation
  */
 
-bool AbstractDecoder::isFormatSupported(const QString &containerType, const QString &containerProfile, const QString &formatType, const QString &formatProfile, const QString &formatVersion)
+bool AbstractDecoder::isFormatSupported(const QString& /*containerType*/, const QString& /*containerProfile*/, const QString& /*formatType*/, const QString& /*formatProfile*/, const QString& /*formatVersion*/)
 {
 	return false;
 }

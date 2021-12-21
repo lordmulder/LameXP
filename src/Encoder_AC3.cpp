@@ -144,7 +144,7 @@ AC3Encoder::~AC3Encoder(void)
 {
 }
 
-bool AC3Encoder::encode(const QString &sourceFile, const AudioFileModel_MetaInfo &metaInfo, const unsigned int duration, const unsigned int channels, const QString &outputFile, QAtomicInt &abortFlag)
+bool AC3Encoder::encode(const QString &sourceFile, const AudioFileModel_MetaInfo& /*metaInfo*/, const unsigned int /*duration*/, const unsigned int /*channels*/, const QString &outputFile, QAtomicInt &abortFlag)
 {
 	QProcess process;
 	QStringList args;
@@ -245,7 +245,7 @@ const unsigned int *AC3Encoder::supportedSamplerates(void)
 	return supportedRates;
 }
 
-bool AC3Encoder::isFormatSupported(const QString &containerType, const QString &containerProfile, const QString &formatType, const QString &formatProfile, const QString &formatVersion)
+bool AC3Encoder::isFormatSupported(const QString &containerType, const QString& /*containerProfile*/, const QString &formatType, const QString& /*formatProfile*/, const QString& /*formatVersion*/)
 {
 	if(containerType.compare(L1S("Wave"), Qt::CaseInsensitive) == 0)
 	{

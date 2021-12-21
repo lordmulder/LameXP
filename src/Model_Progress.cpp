@@ -46,12 +46,12 @@ ProgressModel::~ProgressModel(void)
 {
 }
 
-int ProgressModel::columnCount(const QModelIndex &parent) const
+int ProgressModel::columnCount(const QModelIndex& /*parent*/) const
 {
 	return 2;
 }
 
-int ProgressModel::rowCount(const QModelIndex &parent) const
+int ProgressModel::rowCount(const QModelIndex& /*parent*/) const
 {
 	return m_jobList.count();
 }

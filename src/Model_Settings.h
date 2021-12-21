@@ -212,8 +212,8 @@ public:
 	void syncNow(void);
 
 private:
-	SettingsModel(const SettingsModel &other) {}
-	SettingsModel &operator=(const SettingsModel &other) { return *this; }
+	SettingsModel(const SettingsModel& /*other*/) {}
+	SettingsModel &operator=(const SettingsModel& /*other*/) { return *this; }
 
 	QString initDirectory(const QString &path) const;
 	QString defaultLanguage(void) const;

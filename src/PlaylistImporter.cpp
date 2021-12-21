@@ -366,7 +366,7 @@ void PlaylistImporter::fixFilePath(QFileInfo &filename, const QDir &baseDir, con
 	}
 }
 
-QString &PlaylistImporter::unescapeXml(QString &str)
+QString PlaylistImporter::unescapeXml(QString str)
 {
 	for(int i = 0; (g_xmlEscapeSequence[i].escape && g_xmlEscapeSequence[i].output); i++)
 	{

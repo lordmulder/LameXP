@@ -68,7 +68,7 @@ bool ShortenDecoder::decode(const QString &sourceFile, const QString &outputFile
 	return (awaitProcess(process, abortFlag) == RESULT_SUCCESS);
 }
 
-bool ShortenDecoder::isFormatSupported(const QString &containerType, const QString &containerProfile, const QString &formatType, const QString &formatProfile, const QString &formatVersion)
+bool ShortenDecoder::isFormatSupported(const QString &containerType, const QString& /*containerProfile*/, const QString &formatType, const QString& /*formatProfile*/, const QString& /*formatVersion*/)
 {
 	static const QLatin1String shorten("Shorten");
 	if(containerType.compare(shorten, Qt::CaseInsensitive) == 0)

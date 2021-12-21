@@ -72,7 +72,7 @@ public:
 		}
 	}
 
-	virtual int valueAt(int mode, int index) const
+	virtual int valueAt(int mode, int /*index*/) const
 	{
 		switch(mode)
 		{
@@ -132,7 +132,7 @@ WaveEncoder::~WaveEncoder(void)
 {
 }
 
-bool WaveEncoder::encode(const QString &sourceFile, const AudioFileModel_MetaInfo &metaInfo, const unsigned int duration, const unsigned int channels, const QString &outputFile, QAtomicInt &abortFlag)
+bool WaveEncoder::encode(const QString &sourceFile, const AudioFileModel_MetaInfo& /*metaInfo*/, const unsigned int /*duration*/, const unsigned int /*channels*/, const QString &outputFile, QAtomicInt &abortFlag)
 {
 	emit messageLogged(QString("Copy file \"%1\" to \"%2\"\n").arg(sourceFile, outputFile));
 
@@ -169,7 +169,7 @@ void WaveEncoder::updateProgress(const double &progress)
 	emit statusUpdated(qRound(progress * 100.0));
 }
 
-bool WaveEncoder::isFormatSupported(const QString &containerType, const QString &containerProfile, const QString &formatType, const QString &formatProfile, const QString &formatVersion)
+bool WaveEncoder::isFormatSupported(const QString &containerType, const QString& /*containerProfile*/, const QString &formatType, const QString& /*formatProfile*/, const QString& /*formatVersion*/)
 {
 	if(containerType.compare(L1S("Wave"), Qt::CaseInsensitive) == 0)
 	{

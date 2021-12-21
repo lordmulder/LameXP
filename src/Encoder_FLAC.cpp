@@ -135,7 +135,7 @@ FLACEncoder::~FLACEncoder(void)
 {
 }
 
-bool FLACEncoder::encode(const QString &sourceFile, const AudioFileModel_MetaInfo &metaInfo, const unsigned int duration, const unsigned int channels, const QString &outputFile, QAtomicInt &abortFlag)
+bool FLACEncoder::encode(const QString &sourceFile, const AudioFileModel_MetaInfo &metaInfo, const unsigned int /*duration*/, const unsigned int /*channels*/, const QString &outputFile, QAtomicInt &abortFlag)
 {
 	QProcess process;
 	QStringList args;
@@ -188,7 +188,7 @@ bool FLACEncoder::encode(const QString &sourceFile, const AudioFileModel_MetaInf
 	return (result == RESULT_SUCCESS);
 }
 
-bool FLACEncoder::isFormatSupported(const QString &containerType, const QString &containerProfile, const QString &formatType, const QString &formatProfile, const QString &formatVersion)
+bool FLACEncoder::isFormatSupported(const QString &containerType, const QString& /*containerProfile*/, const QString &formatType, const QString& /*formatProfile*/, const QString& /*formatVersion*/)
 {
 	if(containerType.compare(L1S("Wave"), Qt::CaseInsensitive) == 0)
 	{

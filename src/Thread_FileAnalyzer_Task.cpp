@@ -280,7 +280,6 @@ const AudioFileModel& AnalyzeTask::analyzeMediaFile(const QString &filePath, Aud
 {
 	//bool skipNext = false;
 	QPair<quint32, quint32> id_val(UINT_MAX, UINT_MAX);
-	quint32 coverType = UINT_MAX;
 	QByteArray coverData;
 
 	QStringList params;

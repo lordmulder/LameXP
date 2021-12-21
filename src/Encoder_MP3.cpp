@@ -157,7 +157,7 @@ MP3Encoder::~MP3Encoder(void)
 {
 }
 
-bool MP3Encoder::encode(const QString &sourceFile, const AudioFileModel_MetaInfo &metaInfo, const unsigned int duration, const unsigned int channels, const QString &outputFile, QAtomicInt &abortFlag)
+bool MP3Encoder::encode(const QString &sourceFile, const AudioFileModel_MetaInfo &metaInfo, const unsigned int /*duration*/, const unsigned int /*channels*/, const QString &outputFile, QAtomicInt &abortFlag)
 {
 	QProcess process;
 	QStringList args;
@@ -268,7 +268,7 @@ bool MP3Encoder::encode(const QString &sourceFile, const AudioFileModel_MetaInfo
 	return (result == RESULT_SUCCESS);
 }
 
-bool MP3Encoder::isFormatSupported(const QString &containerType, const QString &containerProfile, const QString &formatType, const QString &formatProfile, const QString &formatVersion)
+bool MP3Encoder::isFormatSupported(const QString &containerType, const QString& /*containerProfile*/, const QString &formatType, const QString &formatProfile, const QString &formatVersion)
 {
 	if(containerType.compare(L1S("Wave"), Qt::CaseInsensitive) == 0)
 	{

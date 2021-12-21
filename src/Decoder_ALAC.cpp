@@ -87,7 +87,7 @@ bool ALACDecoder::decode(const QString &sourceFile, const QString &outputFile, Q
 	return (result == RESULT_SUCCESS);
 }
 
-bool ALACDecoder::isFormatSupported(const QString &containerType, const QString &containerProfile, const QString &formatType, const QString &formatProfile, const QString &formatVersion)
+bool ALACDecoder::isFormatSupported(const QString &containerType, const QString& /*containerProfile*/, const QString &formatType, const QString& /*formatProfile*/, const QString& /*formatVersion*/)
 {
 	if(containerType.compare(QLatin1String("MPEG-4"), Qt::CaseInsensitive) == 0)
 	{

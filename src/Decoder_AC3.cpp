@@ -84,7 +84,7 @@ bool AC3Decoder::decode(const QString &sourceFile, const QString &outputFile, QA
 	return (result == RESULT_SUCCESS);
 }
 
-bool AC3Decoder::isFormatSupported(const QString &containerType, const QString &containerProfile, const QString &formatType, const QString &formatProfile, const QString &formatVersion)
+bool AC3Decoder::isFormatSupported(const QString &containerType, const QString& /*containerProfile*/, const QString &formatType, const QString& /*formatProfile*/, const QString& /*formatVersion*/)
 {
 	static const QLatin1String ac3("AC-3"), eac3("E-AC-3"), dts("DTS");
 	if(containerType.compare(ac3, Qt::CaseInsensitive) == 0)

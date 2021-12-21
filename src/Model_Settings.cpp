@@ -548,9 +548,9 @@ QString SettingsModel::defaultLanguage(void) const
 		//Try to find a suitable translation for the user's system language *and* country
 		for(QStringList::ConstIterator iter = languages.constBegin(); iter != languages.constEnd(); iter++)
 		{
-			if(MUtils::Translation::get_sysid(*iter) == systemLanguage.language())
+			if(MUtils::Translation::get_sysid(*iter) == static_cast<quint32>(systemLanguage.language()))
 			{
-				if(MUtils::Translation::get_country(*iter) == systemLanguage.country())
+				if(MUtils::Translation::get_country(*iter) == static_cast<quint32>(systemLanguage.country()))
 				{
 					m_defaultLanguage.reset(new QString(*iter));
 					return (*iter);
@@ -561,7 +561,7 @@ QString SettingsModel::defaultLanguage(void) const
 		//Try to find a suitable translation for the user's system language
 		for(QStringList::ConstIterator iter = languages.constBegin(); iter != languages.constEnd(); iter++)
 		{
-			if(MUtils::Translation::get_sysid(*iter) == systemLanguage.language())
+			if(MUtils::Translation::get_sysid(*iter) == static_cast<quint32>(systemLanguage.language()))
 			{
 				m_defaultLanguage.reset(new QString(*iter));
 				return (*iter);

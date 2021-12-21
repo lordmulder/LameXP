@@ -155,7 +155,7 @@ QModelIndex CueSheetModel::index(int row, int column, const QModelIndex &parent)
 	return QModelIndex();
 }
 
-int CueSheetModel::columnCount(const QModelIndex &parent) const
+int CueSheetModel::columnCount(const QModelIndex& /*parent*/) const
 {
 	QMutexLocker lock(&m_mutex);
 	return 4;
@@ -195,7 +195,7 @@ QModelIndex CueSheetModel::parent(const QModelIndex &child) const
 	return QModelIndex();
 }
 
-QVariant CueSheetModel::headerData (int section, Qt::Orientation orientation, int role) const
+QVariant CueSheetModel::headerData (int section, Qt::Orientation /*orientation*/, int role) const
 {
 	QMutexLocker lock(&m_mutex);
 	
@@ -744,13 +744,13 @@ int CueSheetModel::parseCueFile(QFile &cueFile, const QDir &baseDir, QCoreApplic
 			MUtils::OS::sleep_ms(10);
 		}
 
-		CueSheetFile *currentFile = m_files.at(i);
+		currentFile = m_files.at(i);
 		int nTracks = currentFile->trackCount();
 		if(nTracks > 1)
 		{
 			for(int j = 1; j < nTracks; j++)
 			{
-				CueSheetTrack *currentTrack = currentFile->track(j);
+				currentTrack = currentFile->track(j);
 				CueSheetTrack *previousTrack = currentFile->track(j-1);
 				double duration = currentTrack->startIndex() - previousTrack->startIndex();
 				previousTrack->setDuration(qMax(0.0, duration));
@@ -776,7 +776,7 @@ int CueSheetModel::parseCueFile(QFile &cueFile, const QDir &baseDir, QCoreApplic
 				application->processEvents();
 				MUtils::OS::sleep_ms(10);
 			}
-			CueSheetFile *currentFile = m_files.at(i);
+			currentFile = m_files.at(i);
 			int nTracks = currentFile->trackCount();
 			if(nTracks > 1)
 			{

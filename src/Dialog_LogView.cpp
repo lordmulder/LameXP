@@ -87,7 +87,7 @@ void LogViewDialog::copyButtonClicked(void)
 	mime->setData("text/plain", MUTILS_UTF8(ui->textEdit->toPlainText()));
 	QApplication::clipboard()->setMimeData(mime);
 	m_clipboardUsed = true;
-	m_oldIcon->swap(ui->buttonCopy->icon());
+	*m_oldIcon = ui->buttonCopy->icon();
 	ui->buttonCopy->setIcon(*m_acceptIcon);
 	ui->buttonCopy->blockSignals(true);
 	QTimer::singleShot(1250, this, SLOT(restoreIcon()));
@@ -117,6 +117,6 @@ void LogViewDialog::restoreIcon(void)
 	{
 		ui->buttonCopy->setIcon(*m_oldIcon);
 		ui->buttonCopy->blockSignals(false);
-		m_oldIcon->swap(QIcon());
+		*m_oldIcon = QIcon();
 	}
 }

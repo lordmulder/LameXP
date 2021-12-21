@@ -66,7 +66,7 @@ AbstractFilter::FilterResult ResampleFilter::apply(const QString &sourceFile, co
 	QProcess process;
 	QStringList args;
 
-	if((m_samplingRate == formatInfo->audioSamplerate()) && (m_bitDepth == formatInfo->audioBitdepth()))
+	if((m_samplingRate == static_cast<int>(formatInfo->audioSamplerate())) && (m_bitDepth == static_cast<int>(formatInfo->audioBitdepth())))
 	{
 		messageLogged("Skipping resample filter!");
 		qDebug("Resampling filter target samplerate/bitdepth is equals to the format of the input file, skipping!");

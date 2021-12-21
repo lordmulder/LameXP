@@ -86,7 +86,7 @@ bool WMADecoder::decode(const QString &sourceFile, const QString &outputFile, QA
 	return (result == RESULT_SUCCESS);
 }
 
-bool WMADecoder::isFormatSupported(const QString &containerType, const QString &containerProfile, const QString &formatType, const QString &formatProfile, const QString &formatVersion)
+bool WMADecoder::isFormatSupported(const QString &containerType, const QString& /*containerProfile*/, const QString &formatType, const QString &formatProfile, const QString &formatVersion)
 {
 	if(containerType.compare(QLatin1String("Windows Media"), Qt::CaseInsensitive) == 0)
 	{

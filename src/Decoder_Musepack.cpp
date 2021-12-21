@@ -86,7 +86,7 @@ bool MusepackDecoder::decode(const QString &sourceFile, const QString &outputFil
 	return (result == RESULT_SUCCESS);
 }
 
-bool MusepackDecoder::isFormatSupported(const QString &containerType, const QString &containerProfile, const QString &formatType, const QString &formatProfile, const QString &formatVersion)
+bool MusepackDecoder::isFormatSupported(const QString &containerType, const QString& /*containerProfile*/, const QString &formatType, const QString& /*formatProfile*/, const QString& /*formatVersion*/)
 {
 	static const QLatin1String mpc_sv8("Musepack SV8"), mpc_sv7("Musepack SV7");
 	if((containerType.compare(mpc_sv8, Qt::CaseInsensitive) == 0) || (containerType.compare(mpc_sv7, Qt::CaseInsensitive) == 0))

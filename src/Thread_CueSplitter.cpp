@@ -238,7 +238,7 @@ void CueSplitter::run()
 // Slots
 ////////////////////////////////////////////////////////////
 
-void CueSplitter::handleUpdate(int progress)
+void CueSplitter::handleUpdate(int /*progress*/)
 {
 	//QString("%1 [%2]").arg(m_activeFile, QString::number(progress)))
 }
@@ -383,16 +383,16 @@ void CueSplitter::splitFile(const QString &output, const int trackNo, const QStr
 						unsigned int duration[3U];
 						if (MUtils::regexp_parse_uint32(rxDuration, duration, 3U))
 						{
-							unsigned intputLen = (duration[0U] * 3600) + (duration[1U] * 60) + duration[2U];
+							unsigned int intputLen = (duration[0U] * 3600) + (duration[1U] * 60) + duration[2U];
 							if (length == std::numeric_limits<double>::infinity())
 							{
 								qDebug("Duration updated from SoX info!");
-								int duration = intputLen - static_cast<int>(floor(offset + 0.5));
-								if (duration < 0)
+								int durationSecs = intputLen - static_cast<int>(floor(offset + 0.5));
+								if (durationSecs < 0)
 								{
 									qWarning("Track is out of bounds: Track offset exceeds input file duration!");
 								}
-								outFileInfo.techInfo().setDuration(qMax(0, duration));
+								outFileInfo.techInfo().setDuration(qMax(0, durationSecs));
 							}
 							else
 							{

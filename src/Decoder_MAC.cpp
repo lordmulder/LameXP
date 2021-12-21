@@ -85,7 +85,7 @@ bool MACDecoder::decode(const QString &sourceFile, const QString &outputFile, QA
 	return (result == RESULT_SUCCESS);
 }
 
-bool MACDecoder::isFormatSupported(const QString &containerType, const QString &containerProfile, const QString &formatType, const QString &formatProfile, const QString &formatVersion)
+bool MACDecoder::isFormatSupported(const QString &containerType, const QString& /*containerProfile*/, const QString &formatType, const QString& /*formatProfile*/, const QString& /*formatVersion*/)
 {
 	static const QLatin1String mac("Monkey's Audio");
 	if(containerType.compare(mac, Qt::CaseInsensitive) == 0)

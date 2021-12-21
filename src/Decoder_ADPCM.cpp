@@ -86,7 +86,7 @@ bool ADPCMDecoder::decode(const QString &sourceFile, const QString &outputFile, 
 	return (result == RESULT_SUCCESS);
 }
 
-bool ADPCMDecoder::isFormatSupported(const QString &containerType, const QString &containerProfile, const QString &formatType, const QString &formatProfile, const QString &formatVersion)
+bool ADPCMDecoder::isFormatSupported(const QString &containerType, const QString& /*containerProfile*/, const QString &formatType, const QString& /*formatProfile*/, const QString& /*formatVersion*/)
 {
 	if(containerType.compare(QLatin1String("Wave"), Qt::CaseInsensitive) == 0)
 	{

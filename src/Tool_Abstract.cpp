@@ -161,7 +161,7 @@ bool AbstractTool::startProcess(QProcess &process, const QString &program, const
 */
 AbstractTool::result_t AbstractTool::awaitProcess(QProcess &process, QAtomicInt &abortFlag, int *const exitCode)
 {
-	return awaitProcess(process, abortFlag, [](const QString &text) { return false; }, exitCode);
+	return awaitProcess(process, abortFlag, [](const QString& /*text*/) { return false; }, exitCode);
 }
 
 /*

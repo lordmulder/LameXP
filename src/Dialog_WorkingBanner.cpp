@@ -162,7 +162,8 @@ void WorkingBanner::show(const QString &text, QThread *thread)
 	connect(thread, SIGNAL(terminated()), loop, SLOT(quit()));
 
 	//Set taskbar state
-	m_taskbar->setOverlayIcon(&QIcon(":/icons/hourglass.png"));
+	QIcon waitingIcon(":/icons/hourglass.png");
+	m_taskbar->setOverlayIcon(&waitingIcon);
 	m_taskbar->setTaskbarState(MUtils::Taskbar7::TASKBAR_STATE_INTERMEDIATE);
 
 	//Start the thread
@@ -197,7 +198,8 @@ void WorkingBanner::show(const QString &text, QEventLoop *loop)
 	this->show(text);
 
 	//Set taskbar state
-	m_taskbar->setOverlayIcon(&QIcon(":/icons/hourglass.png"));
+	QIcon waitingIcon(":/icons/hourglass.png");
+	m_taskbar->setOverlayIcon(&waitingIcon);
 	m_taskbar->setTaskbarState(MUtils::Taskbar7::TASKBAR_STATE_INTERMEDIATE);
 
 	//Update cursor

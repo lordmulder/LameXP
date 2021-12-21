@@ -85,7 +85,7 @@ bool FLACDecoder::decode(const QString &sourceFile, const QString &outputFile, Q
 	return (result == RESULT_SUCCESS);
 }
 
-bool FLACDecoder::isFormatSupported(const QString &containerType, const QString &containerProfile, const QString &formatType, const QString &formatProfile, const QString &formatVersion)
+bool FLACDecoder::isFormatSupported(const QString &containerType, const QString& /*containerProfile*/, const QString &formatType, const QString& /*formatProfile*/, const QString& /*formatVersion*/)
 {
 	static const QLatin1String flac("FLAC");
 	if((containerType.compare(flac, Qt::CaseInsensitive) == 0) || (containerType.compare(QLatin1String("OGG"), Qt::CaseInsensitive) == 0))

@@ -63,8 +63,9 @@ while(0)
 
 #define UPDATE_TASKBAR(STATE, ICON) do \
 { \
+	QIcon _icon((ICON)); \
 	m_taskbar->setTaskbarState((STATE)); \
-	m_taskbar->setOverlayIcon(&QIcon((ICON))); \
+	m_taskbar->setOverlayIcon(&_icon); \
 } \
 while(0)
 
@@ -258,8 +259,9 @@ void UpdateDialog::checkForUpdates(void)
 		}
 	}
 
+	QIcon defaultIcon(":/icons/transmit_blue.png");
 	m_taskbar->setTaskbarState(MUtils::Taskbar7::TASKBAR_STATE_NORMAL);
-	m_taskbar->setOverlayIcon(&QIcon(":/icons/transmit_blue.png"));
+	m_taskbar->setOverlayIcon(&defaultIcon);
 
 	ui->progressBar->setValue(0);
 	ui->installButton->setEnabled(false);
@@ -449,9 +451,10 @@ void UpdateDialog::applyUpdate(void)
 		}
 		else
 		{
+			QIcon warningIcon(":/icons/exclamation.png");
 			ui->statusLabel->setText(tr("Update failed. Please try again or download manually!"));
 			m_taskbar->setTaskbarState(MUtils::Taskbar7::TASKBAR_STATE_ERROR);
-			m_taskbar->setOverlayIcon(&QIcon(":/icons/exclamation.png"));
+			m_taskbar->setOverlayIcon(&warningIcon);
 			m_taskbar->setTaskbarProgress(100, 100);
 		}
 	}

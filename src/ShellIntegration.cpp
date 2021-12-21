@@ -200,7 +200,7 @@ void ShellIntegration::remove(bool async)
 // Private Functions
 ////////////////////////////////////////////////////////////
 
-void ShellIntegration::initializeTypes(const QString &lamexpFileType, const QString &lamexpShellAction, QStringList &nativeTypes)
+void ShellIntegration::initializeTypes(const QString &lamexpFileType, const QString& /*lamexpShellAction*/, QStringList &nativeTypes)
 {
 	nativeTypes.clear();
 	const QString progId = "Progid";
@@ -212,7 +212,7 @@ void ShellIntegration::initializeTypes(const QString &lamexpFileType, const QStr
 		const QString currentExt = (*iter).mid(1).trimmed(); /*remove leading asterisk*/
 		if(currentExt.isEmpty() || (!currentExt.startsWith('.')))
 		{
-			qWarning("Invalid file extension '%s' encountered -> skipping!", currentExt);
+			qWarning("Invalid file extension '%s' encountered -> skipping!", MUTILS_UTF8(currentExt));
 			continue;
 		}
 
