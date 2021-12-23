@@ -87,6 +87,15 @@ private:
 	QScopedPointer<QStringList> m_logFile;
 	QScopedPointer<QMovie> m_animator;
 
+	QScopedPointer<QIcon> m_iconTransmitting;
+	QScopedPointer<QIcon> m_iconFailure;
+	QScopedPointer<QIcon> m_iconUpdateAvailable;
+	QScopedPointer<QIcon> m_iconNoUpdates;
+	QScopedPointer<QIcon> m_iconNewVersionOlder;
+	QScopedPointer<QIcon> m_iconVersionError;
+	QScopedPointer<QIcon> m_iconNetworkError;
+	QScopedPointer<QIcon> m_iconServerError;
+
 	unsigned long m_updaterProcess;
 
 	bool m_success;

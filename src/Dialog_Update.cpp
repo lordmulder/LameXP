@@ -55,7 +55,7 @@
 #define SHOW_HINT(TEXT, ICON) do \
 { \
 	ui->hintLabel->setText((TEXT)); \
-	ui->hintIcon->setPixmap(QIcon((ICON)).pixmap(16,16)); \
+	ui->hintIcon->setPixmap((ICON)->pixmap(16,16)); \
 	ui->hintIcon->show(); \
 	ui->hintLabel->show(); \
 } \
@@ -63,9 +63,8 @@ while(0)
 
 #define UPDATE_TASKBAR(STATE, ICON) do \
 { \
-	QIcon _icon((ICON)); \
 	m_taskbar->setTaskbarState((STATE)); \
-	m_taskbar->setOverlayIcon(&_icon); \
+	m_taskbar->setOverlayIcon((ICON).data()); \
 } \
 while(0)
 
@@ -99,6 +98,16 @@ UpdateDialog::UpdateDialog(const SettingsModel *const settings, QWidget *parent)
 
 	//Disable "X" button
 	MUtils::GUI::enable_close_button(this, false);
+
+	//Load the icons
+	m_iconTransmitting.reset   (new QIcon(":/icons/transmit_blue.png"));
+	m_iconFailure.reset        (new QIcon(":/icons/exclamation.png"));
+	m_iconUpdateAvailable.reset(new QIcon(":/icons/shield_exclamation.png"));
+	m_iconNoUpdates.reset      (new QIcon(":/icons/shield_green.png"));
+	m_iconNewVersionOlder.reset(new QIcon(":/icons/shield_blue.png"));
+	m_iconVersionError.reset   (new QIcon(":/icons/shield_error.png"));
+	m_iconNetworkError.reset   (new QIcon(":/icons/network_error.png"));
+	m_iconServerError.reset    (new QIcon(":/icons/server_error.png"));
 
 	//Init animation
 	m_animator.reset(new QMovie(":/images/Loading3.gif"));
@@ -259,9 +268,8 @@ void UpdateDialog::checkForUpdates(void)
 		}
 	}
 
-	QIcon defaultIcon(":/icons/transmit_blue.png");
 	m_taskbar->setTaskbarState(MUtils::Taskbar7::TASKBAR_STATE_NORMAL);
-	m_taskbar->setOverlayIcon(&defaultIcon);
+	m_taskbar->setOverlayIcon(m_iconTransmitting.data());
 
 	ui->progressBar->setValue(0);
 	ui->installButton->setEnabled(false);
@@ -296,38 +304,38 @@ void UpdateDialog::threadStatusChanged(const int status)
 		break;
 	case MUtils::UpdateChecker::UpdateStatus_CompletedUpdateAvailable:
 		ui->statusLabel->setText(tr("A new version of LameXP is available!"));
-		SHOW_HINT(tr("We highly recommend all users to install this update as soon as possible."), ":/icons/shield_exclamation.png");
-		UPDATE_TASKBAR(MUtils::Taskbar7::TASKBAR_STATE_NORMAL, ":/icons/shield_exclamation.png");
+		SHOW_HINT(tr("We highly recommend all users to install this update as soon as possible."), m_iconUpdateAvailable);
+		UPDATE_TASKBAR(MUtils::Taskbar7::TASKBAR_STATE_NORMAL, m_iconUpdateAvailable);
 		break;
 	case MUtils::UpdateChecker::UpdateStatus_CompletedNoUpdates:
 		ui->statusLabel->setText(tr("No new updates available at this time."));
-		SHOW_HINT(tr("Your version of LameXP is still up-to-date. Please check for updates regularly!"), ":/icons/shield_green.png");
-		UPDATE_TASKBAR(MUtils::Taskbar7::TASKBAR_STATE_NORMAL, ":/icons/shield_green.png");
+		SHOW_HINT(tr("Your version of LameXP is still up-to-date. Please check for updates regularly!"), m_iconNoUpdates);
+		UPDATE_TASKBAR(MUtils::Taskbar7::TASKBAR_STATE_NORMAL, m_iconNoUpdates);
 		break;
 	case MUtils::UpdateChecker::UpdateStatus_CompletedNewVersionOlder:
 		ui->statusLabel->setText(tr("Your version appears to be newer than the latest release."));
-		SHOW_HINT(tr("This usually indicates your are currently using a pre-release version of LameXP."), ":/icons/shield_blue.png");
-		UPDATE_TASKBAR(MUtils::Taskbar7::TASKBAR_STATE_NORMAL, ":/icons/shield_error.png");
+		SHOW_HINT(tr("This usually indicates your are currently using a pre-release version of LameXP."), m_iconNewVersionOlder);
+		UPDATE_TASKBAR(MUtils::Taskbar7::TASKBAR_STATE_NORMAL, m_iconVersionError);
 		break;
 	case MUtils::UpdateChecker::UpdateStatus_ErrorNoConnection:
 		ui->statusLabel->setText(tr("It appears that the computer currently is offline!"));
-		SHOW_HINT(tr("Please make sure your computer is connected to the internet and try again."), ":/icons/network_error.png");
-		UPDATE_TASKBAR(MUtils::Taskbar7::TASKBAR_STATE_NORMAL, ":/icons/exclamation.png");
+		SHOW_HINT(tr("Please make sure your computer is connected to the internet and try again."), m_iconNetworkError);
+		UPDATE_TASKBAR(MUtils::Taskbar7::TASKBAR_STATE_NORMAL, m_iconFailure);
 		break;
 	case MUtils::UpdateChecker::UpdateStatus_ErrorConnectionTestFailed:
 		ui->statusLabel->setText(tr("Network connectivity test has failed!"));
-		SHOW_HINT(tr("Please make sure your computer is connected to the internet and try again."), ":/icons/network_error.png");
-		UPDATE_TASKBAR(MUtils::Taskbar7::TASKBAR_STATE_NORMAL, ":/icons/exclamation.png");
+		SHOW_HINT(tr("Please make sure your computer is connected to the internet and try again."), m_iconNetworkError);
+		UPDATE_TASKBAR(MUtils::Taskbar7::TASKBAR_STATE_NORMAL, m_iconFailure);
 		break;
 	case MUtils::UpdateChecker::UpdateStatus_ErrorFetchUpdateInfo:
 		ui->statusLabel->setText(tr("Failed to fetch update information from server!"));
-		SHOW_HINT(tr("Sorry, the update server might be busy at this time. Plase try again later."), ":/icons/server_error.png");
-		UPDATE_TASKBAR(MUtils::Taskbar7::TASKBAR_STATE_NORMAL, ":/icons/exclamation.png");
+		SHOW_HINT(tr("Sorry, the update server might be busy at this time. Plase try again later."), m_iconNetworkError);
+		UPDATE_TASKBAR(MUtils::Taskbar7::TASKBAR_STATE_NORMAL, m_iconFailure);
 		break;
 	case MUtils::UpdateChecker::UpdateStatus_CancelledByUser:
 		ui->statusLabel->setText(tr("Update check has been cancelled!"));
-		SHOW_HINT(tr("The update check has been cancelled by the user. Please try again later."), ":/icons/server_error.png");
-		UPDATE_TASKBAR(MUtils::Taskbar7::TASKBAR_STATE_NORMAL, ":/icons/exclamation.png");
+		SHOW_HINT(tr("The update check has been cancelled by the user. Please try again later."), m_iconServerError);
+		UPDATE_TASKBAR(MUtils::Taskbar7::TASKBAR_STATE_NORMAL, m_iconFailure);
 		break;
 	default:
 		qWarning("Unknown status %d !!!", int(status));
@@ -422,7 +430,7 @@ void UpdateDialog::applyUpdate(void)
 		args << QString("/AppTitle=LameXP (Build #%1)").arg(QString::number(updateInfo->getBuildNo()));
 
 		QApplication::setOverrideCursor(Qt::WaitCursor);
-		UPDATE_TASKBAR(MUtils::Taskbar7::TASKBAR_STATE_INTERMEDIATE, ":/icons/transmit_blue.png");
+		UPDATE_TASKBAR(MUtils::Taskbar7::TASKBAR_STATE_INTERMEDIATE, m_iconTransmitting);
 
 		process.start(m_binaryUpdater, args);
 		bool updateStarted = process.waitForStarted();
@@ -451,10 +459,9 @@ void UpdateDialog::applyUpdate(void)
 		}
 		else
 		{
-			QIcon warningIcon(":/icons/exclamation.png");
 			ui->statusLabel->setText(tr("Update failed. Please try again or download manually!"));
 			m_taskbar->setTaskbarState(MUtils::Taskbar7::TASKBAR_STATE_ERROR);
-			m_taskbar->setOverlayIcon(&warningIcon);
+			m_taskbar->setOverlayIcon(m_iconFailure.data());
 			m_taskbar->setTaskbarProgress(100, 100);
 		}
 	}

@@ -79,4 +79,5 @@ protected:
 
 	QScopedPointer<QFontMetrics> m_metrics;
 	QScopedPointer<QStyle> m_style;
+	QScopedPointer<QIcon> m_iconHourglass;
 };

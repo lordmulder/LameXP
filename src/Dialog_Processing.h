@@ -146,6 +146,10 @@ private:
 	QScopedPointer<QColor> m_defaultColor;
 	QScopedPointer<FileExtsModel> m_fileExts;
 	QScopedPointer<MUtils::Taskbar7> m_taskbar;
+	QScopedPointer<QIcon> m_iconRunning;
+	QScopedPointer<QIcon> m_iconError;
+	QScopedPointer<QIcon> m_iconWarning;
+	QScopedPointer<QIcon> m_iconSuccess;
 
 	static bool isFastSeekingDevice(const QString &path);
 	static quint32 cores2instances(const quint32 &cores);

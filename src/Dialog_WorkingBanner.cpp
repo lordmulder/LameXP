@@ -85,6 +85,7 @@ WorkingBanner::WorkingBanner(QWidget *parent)
 :
 	QDialog(parent, Qt::CustomizeWindowHint | Qt::WindowStaysOnTopHint),
 	ui(new Ui::WorkingBanner()),
+	m_iconHourglass(new QIcon(":/icons/hourglass.png")),
 	m_taskbar(new MUtils::Taskbar7(parent)),
 	m_metrics(NULL), m_working(NULL), m_style(NULL)
 {
@@ -162,8 +163,7 @@ void WorkingBanner::show(const QString &text, QThread *thread)
 	connect(thread, SIGNAL(terminated()), loop, SLOT(quit()));
 
 	//Set taskbar state
-	QIcon waitingIcon(":/icons/hourglass.png");
-	m_taskbar->setOverlayIcon(&waitingIcon);
+	m_taskbar->setOverlayIcon(m_iconHourglass.data());
 	m_taskbar->setTaskbarState(MUtils::Taskbar7::TASKBAR_STATE_INTERMEDIATE);
 
 	//Start the thread
@@ -198,8 +198,7 @@ void WorkingBanner::show(const QString &text, QEventLoop *loop)
 	this->show(text);
 
 	//Set taskbar state
-	QIcon waitingIcon(":/icons/hourglass.png");
-	m_taskbar->setOverlayIcon(&waitingIcon);
+	m_taskbar->setOverlayIcon(m_iconHourglass.data());
 	m_taskbar->setTaskbarState(MUtils::Taskbar7::TASKBAR_STATE_INTERMEDIATE);
 
 	//Update cursor

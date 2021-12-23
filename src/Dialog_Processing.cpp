@@ -193,6 +193,12 @@ ProcessingDialog::ProcessingDialog(FileListModel *const fileListModel, const Aud
 	ui->label_headerWorking->setMovie(m_progressIndicator.data());
 	ui->progressBar->setValue(0);
 
+	//Load overlay icons
+	m_iconRunning.reset(new QIcon(":/icons/control_play_blue.png"));
+	m_iconError.reset  (new QIcon(":/icons/error.png"));
+	m_iconWarning.reset(new QIcon(":/icons/exclamation.png"));
+	m_iconSuccess.reset(new QIcon(":/icons/accept.png"));
+
 	//Init progress model
 	m_progressModel.reset(new ProgressModel());
 	ui->view_log->setModel(m_progressModel.data());
@@ -491,10 +497,9 @@ void ProcessingDialog::initEncoding(void)
 	ui->checkBox_shutdownComputer->setEnabled(true);
 	ui->checkBox_shutdownComputer->setChecked(false);
 
-	QIcon defaultIcon(":/icons/control_play_blue.png");
 	m_taskbar->setTaskbarState(MUtils::Taskbar7::TASKBAR_STATE_NORMAL);
 	m_taskbar->setTaskbarProgress(0, m_pendingJobs.count());
-	m_taskbar->setOverlayIcon(&defaultIcon);
+	m_taskbar->setOverlayIcon(m_iconRunning.data());
 
 	if(!m_diskObserver)
 	{
@@ -693,10 +698,9 @@ void ProcessingDialog::doneEncoding(void)
 	
 	if(m_userAborted)
 	{
-		QIcon errorIcon(":/icons/error.png");
 		CHANGE_BACKGROUND_COLOR(ui->frame_header, QColor("#FFFFE0"));
 		m_taskbar->setTaskbarState(MUtils::Taskbar7::TASKBAR_STATE_ERROR);
-		m_taskbar->setOverlayIcon(&errorIcon);
+		m_taskbar->setOverlayIcon(m_iconError.data());
 		SET_PROGRESS_TEXT((m_succeededJobs.count() > 0) ? tr("Process was aborted by the user after %n file(s)!", "", m_succeededJobs.count()) : tr("Process was aborted prematurely by the user!"));
 		m_systemTray->showMessage(tr("LameXP - Aborted"), tr("Process was aborted by the user."), QSystemTrayIcon::Warning);
 		m_systemTray->setIcon(QIcon(":/icons/cd_delete.png"));
@@ -713,10 +717,9 @@ void ProcessingDialog::doneEncoding(void)
 
 		if(m_failedJobs.count() > 0)
 		{
-			QIcon warningIcon(":/icons/exclamation.png");
 			CHANGE_BACKGROUND_COLOR(ui->frame_header, QColor("#FFF0F0"));
 			m_taskbar->setTaskbarState(MUtils::Taskbar7::TASKBAR_STATE_ERROR);
-			m_taskbar->setOverlayIcon(&warningIcon);
+			m_taskbar->setOverlayIcon(m_iconWarning.data());
 			if(m_skippedJobs.count() > 0)
 			{
 				SET_PROGRESS_TEXT(tr("Error: %1 of %n file(s) failed (%2). Double-click failed items for detailed information!", "", m_failedJobs.count() + m_succeededJobs.count() + m_skippedJobs.count()).arg(QString::number(m_failedJobs.count()), tr("%n file(s) skipped", "", m_skippedJobs.count())));
@@ -732,10 +735,9 @@ void ProcessingDialog::doneEncoding(void)
 		}
 		else
 		{
-			QIcon successIcon(":/icons/accept.png");
 			CHANGE_BACKGROUND_COLOR(ui->frame_header, QColor("#F0FFF0"));
 			m_taskbar->setTaskbarState(MUtils::Taskbar7::TASKBAR_STATE_NORMAL);
-			m_taskbar->setOverlayIcon(&successIcon);
+			m_taskbar->setOverlayIcon(m_iconSuccess.data());
 			if(m_skippedJobs.count() > 0)
 			{
 				SET_PROGRESS_TEXT(tr("All files completed successfully. Skipped %n file(s).", "", m_skippedJobs.count()));
