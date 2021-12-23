@@ -31,11 +31,11 @@
 ///////////////////////////////////////////////////////////////////////////////
 
 #define VER_LAMEXP_MAJOR					4
-#define VER_LAMEXP_MINOR_HI					1
-#define VER_LAMEXP_MINOR_LO					9
-#define VER_LAMEXP_TYPE						Final
+#define VER_LAMEXP_MINOR_HI					2
+#define VER_LAMEXP_MINOR_LO					0
+#define VER_LAMEXP_TYPE						Beta
 #define VER_LAMEXP_PATCH					1
-#define VER_LAMEXP_BUILD					2329
+#define VER_LAMEXP_BUILD					2330
 #define VER_LAMEXP_CONFG					2188
 
 ///////////////////////////////////////////////////////////////////////////////

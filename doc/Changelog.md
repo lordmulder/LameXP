@@ -6,6 +6,9 @@ subtitle: "Audio-Encoder Front-End &ndash; Changelog"
 
 # LameXP v4.xx History #
 
+## LameXP v4.20 [unreleased] ## {-}
+* Updated MediaInfo to v21.09 (2021-09-17), compiled with ICL 2021.2 and MSVC 15.9
+
 ## LameXP v4.19 [2021-08-29] ## {-}
 * Updated LAME encoder to v3.100.1-SVN (2020-08-25), compiled with ICL 19.1 and MSVC 15.9
 * Updated Vorbis encoder to OggEnc v2.88 (2020-07-07), using libvorbis v1.3.7 with aoTuV beta-6.03
