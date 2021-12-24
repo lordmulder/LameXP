@@ -2808,7 +2808,7 @@
     </message>
     <message>
         <location filename="../../src/Model_MetaInfo.cpp" line="119"/>
-        <location filename="../../src/Model_MetaInfo.cpp" line="409"/>
+        <location filename="../../src/Model_MetaInfo.cpp" line="408"/>
         <source>Generate from list position</source>
         <translation>從列表的位置中生成</translation>
     </message>
@@ -2828,130 +2828,130 @@
         <translation>值</translation>
     </message>
     <message>
-        <location filename="../../src/Model_MetaInfo.cpp" line="309"/>
+        <location filename="../../src/Model_MetaInfo.cpp" line="308"/>
         <source>Unspecified</source>
         <translation>未指定</translation>
     </message>
     <message>
-        <location filename="../../src/Model_MetaInfo.cpp" line="320"/>
-        <location filename="../../src/Model_MetaInfo.cpp" line="328"/>
+        <location filename="../../src/Model_MetaInfo.cpp" line="319"/>
+        <location filename="../../src/Model_MetaInfo.cpp" line="327"/>
         <source>Edit Title</source>
         <translation>編輯標題</translation>
     </message>
     <message>
-        <location filename="../../src/Model_MetaInfo.cpp" line="321"/>
+        <location filename="../../src/Model_MetaInfo.cpp" line="320"/>
         <source>Please enter the title for this file:</source>
         <translation>請輸入此文件的標題:</translation>
     </message>
     <message>
-        <location filename="../../src/Model_MetaInfo.cpp" line="328"/>
+        <location filename="../../src/Model_MetaInfo.cpp" line="327"/>
         <source>The title must not be empty. Generating title from file name!</source>
         <translation>標題不能為空.從文件的名稱生成標題 !</translation>
     </message>
     <message>
-        <location filename="../../src/Model_MetaInfo.cpp" line="339"/>
+        <location filename="../../src/Model_MetaInfo.cpp" line="338"/>
         <source>Edit Artist</source>
         <translation>編輯藝術家</translation>
     </message>
     <message>
-        <location filename="../../src/Model_MetaInfo.cpp" line="340"/>
+        <location filename="../../src/Model_MetaInfo.cpp" line="339"/>
         <source>Please enter the artist for this file:</source>
         <translation>請輸入此文件的藝術家:</translation>
     </message>
     <message>
-        <location filename="../../src/Model_MetaInfo.cpp" line="351"/>
+        <location filename="../../src/Model_MetaInfo.cpp" line="350"/>
         <source>Edit Album</source>
         <translation>編輯專輯</translation>
     </message>
     <message>
-        <location filename="../../src/Model_MetaInfo.cpp" line="352"/>
+        <location filename="../../src/Model_MetaInfo.cpp" line="351"/>
         <source>Please enter the album for this file:</source>
         <translation>請輸入此文件的專輯:</translation>
     </message>
     <message>
-        <location filename="../../src/Model_MetaInfo.cpp" line="363"/>
+        <location filename="../../src/Model_MetaInfo.cpp" line="362"/>
         <source>Edit Genre</source>
         <translation>編輯風格</translation>
     </message>
     <message>
-        <location filename="../../src/Model_MetaInfo.cpp" line="364"/>
+        <location filename="../../src/Model_MetaInfo.cpp" line="363"/>
         <source>Please enter the genre for this file:</source>
         <translation>請輸入此文件風格:</translation>
     </message>
     <message>
-        <location filename="../../src/Model_MetaInfo.cpp" line="377"/>
+        <location filename="../../src/Model_MetaInfo.cpp" line="376"/>
         <source>Edit Year</source>
         <translation>編輯年份</translation>
     </message>
     <message>
-        <location filename="../../src/Model_MetaInfo.cpp" line="378"/>
+        <location filename="../../src/Model_MetaInfo.cpp" line="377"/>
         <source>Please enter the year for this file:</source>
         <translation>請輸入此文件的年份:</translation>
     </message>
     <message>
-        <location filename="../../src/Model_MetaInfo.cpp" line="393"/>
-        <location filename="../../src/Model_MetaInfo.cpp" line="410"/>
+        <location filename="../../src/Model_MetaInfo.cpp" line="392"/>
+        <location filename="../../src/Model_MetaInfo.cpp" line="409"/>
         <source>Edit Position</source>
         <translation>編輯位置</translation>
     </message>
     <message>
-        <location filename="../../src/Model_MetaInfo.cpp" line="394"/>
-        <location filename="../../src/Model_MetaInfo.cpp" line="411"/>
+        <location filename="../../src/Model_MetaInfo.cpp" line="393"/>
+        <location filename="../../src/Model_MetaInfo.cpp" line="410"/>
         <source>Please enter the position (track no.) for this file:</source>
         <translation>請輸入此文件的位置 (軌道號):</translation>
     </message>
     <message>
-        <location filename="../../src/Model_MetaInfo.cpp" line="409"/>
+        <location filename="../../src/Model_MetaInfo.cpp" line="408"/>
         <source>Unspecified (copy from source file)</source>
         <translation>未指定 (復制源代碼文件的副本)</translation>
     </message>
     <message>
-        <location filename="../../src/Model_MetaInfo.cpp" line="424"/>
+        <location filename="../../src/Model_MetaInfo.cpp" line="423"/>
         <source>Edit Comment</source>
         <translation>編輯注釋</translation>
     </message>
     <message>
-        <location filename="../../src/Model_MetaInfo.cpp" line="425"/>
+        <location filename="../../src/Model_MetaInfo.cpp" line="424"/>
         <source>Please enter the comment for this file:</source>
         <translation>請輸入此文件的注釋:</translation>
     </message>
     <message>
-        <location filename="../../src/Model_MetaInfo.cpp" line="426"/>
-        <location filename="../../src/Model_MetaInfo.cpp" line="461"/>
+        <location filename="../../src/Model_MetaInfo.cpp" line="425"/>
+        <location filename="../../src/Model_MetaInfo.cpp" line="460"/>
         <source>Encoded with LameXP</source>
         <translation>編碼與LameXP</translation>
     </message>
     <message>
-        <location filename="../../src/Model_MetaInfo.cpp" line="436"/>
+        <location filename="../../src/Model_MetaInfo.cpp" line="435"/>
         <source>Not editable</source>
         <translation>不可編輯</translation>
     </message>
     <message>
-        <location filename="../../src/Model_MetaInfo.cpp" line="436"/>
+        <location filename="../../src/Model_MetaInfo.cpp" line="435"/>
         <source>Sorry, this property of the source file cannot be edited!</source>
         <translation>對不起,不能編輯此屬性的源文件 !</translation>
     </message>
     <message>
-        <location filename="../../src/Model_MetaInfo.cpp" line="313"/>
+        <location filename="../../src/Model_MetaInfo.cpp" line="312"/>
         <source>OK</source>
         <translation>確定</translation>
     </message>
     <message>
-        <location filename="../../src/Model_MetaInfo.cpp" line="314"/>
+        <location filename="../../src/Model_MetaInfo.cpp" line="313"/>
         <source>Cancel</source>
         <translation>取消</translation>
     </message>
     <message>
         <location filename="../../src/Model_MetaInfo.cpp" line="51"/>
         <location filename="../../src/Model_MetaInfo.cpp" line="61"/>
-        <location filename="../../src/Model_MetaInfo.cpp" line="451"/>
+        <location filename="../../src/Model_MetaInfo.cpp" line="450"/>
         <source>Not Specified</source>
         <translation>未指定</translation>
     </message>
     <message>
         <location filename="../../src/Model_MetaInfo.cpp" line="50"/>
         <location filename="../../src/Model_MetaInfo.cpp" line="60"/>
-        <location filename="../../src/Model_MetaInfo.cpp" line="450"/>
+        <location filename="../../src/Model_MetaInfo.cpp" line="449"/>
         <source>Unknown</source>
         <translation>未知</translation>
     </message>
@@ -3128,88 +3128,88 @@
         <translation>關閉</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="213"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="219"/>
         <source>Show details for selected job</source>
         <translation>顯示選定的項目的詳細信息</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="282"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="288"/>
         <source>Encoding Files</source>
         <translation>文件編碼</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="282"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="288"/>
         <source>Your files are being encoded, please be patient...</source>
         <translation>正在為您的文件編碼,請耐心等待...</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="486"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="492"/>
         <source>Encoding files, please wait...</source>
         <translation>正在編碼文件,請稍候...</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="655"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="661"/>
         <source>Aborted! Waiting for running jobs to terminate...</source>
         <translation>中止! 正在等待運行項目終止...</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="688"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="694"/>
         <source>Creating the playlist file, please wait...</source>
         <translation>創建播放列表文件,請稍候...</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="699"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="705"/>
         <source>LameXP - Aborted</source>
         <translation>LameXP - 中止</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="699"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="705"/>
         <source>Process was aborted by the user.</source>
         <translation>進程被用戶終止.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="725"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="731"/>
         <source>LameXP - Error</source>
         <translation>LameXP - 錯誤</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="725"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="731"/>
         <source>At least one file has failed!</source>
         <translation>至少一個文件失敗 !</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="741"/>
-        <location filename="../../src/Dialog_Processing.cpp" line="743"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="747"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="749"/>
         <source>All files completed successfully.</source>
         <translation>已成功完成的所有文件.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="743"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="749"/>
         <source>LameXP - Done</source>
         <translation>LameXP - 完成了</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="1043"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="1049"/>
         <source>Playlist creation failed</source>
         <translation>播放列表創建失敗</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="1043"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="1049"/>
         <source>The playlist file could not be created:</source>
         <translation>無法創建播放列表文件:</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="698"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="704"/>
         <source>Process was aborted prematurely by the user!</source>
         <translation>用戶提前中止了進程 !</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="523"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="529"/>
         <source>Multi-threading enabled: Running %1 instances in parallel!</source>
         <translation>多線程啟用: 以并行方式運行 %1 個實例 !</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="214"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="220"/>
         <source>Browse Output File Location</source>
         <translation>瀏覽輸出文件的位置</translation>
     </message>
@@ -3219,13 +3219,13 @@
         <translation>所有文件都轉換后自動關閉計算機 </translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="1105"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="1111"/>
         <source>Warning: Computer will shutdown in %1 seconds...</source>
         <translation>警告:計算機將在 %1 秒關機...</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="1109"/>
-        <location filename="../../src/Dialog_Processing.cpp" line="1110"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="1115"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="1116"/>
         <source>Cancel Shutdown</source>
         <translation>取消關機</translation>
     </message>
@@ -3248,112 +3248,112 @@
         <translation>可用的磁盤空間(Temp文件夾)</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="708"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="714"/>
         <source>Process finished after %1.</source>
         <translation>過程執行了 %1.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="220"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="226"/>
         <source>Filter Log Items</source>
         <translation>過濾日志項目</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="222"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="228"/>
         <source>Show Running Only</source>
         <translation>顯示僅運行</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="223"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="229"/>
         <source>Show Succeeded Only</source>
         <translation>顯示僅成功</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="224"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="230"/>
         <source>Show Failed Only</source>
         <translation>顯示僅失敗</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="225"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="231"/>
         <source>Show Skipped Only</source>
         <translation>顯示僅跳過</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="226"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="232"/>
         <source>Show All Items</source>
         <translation>顯示所有項目</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="930"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="936"/>
         <source>None of the items matches the current filtering rules</source>
         <translation>此項目都不匹配當前的過濾規則</translation>
     </message>
     <message numerus="yes">
-        <location filename="../../src/Dialog_Processing.cpp" line="698"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="704"/>
         <source>Process was aborted by the user after %n file(s)!</source>
         <translation>
             <numerusform>用戶在第 %n 個文件時進程被中止!</numerusform>
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="../../src/Dialog_Processing.cpp" line="1205"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="1211"/>
         <source>%n hour(s)</source>
         <translation>
             <numerusform>%n 小時</numerusform>
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="../../src/Dialog_Processing.cpp" line="1206"/>
-        <location filename="../../src/Dialog_Processing.cpp" line="1210"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="1212"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="1216"/>
         <source>%n minute(s)</source>
         <translation>
             <numerusform>%n 分鐘</numerusform>
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="../../src/Dialog_Processing.cpp" line="1211"/>
-        <location filename="../../src/Dialog_Processing.cpp" line="1215"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="1217"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="1221"/>
         <source>%n second(s)</source>
         <translation>
             <numerusform>%n 秒</numerusform>
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="../../src/Dialog_Processing.cpp" line="1216"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="1222"/>
         <source>%n millisecond(s)</source>
         <translation>
             <numerusform>%n 毫秒</numerusform>
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="../../src/Dialog_Processing.cpp" line="666"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="672"/>
         <source>Encoding: %n file(s) of %1 completed so far, please wait...</source>
         <translation>
             <numerusform>編碼: %1 個文件迄今已完成 %n 個文件 , 請稍候...</numerusform>
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="../../src/Dialog_Processing.cpp" line="719"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="725"/>
         <source>Error: %1 of %n file(s) failed (%2). Double-click failed items for detailed information!</source>
         <translation>
             <numerusform>錯誤: %n 個文件 %1 失敗 %2. 雙擊失敗的項目的詳細信息!</numerusform>
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="../../src/Dialog_Processing.cpp" line="719"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="725"/>
         <source>%n file(s) skipped</source>
         <translation>
             <numerusform>跳過 %n 個文件</numerusform>
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="../../src/Dialog_Processing.cpp" line="723"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="729"/>
         <source>Error: %1 of %n file(s) failed. Double-click failed items for detailed information!</source>
         <translation>
             <numerusform>錯誤: 總 %n 個文件 %1 個失敗. 雙擊失敗的項目的詳細信息!</numerusform>
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="../../src/Dialog_Processing.cpp" line="737"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="743"/>
         <source>All files completed successfully. Skipped %n file(s).</source>
         <translation>
             <numerusform>所有文件已成功完成. 跳過 %n 個文件.</numerusform>
@@ -3442,139 +3442,139 @@
         <translation>關閉</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="162"/>
-        <location filename="../../src/Dialog_Update.cpp" line="367"/>
+        <location filename="../../src/Dialog_Update.cpp" line="172"/>
+        <location filename="../../src/Dialog_Update.cpp" line="377"/>
         <source>Build</source>
         <translation>生成</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="163"/>
+        <location filename="../../src/Dialog_Update.cpp" line="173"/>
         <source>Unknown</source>
         <translation>未知</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="290"/>
+        <location filename="../../src/Dialog_Update.cpp" line="300"/>
         <source>Testing your internet connection, please wait...</source>
         <translation>測試您的 Internet 連接,請稍候...</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="316"/>
+        <location filename="../../src/Dialog_Update.cpp" line="326"/>
         <source>Network connectivity test has failed!</source>
         <translation>網絡連接測試失敗 !</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="293"/>
+        <location filename="../../src/Dialog_Update.cpp" line="303"/>
         <source>Checking for new updates online, please wait...</source>
         <translation>在線更新檢查新的版本,請稍候...</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="321"/>
+        <location filename="../../src/Dialog_Update.cpp" line="331"/>
         <source>Failed to fetch update information from server!</source>
         <translation>無法從服務器獲取更新信息 !</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="322"/>
+        <location filename="../../src/Dialog_Update.cpp" line="332"/>
         <source>Sorry, the update server might be busy at this time. Plase try again later.</source>
         <translation>抱歉,更新服務器可能在這一次忙.請稍后再試.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="366"/>
+        <location filename="../../src/Dialog_Update.cpp" line="376"/>
         <source>More information available at:</source>
         <translation>在可用的詳細信息:</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="296"/>
+        <location filename="../../src/Dialog_Update.cpp" line="306"/>
         <source>A new version of LameXP is available!</source>
         <translation>發現一個可用的新版本 LameXP  !</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="207"/>
+        <location filename="../../src/Dialog_Update.cpp" line="217"/>
         <source>Stopping update check, please wait...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="297"/>
+        <location filename="../../src/Dialog_Update.cpp" line="307"/>
         <source>We highly recommend all users to install this update as soon as possible.</source>
         <translation>我們強烈建議所有的用戶,要盡快安裝此更新.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="301"/>
+        <location filename="../../src/Dialog_Update.cpp" line="311"/>
         <source>No new updates available at this time.</source>
         <translation>這個時候沒有發現新的可用更新.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="302"/>
+        <location filename="../../src/Dialog_Update.cpp" line="312"/>
         <source>Your version of LameXP is still up-to-date. Please check for updates regularly!</source>
         <translation>您的 LameXP 版本是仍然最新的.請定期檢查更新 !</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="306"/>
+        <location filename="../../src/Dialog_Update.cpp" line="316"/>
         <source>Your version appears to be newer than the latest release.</source>
         <translation>您的版本似乎是比最新的版本新.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="307"/>
+        <location filename="../../src/Dialog_Update.cpp" line="317"/>
         <source>This usually indicates your are currently using a pre-release version of LameXP.</source>
         <translation>這通常表示您當前正在使用的 LameXP 預發布版.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="326"/>
+        <location filename="../../src/Dialog_Update.cpp" line="336"/>
         <source>Update check has been cancelled!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="327"/>
+        <location filename="../../src/Dialog_Update.cpp" line="337"/>
         <source>The update check has been cancelled by the user. Please try again later.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="396"/>
+        <location filename="../../src/Dialog_Update.cpp" line="406"/>
         <source>Update is being downloaded, please be patient...</source>
         <translation>正在下載更新,請耐心等待...</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="444"/>
+        <location filename="../../src/Dialog_Update.cpp" line="454"/>
         <source>Update ready to install. Applicaion will quit...</source>
         <translation>準備好安裝更新.應用程序將退出...</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="452"/>
+        <location filename="../../src/Dialog_Update.cpp" line="462"/>
         <source>Update failed. Please try again or download manually!</source>
         <translation>更新失敗.請再試一次或手動下載 !</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="311"/>
+        <location filename="../../src/Dialog_Update.cpp" line="321"/>
         <source>It appears that the computer currently is offline!</source>
         <translation>看來,目前的計算機處于脫機狀態!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="312"/>
-        <location filename="../../src/Dialog_Update.cpp" line="317"/>
+        <location filename="../../src/Dialog_Update.cpp" line="322"/>
+        <location filename="../../src/Dialog_Update.cpp" line="327"/>
         <source>Please make sure your computer is connected to the internet and try again.</source>
         <translation>請確保您的計算機連接到 Internet,然后重試.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="287"/>
+        <location filename="../../src/Dialog_Update.cpp" line="297"/>
         <source>Initializing, please wait...</source>
         <translation>正在初始化,請稍候...</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="254"/>
+        <location filename="../../src/Dialog_Update.cpp" line="264"/>
         <source>Discard</source>
         <translation>放棄</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="254"/>
+        <location filename="../../src/Dialog_Update.cpp" line="264"/>
         <source>Ignore</source>
         <translation>忽略</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="252"/>
+        <location filename="../../src/Dialog_Update.cpp" line="262"/>
         <source>Sorry, but only users in the &quot;Administrators&quot; group can install updates.</source>
         <translation>抱歉，只有&quot;Administrators&quot;組的用戶能夠安裝更新。</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="253"/>
+        <location filename="../../src/Dialog_Update.cpp" line="263"/>
         <source>Please start application from an administrator account and try again!</source>
         <translation>請以管理員身份運行程序并重試！</translation>
     </message>

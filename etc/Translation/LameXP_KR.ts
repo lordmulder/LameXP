@@ -2754,14 +2754,14 @@
     <message>
         <location filename="../../src/Model_MetaInfo.cpp" line="50"/>
         <location filename="../../src/Model_MetaInfo.cpp" line="60"/>
-        <location filename="../../src/Model_MetaInfo.cpp" line="450"/>
+        <location filename="../../src/Model_MetaInfo.cpp" line="449"/>
         <source>Unknown</source>
         <translation type="unfinished">알 수 없음</translation>
     </message>
     <message>
         <location filename="../../src/Model_MetaInfo.cpp" line="51"/>
         <location filename="../../src/Model_MetaInfo.cpp" line="61"/>
-        <location filename="../../src/Model_MetaInfo.cpp" line="451"/>
+        <location filename="../../src/Model_MetaInfo.cpp" line="450"/>
         <source>Not Specified</source>
         <translation type="unfinished">지정되지 않음</translation>
     </message>
@@ -2822,7 +2822,7 @@
     </message>
     <message>
         <location filename="../../src/Model_MetaInfo.cpp" line="119"/>
-        <location filename="../../src/Model_MetaInfo.cpp" line="409"/>
+        <location filename="../../src/Model_MetaInfo.cpp" line="408"/>
         <source>Generate from list position</source>
         <translation type="unfinished">목록 위치로부터 제작</translation>
     </message>
@@ -2842,116 +2842,116 @@
         <translation type="unfinished">값</translation>
     </message>
     <message>
-        <location filename="../../src/Model_MetaInfo.cpp" line="309"/>
+        <location filename="../../src/Model_MetaInfo.cpp" line="308"/>
         <source>Unspecified</source>
         <translation type="unfinished">미지정</translation>
     </message>
     <message>
-        <location filename="../../src/Model_MetaInfo.cpp" line="313"/>
+        <location filename="../../src/Model_MetaInfo.cpp" line="312"/>
         <source>OK</source>
         <translation type="unfinished">확인</translation>
     </message>
     <message>
-        <location filename="../../src/Model_MetaInfo.cpp" line="314"/>
+        <location filename="../../src/Model_MetaInfo.cpp" line="313"/>
         <source>Cancel</source>
         <translation type="unfinished">취소</translation>
     </message>
     <message>
-        <location filename="../../src/Model_MetaInfo.cpp" line="320"/>
-        <location filename="../../src/Model_MetaInfo.cpp" line="328"/>
+        <location filename="../../src/Model_MetaInfo.cpp" line="319"/>
+        <location filename="../../src/Model_MetaInfo.cpp" line="327"/>
         <source>Edit Title</source>
         <translation type="unfinished">제목 편집</translation>
     </message>
     <message>
-        <location filename="../../src/Model_MetaInfo.cpp" line="321"/>
+        <location filename="../../src/Model_MetaInfo.cpp" line="320"/>
         <source>Please enter the title for this file:</source>
         <translation type="unfinished">이 파일에 대한 제목을 입력하십시오:</translation>
     </message>
     <message>
-        <location filename="../../src/Model_MetaInfo.cpp" line="328"/>
+        <location filename="../../src/Model_MetaInfo.cpp" line="327"/>
         <source>The title must not be empty. Generating title from file name!</source>
         <translation type="unfinished">제목은 비워둘 수 없습니다. 파일명으로부터 제목을 만듭니다!</translation>
     </message>
     <message>
-        <location filename="../../src/Model_MetaInfo.cpp" line="339"/>
+        <location filename="../../src/Model_MetaInfo.cpp" line="338"/>
         <source>Edit Artist</source>
         <translation type="unfinished">가수 편집</translation>
     </message>
     <message>
-        <location filename="../../src/Model_MetaInfo.cpp" line="340"/>
+        <location filename="../../src/Model_MetaInfo.cpp" line="339"/>
         <source>Please enter the artist for this file:</source>
         <translation type="unfinished">이 파일에 대한 가수 이름을 입력하십시오:</translation>
     </message>
     <message>
-        <location filename="../../src/Model_MetaInfo.cpp" line="351"/>
+        <location filename="../../src/Model_MetaInfo.cpp" line="350"/>
         <source>Edit Album</source>
         <translation type="unfinished">앨범 편집</translation>
     </message>
     <message>
-        <location filename="../../src/Model_MetaInfo.cpp" line="352"/>
+        <location filename="../../src/Model_MetaInfo.cpp" line="351"/>
         <source>Please enter the album for this file:</source>
         <translation type="unfinished">이 파일에 대한 앨범명을 입력하십시오:</translation>
     </message>
     <message>
-        <location filename="../../src/Model_MetaInfo.cpp" line="363"/>
+        <location filename="../../src/Model_MetaInfo.cpp" line="362"/>
         <source>Edit Genre</source>
         <translation type="unfinished">장르 편집</translation>
     </message>
     <message>
-        <location filename="../../src/Model_MetaInfo.cpp" line="364"/>
+        <location filename="../../src/Model_MetaInfo.cpp" line="363"/>
         <source>Please enter the genre for this file:</source>
         <translation type="unfinished">이 파일에 대한 장르를 입력하십시오:</translation>
     </message>
     <message>
-        <location filename="../../src/Model_MetaInfo.cpp" line="377"/>
+        <location filename="../../src/Model_MetaInfo.cpp" line="376"/>
         <source>Edit Year</source>
         <translation type="unfinished">연도 편집</translation>
     </message>
     <message>
-        <location filename="../../src/Model_MetaInfo.cpp" line="378"/>
+        <location filename="../../src/Model_MetaInfo.cpp" line="377"/>
         <source>Please enter the year for this file:</source>
         <translation type="unfinished">이 파일에 대한 출판년도를 입력하십시오:</translation>
     </message>
     <message>
-        <location filename="../../src/Model_MetaInfo.cpp" line="393"/>
-        <location filename="../../src/Model_MetaInfo.cpp" line="410"/>
+        <location filename="../../src/Model_MetaInfo.cpp" line="392"/>
+        <location filename="../../src/Model_MetaInfo.cpp" line="409"/>
         <source>Edit Position</source>
         <translation type="unfinished">트랙 편집</translation>
     </message>
     <message>
-        <location filename="../../src/Model_MetaInfo.cpp" line="394"/>
-        <location filename="../../src/Model_MetaInfo.cpp" line="411"/>
+        <location filename="../../src/Model_MetaInfo.cpp" line="393"/>
+        <location filename="../../src/Model_MetaInfo.cpp" line="410"/>
         <source>Please enter the position (track no.) for this file:</source>
         <translation type="unfinished">이 파일에 대한 트랙 번호를 입력하십시오:</translation>
     </message>
     <message>
-        <location filename="../../src/Model_MetaInfo.cpp" line="409"/>
+        <location filename="../../src/Model_MetaInfo.cpp" line="408"/>
         <source>Unspecified (copy from source file)</source>
         <translation type="unfinished">미지정 (원본 파일에서 복사)</translation>
     </message>
     <message>
-        <location filename="../../src/Model_MetaInfo.cpp" line="424"/>
+        <location filename="../../src/Model_MetaInfo.cpp" line="423"/>
         <source>Edit Comment</source>
         <translation type="unfinished">설명 편집</translation>
     </message>
     <message>
-        <location filename="../../src/Model_MetaInfo.cpp" line="425"/>
+        <location filename="../../src/Model_MetaInfo.cpp" line="424"/>
         <source>Please enter the comment for this file:</source>
         <translation type="unfinished">이 파일에 대한 설명을 입력하십시오:</translation>
     </message>
     <message>
-        <location filename="../../src/Model_MetaInfo.cpp" line="426"/>
-        <location filename="../../src/Model_MetaInfo.cpp" line="461"/>
+        <location filename="../../src/Model_MetaInfo.cpp" line="425"/>
+        <location filename="../../src/Model_MetaInfo.cpp" line="460"/>
         <source>Encoded with LameXP</source>
         <translation type="unfinished">LameXP로 인코딩 되었음</translation>
     </message>
     <message>
-        <location filename="../../src/Model_MetaInfo.cpp" line="436"/>
+        <location filename="../../src/Model_MetaInfo.cpp" line="435"/>
         <source>Not editable</source>
         <translation type="unfinished">편집 불가</translation>
     </message>
     <message>
-        <location filename="../../src/Model_MetaInfo.cpp" line="436"/>
+        <location filename="../../src/Model_MetaInfo.cpp" line="435"/>
         <source>Sorry, this property of the source file cannot be edited!</source>
         <translation type="unfinished">죄송하지만, 이 원본 파일의 속성은 편집할 수 없습니다!</translation>
     </message>
@@ -3134,99 +3134,99 @@
         <translation type="unfinished">닫기</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="213"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="219"/>
         <source>Show details for selected job</source>
         <translation type="unfinished">선택 작업 자세히 표시</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="214"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="220"/>
         <source>Browse Output File Location</source>
         <translation type="unfinished">출력 파일 위치 찾아보기</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="282"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="288"/>
         <source>Encoding Files</source>
         <translation type="unfinished">인코딩 파일</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="282"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="288"/>
         <source>Your files are being encoded, please be patient...</source>
         <translation type="unfinished">파일을 인코딩하고 있습니다. 잠시만 기다려 주십시오...</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="486"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="492"/>
         <source>Encoding files, please wait...</source>
         <translation type="unfinished">파일 인코딩 중, 잠시만 기다려 주십시오...</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="523"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="529"/>
         <source>Multi-threading enabled: Running %1 instances in parallel!</source>
         <translation type="unfinished">멀티-쓰레딩 활성화: %1 인스턴스 동시 실행!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="655"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="661"/>
         <source>Aborted! Waiting for running jobs to terminate...</source>
         <translation type="unfinished">중단됨! 종료를 위해 실행중인 작업을 대기 중...</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="688"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="694"/>
         <source>Creating the playlist file, please wait...</source>
         <translation type="unfinished">재생 목록 파일 생성 중, 잠시 기다려 주십시오...</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="698"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="704"/>
         <source>Process was aborted prematurely by the user!</source>
         <translation type="unfinished">처리가 사용자에 의해 완전히 중단되었습니다!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="699"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="705"/>
         <source>LameXP - Aborted</source>
         <translation type="unfinished">LameXP - 중단됨</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="699"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="705"/>
         <source>Process was aborted by the user.</source>
         <translation type="unfinished">처리가 사용자에 의해 중단되었습니다.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="725"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="731"/>
         <source>LameXP - Error</source>
         <translation type="unfinished">LameXP - 오류</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="725"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="731"/>
         <source>At least one file has failed!</source>
         <translation type="unfinished">최소한 한 개의 파일이 실패되었습니다!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="741"/>
-        <location filename="../../src/Dialog_Processing.cpp" line="743"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="747"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="749"/>
         <source>All files completed successfully.</source>
         <translation type="unfinished">모든 파일을 성공적으로 인코딩 완료하였습니다.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="743"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="749"/>
         <source>LameXP - Done</source>
         <translation type="unfinished">LameXP - 완료</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="1043"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="1049"/>
         <source>Playlist creation failed</source>
         <translation type="unfinished">재생 목록 생성 실패</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="1043"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="1049"/>
         <source>The playlist file could not be created:</source>
         <translation type="unfinished">재생 목록 파일을 생성할 수 없음:</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="1105"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="1111"/>
         <source>Warning: Computer will shutdown in %1 seconds...</source>
         <translation type="unfinished">경고: 컴퓨터가 %1초 후 종료됩니다...</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="1109"/>
-        <location filename="../../src/Dialog_Processing.cpp" line="1110"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="1115"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="1116"/>
         <source>Cancel Shutdown</source>
         <translation type="unfinished">컴퓨터 종료 취소</translation>
     </message>
@@ -3249,112 +3249,112 @@
         <translation type="unfinished">여유 디스크 공간(임시 폴더)</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="708"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="714"/>
         <source>Process finished after %1.</source>
         <translation type="unfinished">작업 경과 시간: %1 소요됨.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="220"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="226"/>
         <source>Filter Log Items</source>
         <translation type="unfinished">필터링 로그 항목</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="222"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="228"/>
         <source>Show Running Only</source>
         <translation type="unfinished">실행 중인 항목만 표시</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="223"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="229"/>
         <source>Show Succeeded Only</source>
         <translation type="unfinished">성공한 항목만 표시</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="224"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="230"/>
         <source>Show Failed Only</source>
         <translation type="unfinished">실패된 항목만 표시</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="225"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="231"/>
         <source>Show Skipped Only</source>
         <translation type="unfinished">건너뛴 항목만 표시</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="226"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="232"/>
         <source>Show All Items</source>
         <translation type="unfinished">모든 항목 표시</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="930"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="936"/>
         <source>None of the items matches the current filtering rules</source>
         <translation>현재 필터링 규칙과 일치하지 항목이 없습니다.</translation>
     </message>
     <message numerus="yes">
-        <location filename="../../src/Dialog_Processing.cpp" line="698"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="704"/>
         <source>Process was aborted by the user after %n file(s)!</source>
         <translation type="unfinished">
             <numerusform>%n 파일 후 사용자에 의해 작업이 취소되었습니다!</numerusform>
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="../../src/Dialog_Processing.cpp" line="1205"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="1211"/>
         <source>%n hour(s)</source>
         <translation type="unfinished">
             <numerusform>%n 시간</numerusform>
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="../../src/Dialog_Processing.cpp" line="1206"/>
-        <location filename="../../src/Dialog_Processing.cpp" line="1210"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="1212"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="1216"/>
         <source>%n minute(s)</source>
         <translation type="unfinished">
             <numerusform>%n 분</numerusform>
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="../../src/Dialog_Processing.cpp" line="1211"/>
-        <location filename="../../src/Dialog_Processing.cpp" line="1215"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="1217"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="1221"/>
         <source>%n second(s)</source>
         <translation type="unfinished">
             <numerusform>%n 초</numerusform>
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="../../src/Dialog_Processing.cpp" line="1216"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="1222"/>
         <source>%n millisecond(s)</source>
         <translation type="unfinished">
             <numerusform>%n ms</numerusform>
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="../../src/Dialog_Processing.cpp" line="666"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="672"/>
         <source>Encoding: %n file(s) of %1 completed so far, please wait...</source>
         <translation type="unfinished">
             <numerusform>인코딩: 현재 %n / %1 파일 완료됨, 잠시만 기다려 주십시오...</numerusform>
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="../../src/Dialog_Processing.cpp" line="719"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="725"/>
         <source>Error: %1 of %n file(s) failed (%2). Double-click failed items for detailed information!</source>
         <translation type="unfinished">
             <numerusform>오류: %1/%n 파일 실패 (%2). 자세한 정보를 보려면 실패 항목을 더블 클릭하십시오!</numerusform>
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="../../src/Dialog_Processing.cpp" line="719"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="725"/>
         <source>%n file(s) skipped</source>
         <translation type="unfinished">
             <numerusform>%n 파일 건너뜀</numerusform>
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="../../src/Dialog_Processing.cpp" line="723"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="729"/>
         <source>Error: %1 of %n file(s) failed. Double-click failed items for detailed information!</source>
         <translation type="unfinished">
             <numerusform>오류: : %1 / %n 파일 실패. 자세한 정보를 보려면 실패 항목을 더블 클릭하십시오!</numerusform>
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="../../src/Dialog_Processing.cpp" line="737"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="743"/>
         <source>All files completed successfully. Skipped %n file(s).</source>
         <translation type="unfinished">
             <numerusform>모든 파일들이 성공적으로 완료되었습니다. %n 파일 건너뜀.</numerusform>
@@ -3443,139 +3443,139 @@
         <translation type="unfinished">닫기</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="162"/>
-        <location filename="../../src/Dialog_Update.cpp" line="367"/>
+        <location filename="../../src/Dialog_Update.cpp" line="172"/>
+        <location filename="../../src/Dialog_Update.cpp" line="377"/>
         <source>Build</source>
         <translation type="unfinished">Build</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="163"/>
+        <location filename="../../src/Dialog_Update.cpp" line="173"/>
         <source>Unknown</source>
         <translation type="unfinished">알 수 없음</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="290"/>
+        <location filename="../../src/Dialog_Update.cpp" line="300"/>
         <source>Testing your internet connection, please wait...</source>
         <translation type="unfinished">인터넷 연결 테스트 중, 잠시만 기다려 주십시오...</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="316"/>
+        <location filename="../../src/Dialog_Update.cpp" line="326"/>
         <source>Network connectivity test has failed!</source>
         <translation type="unfinished">네트워크 연결 테스트가 실패되었습니다!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="293"/>
+        <location filename="../../src/Dialog_Update.cpp" line="303"/>
         <source>Checking for new updates online, please wait...</source>
         <translation type="unfinished">새로운 업데이트 확인 중, 잠시만 기다려 주십시오...</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="321"/>
+        <location filename="../../src/Dialog_Update.cpp" line="331"/>
         <source>Failed to fetch update information from server!</source>
         <translation type="unfinished">서버로부터 업데이트 정보를 불러오기가 실패되었습니다!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="322"/>
+        <location filename="../../src/Dialog_Update.cpp" line="332"/>
         <source>Sorry, the update server might be busy at this time. Plase try again later.</source>
         <translation type="unfinished">죄송하지만, 업데이트 서버가 폭주 상태입니다. 나중에 다시 시도하시기 바랍니다.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="366"/>
+        <location filename="../../src/Dialog_Update.cpp" line="376"/>
         <source>More information available at:</source>
         <translation type="unfinished">추가 정보 링크:</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="296"/>
+        <location filename="../../src/Dialog_Update.cpp" line="306"/>
         <source>A new version of LameXP is available!</source>
         <translation type="unfinished">LameXP의 새 버전을 사용할 수 있습니다!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="207"/>
+        <location filename="../../src/Dialog_Update.cpp" line="217"/>
         <source>Stopping update check, please wait...</source>
         <translation type="unfinished">업데이트 확인 중지 중, 잠시 기다려 주십시오...</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="297"/>
+        <location filename="../../src/Dialog_Update.cpp" line="307"/>
         <source>We highly recommend all users to install this update as soon as possible.</source>
         <translation type="unfinished">이 업데이트를 신속히 설치하시길 모든 사용자들에게 권장합니다.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="301"/>
+        <location filename="../../src/Dialog_Update.cpp" line="311"/>
         <source>No new updates available at this time.</source>
         <translation type="unfinished">사용 가능한 새로운 업데이트가 없습니다.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="302"/>
+        <location filename="../../src/Dialog_Update.cpp" line="312"/>
         <source>Your version of LameXP is still up-to-date. Please check for updates regularly!</source>
         <translation type="unfinished">LameXP의 최신 버전입니다. 자주 업데이트를 확인하여 주십시오!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="306"/>
+        <location filename="../../src/Dialog_Update.cpp" line="316"/>
         <source>Your version appears to be newer than the latest release.</source>
         <translation type="unfinished">현재 설치된 버전이 최신 출시 버전 보다 더 최신인 것 같습니다.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="307"/>
+        <location filename="../../src/Dialog_Update.cpp" line="317"/>
         <source>This usually indicates your are currently using a pre-release version of LameXP.</source>
         <translation type="unfinished">이런 경우는 LameXP의 시험판 사용을 의미합니다.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="326"/>
+        <location filename="../../src/Dialog_Update.cpp" line="336"/>
         <source>Update check has been cancelled!</source>
         <translation type="unfinished">업데이트 확인이 취소되었습니다!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="327"/>
+        <location filename="../../src/Dialog_Update.cpp" line="337"/>
         <source>The update check has been cancelled by the user. Please try again later.</source>
         <translation type="unfinished">업데이트 확인이 취소되었습니다. 나중에 다시 시도하시기 바랍니다.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="396"/>
+        <location filename="../../src/Dialog_Update.cpp" line="406"/>
         <source>Update is being downloaded, please be patient...</source>
         <translation type="unfinished">업데이트를 내려받고 있습니다. 잠시만 기다려주십시오...</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="444"/>
+        <location filename="../../src/Dialog_Update.cpp" line="454"/>
         <source>Update ready to install. Applicaion will quit...</source>
         <translation type="unfinished">업데이트 설치 준비. 프로그램이 종료됩니다...</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="452"/>
+        <location filename="../../src/Dialog_Update.cpp" line="462"/>
         <source>Update failed. Please try again or download manually!</source>
         <translation type="unfinished">업데이트 실패. 다시 시도하거나 업데이트를 수동으로 내려받으시기 바랍니다!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="311"/>
+        <location filename="../../src/Dialog_Update.cpp" line="321"/>
         <source>It appears that the computer currently is offline!</source>
         <translation type="unfinished">현재 컴퓨터가 인터넷에 연결되어 있지 않은 걸로 보입니다!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="312"/>
-        <location filename="../../src/Dialog_Update.cpp" line="317"/>
+        <location filename="../../src/Dialog_Update.cpp" line="322"/>
+        <location filename="../../src/Dialog_Update.cpp" line="327"/>
         <source>Please make sure your computer is connected to the internet and try again.</source>
         <translation type="unfinished">인터넷 연결을 확인하고 다시 시도하시기 바랍니다.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="287"/>
+        <location filename="../../src/Dialog_Update.cpp" line="297"/>
         <source>Initializing, please wait...</source>
         <translation type="unfinished">초기화 중, 잠시만 기다려 주십시오...</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="254"/>
+        <location filename="../../src/Dialog_Update.cpp" line="264"/>
         <source>Discard</source>
         <translation type="unfinished">닫기</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="254"/>
+        <location filename="../../src/Dialog_Update.cpp" line="264"/>
         <source>Ignore</source>
         <translation type="unfinished">무시</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="252"/>
+        <location filename="../../src/Dialog_Update.cpp" line="262"/>
         <source>Sorry, but only users in the &quot;Administrators&quot; group can install updates.</source>
         <translation type="unfinished">죄송하지만 관리자 그룹의 사용자들만 업데이트를 설치할 수 있습니다.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="253"/>
+        <location filename="../../src/Dialog_Update.cpp" line="263"/>
         <source>Please start application from an administrator account and try again!</source>
         <translation type="unfinished">프로그램을 관리자 권한으로 시작한 다음 다시 시도하시기 바랍니다!</translation>
     </message>

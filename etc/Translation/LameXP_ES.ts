@@ -2817,7 +2817,7 @@
     </message>
     <message>
         <location filename="../../src/Model_MetaInfo.cpp" line="119"/>
-        <location filename="../../src/Model_MetaInfo.cpp" line="409"/>
+        <location filename="../../src/Model_MetaInfo.cpp" line="408"/>
         <source>Generate from list position</source>
         <translation>Generar a partir de la posición en la lista</translation>
     </message>
@@ -2837,130 +2837,130 @@
         <translation>Valor</translation>
     </message>
     <message>
-        <location filename="../../src/Model_MetaInfo.cpp" line="309"/>
+        <location filename="../../src/Model_MetaInfo.cpp" line="308"/>
         <source>Unspecified</source>
         <translation>Sin especificar</translation>
     </message>
     <message>
-        <location filename="../../src/Model_MetaInfo.cpp" line="320"/>
-        <location filename="../../src/Model_MetaInfo.cpp" line="328"/>
+        <location filename="../../src/Model_MetaInfo.cpp" line="319"/>
+        <location filename="../../src/Model_MetaInfo.cpp" line="327"/>
         <source>Edit Title</source>
         <translation>Editar título</translation>
     </message>
     <message>
-        <location filename="../../src/Model_MetaInfo.cpp" line="321"/>
+        <location filename="../../src/Model_MetaInfo.cpp" line="320"/>
         <source>Please enter the title for this file:</source>
         <translation>Introduzca el título de este archivo:</translation>
     </message>
     <message>
-        <location filename="../../src/Model_MetaInfo.cpp" line="328"/>
+        <location filename="../../src/Model_MetaInfo.cpp" line="327"/>
         <source>The title must not be empty. Generating title from file name!</source>
         <translation>El título no puede estar vacío. ¡Generando título a partir del nombre del archivo!</translation>
     </message>
     <message>
-        <location filename="../../src/Model_MetaInfo.cpp" line="339"/>
+        <location filename="../../src/Model_MetaInfo.cpp" line="338"/>
         <source>Edit Artist</source>
         <translation>Editar artista</translation>
     </message>
     <message>
-        <location filename="../../src/Model_MetaInfo.cpp" line="340"/>
+        <location filename="../../src/Model_MetaInfo.cpp" line="339"/>
         <source>Please enter the artist for this file:</source>
         <translation>Introduzca el artista de este archivo:</translation>
     </message>
     <message>
-        <location filename="../../src/Model_MetaInfo.cpp" line="351"/>
+        <location filename="../../src/Model_MetaInfo.cpp" line="350"/>
         <source>Edit Album</source>
         <translation>Editar álbum</translation>
     </message>
     <message>
-        <location filename="../../src/Model_MetaInfo.cpp" line="352"/>
+        <location filename="../../src/Model_MetaInfo.cpp" line="351"/>
         <source>Please enter the album for this file:</source>
         <translation>Introduzca el álbum de este archivo:</translation>
     </message>
     <message>
-        <location filename="../../src/Model_MetaInfo.cpp" line="363"/>
+        <location filename="../../src/Model_MetaInfo.cpp" line="362"/>
         <source>Edit Genre</source>
         <translation>Editar género</translation>
     </message>
     <message>
-        <location filename="../../src/Model_MetaInfo.cpp" line="364"/>
+        <location filename="../../src/Model_MetaInfo.cpp" line="363"/>
         <source>Please enter the genre for this file:</source>
         <translation>Introduzca el género de este archivo:</translation>
     </message>
     <message>
-        <location filename="../../src/Model_MetaInfo.cpp" line="377"/>
+        <location filename="../../src/Model_MetaInfo.cpp" line="376"/>
         <source>Edit Year</source>
         <translation>Editar año</translation>
     </message>
     <message>
-        <location filename="../../src/Model_MetaInfo.cpp" line="378"/>
+        <location filename="../../src/Model_MetaInfo.cpp" line="377"/>
         <source>Please enter the year for this file:</source>
         <translation>Introduzca el año de este archivo:</translation>
     </message>
     <message>
-        <location filename="../../src/Model_MetaInfo.cpp" line="393"/>
-        <location filename="../../src/Model_MetaInfo.cpp" line="410"/>
+        <location filename="../../src/Model_MetaInfo.cpp" line="392"/>
+        <location filename="../../src/Model_MetaInfo.cpp" line="409"/>
         <source>Edit Position</source>
         <translation>Editar Nº de pista</translation>
     </message>
     <message>
-        <location filename="../../src/Model_MetaInfo.cpp" line="394"/>
-        <location filename="../../src/Model_MetaInfo.cpp" line="411"/>
+        <location filename="../../src/Model_MetaInfo.cpp" line="393"/>
+        <location filename="../../src/Model_MetaInfo.cpp" line="410"/>
         <source>Please enter the position (track no.) for this file:</source>
         <translation>Introduzca el Nº de pista de este archivo:</translation>
     </message>
     <message>
-        <location filename="../../src/Model_MetaInfo.cpp" line="409"/>
+        <location filename="../../src/Model_MetaInfo.cpp" line="408"/>
         <source>Unspecified (copy from source file)</source>
         <translation>Sin especificar (copiar desde al archivo de entrada)</translation>
     </message>
     <message>
-        <location filename="../../src/Model_MetaInfo.cpp" line="424"/>
+        <location filename="../../src/Model_MetaInfo.cpp" line="423"/>
         <source>Edit Comment</source>
         <translation>Editar comentarios</translation>
     </message>
     <message>
-        <location filename="../../src/Model_MetaInfo.cpp" line="425"/>
+        <location filename="../../src/Model_MetaInfo.cpp" line="424"/>
         <source>Please enter the comment for this file:</source>
         <translation>Por favor, introduzca los comentarios de este archivo:</translation>
     </message>
     <message>
-        <location filename="../../src/Model_MetaInfo.cpp" line="426"/>
-        <location filename="../../src/Model_MetaInfo.cpp" line="461"/>
+        <location filename="../../src/Model_MetaInfo.cpp" line="425"/>
+        <location filename="../../src/Model_MetaInfo.cpp" line="460"/>
         <source>Encoded with LameXP</source>
         <translation>Codificado con LameXP</translation>
     </message>
     <message>
-        <location filename="../../src/Model_MetaInfo.cpp" line="436"/>
+        <location filename="../../src/Model_MetaInfo.cpp" line="435"/>
         <source>Not editable</source>
         <translation>No editable</translation>
     </message>
     <message>
-        <location filename="../../src/Model_MetaInfo.cpp" line="436"/>
+        <location filename="../../src/Model_MetaInfo.cpp" line="435"/>
         <source>Sorry, this property of the source file cannot be edited!</source>
         <translation>Disculpe, ¡esta propiedad del archivo no se puede editar!</translation>
     </message>
     <message>
-        <location filename="../../src/Model_MetaInfo.cpp" line="313"/>
+        <location filename="../../src/Model_MetaInfo.cpp" line="312"/>
         <source>OK</source>
         <translation>Aceptar</translation>
     </message>
     <message>
-        <location filename="../../src/Model_MetaInfo.cpp" line="314"/>
+        <location filename="../../src/Model_MetaInfo.cpp" line="313"/>
         <source>Cancel</source>
         <translation>Cancelar</translation>
     </message>
     <message>
         <location filename="../../src/Model_MetaInfo.cpp" line="51"/>
         <location filename="../../src/Model_MetaInfo.cpp" line="61"/>
-        <location filename="../../src/Model_MetaInfo.cpp" line="451"/>
+        <location filename="../../src/Model_MetaInfo.cpp" line="450"/>
         <source>Not Specified</source>
         <translation>Sin especificar</translation>
     </message>
     <message>
         <location filename="../../src/Model_MetaInfo.cpp" line="50"/>
         <location filename="../../src/Model_MetaInfo.cpp" line="60"/>
-        <location filename="../../src/Model_MetaInfo.cpp" line="450"/>
+        <location filename="../../src/Model_MetaInfo.cpp" line="449"/>
         <source>Unknown</source>
         <translation>Desconocido</translation>
     </message>
@@ -3137,88 +3137,88 @@
         <translation>Cerrar</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="213"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="219"/>
         <source>Show details for selected job</source>
         <translation>Mostrar detalles de la tarea seleccionada</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="282"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="288"/>
         <source>Encoding Files</source>
         <translation>Codificando archivos</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="282"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="288"/>
         <source>Your files are being encoded, please be patient...</source>
         <translation>Sus archivos están siendo codificados, tenga paciencia...</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="486"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="492"/>
         <source>Encoding files, please wait...</source>
         <translation>Codificando archivos, espere por favor...</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="655"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="661"/>
         <source>Aborted! Waiting for running jobs to terminate...</source>
         <translation>¡Cancelado! Esperando a que finalicen las tareas que se están ejecutando...</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="688"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="694"/>
         <source>Creating the playlist file, please wait...</source>
         <translation>Creando el archivo de lista de reproducción, espere por favor...</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="699"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="705"/>
         <source>LameXP - Aborted</source>
         <translation>LameXP - Cancelado</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="699"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="705"/>
         <source>Process was aborted by the user.</source>
         <translation>El proceso ha sido cancelado por el usuario.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="725"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="731"/>
         <source>LameXP - Error</source>
         <translation>LameXP - Error</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="725"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="731"/>
         <source>At least one file has failed!</source>
         <translation>¡Se ha producido al menos un error!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="741"/>
-        <location filename="../../src/Dialog_Processing.cpp" line="743"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="747"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="749"/>
         <source>All files completed successfully.</source>
         <translation>Todos los archivos han sido codificados correctamente.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="743"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="749"/>
         <source>LameXP - Done</source>
         <translation>LameXP - Finalizado</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="1043"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="1049"/>
         <source>Playlist creation failed</source>
         <translation>Error al crear la lista de reproducción</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="1043"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="1049"/>
         <source>The playlist file could not be created:</source>
         <translation>No ha podido crearse la lista de reproducción:</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="698"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="704"/>
         <source>Process was aborted prematurely by the user!</source>
         <translation>¡El proceso fue cancelado prematuramente por el usuario!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="523"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="529"/>
         <source>Multi-threading enabled: Running %1 instances in parallel!</source>
         <translation>Ejecución multi-hilo habilitada: ¡Ejecutando %1 instancias en paralelo!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="214"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="220"/>
         <source>Browse Output File Location</source>
         <translation>Navegar hasta la ubicación del archivo de salida</translation>
     </message>
@@ -3228,13 +3228,13 @@
         <translation>Apagar el ordenador cuando todos los archivos hayan sido convertidos</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="1105"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="1111"/>
         <source>Warning: Computer will shutdown in %1 seconds...</source>
         <translation>Aviso: El ordenador de apagará en %1 segundos...</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="1109"/>
-        <location filename="../../src/Dialog_Processing.cpp" line="1110"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="1115"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="1116"/>
         <source>Cancel Shutdown</source>
         <translation>Cancelar apagado</translation>
     </message>
@@ -3257,47 +3257,47 @@
         <translation>Espcaio libre en disco (Carpeta temporal)</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="708"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="714"/>
         <source>Process finished after %1.</source>
         <translation>Finalizado en %1.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="220"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="226"/>
         <source>Filter Log Items</source>
         <translation>Filtrar el registro de archivos</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="222"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="228"/>
         <source>Show Running Only</source>
         <translation>Mostrar solo en ejecución</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="223"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="229"/>
         <source>Show Succeeded Only</source>
         <translation>Mostrar solo finalizados</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="224"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="230"/>
         <source>Show Failed Only</source>
         <translation>Mostrar solo fallidos</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="225"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="231"/>
         <source>Show Skipped Only</source>
         <translation>Mostrar solo omitidos</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="226"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="232"/>
         <source>Show All Items</source>
         <translation>Mostrar todos los archivos</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="930"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="936"/>
         <source>None of the items matches the current filtering rules</source>
         <translation>Ninguno de los archivos concuerda con las reglas de filtrado</translation>
     </message>
     <message numerus="yes">
-        <location filename="../../src/Dialog_Processing.cpp" line="698"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="704"/>
         <source>Process was aborted by the user after %n file(s)!</source>
         <translation>
             <numerusform>¡El proceso fue abortado por el usuario tras %n archivo!</numerusform>
@@ -3305,7 +3305,7 @@
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="../../src/Dialog_Processing.cpp" line="1205"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="1211"/>
         <source>%n hour(s)</source>
         <translation>
             <numerusform>%n hora</numerusform>
@@ -3313,8 +3313,8 @@
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="../../src/Dialog_Processing.cpp" line="1206"/>
-        <location filename="../../src/Dialog_Processing.cpp" line="1210"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="1212"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="1216"/>
         <source>%n minute(s)</source>
         <translation>
             <numerusform>%n minuto</numerusform>
@@ -3322,8 +3322,8 @@
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="../../src/Dialog_Processing.cpp" line="1211"/>
-        <location filename="../../src/Dialog_Processing.cpp" line="1215"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="1217"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="1221"/>
         <source>%n second(s)</source>
         <translation>
             <numerusform>%n segundo</numerusform>
@@ -3331,7 +3331,7 @@
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="../../src/Dialog_Processing.cpp" line="1216"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="1222"/>
         <source>%n millisecond(s)</source>
         <translation>
             <numerusform>%n milisegundo</numerusform>
@@ -3339,7 +3339,7 @@
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="../../src/Dialog_Processing.cpp" line="666"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="672"/>
         <source>Encoding: %n file(s) of %1 completed so far, please wait...</source>
         <translation>
             <numerusform>Codificando: %n de %1 archivo completado, espere por favor...</numerusform>
@@ -3347,7 +3347,7 @@
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="../../src/Dialog_Processing.cpp" line="719"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="725"/>
         <source>Error: %1 of %n file(s) failed (%2). Double-click failed items for detailed information!</source>
         <translation>
             <numerusform>Error: %1 de %n archivo fallido (%2). ¡Haga doble clic en el archivo para obtener información más detallada!</numerusform>
@@ -3355,7 +3355,7 @@
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="../../src/Dialog_Processing.cpp" line="719"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="725"/>
         <source>%n file(s) skipped</source>
         <translation>
             <numerusform>%n archivo omitido</numerusform>
@@ -3363,7 +3363,7 @@
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="../../src/Dialog_Processing.cpp" line="723"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="729"/>
         <source>Error: %1 of %n file(s) failed. Double-click failed items for detailed information!</source>
         <translation>
             <numerusform>Error: %1 de %n archivo fallido. ¡Haga doble clic en el archivo para obtener información más detallada!</numerusform>
@@ -3371,7 +3371,7 @@
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="../../src/Dialog_Processing.cpp" line="737"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="743"/>
         <source>All files completed successfully. Skipped %n file(s).</source>
         <translation>
             <numerusform>Todos los archivos han sido procesados. Se ha omitido %n archivo.</numerusform>
@@ -3461,139 +3461,139 @@
         <translation>Cerrar</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="162"/>
-        <location filename="../../src/Dialog_Update.cpp" line="367"/>
+        <location filename="../../src/Dialog_Update.cpp" line="172"/>
+        <location filename="../../src/Dialog_Update.cpp" line="377"/>
         <source>Build</source>
         <translation>Build</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="163"/>
+        <location filename="../../src/Dialog_Update.cpp" line="173"/>
         <source>Unknown</source>
         <translation>Desconocida</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="290"/>
+        <location filename="../../src/Dialog_Update.cpp" line="300"/>
         <source>Testing your internet connection, please wait...</source>
         <translation>Comprobando su conexión de internet, espere por favor...</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="316"/>
+        <location filename="../../src/Dialog_Update.cpp" line="326"/>
         <source>Network connectivity test has failed!</source>
         <translation>¡La prueba de conexión a internet ha fallado!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="293"/>
+        <location filename="../../src/Dialog_Update.cpp" line="303"/>
         <source>Checking for new updates online, please wait...</source>
         <translation>Comprobando en busca de nuevas actualizaciones, espere por favor...</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="321"/>
+        <location filename="../../src/Dialog_Update.cpp" line="331"/>
         <source>Failed to fetch update information from server!</source>
         <translation>¡No se ha podido obtener información de actualización desde el servidor!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="322"/>
+        <location filename="../../src/Dialog_Update.cpp" line="332"/>
         <source>Sorry, the update server might be busy at this time. Plase try again later.</source>
         <translation>Disculpe, puede que el servidor este sobrecargado en estos momentos. Por favor, inténtelo más tarde.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="366"/>
+        <location filename="../../src/Dialog_Update.cpp" line="376"/>
         <source>More information available at:</source>
         <translation>Más información disponible en:</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="296"/>
+        <location filename="../../src/Dialog_Update.cpp" line="306"/>
         <source>A new version of LameXP is available!</source>
         <translation>¡Hay una nueva versión de LameXP disponible!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="207"/>
+        <location filename="../../src/Dialog_Update.cpp" line="217"/>
         <source>Stopping update check, please wait...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="297"/>
+        <location filename="../../src/Dialog_Update.cpp" line="307"/>
         <source>We highly recommend all users to install this update as soon as possible.</source>
         <translation>Recomendamos a todos los usuarios instalar esta actualización cuanto antes.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="301"/>
+        <location filename="../../src/Dialog_Update.cpp" line="311"/>
         <source>No new updates available at this time.</source>
         <translation>No se ha encontrado ninguna actualización.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="302"/>
+        <location filename="../../src/Dialog_Update.cpp" line="312"/>
         <source>Your version of LameXP is still up-to-date. Please check for updates regularly!</source>
         <translation>LameXP está actualizado. ¡Por favor, compruebe regularmente las actualizaciones!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="306"/>
+        <location filename="../../src/Dialog_Update.cpp" line="316"/>
         <source>Your version appears to be newer than the latest release.</source>
         <translation>Su versión parece ser más reciente que la última versión publicada.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="307"/>
+        <location filename="../../src/Dialog_Update.cpp" line="317"/>
         <source>This usually indicates your are currently using a pre-release version of LameXP.</source>
         <translation>Esto generalmente indica que está usando una versión pre-lanzamiento de LameXP.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="326"/>
+        <location filename="../../src/Dialog_Update.cpp" line="336"/>
         <source>Update check has been cancelled!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="327"/>
+        <location filename="../../src/Dialog_Update.cpp" line="337"/>
         <source>The update check has been cancelled by the user. Please try again later.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="396"/>
+        <location filename="../../src/Dialog_Update.cpp" line="406"/>
         <source>Update is being downloaded, please be patient...</source>
         <translation>Descargando actualización, espere por favor...</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="444"/>
+        <location filename="../../src/Dialog_Update.cpp" line="454"/>
         <source>Update ready to install. Applicaion will quit...</source>
         <translation>Actualización lista para instalar. La aplicación se cerrará...</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="452"/>
+        <location filename="../../src/Dialog_Update.cpp" line="462"/>
         <source>Update failed. Please try again or download manually!</source>
         <translation>Actualización fallida. ¡Por favor, vuelva a intentarlo o descárguelo manualmente!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="311"/>
+        <location filename="../../src/Dialog_Update.cpp" line="321"/>
         <source>It appears that the computer currently is offline!</source>
         <translation>¡No está conectado a Internet!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="312"/>
-        <location filename="../../src/Dialog_Update.cpp" line="317"/>
+        <location filename="../../src/Dialog_Update.cpp" line="322"/>
+        <location filename="../../src/Dialog_Update.cpp" line="327"/>
         <source>Please make sure your computer is connected to the internet and try again.</source>
         <translation>Por favor, asegurese de que tiene conexión a internet y vuelva a intentarlo.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="287"/>
+        <location filename="../../src/Dialog_Update.cpp" line="297"/>
         <source>Initializing, please wait...</source>
         <translation>La inicialización, por favor espere ...</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="254"/>
+        <location filename="../../src/Dialog_Update.cpp" line="264"/>
         <source>Discard</source>
         <translation>descartar</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="254"/>
+        <location filename="../../src/Dialog_Update.cpp" line="264"/>
         <source>Ignore</source>
         <translation>Ignorar</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="252"/>
+        <location filename="../../src/Dialog_Update.cpp" line="262"/>
         <source>Sorry, but only users in the &quot;Administrators&quot; group can install updates.</source>
         <translation>Lo sentimos , pero sólo los usuarios del grupo &quot;Administradores&quot; se pueden instalar las actualizaciones.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="253"/>
+        <location filename="../../src/Dialog_Update.cpp" line="263"/>
         <source>Please start application from an administrator account and try again!</source>
         <translation>Por favor, iniciar la aplicación desde una cuenta de administrador y vuelva a intentarlo!</translation>
     </message>

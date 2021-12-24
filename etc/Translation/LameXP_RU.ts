@@ -2778,14 +2778,14 @@
     <message>
         <location filename="../../src/Model_MetaInfo.cpp" line="50"/>
         <location filename="../../src/Model_MetaInfo.cpp" line="60"/>
-        <location filename="../../src/Model_MetaInfo.cpp" line="450"/>
+        <location filename="../../src/Model_MetaInfo.cpp" line="449"/>
         <source>Unknown</source>
         <translation>Неизвестно</translation>
     </message>
     <message>
         <location filename="../../src/Model_MetaInfo.cpp" line="51"/>
         <location filename="../../src/Model_MetaInfo.cpp" line="61"/>
-        <location filename="../../src/Model_MetaInfo.cpp" line="451"/>
+        <location filename="../../src/Model_MetaInfo.cpp" line="450"/>
         <source>Not Specified</source>
         <translation>Не указано</translation>
     </message>
@@ -2846,7 +2846,7 @@
     </message>
     <message>
         <location filename="../../src/Model_MetaInfo.cpp" line="119"/>
-        <location filename="../../src/Model_MetaInfo.cpp" line="409"/>
+        <location filename="../../src/Model_MetaInfo.cpp" line="408"/>
         <source>Generate from list position</source>
         <translation>Генерировать из позиции в списке</translation>
     </message>
@@ -2866,116 +2866,116 @@
         <translation>Значение</translation>
     </message>
     <message>
-        <location filename="../../src/Model_MetaInfo.cpp" line="309"/>
+        <location filename="../../src/Model_MetaInfo.cpp" line="308"/>
         <source>Unspecified</source>
         <translation>Не указано</translation>
     </message>
     <message>
-        <location filename="../../src/Model_MetaInfo.cpp" line="313"/>
+        <location filename="../../src/Model_MetaInfo.cpp" line="312"/>
         <source>OK</source>
         <translation>ОК</translation>
     </message>
     <message>
-        <location filename="../../src/Model_MetaInfo.cpp" line="314"/>
+        <location filename="../../src/Model_MetaInfo.cpp" line="313"/>
         <source>Cancel</source>
         <translation>Отмена</translation>
     </message>
     <message>
-        <location filename="../../src/Model_MetaInfo.cpp" line="320"/>
-        <location filename="../../src/Model_MetaInfo.cpp" line="328"/>
+        <location filename="../../src/Model_MetaInfo.cpp" line="319"/>
+        <location filename="../../src/Model_MetaInfo.cpp" line="327"/>
         <source>Edit Title</source>
         <translation>Изменить Заголовок</translation>
     </message>
     <message>
-        <location filename="../../src/Model_MetaInfo.cpp" line="321"/>
+        <location filename="../../src/Model_MetaInfo.cpp" line="320"/>
         <source>Please enter the title for this file:</source>
         <translation>Введите заголовок для этого файла:</translation>
     </message>
     <message>
-        <location filename="../../src/Model_MetaInfo.cpp" line="328"/>
+        <location filename="../../src/Model_MetaInfo.cpp" line="327"/>
         <source>The title must not be empty. Generating title from file name!</source>
         <translation>Заголовок не должен быть пустым. Генерирование заголовка из имени файла!</translation>
     </message>
     <message>
-        <location filename="../../src/Model_MetaInfo.cpp" line="339"/>
+        <location filename="../../src/Model_MetaInfo.cpp" line="338"/>
         <source>Edit Artist</source>
         <translation>Изменить  Исполнителя</translation>
     </message>
     <message>
-        <location filename="../../src/Model_MetaInfo.cpp" line="340"/>
+        <location filename="../../src/Model_MetaInfo.cpp" line="339"/>
         <source>Please enter the artist for this file:</source>
         <translation>Введите исполнителя для этого файла:</translation>
     </message>
     <message>
-        <location filename="../../src/Model_MetaInfo.cpp" line="351"/>
+        <location filename="../../src/Model_MetaInfo.cpp" line="350"/>
         <source>Edit Album</source>
         <translation>Изменить Альбом</translation>
     </message>
     <message>
-        <location filename="../../src/Model_MetaInfo.cpp" line="352"/>
+        <location filename="../../src/Model_MetaInfo.cpp" line="351"/>
         <source>Please enter the album for this file:</source>
         <translation>Введите альбом для этого файла:</translation>
     </message>
     <message>
-        <location filename="../../src/Model_MetaInfo.cpp" line="363"/>
+        <location filename="../../src/Model_MetaInfo.cpp" line="362"/>
         <source>Edit Genre</source>
         <translation>Изменить Жанр</translation>
     </message>
     <message>
-        <location filename="../../src/Model_MetaInfo.cpp" line="364"/>
+        <location filename="../../src/Model_MetaInfo.cpp" line="363"/>
         <source>Please enter the genre for this file:</source>
         <translation>Введите жанр для этого файла:</translation>
     </message>
     <message>
-        <location filename="../../src/Model_MetaInfo.cpp" line="377"/>
+        <location filename="../../src/Model_MetaInfo.cpp" line="376"/>
         <source>Edit Year</source>
         <translation>Изменить Год</translation>
     </message>
     <message>
-        <location filename="../../src/Model_MetaInfo.cpp" line="378"/>
+        <location filename="../../src/Model_MetaInfo.cpp" line="377"/>
         <source>Please enter the year for this file:</source>
         <translation>Введите год для этого файла:</translation>
     </message>
     <message>
-        <location filename="../../src/Model_MetaInfo.cpp" line="393"/>
-        <location filename="../../src/Model_MetaInfo.cpp" line="410"/>
+        <location filename="../../src/Model_MetaInfo.cpp" line="392"/>
+        <location filename="../../src/Model_MetaInfo.cpp" line="409"/>
         <source>Edit Position</source>
         <translation>Изменить Позицию</translation>
     </message>
     <message>
-        <location filename="../../src/Model_MetaInfo.cpp" line="394"/>
-        <location filename="../../src/Model_MetaInfo.cpp" line="411"/>
+        <location filename="../../src/Model_MetaInfo.cpp" line="393"/>
+        <location filename="../../src/Model_MetaInfo.cpp" line="410"/>
         <source>Please enter the position (track no.) for this file:</source>
         <translation>Введите позицию (номер трека) для этого файла:</translation>
     </message>
     <message>
-        <location filename="../../src/Model_MetaInfo.cpp" line="409"/>
+        <location filename="../../src/Model_MetaInfo.cpp" line="408"/>
         <source>Unspecified (copy from source file)</source>
         <translation>Не указано (копировать из исходного файла)</translation>
     </message>
     <message>
-        <location filename="../../src/Model_MetaInfo.cpp" line="424"/>
+        <location filename="../../src/Model_MetaInfo.cpp" line="423"/>
         <source>Edit Comment</source>
         <translation>Изменить Комментарий</translation>
     </message>
     <message>
-        <location filename="../../src/Model_MetaInfo.cpp" line="425"/>
+        <location filename="../../src/Model_MetaInfo.cpp" line="424"/>
         <source>Please enter the comment for this file:</source>
         <translation>Введите комментарий для этого файла:</translation>
     </message>
     <message>
-        <location filename="../../src/Model_MetaInfo.cpp" line="426"/>
-        <location filename="../../src/Model_MetaInfo.cpp" line="461"/>
+        <location filename="../../src/Model_MetaInfo.cpp" line="425"/>
+        <location filename="../../src/Model_MetaInfo.cpp" line="460"/>
         <source>Encoded with LameXP</source>
         <translation>Кодировано с помощью LameXP</translation>
     </message>
     <message>
-        <location filename="../../src/Model_MetaInfo.cpp" line="436"/>
+        <location filename="../../src/Model_MetaInfo.cpp" line="435"/>
         <source>Not editable</source>
         <translation>Невозможно изменить</translation>
     </message>
     <message>
-        <location filename="../../src/Model_MetaInfo.cpp" line="436"/>
+        <location filename="../../src/Model_MetaInfo.cpp" line="435"/>
         <source>Sorry, this property of the source file cannot be edited!</source>
         <translation>К сожалению, это свойство исходного файла не может быть изменено!</translation>
     </message>
@@ -3152,88 +3152,88 @@
         <translation>Закрыть</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="213"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="219"/>
         <source>Show details for selected job</source>
         <translation>Показать подробности задания</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="214"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="220"/>
         <source>Browse Output File Location</source>
         <translation>Открыть папку с преобразованным файлом</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="282"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="288"/>
         <source>Encoding Files</source>
         <translation>Преобразование Файлов</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="282"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="288"/>
         <source>Your files are being encoded, please be patient...</source>
         <translation>Ваши файлы кодируются, пожалуйста, проявите терпение...</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="486"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="492"/>
         <source>Encoding files, please wait...</source>
         <translation>Кодирую файлы, пожалуйста, подождите...</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="523"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="529"/>
         <source>Multi-threading enabled: Running %1 instances in parallel!</source>
         <translation>Многопоточность включена: Выполняется %1 экземпляра(ов) параллельно!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="655"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="661"/>
         <source>Aborted! Waiting for running jobs to terminate...</source>
         <translation>Отменено! Ожидание завершения запущенных заданий...</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="688"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="694"/>
         <source>Creating the playlist file, please wait...</source>
         <translation>Создаю плэйлист, пожалуйста, подождите...</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="698"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="704"/>
         <source>Process was aborted prematurely by the user!</source>
         <translation>Процесс был преждевременно прерван пользователем!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="699"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="705"/>
         <source>LameXP - Aborted</source>
         <translation>LameXP - Отменено</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="699"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="705"/>
         <source>Process was aborted by the user.</source>
         <translation>Процесс был прерван пользователем.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="725"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="731"/>
         <source>LameXP - Error</source>
         <translation>LameXP - Ошибка</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="725"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="731"/>
         <source>At least one file has failed!</source>
         <translation>Ошибка как минимум с 1 файлом!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="743"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="749"/>
         <source>LameXP - Done</source>
         <translation>LameXP - Завершено</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="741"/>
-        <location filename="../../src/Dialog_Processing.cpp" line="743"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="747"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="749"/>
         <source>All files completed successfully.</source>
         <translation>Все файлы преобразовались успешно.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="1043"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="1049"/>
         <source>Playlist creation failed</source>
         <translation>Не могу создать плэйлист</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="1043"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="1049"/>
         <source>The playlist file could not be created:</source>
         <translation>Плэйлист не может быть создан:</translation>
     </message>
@@ -3243,13 +3243,13 @@
         <translation>Выключить компьютер после завершения преобразования всех файлов</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="1105"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="1111"/>
         <source>Warning: Computer will shutdown in %1 seconds...</source>
         <translation>Внимание: Компьютер выключится через %1 секунд...</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="1109"/>
-        <location filename="../../src/Dialog_Processing.cpp" line="1110"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="1115"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="1116"/>
         <source>Cancel Shutdown</source>
         <translation>Отменить выключение</translation>
     </message>
@@ -3272,47 +3272,47 @@
         <translation>Свободное место на диске (Временная папка)</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="708"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="714"/>
         <source>Process finished after %1.</source>
         <translation>Процесс завершился спустя %1.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="220"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="226"/>
         <source>Filter Log Items</source>
         <translation>Фильтр</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="222"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="228"/>
         <source>Show Running Only</source>
         <translation>Показать только выполняемые</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="223"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="229"/>
         <source>Show Succeeded Only</source>
         <translation>Показать только готовые</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="224"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="230"/>
         <source>Show Failed Only</source>
         <translation>Показать только с ошибками</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="225"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="231"/>
         <source>Show Skipped Only</source>
         <translation>Показать только пропущенные</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="226"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="232"/>
         <source>Show All Items</source>
         <translation>Показать все</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="930"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="936"/>
         <source>None of the items matches the current filtering rules</source>
         <translation>Ни один из элементов не удовлетворяет правилам фильтра</translation>
     </message>
     <message numerus="yes">
-        <location filename="../../src/Dialog_Processing.cpp" line="698"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="704"/>
         <source>Process was aborted by the user after %n file(s)!</source>
         <translation>
             <numerusform>Процесс был прерван пользователем после %n файла!</numerusform>
@@ -3321,7 +3321,7 @@
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="../../src/Dialog_Processing.cpp" line="1205"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="1211"/>
         <source>%n hour(s)</source>
         <translation>
             <numerusform>%n час</numerusform>
@@ -3330,8 +3330,8 @@
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="../../src/Dialog_Processing.cpp" line="1206"/>
-        <location filename="../../src/Dialog_Processing.cpp" line="1210"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="1212"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="1216"/>
         <source>%n minute(s)</source>
         <translation>
             <numerusform>%n минута</numerusform>
@@ -3340,8 +3340,8 @@
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="../../src/Dialog_Processing.cpp" line="1211"/>
-        <location filename="../../src/Dialog_Processing.cpp" line="1215"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="1217"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="1221"/>
         <source>%n second(s)</source>
         <translation>
             <numerusform>%n секунда</numerusform>
@@ -3350,7 +3350,7 @@
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="../../src/Dialog_Processing.cpp" line="1216"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="1222"/>
         <source>%n millisecond(s)</source>
         <translation>
             <numerusform>%n миллисекунда</numerusform>
@@ -3359,7 +3359,7 @@
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="../../src/Dialog_Processing.cpp" line="666"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="672"/>
         <source>Encoding: %n file(s) of %1 completed so far, please wait...</source>
         <translation>
             <numerusform>Кодирование: %n файл из %1 завершено, пожалуйста ждите...</numerusform>
@@ -3368,7 +3368,7 @@
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="../../src/Dialog_Processing.cpp" line="719"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="725"/>
         <source>Error: %1 of %n file(s) failed (%2). Double-click failed items for detailed information!</source>
         <translation>
             <numerusform>Ошибка в: %1 из %n файла (%2). Узнайте подробности по двойному щелчку на элементе с ошибкой!</numerusform>
@@ -3377,7 +3377,7 @@
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="../../src/Dialog_Processing.cpp" line="719"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="725"/>
         <source>%n file(s) skipped</source>
         <translation>
             <numerusform>%n файл пропущен</numerusform>
@@ -3386,7 +3386,7 @@
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="../../src/Dialog_Processing.cpp" line="723"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="729"/>
         <source>Error: %1 of %n file(s) failed. Double-click failed items for detailed information!</source>
         <translation>
             <numerusform>Ошибка в: %1 из %n файла. Узнайте подробности по двойному щелчку на элементе с ошибкой!</numerusform>
@@ -3395,7 +3395,7 @@
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="../../src/Dialog_Processing.cpp" line="737"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="743"/>
         <source>All files completed successfully. Skipped %n file(s).</source>
         <translation>
             <numerusform>Все файлы успешно преобразованы. Пропущен %n файл.</numerusform>
@@ -3486,141 +3486,141 @@
         <translation>Закрыть</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="162"/>
-        <location filename="../../src/Dialog_Update.cpp" line="367"/>
+        <location filename="../../src/Dialog_Update.cpp" line="172"/>
+        <location filename="../../src/Dialog_Update.cpp" line="377"/>
         <source>Build</source>
         <translation>Сборка</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="163"/>
+        <location filename="../../src/Dialog_Update.cpp" line="173"/>
         <source>Unknown</source>
         <translation>Неизвестно</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="290"/>
+        <location filename="../../src/Dialog_Update.cpp" line="300"/>
         <source>Testing your internet connection, please wait...</source>
         <translation>Проверяю соединение с сетью, пожалуйста, подождите...</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="316"/>
+        <location filename="../../src/Dialog_Update.cpp" line="326"/>
         <source>Network connectivity test has failed!</source>
         <translation>Нет соединения с сетью!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="293"/>
+        <location filename="../../src/Dialog_Update.cpp" line="303"/>
         <source>Checking for new updates online, please wait...</source>
         <translation>Проверяю обновления, пожалуйста, подождите...</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="321"/>
+        <location filename="../../src/Dialog_Update.cpp" line="331"/>
         <source>Failed to fetch update information from server!</source>
         <translation>Не могу получить информацию об обновлениях с сервера!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="322"/>
+        <location filename="../../src/Dialog_Update.cpp" line="332"/>
         <source>Sorry, the update server might be busy at this time. Plase try again later.</source>
         <translation>Извините, сервер обновлений сейчас недоступен. Пожалуйста, попробуйте позднее.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="366"/>
+        <location filename="../../src/Dialog_Update.cpp" line="376"/>
         <source>More information available at:</source>
         <translation>Подробная информация здесь:</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="296"/>
+        <location filename="../../src/Dialog_Update.cpp" line="306"/>
         <source>A new version of LameXP is available!</source>
         <translation>Доступна новя версия LameXP!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="207"/>
+        <location filename="../../src/Dialog_Update.cpp" line="217"/>
         <source>Stopping update check, please wait...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="297"/>
+        <location filename="../../src/Dialog_Update.cpp" line="307"/>
         <source>We highly recommend all users to install this update as soon as possible.</source>
         <translatorcomment>A nasty typo corrected</translatorcomment>
         <translation>Настоятельно  рекомендуем установить это обновление как можно скорее.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="301"/>
+        <location filename="../../src/Dialog_Update.cpp" line="311"/>
         <source>No new updates available at this time.</source>
         <translation>На данный момент обновлений нет.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="302"/>
+        <location filename="../../src/Dialog_Update.cpp" line="312"/>
         <source>Your version of LameXP is still up-to-date. Please check for updates regularly!</source>
         <translation>Вы используете самую новую версию. Проверяйте обновления регулярно!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="306"/>
+        <location filename="../../src/Dialog_Update.cpp" line="316"/>
         <source>Your version appears to be newer than the latest release.</source>
         <translation>Установленная версия новее чем последний релиз.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="307"/>
+        <location filename="../../src/Dialog_Update.cpp" line="317"/>
         <source>This usually indicates your are currently using a pre-release version of LameXP.</source>
         <translation>Это обычно значит, что вы используете бета версию LameXP.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="326"/>
+        <location filename="../../src/Dialog_Update.cpp" line="336"/>
         <source>Update check has been cancelled!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="327"/>
+        <location filename="../../src/Dialog_Update.cpp" line="337"/>
         <source>The update check has been cancelled by the user. Please try again later.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="396"/>
+        <location filename="../../src/Dialog_Update.cpp" line="406"/>
         <source>Update is being downloaded, please be patient...</source>
         <translation>Скачиваю обновление...</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="444"/>
+        <location filename="../../src/Dialog_Update.cpp" line="454"/>
         <source>Update ready to install. Applicaion will quit...</source>
         <translation>Обновление готово к установке. Завершение приложения...</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="452"/>
+        <location filename="../../src/Dialog_Update.cpp" line="462"/>
         <source>Update failed. Please try again or download manually!</source>
         <translatorcomment>Фак май майнд</translatorcomment>
         <translation>Не могу установить обновление в автоматическом режиме. Повторите попытку или установите обновление вручную!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="311"/>
+        <location filename="../../src/Dialog_Update.cpp" line="321"/>
         <source>It appears that the computer currently is offline!</source>
         <translation>Похоже компьютер не подключен к интернету!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="312"/>
-        <location filename="../../src/Dialog_Update.cpp" line="317"/>
+        <location filename="../../src/Dialog_Update.cpp" line="322"/>
+        <location filename="../../src/Dialog_Update.cpp" line="327"/>
         <source>Please make sure your computer is connected to the internet and try again.</source>
         <translation>Пожалуйста, проверьте, что ваш компьютер подключен к интернету и попробуйте снова.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="287"/>
+        <location filename="../../src/Dialog_Update.cpp" line="297"/>
         <source>Initializing, please wait...</source>
         <translation>Инициализация, пожалуйста, подождите...</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="254"/>
+        <location filename="../../src/Dialog_Update.cpp" line="264"/>
         <source>Discard</source>
         <translation>Отменить</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="254"/>
+        <location filename="../../src/Dialog_Update.cpp" line="264"/>
         <source>Ignore</source>
         <translation>Игнорировать</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="252"/>
+        <location filename="../../src/Dialog_Update.cpp" line="262"/>
         <source>Sorry, but only users in the &quot;Administrators&quot; group can install updates.</source>
         <translation>Извините, но только пользователи из группы &quot;Администраторы&quot; могут устанавливать обновления.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="253"/>
+        <location filename="../../src/Dialog_Update.cpp" line="263"/>
         <source>Please start application from an administrator account and try again!</source>
         <translation>Пожалуйста, запустите приложение с правами администратора и попробуйте снова!</translation>
     </message>
