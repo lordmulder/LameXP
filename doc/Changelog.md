@@ -7,7 +7,8 @@ subtitle: "Audio-Encoder Front-End &ndash; Changelog"
 # LameXP v4.xx History #
 
 ## LameXP v4.20 [unreleased] ## {-}
-* Updated MediaInfo to v21.09 (2021-09-17), compiled with ICL 2021.2 and MSVC 15.9
+* Updated MediaInfo to v22.03 (2022-03-31), compiled with ICL 2021.2 and MSVC 15.9
+* Implemented workaround for `DwmEnableBlurBehindWindow()` not working on Windows 11
 
 ## LameXP v4.19 [2021-08-29] ## {-}
 * Updated LAME encoder to v3.100.1-SVN (2020-08-25), compiled with ICL 19.1 and MSVC 15.9
