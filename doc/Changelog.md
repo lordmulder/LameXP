@@ -7,6 +7,7 @@ subtitle: "Audio-Encoder Front-End &ndash; Changelog"
 # LameXP v4.xx History #
 
 ## LameXP v4.20 [unreleased] ## {-}
+* Updated FLAC encoder/decoder to v1.4.1 (2022-09-22), compiled with ICL 2022.2 and MSVC 15.9
 * Updated MediaInfo to v22.06 (2022-06-23), compiled with ICL 2022.2 and MSVC 15.9
 * Implemented workaround for `DwmEnableBlurBehindWindow()` not working on Windows 11
 * Updated cURL to v7.85.0 (2022-08-31), with libcurl v7.85.0 and OpenSSL v1.1.1q
