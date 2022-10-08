@@ -358,9 +358,8 @@ double InitializationThread::doInit(const size_t threadCount)
 	delay();
 
 	//CPU type selection
-	unsigned int cpuSupport = 0;
-	const bool haveSSE2 = (m_cpuFeatures.features & MUtils::CPUFetaures::FLAG_SSE) && (m_cpuFeatures.features & MUtils::CPUFetaures::FLAG_SSE2);
-	if(haveSSE2 && (m_cpuFeatures.vendor & MUtils::CPUFetaures::VENDOR_INTEL))
+	unsigned int cpuSupport = m_cpuFeatures.x64 ? CPU_TYPE_X64_GEN : CPU_TYPE_X86_GEN;
+	if((m_cpuFeatures.features & MUtils::CPUFetaures::FLAG_SSE) && (m_cpuFeatures.features & MUtils::CPUFetaures::FLAG_SSE2))
 	{
 		if (m_cpuFeatures.features & MUtils::CPUFetaures::FLAG_AVX)
 		{
@@ -370,10 +369,6 @@ double InitializationThread::doInit(const size_t threadCount)
 		{
 			cpuSupport = m_cpuFeatures.x64 ? CPU_TYPE_X64_SSE : CPU_TYPE_X86_SSE;
 		}
-	}
-	else
-	{
-		cpuSupport = m_cpuFeatures.x64 ? CPU_TYPE_X64_GEN : CPU_TYPE_X86_GEN;
 	}
 
 	//Hack to disable x64 on Wine, as x64 binaries won't run under Wine (tested with Wine 1.4 under Ubuntu 12.04 x64)
