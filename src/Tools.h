@@ -32,10 +32,10 @@
 
 /* CPU_TYPE_<ARCH>_<TYPE> */
 #define CPU_TYPE_X86_GEN 0x00000001UL //x86, generic
-#define CPU_TYPE_X86_SSE 0x00000002UL //x86, with SSE and SSE2 support - Intel only!
+#define CPU_TYPE_X86_SSE 0x00000002UL //x86, with SSE and SSE2 support
 #define CPU_TYPE_X86_AVX 0x00000004UL //x86, with AVX support
 #define CPU_TYPE_X64_GEN 0x00000008UL //x64, generic
-#define CPU_TYPE_X64_SSE 0x00000010UL //x64, with SSE and SSE2 support - Intel only!
+#define CPU_TYPE_X64_SSE 0x00000010UL //x64, with SSE and SSE2 support
 #define CPU_TYPE_X64_AVX 0x00000020UL //x64, with AVX support
 
 /* combined CPU types */
@@ -82,10 +82,10 @@ g_lamexp_tools[] =
 	{"d26a917f5cd1b29bb10810d85e4f979e3fd58d9c4957990badd35a57bc6936b02d78c0096094e7906c8288f66b79bb8b", CPU_TYPE_X86_SSX, "lame.x86-sse2.exe", 31001, "SVN"},
 	{"b76d98075dac1a18675d837aea4051a9a71406af4636a41f0a8923beaf0d299de3ad51a6d80275a878849a63de16e90a", CPU_TYPE_X64_NVX, "lame.x64-sse2.exe", 31001, "SVN" },
 	{"31c4374e174bbf25b4429eabf22f570a841ce63796ce8321ea02af9620ce599cf9f92276224acc8f9375cdcaae846c8c", CPU_TYPE_X64_AVX, "lame.x64-avx.exe",  31001, "SVN" },
-	{"a3c47ae29d53ca312a55de1496e01b4c68c49c75383bc33f895075395aec75530b13436cfebbd01b321c08b8ce81eabb", CPU_TYPE_X86_GEN, "mac.x86-i686.exe", 629, ""},
-	{"fb9cb0cb352b3b6032bb1294cb1da0f6bfd08b4fc23140a2507c53ff84772c580c6cc98266bb2ab15cbec1487f9e6714", CPU_TYPE_X86_SSX, "mac.x86-sse2.exe", 629, ""},
-	{"10ca816bdbff8611aed072e9e54fc1caabb283d927d13f781a57c8ee6727ba59d383e3b740abac095b3f77ff8a31e95a", CPU_TYPE_X64_NVX, "mac.x64-sse2.exe", 629, ""},
-	{"6f9ca8c65c3ffd4088b54a430167bea8b094c7991e74fc5cba7e5ccc58512e113b68a179fe13d787b867b3a14f3ee12e", CPU_TYPE_X64_AVX, "mac.x64-avx.exe",  629, ""},
+	{"ecce88182864fee956f32be40ed072a53ce65811cb74f8cd2dc3b07caed8ce3dfc98d84dfc2ceaf426acf4d4c1c73c7c", CPU_TYPE_X86_GEN, "mac.x86-i686.exe", 892, ""},
+	{"5b4a8baa2e817ae4a4f58194f6b5f7b1d3b7a7473fd09a7a518bc0d994726b1d603b8d94e73c028e823312f29c1514f6", CPU_TYPE_X86_SSX, "mac.x86-sse2.exe", 892, ""},
+	{"42f03cddc33f984c61253e15d6803145977f14ed88dac1d1aa635abca52d8f29184516535ec51592fef824954457575d", CPU_TYPE_X64_NVX, "mac.x64-sse2.exe", 892, ""},
+	{"2b3d2cdc1783720c20b1c983dee098391211f9722747ed3e0ff6a59c1765f4c398e8a0edd039b28a82138157c3f3ae04", CPU_TYPE_X64_AVX, "mac.x64-avx.exe",  892, ""},
 	{"d12d531ade6a8902b37d048dd5f05c3760f5a093abeb51cbaf09c98a5bc4ba65c8b115b2f40d745334ddc0997319f85a", CPU_TYPE_X86_GEN, "mediainfo.i686.exe", 22060, ""},
 	{"7e77ea70eb2bf444bbef73d2ab7fdd19702bd42dd46ed298510e2eff2aa5ed08ab05380464dc14c8b1bfe4c062162209", CPU_TYPE_X86_SSX, "mediainfo.sse2.exe", 22060, ""},
 	{"61243ef793ae2afcd42748880d5d18279932fb7effc1007979c7df6a3fc34d909559738fc4f1eb0bdbb14dbbbdddc6cd", CPU_TYPE_X64_ALL, "mediainfo.x64.exe",  22060, ""},
