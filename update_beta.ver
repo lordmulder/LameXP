@@ -1,11 +1,11 @@
 [!Update]
-TimestampCreated=2022-10-02
+TimestampCreated=2022-10-09
 
 [LameXP]
-BuildNo=2344
-BuildDate=2022-10-02
+BuildNo=2350
+BuildDate=2022-10-09
 DownloadSite=http://forum.doom9.org/showthread.php?t=157726
 DownloadAddress=http://muldersoft.com/update/
-DownloadFilename=LameXP-BETA.2022-10-02.Release-Static.Build-2344.exe
-DownloadFilecode=cb14c02ff812eeed79c338c3a11bd7e30f1ccf84
-DownloadChecksum=6527C9417DCED08738FF92C97A4E0D7FB7A9C27FDBF52B1D03CDECD06B3480FF59D9FAE0A5CEA361AFF6054C6A818E3F
+DownloadFilename=LameXP-BETA.2022-10-09.Release-Static.Build-2350.exe
+DownloadFilecode=ee03f31f08b65029c0be30577df0c372358168ba
+DownloadChecksum=AC81C22F5C500F211038143B0926ED75BF9E404AF4099960195564D189759DE38B8B84C140D4297ACFA19FD249B60AC1
