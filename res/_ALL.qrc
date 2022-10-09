@@ -234,7 +234,7 @@
     <file>tools/lame.x64-sse2.exe</file>
     <file>tools/lame.x86-i686.exe</file>
     <file>tools/lame.x86-sse2.exe</file>
-    <file>tools/mac.x64-avx.exe</file>
+    <file>tools/mac.x64-avx2.exe</file>
     <file>tools/mac.x64-sse2.exe</file>
     <file>tools/mac.x86-i686.exe</file>
     <file>tools/mac.x86-sse2.exe</file>
