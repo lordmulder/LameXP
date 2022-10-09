@@ -475,7 +475,7 @@ copy /Y "$(SolutionDir)\..\Prerequisites\Qt4\v141_xp\Shared\plugins\imageformats
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release_Static|Win32'">false</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="tmp\LameXP\QRC_Tools.flac-x64-avx.cpp">
+    <ClCompile Include="tmp\LameXP\QRC_Tools.flac-x64-avx2.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release_Static|Win32'">false</ExcludedFromBuild>
@@ -1575,7 +1575,7 @@ copy /Y "$(SolutionDir)\..\Prerequisites\Qt4\v141_xp\Shared\plugins\imageformats
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release_Static|Win32'">false</ExcludedFromBuild>
     </CustomBuild>
-    <CustomBuild Include="res\Tools.flac-x64-avx.qrc">
+    <CustomBuild Include="res\Tools.flac-x64-avx2.qrc">
       <FileType>Document</FileType>
       <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">"$(QTDIR)\bin\rcc.exe" -o "$(SolutionDir)tmp\$(ProjectName)\QRC_%(Filename).cpp" -no-compress -name "%(Filename)" "%(FullPath)"</Command>
       <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">RCC "$(SolutionDir)tmp\$(ProjectName)\QRC_%(Filename).cpp"</Message>

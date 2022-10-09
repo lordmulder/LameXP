@@ -226,7 +226,7 @@
     <file>tools/dcaenc.exe</file>
     <file>tools/faad.i686.exe</file>
     <file>tools/faad.sse2.exe</file>
-    <file>tools/flac.x64-avx.exe</file>
+    <file>tools/flac.x64-avx2.exe</file>
     <file>tools/flac.x64-sse2.exe</file>
     <file>tools/flac.x86-i686.exe</file>
     <file>tools/flac.x86-sse2.exe</file>

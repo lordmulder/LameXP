@@ -412,7 +412,7 @@
     <ClCompile Include="tmp\LameXP\QRC_Tools.dcaenc.cpp">
       <Filter>Generated Files\QRC</Filter>
     </ClCompile>
-    <ClCompile Include="tmp\LameXP\QRC_Tools.flac-x64-avx.cpp">
+    <ClCompile Include="tmp\LameXP\QRC_Tools.flac-x64-avx2.cpp">
       <Filter>Generated Files\QRC</Filter>
     </ClCompile>
     <ClCompile Include="tmp\LameXP\QRC_Tools.flac-x64-sse2.cpp">
@@ -914,7 +914,7 @@
     <CustomBuild Include="res\Tools.dcaenc.qrc">
       <Filter>Resources</Filter>
     </CustomBuild>
-    <CustomBuild Include="res\Tools.flac-x64-avx.qrc">
+    <CustomBuild Include="res\Tools.flac-x64-avx2.qrc">
       <Filter>Resources</Filter>
     </CustomBuild>
     <CustomBuild Include="res\Tools.flac-x64-sse2.qrc">
