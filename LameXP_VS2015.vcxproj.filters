@@ -520,7 +520,7 @@
     <ClCompile Include="tmp\LameXP\QRC_Tools.wvunpack-x86-sse2.cpp">
       <Filter>Generated Files\QRC</Filter>
     </ClCompile>
-    <ClCompile Include="tmp\LameXP\QRC_Tools.mac-x64-avx.cpp">
+    <ClCompile Include="tmp\LameXP\QRC_Tools.mac-x64-avx2.cpp">
       <Filter>Generated Files\QRC</Filter>
     </ClCompile>
     <ClCompile Include="tmp\LameXP\QRC_Tools.mac-x64-sse2.cpp">
@@ -1019,7 +1019,7 @@
     <CustomBuild Include="res\Tools.wvunpack-x86-sse2.qrc">
       <Filter>Resources</Filter>
     </CustomBuild>
-    <CustomBuild Include="res\Tools.mac-x64-avx.qrc">
+    <CustomBuild Include="res\Tools.mac-x64-avx2.qrc">
       <Filter>Resources</Filter>
     </CustomBuild>
     <CustomBuild Include="res\Tools.mac-x64-sse2.qrc">
