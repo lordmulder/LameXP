@@ -100,20 +100,16 @@ static QList<QRegExp> createRegExpList(const char *const *const regExpList)
 }
 
 /* print selected CPU type*/
-static inline void printCpuTypeFriendlyName(const unsigned int &cpuSupport)
+#define _CPU_FRIENDLY_NAME(X,Y) case X: return #X " (" Y ")";
+static inline const char *cpuTypeFriendlyName(const unsigned int &cpuSupport)
 {
 	switch (cpuSupport)
 	{
-	case CPU_TYPE_X86_GEN:
-		qDebug("Selected CPU type is: x86 (i686)"); break;
-	case CPU_TYPE_X86_SSE:
-		qDebug("Selected CPU type is: x86 + SSE2"); break;
-	case CPU_TYPE_X86_AVX:
-		qDebug("Selected CPU type is: x86 + AVX2"); break;
-	case CPU_TYPE_X64_SSE:
-		qDebug("Selected CPU type is: x64 + SSE2"); break;
-	case CPU_TYPE_X64_AVX:
-		qDebug("Selected CPU type is: x64 + AVX2"); break;
+		_CPU_FRIENDLY_NAME(CPU_TYPE_X86_GEN, "i686")
+		_CPU_FRIENDLY_NAME(CPU_TYPE_X86_SSE, "i686 + SSE2")
+		_CPU_FRIENDLY_NAME(CPU_TYPE_X86_AVX, "i686 + AVX2")
+		_CPU_FRIENDLY_NAME(CPU_TYPE_X64_SSE, "x86_64")
+		_CPU_FRIENDLY_NAME(CPU_TYPE_X64_AVX, "x86_64 + AVX2")
 	default:
 		MUTILS_THROW("CPU support undefined!");
 	}
@@ -384,7 +380,12 @@ double InitializationThread::doInit(const size_t threadCount)
 		cpuSupport = m_cpuFeatures.x64 ? CPU_TYPE_X64_SSE : CPU_TYPE_X86_SSE;
 		if ((m_cpuFeatures.features & MUtils::CPUFetaures::FLAG_AVX) && (m_cpuFeatures.features & MUtils::CPUFetaures::FLAG_AVX2))
 		{
-			cpuSupport = m_cpuFeatures.x64 ? CPU_TYPE_X64_AVX : CPU_TYPE_X86_AVX;
+			//Note: AVX is supported on Windows 7 SP1 or later
+			const MUtils::OS::Version::os_version_t &osVersion = MUtils::OS::os_version();
+			if ((osVersion >= MUtils::OS::Version::WINDOWS_WIN80) || ((osVersion >= MUtils::OS::Version::WINDOWS_WIN70) && (osVersion.versionSPack >= 1)))
+			{
+				cpuSupport = m_cpuFeatures.x64 ? CPU_TYPE_X64_AVX : CPU_TYPE_X86_AVX;
+			}
 		}
 	}
 
@@ -396,7 +397,7 @@ double InitializationThread::doInit(const size_t threadCount)
 	}
 
 	//Print the selected CPU type
-	printCpuTypeFriendlyName(cpuSupport);
+	qDebug("Selected CPU type is: %s", cpuTypeFriendlyName(cpuSupport));
 
 	//Allocate queues
 	QQueue<QString> queueToolName;
@@ -768,7 +769,7 @@ void InitializationThread::selfTest(void)
 	{
 		const unsigned int cpuSupport = CPU[k];
 		qDebug("[SELF-TEST]");
-		printCpuTypeFriendlyName(cpuSupport);
+		qDebug("Testing CPU type: %s", cpuTypeFriendlyName(cpuSupport));
 		for (int i = 0; g_lamexp_tools[i].pcName || g_lamexp_tools[i].pcHash || g_lamexp_tools[i].uiVersion; ++i)
 		{
 			if (g_lamexp_tools[i].pcName && g_lamexp_tools[i].pcHash && g_lamexp_tools[i].uiVersion)
