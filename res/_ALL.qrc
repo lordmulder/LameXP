@@ -238,9 +238,10 @@
     <file>tools/mac.x64-sse2.exe</file>
     <file>tools/mac.x86-i686.exe</file>
     <file>tools/mac.x86-sse2.exe</file>
-    <file>tools/mediainfo.i686.exe</file>
-    <file>tools/mediainfo.sse2.exe</file>
-    <file>tools/mediainfo.x64.exe</file>
+    <file>tools/mediainfo.x64-avx2.exe</file>
+    <file>tools/mediainfo.x64-sse2.exe</file>
+    <file>tools/mediainfo.x86-i686.exe</file>
+    <file>tools/mediainfo.x86-sse2.exe</file>
     <file>tools/mpcdec.exe</file>
     <file>tools/mpg123.x64-avx2.exe</file>
     <file>tools/mpg123.x64-sse2.exe</file>
