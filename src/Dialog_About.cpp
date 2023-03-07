@@ -843,13 +843,6 @@ void AboutDialog::initSoftwareTab(void)
 	);
 	moreAboutText += makeToolText
 	(
-		tr("GnuPG - The GNU Privacy Guard"),
-		"gpgv.exe", "v?.?.??",
-		tr("Released under the terms of the GNU Lesser General Public License."),
-		"http://www.gnupg.org/"
-	);
-	moreAboutText += makeToolText
-	(
 		tr("cURL - Curl URL Request Library"),
 		"curl.exe", "v?.??.?",
 		tr("By Daniel Stenberg, released under the terms of the MIT/X Derivate License."),
