@@ -6,7 +6,7 @@ subtitle: "Audio-Encoder Front-End &ndash; Changelog"
 
 # LameXP v4.xx History #
 
-## LameXP v4.20 [unreleased] ## {-}
+## LameXP v4.20 [2023-03-07] ## {-}
 * Updated FLAC encoder/decoder to v1.4.1 (2022-09-22), compiled with ICL 2022.2 and MSVC 15.9
 * Updated Monkey's Audio binary to v8.92 (2022-10-07), compiled with ICL 2022.2 and MSVC 15.9
 * Updated mpg123 decoder to v1.30.2 (2022-08-02), compiled with GCC 12.2.0

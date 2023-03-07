@@ -73,8 +73,7 @@
         <location filename="../../src/Dialog_About.cpp" line="799"/>
         <location filename="../../src/Dialog_About.cpp" line="834"/>
         <location filename="../../src/Dialog_About.cpp" line="841"/>
-        <location filename="../../src/Dialog_About.cpp" line="848"/>
-        <location filename="../../src/Dialog_About.cpp" line="862"/>
+        <location filename="../../src/Dialog_About.cpp" line="855"/>
         <source>Released under the terms of the GNU Lesser General Public License.</source>
         <translation>Veröffentlicht unter den Bestimmungen der GNU Lesser General Public License.</translation>
     </message>
@@ -109,37 +108,37 @@
         <translation>Von Jory Stone &amp;lt;jcsston@toughguy.net&amp;gt; und LoRd_MuldeR &amp;lt;mulder2@gmx.de&amp;gt;.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_About.cpp" line="853"/>
+        <location filename="../../src/Dialog_About.cpp" line="846"/>
         <source>cURL - Curl URL Request Library</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_About.cpp" line="855"/>
+        <location filename="../../src/Dialog_About.cpp" line="848"/>
         <source>By Daniel Stenberg, released under the terms of the MIT/X Derivate License.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_About.cpp" line="867"/>
+        <location filename="../../src/Dialog_About.cpp" line="860"/>
         <source>Silk Icons - Over 700 icons in PNG format</source>
         <translation>Silk Icons - Über 700 Icons im PNG-Format</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_About.cpp" line="869"/>
+        <location filename="../../src/Dialog_About.cpp" line="862"/>
         <source>By Mark James, released under the Creative Commons &apos;BY&apos; License.</source>
         <translation>Von Mark James, veröffentlicht unter der Creative Commons &apos;BY&apos; Lizenz.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_About.cpp" line="874"/>
+        <location filename="../../src/Dialog_About.cpp" line="867"/>
         <source>Angry Chicken and Ghost Scream sound</source>
         <translation>Angry Chicken und Ghost Scream Sound</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_About.cpp" line="876"/>
+        <location filename="../../src/Dialog_About.cpp" line="869"/>
         <source>By Alexander, released under the Creative Commons &apos;BY&apos; License.</source>
         <translation>Von Alexander, veröffentlicht unter der Creative Commons &apos;BY&apos; Lizenz.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_About.cpp" line="936"/>
+        <location filename="../../src/Dialog_About.cpp" line="929"/>
         <source>n/a</source>
         <translation>n/v</translation>
     </message>
@@ -159,7 +158,7 @@
         <translation>Veröffentlicht unter den Bestimmungen der GNU General Public License.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_About.cpp" line="881"/>
+        <location filename="../../src/Dialog_About.cpp" line="874"/>
         <source>The copyright of LameXP as a whole belongs to LoRd_MuldeR. The copyright of third-party software used in LameXP belongs to the individual authors.</source>
         <translation>Das Urheberrecht an LameXP als Gesamtwerk liegt bei LoRd_MuldeR. Das Urheberrecht an der eingesetzten Drittsoftware liegt bei den jeweiligen Autoren.</translation>
     </message>
@@ -211,11 +210,6 @@
     <message>
         <location filename="../../src/Dialog_About.cpp" line="839"/>
         <source>SoX - Sound eXchange</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="../../src/Dialog_About.cpp" line="846"/>
-        <source>GnuPG - The GNU Privacy Guard</source>
         <translation></translation>
     </message>
     <message>
@@ -320,7 +314,7 @@
         <translation>Besonderen Dank an:</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_About.cpp" line="860"/>
+        <location filename="../../src/Dialog_About.cpp" line="853"/>
         <source>UPX - The Ultimate Packer for eXecutables</source>
         <translation></translation>
     </message>

@@ -73,8 +73,7 @@
         <location filename="../../src/Dialog_About.cpp" line="799"/>
         <location filename="../../src/Dialog_About.cpp" line="834"/>
         <location filename="../../src/Dialog_About.cpp" line="841"/>
-        <location filename="../../src/Dialog_About.cpp" line="848"/>
-        <location filename="../../src/Dialog_About.cpp" line="862"/>
+        <location filename="../../src/Dialog_About.cpp" line="855"/>
         <source>Released under the terms of the GNU Lesser General Public License.</source>
         <translation>Distribué sous les termes de la licence publique générale limitée GNU.</translation>
     </message>
@@ -110,37 +109,37 @@
         <translation>Par Jory Stone &amp;lt;jcsston@toughguy.net&amp;gt; et LoRd_MuldeR &amp;lt;mulder2@gmx.de&amp;gt;.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_About.cpp" line="853"/>
+        <location filename="../../src/Dialog_About.cpp" line="846"/>
         <source>cURL - Curl URL Request Library</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_About.cpp" line="855"/>
+        <location filename="../../src/Dialog_About.cpp" line="848"/>
         <source>By Daniel Stenberg, released under the terms of the MIT/X Derivate License.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_About.cpp" line="867"/>
+        <location filename="../../src/Dialog_About.cpp" line="860"/>
         <source>Silk Icons - Over 700 icons in PNG format</source>
         <translation>Silk Icons - Plus de 700 icônes en format PNG</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_About.cpp" line="869"/>
+        <location filename="../../src/Dialog_About.cpp" line="862"/>
         <source>By Mark James, released under the Creative Commons &apos;BY&apos; License.</source>
         <translation>Par Mark James, distribué sous la license Creative Commons &apos;BY&apos;.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_About.cpp" line="874"/>
+        <location filename="../../src/Dialog_About.cpp" line="867"/>
         <source>Angry Chicken and Ghost Scream sound</source>
         <translation>Sons de poulet en colère et de cri de fantôme</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_About.cpp" line="876"/>
+        <location filename="../../src/Dialog_About.cpp" line="869"/>
         <source>By Alexander, released under the Creative Commons &apos;BY&apos; License.</source>
         <translation>Par Alexander, distribué sous la license Creative Commons &apos;BY&apos;.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_About.cpp" line="936"/>
+        <location filename="../../src/Dialog_About.cpp" line="929"/>
         <source>n/a</source>
         <translation>n/a</translation>
     </message>
@@ -160,7 +159,7 @@
         <translation>Distribué sous les termes de la licence publique générale GNU.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_About.cpp" line="881"/>
+        <location filename="../../src/Dialog_About.cpp" line="874"/>
         <source>The copyright of LameXP as a whole belongs to LoRd_MuldeR. The copyright of third-party software used in LameXP belongs to the individual authors.</source>
         <translatorcomment>LameXP dans son ensemble est protégé par LoRd_MuldeR. Les droits d&apos;auteur des logiciels de tiers utilisés dans LameXP appartiennent aux auteurs individuels.</translatorcomment>
         <translation>Les droits d&apos;auteurs de LameXP dans son entièreté sont détenus par LoRd_MuldeR. Les droits d&apos;auteurs des logiciels tiers appartiennent à leurs auteurs respectifs.</translation>
@@ -216,11 +215,6 @@
         <location filename="../../src/Dialog_About.cpp" line="839"/>
         <source>SoX - Sound eXchange</source>
         <translation>SoX - Échange sonore</translation>
-    </message>
-    <message>
-        <location filename="../../src/Dialog_About.cpp" line="846"/>
-        <source>GnuPG - The GNU Privacy Guard</source>
-        <translation>GnuPG - Le garde de la vie privée privé GNU</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_About.cpp" line="705"/>
@@ -324,7 +318,7 @@
         <translation>Grand merci à :</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_About.cpp" line="860"/>
+        <location filename="../../src/Dialog_About.cpp" line="853"/>
         <source>UPX - The Ultimate Packer for eXecutables</source>
         <translation>UPX - The Ultimate Packer for eXecutable</translation>
     </message>
