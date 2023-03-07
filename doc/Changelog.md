@@ -10,7 +10,7 @@ subtitle: "Audio-Encoder Front-End &ndash; Changelog"
 * Updated FLAC encoder/decoder to v1.4.1 (2022-09-22), compiled with ICL 2022.2 and MSVC 15.9
 * Updated Monkey's Audio binary to v8.92 (2022-10-07), compiled with ICL 2022.2 and MSVC 15.9
 * Updated mpg123 decoder to v1.30.2 (2022-08-02), compiled with GCC 12.2.0
-* Updated MediaInfo to v22.09 (2022-10-04), compiled with ICL 2022.2 and MSVC 15.9
+* Updated MediaInfo to v22.12 (2022-12-22), compiled with ICL 2022.2 and MSVC 15.9
 * Implemented workaround for `DwmEnableBlurBehindWindow()` not working on Windows 11
 * Updated cURL to v7.87.0 (2022-12-21), with libcurl v7.87.0 and OpenSSL v1.1.1s
 
