@@ -105,7 +105,7 @@ Note that LameXP uses a number of *third-party* applications and libraries. The 
 LameXP is [*free software*](http://en.wikipedia.org/wiki/Free_software_movement), released under the terms of the [*GNU General Public License* (GPL), version 2](http://www.gnu.org/licenses/gpl-2.0.html). The licenses for most software and other practical works are designed to take away your freedom to share and change those works. In contrast, the GPL is designed to *guarantee* your freedom to share and change all versions of the software. In other words, the GPL ensures that free software is going to remain free for all of its users until doomsday. LameXP adds some additional terms in order to keep your computer safe from unwanted software. See the *GNU General Public License* for more details!
 
 	LameXP - Audio Encoder Front-End
-	Copyright (C) 2004-2022 LoRd_MuldeR <MuldeR2@GMX.de>
+	Copyright (C) 2004-2023 LoRd_MuldeR <MuldeR2@GMX.de>
 	
 	This program is free software; you can redistribute it and/or modify
 	it under the terms of the GNU GENERAL PUBLIC LICENSE as published by

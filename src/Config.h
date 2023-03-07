@@ -1,6 +1,6 @@
 ///////////////////////////////////////////////////////////////////////////////
 // LameXP - Audio Encoder Front-End
-// Copyright (C) 2004-2022 LoRd_MuldeR <MuldeR2@GMX.de>
+// Copyright (C) 2004-2023 LoRd_MuldeR <MuldeR2@GMX.de>
 //
 // This program is free software; you can redistribute it and/or modify
 // it under the terms of the GNU GENERAL PUBLIC LICENSE as published by
@@ -33,9 +33,9 @@
 #define VER_LAMEXP_MAJOR					4
 #define VER_LAMEXP_MINOR_HI					2
 #define VER_LAMEXP_MINOR_LO					0
-#define VER_LAMEXP_TYPE						Beta
-#define VER_LAMEXP_PATCH					6
-#define VER_LAMEXP_BUILD					2352
+#define VER_LAMEXP_TYPE						RC
+#define VER_LAMEXP_PATCH					1
+#define VER_LAMEXP_BUILD					2354
 #define VER_LAMEXP_CONFG					2188
 
 ///////////////////////////////////////////////////////////////////////////////
