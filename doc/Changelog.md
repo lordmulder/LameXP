@@ -12,7 +12,7 @@ subtitle: "Audio-Encoder Front-End &ndash; Changelog"
 * Updated mpg123 decoder to v1.30.2 (2022-08-02), compiled with GCC 12.2.0
 * Updated MediaInfo to v22.09 (2022-10-04), compiled with ICL 2022.2 and MSVC 15.9
 * Implemented workaround for `DwmEnableBlurBehindWindow()` not working on Windows 11
-* Updated cURL to v7.86.0 (2022-10-26), with libcurl v7.86.0 and OpenSSL v1.1.1s
+* Updated cURL to v7.87.0 (2022-12-21), with libcurl v7.87.0 and OpenSSL v1.1.1s
 
 ## LameXP v4.19 [2021-08-29] ## {-}
 * Updated LAME encoder to v3.100.1-SVN (2020-08-25), compiled with ICL 19.1 and MSVC 15.9
