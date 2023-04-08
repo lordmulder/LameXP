@@ -6,6 +6,11 @@ subtitle: "Audio-Encoder Front-End &ndash; Changelog"
 
 # LameXP v4.xx History #
 
+## LameXP v4.21 [2023-??-??] ## {-}
+* Upgraded build environment to Microsoft Visual Studio 2019.11 (MSVC 16.11)
+* Updated the Windows SDK version to 10.0.19041.0
+* Updated MediaInfo to v23.03 (2023-03-29), compiled with ICL 2023.1 and MSVC 16.11
+
 ## LameXP v4.20 [2023-03-07] ## {-}
 * Updated FLAC encoder/decoder to v1.4.1 (2022-09-22), compiled with ICL 2022.2 and MSVC 15.9
 * Updated Monkey's Audio binary to v8.92 (2022-10-07), compiled with ICL 2022.2 and MSVC 15.9
