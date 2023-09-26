@@ -375,13 +375,11 @@ void ProcessingDialog::showEvent(QShowEvent *event)
 		ui->button_closeDialog->setEnabled(false);
 		ui->button_AbortProcess->setEnabled(false);
 		
-		MUtils::OS::change_process_priority(1);
-		
 		ui->label_cpu->setText(NA);
 		ui->label_disk->setText(NA);
 		ui->label_ram->setText(NA);
 
-		QTimer::singleShot(500, this, SLOT(initEncoding()));
+		QTimer::singleShot(100, this, SLOT(initEncodingLater()));
 		m_firstShow = false;
 	}
 
@@ -472,6 +470,11 @@ void ProcessingDialog::resizeEvent(QResizeEvent *event)
 // SLOTS
 ////////////////////////////////////////////////////////////
 
+void ProcessingDialog::initEncodingLater(void)
+{
+	QTimer::singleShot(100, this, SLOT(initEncoding()));
+}
+
 void ProcessingDialog::initEncoding(void)
 {
 	qDebug("Initializing encoding process...");
@@ -486,6 +489,7 @@ void ProcessingDialog::initEncoding(void)
 	m_playList.clear();
 	m_progressIndicator->start();
 
+	MUtils::OS::change_process_priority(1);
 	DecoderRegistry::configureDecoders(m_settings);
 
 	CHANGE_BACKGROUND_COLOR(ui->frame_header, QColor(Qt::white));
@@ -544,7 +548,7 @@ void ProcessingDialog::initNextJob(void)
 		startNextJob();
 		if(--m_initThreads > 0)
 		{
-			QTimer::singleShot(32, this, SLOT(initNextJob()));
+			QTimer::singleShot(50, this, SLOT(initNextJob()));
 		}
 	}
 }
@@ -675,7 +679,7 @@ void ProcessingDialog::doneEncoding(void)
 	
 	if((!m_pendingJobs.isEmpty()) && (!m_userAborted))
 	{
-		QTimer::singleShot(0, this, SLOT(startNextJob()));
+		QTimer::singleShot(25, this, SLOT(startNextJob()));
 		qDebug("%d files left, starting next job...", m_pendingJobs.count());
 		return;
 	}

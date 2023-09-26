@@ -77,6 +77,7 @@ public:
 	int getShutdownFlag(void) { return m_shutdownFlag; }
 
 private slots:
+	void initEncodingLater(void);
 	void initEncoding(void);
 	void initNextJob(void);
 	void startNextJob(void);
