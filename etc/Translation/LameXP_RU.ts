@@ -3166,68 +3166,68 @@
         <translation>Ваши файлы кодируются, пожалуйста, проявите терпение...</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="492"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="475"/>
         <source>Encoding files, please wait...</source>
         <translation>Кодирую файлы, пожалуйста, подождите...</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="529"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="533"/>
         <source>Multi-threading enabled: Running %1 instances in parallel!</source>
         <translation>Многопоточность включена: Выполняется %1 экземпляра(ов) параллельно!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="661"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="665"/>
         <source>Aborted! Waiting for running jobs to terminate...</source>
         <translation>Отменено! Ожидание завершения запущенных заданий...</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="694"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="698"/>
         <source>Creating the playlist file, please wait...</source>
         <translation>Создаю плэйлист, пожалуйста, подождите...</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="704"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="708"/>
         <source>Process was aborted prematurely by the user!</source>
         <translation>Процесс был преждевременно прерван пользователем!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="705"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="709"/>
         <source>LameXP - Aborted</source>
         <translation>LameXP - Отменено</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="705"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="709"/>
         <source>Process was aborted by the user.</source>
         <translation>Процесс был прерван пользователем.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="731"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="735"/>
         <source>LameXP - Error</source>
         <translation>LameXP - Ошибка</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="731"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="735"/>
         <source>At least one file has failed!</source>
         <translation>Ошибка как минимум с 1 файлом!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="749"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="753"/>
         <source>LameXP - Done</source>
         <translation>LameXP - Завершено</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="747"/>
-        <location filename="../../src/Dialog_Processing.cpp" line="749"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="751"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="753"/>
         <source>All files completed successfully.</source>
         <translation>Все файлы преобразовались успешно.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="1049"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="1053"/>
         <source>Playlist creation failed</source>
         <translation>Не могу создать плэйлист</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="1049"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="1053"/>
         <source>The playlist file could not be created:</source>
         <translation>Плэйлист не может быть создан:</translation>
     </message>
@@ -3237,13 +3237,13 @@
         <translation>Выключить компьютер после завершения преобразования всех файлов</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="1111"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="1115"/>
         <source>Warning: Computer will shutdown in %1 seconds...</source>
         <translation>Внимание: Компьютер выключится через %1 секунд...</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="1115"/>
-        <location filename="../../src/Dialog_Processing.cpp" line="1116"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="1119"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="1120"/>
         <source>Cancel Shutdown</source>
         <translation>Отменить выключение</translation>
     </message>
@@ -3266,7 +3266,7 @@
         <translation>Свободное место на диске (Временная папка)</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="714"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="718"/>
         <source>Process finished after %1.</source>
         <translation>Процесс завершился спустя %1.</translation>
     </message>
@@ -3301,12 +3301,12 @@
         <translation>Показать все</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="936"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="940"/>
         <source>None of the items matches the current filtering rules</source>
         <translation>Ни один из элементов не удовлетворяет правилам фильтра</translation>
     </message>
     <message numerus="yes">
-        <location filename="../../src/Dialog_Processing.cpp" line="704"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="708"/>
         <source>Process was aborted by the user after %n file(s)!</source>
         <translation>
             <numerusform>Процесс был прерван пользователем после %n файла!</numerusform>
@@ -3315,7 +3315,7 @@
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="../../src/Dialog_Processing.cpp" line="1211"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="1215"/>
         <source>%n hour(s)</source>
         <translation>
             <numerusform>%n час</numerusform>
@@ -3324,8 +3324,8 @@
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="../../src/Dialog_Processing.cpp" line="1212"/>
         <location filename="../../src/Dialog_Processing.cpp" line="1216"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="1220"/>
         <source>%n minute(s)</source>
         <translation>
             <numerusform>%n минута</numerusform>
@@ -3334,8 +3334,8 @@
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="../../src/Dialog_Processing.cpp" line="1217"/>
         <location filename="../../src/Dialog_Processing.cpp" line="1221"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="1225"/>
         <source>%n second(s)</source>
         <translation>
             <numerusform>%n секунда</numerusform>
@@ -3344,7 +3344,7 @@
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="../../src/Dialog_Processing.cpp" line="1222"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="1226"/>
         <source>%n millisecond(s)</source>
         <translation>
             <numerusform>%n миллисекунда</numerusform>
@@ -3353,7 +3353,7 @@
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="../../src/Dialog_Processing.cpp" line="672"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="676"/>
         <source>Encoding: %n file(s) of %1 completed so far, please wait...</source>
         <translation>
             <numerusform>Кодирование: %n файл из %1 завершено, пожалуйста ждите...</numerusform>
@@ -3362,7 +3362,7 @@
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="../../src/Dialog_Processing.cpp" line="725"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="729"/>
         <source>Error: %1 of %n file(s) failed (%2). Double-click failed items for detailed information!</source>
         <translation>
             <numerusform>Ошибка в: %1 из %n файла (%2). Узнайте подробности по двойному щелчку на элементе с ошибкой!</numerusform>
@@ -3371,7 +3371,7 @@
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="../../src/Dialog_Processing.cpp" line="725"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="729"/>
         <source>%n file(s) skipped</source>
         <translation>
             <numerusform>%n файл пропущен</numerusform>
@@ -3380,7 +3380,7 @@
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="../../src/Dialog_Processing.cpp" line="729"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="733"/>
         <source>Error: %1 of %n file(s) failed. Double-click failed items for detailed information!</source>
         <translation>
             <numerusform>Ошибка в: %1 из %n файла. Узнайте подробности по двойному щелчку на элементе с ошибкой!</numerusform>
@@ -3389,7 +3389,7 @@
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="../../src/Dialog_Processing.cpp" line="743"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="747"/>
         <source>All files completed successfully. Skipped %n file(s).</source>
         <translation>
             <numerusform>Все файлы успешно преобразованы. Пропущен %n файл.</numerusform>

@@ -379,7 +379,7 @@ void ProcessingDialog::showEvent(QShowEvent *event)
 		ui->label_disk->setText(NA);
 		ui->label_ram->setText(NA);
 
-		QTimer::singleShot(100, this, SLOT(initEncodingLater()));
+		QTimer::singleShot(100, this, SLOT(prepareEncoding()));
 		m_firstShow = false;
 	}
 
@@ -470,8 +470,9 @@ void ProcessingDialog::resizeEvent(QResizeEvent *event)
 // SLOTS
 ////////////////////////////////////////////////////////////
 
-void ProcessingDialog::initEncodingLater(void)
+void ProcessingDialog::prepareEncoding(void)
 {
+	SET_PROGRESS_TEXT(tr("Encoding files, please wait..."));
 	QTimer::singleShot(100, this, SLOT(initEncoding()));
 }
 
@@ -493,8 +494,7 @@ void ProcessingDialog::initEncoding(void)
 	DecoderRegistry::configureDecoders(m_settings);
 
 	CHANGE_BACKGROUND_COLOR(ui->frame_header, QColor(Qt::white));
-	SET_PROGRESS_TEXT(tr("Encoding files, please wait..."));
-	
+
 	ui->button_closeDialog->setEnabled(false);
 	ui->button_AbortProcess->setEnabled(true);
 	ui->progressBar->setRange(0, m_pendingJobs.count());
@@ -536,7 +536,7 @@ void ProcessingDialog::initEncoding(void)
 
 	m_initThreads = m_threadPool->maxThreadCount();
 	QTimer::singleShot(100, this, SLOT(initNextJob()));
-	
+
 	m_totalTime.reset(new QElapsedTimer());
 	m_totalTime->start();
 }
