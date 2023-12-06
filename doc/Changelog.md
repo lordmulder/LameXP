@@ -9,7 +9,7 @@ subtitle: "Audio-Encoder Front-End &ndash; Changelog"
 ## LameXP v4.21 [2023-??-??] ## {-}
 * Upgraded build environment to Microsoft Visual Studio 2019.11 (MSVC 16.11)
 * Updated the Windows SDK version to 10.0.19041.0
-* Updated MediaInfo to v23.03 (2023-03-29), compiled with ICL 2023.1 and MSVC 16.11
+* Updated MediaInfo to v23.11 (2023-11-30), compiled with ICL 2023.2 and MSVC 16.11
 * Updated cURL to v8.4.0 (2023-10-11), with libcurl v8.4.0 and OpenSSL v1.1.1w
 
 ## LameXP v4.20 [2023-03-07] ## {-}
