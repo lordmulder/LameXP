@@ -457,24 +457,6 @@
     <ClCompile Include="tmp\LameXP\QRC_Tools.oggenc2-x64.cpp">
       <Filter>Generated Files\QRC</Filter>
     </ClCompile>
-    <ClCompile Include="tmp\LameXP\QRC_Tools.opusdec-avx.cpp">
-      <Filter>Generated Files\QRC</Filter>
-    </ClCompile>
-    <ClCompile Include="tmp\LameXP\QRC_Tools.opusdec-i686.cpp">
-      <Filter>Generated Files\QRC</Filter>
-    </ClCompile>
-    <ClCompile Include="tmp\LameXP\QRC_Tools.opusdec-sse2.cpp">
-      <Filter>Generated Files\QRC</Filter>
-    </ClCompile>
-    <ClCompile Include="tmp\LameXP\QRC_Tools.opusenc-avx.cpp">
-      <Filter>Generated Files\QRC</Filter>
-    </ClCompile>
-    <ClCompile Include="tmp\LameXP\QRC_Tools.opusenc-i686.cpp">
-      <Filter>Generated Files\QRC</Filter>
-    </ClCompile>
-    <ClCompile Include="tmp\LameXP\QRC_Tools.opusenc-sse2.cpp">
-      <Filter>Generated Files\QRC</Filter>
-    </ClCompile>
     <ClCompile Include="tmp\LameXP\QRC_Tools.refalac-i686.cpp">
       <Filter>Generated Files\QRC</Filter>
     </ClCompile>
@@ -572,6 +554,30 @@
       <Filter>Generated Files\QRC</Filter>
     </ClCompile>
     <ClCompile Include="tmp\LameXP\QRC_Tools.mediainfo-x64-avx2.cpp">
+      <Filter>Generated Files\QRC</Filter>
+    </ClCompile>
+    <ClCompile Include="tmp\LameXP\QRC_Tools.opusdec-x86-i686.cpp">
+      <Filter>Generated Files\QRC</Filter>
+    </ClCompile>
+    <ClCompile Include="tmp\LameXP\QRC_Tools.opusdec-x86-sse2.cpp">
+      <Filter>Generated Files\QRC</Filter>
+    </ClCompile>
+    <ClCompile Include="tmp\LameXP\QRC_Tools.opusenc-x64-avx2.cpp">
+      <Filter>Generated Files\QRC</Filter>
+    </ClCompile>
+    <ClCompile Include="tmp\LameXP\QRC_Tools.opusenc-x64-sse2.cpp">
+      <Filter>Generated Files\QRC</Filter>
+    </ClCompile>
+    <ClCompile Include="tmp\LameXP\QRC_Tools.opusenc-x86-i686.cpp">
+      <Filter>Generated Files\QRC</Filter>
+    </ClCompile>
+    <ClCompile Include="tmp\LameXP\QRC_Tools.opusenc-x86-sse2.cpp">
+      <Filter>Generated Files\QRC</Filter>
+    </ClCompile>
+    <ClCompile Include="tmp\LameXP\QRC_Tools.opusdec-x64-avx2.cpp">
+      <Filter>Generated Files\QRC</Filter>
+    </ClCompile>
+    <ClCompile Include="tmp\LameXP\QRC_Tools.opusdec-x64-sse2.cpp">
       <Filter>Generated Files\QRC</Filter>
     </ClCompile>
   </ItemGroup>
@@ -959,24 +965,6 @@
     <CustomBuild Include="res\Tools.oggenc2-x64.qrc">
       <Filter>Resources</Filter>
     </CustomBuild>
-    <CustomBuild Include="res\Tools.opusdec-avx.qrc">
-      <Filter>Resources</Filter>
-    </CustomBuild>
-    <CustomBuild Include="res\Tools.opusdec-i686.qrc">
-      <Filter>Resources</Filter>
-    </CustomBuild>
-    <CustomBuild Include="res\Tools.opusdec-sse2.qrc">
-      <Filter>Resources</Filter>
-    </CustomBuild>
-    <CustomBuild Include="res\Tools.opusenc-avx.qrc">
-      <Filter>Resources</Filter>
-    </CustomBuild>
-    <CustomBuild Include="res\Tools.opusenc-i686.qrc">
-      <Filter>Resources</Filter>
-    </CustomBuild>
-    <CustomBuild Include="res\Tools.opusenc-sse2.qrc">
-      <Filter>Resources</Filter>
-    </CustomBuild>
     <CustomBuild Include="res\Tools.refalac-i686.qrc">
       <Filter>Resources</Filter>
     </CustomBuild>
@@ -1080,6 +1068,30 @@
       <Filter>Resources</Filter>
     </CustomBuild>
     <CustomBuild Include="res\Tools.mediainfo-x64-avx2.qrc">
+      <Filter>Resources</Filter>
+    </CustomBuild>
+    <CustomBuild Include="res\Tools.opusenc-x86-sse2.qrc">
+      <Filter>Resources</Filter>
+    </CustomBuild>
+    <CustomBuild Include="res\Tools.opusdec-x64-avx2.qrc">
+      <Filter>Resources</Filter>
+    </CustomBuild>
+    <CustomBuild Include="res\Tools.opusdec-x64-sse2.qrc">
+      <Filter>Resources</Filter>
+    </CustomBuild>
+    <CustomBuild Include="res\Tools.opusdec-x86-i686.qrc">
+      <Filter>Resources</Filter>
+    </CustomBuild>
+    <CustomBuild Include="res\Tools.opusdec-x86-sse2.qrc">
+      <Filter>Resources</Filter>
+    </CustomBuild>
+    <CustomBuild Include="res\Tools.opusenc-x64-avx2.qrc">
+      <Filter>Resources</Filter>
+    </CustomBuild>
+    <CustomBuild Include="res\Tools.opusenc-x64-sse2.qrc">
+      <Filter>Resources</Filter>
+    </CustomBuild>
+    <CustomBuild Include="res\Tools.opusenc-x86-i686.qrc">
       <Filter>Resources</Filter>
     </CustomBuild>
   </ItemGroup>
