@@ -9,6 +9,7 @@ subtitle: "Audio-Encoder Front-End &ndash; Changelog"
 ## LameXP v4.21 [2023-??-??] ## {-}
 * Upgraded build environment to Microsoft Visual Studio 2019.11 (MSVC 16.11)
 * Updated the Windows SDK version to 10.0.19041.0
+* Updated Opus encoder/decoder libraries to v1.4+9 (2023-11-03) and Opus-Tools to v0.2+34 (2023-11-12)
 * Updated FLAC encoder/decoder to v1.4.3 (2023-06-23), compiled with ICL 2024.0 and MSVC 16.11
 * Updated mpg123 decoder to v1.32.3 (2023-10-02), compiled with GCC 13.2.0
 * Updated MediaInfo to v23.11 (2023-11-30), compiled with ICL 2023.2 and MSVC 16.11

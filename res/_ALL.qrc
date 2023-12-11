@@ -253,12 +253,14 @@
     <file>tools/oggenc2.i686.exe</file>
     <file>tools/oggenc2.sse2.exe</file>
     <file>tools/oggenc2.x64.exe</file>
-    <file>tools/opusdec.avx.exe</file>
-    <file>tools/opusdec.i686.exe</file>
-    <file>tools/opusdec.sse2.exe</file>
-    <file>tools/opusenc.avx.exe</file>
-    <file>tools/opusenc.i686.exe</file>
-    <file>tools/opusenc.sse2.exe</file>
+    <file>tools/opusdec.x64-avx2.exe</file>
+    <file>tools/opusdec.x64-sse2.exe</file>
+    <file>tools/opusdec.x86-i686.exe</file>
+    <file>tools/opusdec.x86-sse2.exe</file>
+    <file>tools/opusenc.x64-avx2.exe</file>
+    <file>tools/opusenc.x64-sse2.exe</file>
+    <file>tools/opusenc.x86-i686.exe</file>
+    <file>tools/opusenc.x86-sse2.exe</file>
     <file>tools/refalac.i686.exe</file>
     <file>tools/refalac.sse2.exe</file>
     <file>tools/refalac.x64.exe</file>
@@ -267,6 +269,7 @@
     <file>tools/sox.i686.exe</file>
     <file>tools/sox.sse2.exe</file>
     <file>tools/speexdec.exe</file>
+    <file>tools/tag.exe</file>
     <file>tools/tta.exe</file>
     <file>tools/valdec.exe</file>
     <file>tools/verify.exe</file>
