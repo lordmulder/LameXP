@@ -13,7 +13,7 @@ subtitle: "Audio-Encoder Front-End &ndash; Changelog"
 * Updated FLAC encoder/decoder to v1.4.3 (2023-06-23), compiled with ICL 2024.0 and MSVC 16.11
 * Updated mpg123 decoder to v1.32.3 (2023-10-02), compiled with GCC 13.2.0
 * Updated MediaInfo to v23.11 (2023-11-30), compiled with ICL 2023.2 and MSVC 16.11
-* Updated cURL to v8.4.0 (2023-10-11), with libcurl v8.4.0 and OpenSSL v1.1.1w
+* Updated cURL to v8.5.0 (2023-12-06), with libcurl v8.5.0 and OpenSSL v1.1.1w
 
 ## LameXP v4.20 [2023-03-07] ## {-}
 * Updated FLAC encoder/decoder to v1.4.1 (2022-09-22), compiled with ICL 2022.2 and MSVC 15.9
