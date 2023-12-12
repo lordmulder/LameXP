@@ -1,0 +1,49 @@
+diff --git "a/src/common.c" "b/src/common.c"
+index 89b6680..738c194 100644
+--- "a/src/common.c"
++++ "b/src/common.c"
+@@ -93,6 +93,7 @@ void print_header(mpg123_handle *mh)
+ 		default: fprintf(stderr, "???");
+ 	}
+ 	fprintf(stderr, " Extension value: %d\n",	i.flags & MPG123_PRIVATE ? 1 : 0);
++	fflush(stderr);
+ 	print_stat_disabled=FALSE;
+ }
+ 
+@@ -116,6 +117,7 @@ void print_header_compact(mpg123_handle *mh)
+ 		default: fprintf(stderr, "???");
+ 	}
+ 	fprintf(stderr," %ld %s\n", i.rate, smodes[i.mode]);
++	fflush(stderr);
+ 	print_stat_disabled=FALSE;
+ }
+ 
+@@ -161,8 +163,9 @@ void print_buf(const char* prefix, out123_handle *ao)
+ 		return;
+ 	tim = (double)(buffsize/framesize)/rate;
+ 	settle_time(tim, times, &timesep);
+-	fprintf( stderr, "\r%s[%02lu:%02lu%c%02lu]"
+-	,	prefix, times[0], times[1], timesep, times[2] );
++	fprintf( stderr, "\r%s[%02lu:%02lu%c%02lu]",
++		prefix, times[0], times[1], timesep, times[2] );
++	fflush(stderr);
+ }
+ 
+ // This is a massively complicated function just for telling where we are.
+@@ -444,7 +447,8 @@ void print_stat(mpg123_handle *fr, long offset, out123_handle *ao, int draw_bar
+ 				fprintf(stderr, "%s", line+barlen);
+ 			}
+ 			else
+-			fprintf(stderr, "\r%s", line);
++				fprintf(stderr, "\r%s", line);
++			fflush(stderr);
+ 		}
+ 	}
+ 	if(line && line != linebuf)
+@@ -461,5 +465,6 @@ void clear_stat()
+ 		if( (flen=snprintf(fmt, sizeof(fmt), "\r%%%ds\r", len)) > 0
+ 		  && flen < sizeof(fmt) )
+ 			fprintf(stderr, fmt, " ");
++		fflush(stderr);
+ 	}
+ }

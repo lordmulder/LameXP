@@ -1,0 +1,153 @@
+ src/opusdec.c | 35 +++++++++++++++++++++++++++--------
+ src/opusenc.c | 18 ++++++++++--------
+ 2 files changed, 37 insertions(+), 16 deletions(-)
+
+diff --git a/src/opusdec.c b/src/opusdec.c
+index a0882a4..2effff8 100644
+--- a/src/opusdec.c
++++ b/src/opusdec.c
+@@ -41,6 +41,7 @@
+ #include <limits.h>
+ #include <string.h>
+ #include <ctype.h> /*tolower()*/
++#include <time.h>
+ 
+ #include <opus.h>
+ #include <opusfile.h>
+@@ -482,7 +483,7 @@ void usage(void)
+ 
+ void version(void)
+ {
+-   printf("opusdec %s %s (using %s)\n",PACKAGE_NAME,PACKAGE_VERSION,opus_get_version_string());
++   printf("opusdec %s %s\n  using %s\n", PACKAGE_NAME, PACKAGE_VERSION, opus_get_version_string());
+    printf("Copyright (C) 2008-2018 Xiph.Org Foundation\n");
+ }
+ 
+@@ -689,8 +690,10 @@ int main(int argc, char **argv)
+    int quiet = 0;
+    int forcewav = 0;
+    ogg_int64_t nb_read_total=0;
++   ogg_int64_t nb_total_length=0;
+    ogg_int64_t link_read=0;
+    ogg_int64_t link_out=0;
++   time_t last_update=0;
+    struct option long_options[] =
+    {
+       {"help", no_argument, NULL, 0},
+@@ -882,6 +885,7 @@ int main(int argc, char **argv)
+       /*If we have a seekable file, we can make some intelligent decisions
+         about how to decode.*/
+       nlinks = op_link_count(st);
++      nb_total_length = op_pcm_total(st, -1);
+       if (rate==0)
+       {
+          opus_uint32 initial_rate;
+@@ -1123,15 +1127,30 @@ int main(int argc, char **argv)
+          opus_int64 coded_seconds = nb_read_total/48000;
+          if (coded_seconds > last_coded_seconds || li != old_li)
+          {
+-            if (coded_seconds > last_coded_seconds)
++            const time_t now = time(NULL);
++            if (now != last_update)
+             {
+-               last_spin++;
+-               last_coded_seconds = coded_seconds;
++                if (coded_seconds > last_coded_seconds)
++                {
++                    last_spin++;
++                    last_coded_seconds = coded_seconds;
++                }
++                if (nb_total_length > 0)
++                {
++                    const double progress = (nb_read_total / (double)nb_total_length) * 100.0;
++                    fprintf(stderr, "\r[%c] %02" I64FORMAT ":%02d:%02d (%.1f%%)",
++                        spinner[last_spin & 3], coded_seconds / 3600,
++                        (int)((coded_seconds / 60) % 60), (int)(coded_seconds % 60), progress);
++                }
++                else
++                {
++                    fprintf(stderr, "\r[%c] %02" I64FORMAT ":%02d:%02d",
++                        spinner[last_spin & 3], coded_seconds / 3600,
++                        (int)((coded_seconds / 60) % 60), (int)(coded_seconds % 60));
++                }
++                fflush(stderr);
++                last_update = now;
+             }
+-            fprintf(stderr,"\r[%c] %02" I64FORMAT ":%02d:%02d",
+-             spinner[last_spin&3], coded_seconds/3600,
+-             (int)((coded_seconds/60)%60), (int)(coded_seconds%60));
+-            fflush(stderr);
+          }
+       }
+       old_li=li;
+diff --git a/src/opusenc.c b/src/opusenc.c
+index c09eca8..9b59dda 100644
+--- a/src/opusenc.c
++++ b/src/opusenc.c
+@@ -104,15 +104,15 @@ static void fatal(const char *format, ...)
+   exit(1);
+ }
+ 
+-static void opustoolsversion(const char *opusversion)
++static void opustoolsversion(const char *opusversion, const char * opeversion)
+ {
+-  printf("opusenc %s %s (using %s)\n",PACKAGE_NAME,PACKAGE_VERSION,opusversion);
++  printf("opusenc %s %s\n  using %s\n  using %s\n", PACKAGE_NAME, PACKAGE_VERSION, opusversion, opeversion);
+   printf("Copyright (C) 2008-2018 Xiph.Org Foundation\n");
+ }
+ 
+-static void opustoolsversion_short(const char *opusversion)
++static void opustoolsversion_short(const char *opusversion, const char* opeversion)
+ {
+-  opustoolsversion(opusversion);
++  opustoolsversion(opusversion, opeversion);
+ }
+ 
+ static void usage(void)
+@@ -436,6 +436,7 @@ int main(int argc, char **argv)
+   OggOpusEnc         *enc;
+   EncData            data;
+   const char         *opus_version;
++  const char         *ope_version;
+   float              *input;
+   /*I/O*/
+   oe_enc_opt         inopt;
+@@ -515,6 +516,7 @@ int main(int argc, char **argv)
+   inopt.comments = ope_comments_create();
+   if (inopt.comments == NULL) fatal("Error: failed to allocate memory for comments\n");
+   opus_version=opus_get_version_string();
++  ope_version = ope_get_version_string();
+   /*Vendor string should just be the encoder library,
+     the ENCODER comment specifies the tool used.*/
+   snprintf(ENCODER_string, sizeof(ENCODER_string), "opusenc from %s %s",PACKAGE_NAME,PACKAGE_VERSION);
+@@ -574,10 +576,10 @@ int main(int argc, char **argv)
+           help_picture();
+           exit(0);
+         } else if (strcmp(optname, "version")==0) {
+-          opustoolsversion(opus_version);
++          opustoolsversion(opus_version, ope_version);
+           exit(0);
+         } else if (strcmp(optname, "version-short")==0) {
+-          opustoolsversion_short(opus_version);
++          opustoolsversion_short(opus_version, ope_version);
+           exit(0);
+         } else if (strcmp(optname, "ignorelength")==0) {
+           inopt.ignorelength=1;
+@@ -835,7 +837,7 @@ int main(int argc, char **argv)
+         exit(0);
+         break;
+       case 'V':
+-        opustoolsversion(opus_version);
++        opustoolsversion(opus_version, ope_version);
+         exit(0);
+         break;
+       case '?':
+@@ -1067,7 +1069,7 @@ int main(int argc, char **argv)
+ 
+   if (!quiet) {
+     int opus_app;
+-    fprintf(stderr, "Encoding using %s", opus_version);
++    fprintf(stderr, "Encoding using %s (%s)", opus_version, ope_version);
+     ret = ope_encoder_ctl(enc, OPUS_GET_APPLICATION(&opus_app));
+     if (ret != OPE_OK) fprintf(stderr, "\n");
+     else if (opus_app==OPUS_APPLICATION_VOIP) fprintf(stderr, " (VoIP)\n");
