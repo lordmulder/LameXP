@@ -101,6 +101,16 @@ while(0)
 } \
 while(0)
 
+#define SET_PROGRESS_MESG(TITLE, MESSAGE, TYPE, ICON) do \
+{ \
+	if (!m_systemTray.isNull()) \
+	{ \
+		m_systemTray->showMessage(TITLE, MESSAGE, TYPE); \
+		m_systemTray->setIcon(ICON); \
+	} \
+} \
+while(0)
+
 #define SET_FONT_BOLD(WIDGET,BOLD) do \
 { \
 	QFont _font = WIDGET->font(); \
@@ -152,7 +162,7 @@ ProcessingDialog::ProcessingDialog(FileListModel *const fileListModel, const Aud
 :
 	QDialog(parent),
 	ui(new Ui::ProcessingDialog),
-	m_systemTray(new QSystemTrayIcon(QIcon(":/icons/cd_go.png"), this)),
+	m_systemTray((!settings->disableTrayIcon()) ? new QSystemTrayIcon(QIcon(":/icons/cd_go.png"), this) : NULL),
 	m_taskbar(new MUtils::Taskbar7(this)),
 	m_settings(settings),
 	m_metaInfo(metaInfo),
@@ -287,8 +297,11 @@ ProcessingDialog::ProcessingDialog(FileListModel *const fileListModel, const Aud
 	//Translate
 	ui->label_headerStatus->setText(QString("<b>%1</b><br>%2").arg(tr("Encoding Files"), tr("Your files are being encoded, please be patient...")));
 	
-	//Enable system tray icon
-	connect(m_systemTray.data(), SIGNAL(activated(QSystemTrayIcon::ActivationReason)), this, SLOT(systemTrayActivated(QSystemTrayIcon::ActivationReason)));
+	//Enable system tray icon, if enabled
+	if (!m_systemTray.isNull())
+	{
+		connect(m_systemTray.data(), SIGNAL(activated(QSystemTrayIcon::ActivationReason)), this, SLOT(systemTrayActivated(QSystemTrayIcon::ActivationReason)));
+	}
 
 	//Init other vars
 	m_runningThreads = 0;
@@ -395,7 +408,10 @@ void ProcessingDialog::closeEvent(QCloseEvent *event)
 	}
 	else
 	{
-		m_systemTray->setVisible(false);
+		if (!m_systemTray.isNull())
+		{
+			m_systemTray->setVisible(false);
+		}
 	}
 }
 
@@ -706,8 +722,7 @@ void ProcessingDialog::doneEncoding(void)
 		m_taskbar->setTaskbarState(MUtils::Taskbar7::TASKBAR_STATE_ERROR);
 		m_taskbar->setOverlayIcon(m_iconError.data());
 		SET_PROGRESS_TEXT((m_succeededJobs.count() > 0) ? tr("Process was aborted by the user after %n file(s)!", "", m_succeededJobs.count()) : tr("Process was aborted prematurely by the user!"));
-		m_systemTray->showMessage(tr("LameXP - Aborted"), tr("Process was aborted by the user."), QSystemTrayIcon::Warning);
-		m_systemTray->setIcon(QIcon(":/icons/cd_delete.png"));
+		SET_PROGRESS_MESG(tr("LameXP - Aborted"), tr("Process was aborted by the user."), QSystemTrayIcon::Warning, QIcon(":/icons/cd_delete.png"));
 		qApp->processEvents(QEventLoop::ExcludeUserInputEvents);
 		if(!m_forcedAbort) PLAY_SOUND_OPTIONAL("aborted", false);
 	}
@@ -732,8 +747,7 @@ void ProcessingDialog::doneEncoding(void)
 			{
 				SET_PROGRESS_TEXT(tr("Error: %1 of %n file(s) failed. Double-click failed items for detailed information!", "", m_failedJobs.count() + m_succeededJobs.count()).arg(QString::number(m_failedJobs.count())));
 			}
-			m_systemTray->showMessage(tr("LameXP - Error"), tr("At least one file has failed!"), QSystemTrayIcon::Critical);
-			m_systemTray->setIcon(QIcon(":/icons/cd_delete.png"));
+			SET_PROGRESS_MESG(tr("LameXP - Error"), tr("At least one file has failed!"), QSystemTrayIcon::Critical, QIcon(":/icons/cd_delete.png"));
 			qApp->processEvents(QEventLoop::ExcludeUserInputEvents);
 			PLAY_SOUND_OPTIONAL("error", false);
 		}
@@ -750,8 +764,7 @@ void ProcessingDialog::doneEncoding(void)
 			{
 				SET_PROGRESS_TEXT(tr("All files completed successfully."));
 			}
-			m_systemTray->showMessage(tr("LameXP - Done"), tr("All files completed successfully."), QSystemTrayIcon::Information);
-			m_systemTray->setIcon(QIcon(":/icons/cd_add.png"));
+			SET_PROGRESS_MESG(tr("LameXP - Done"), tr("All files completed successfully."), QSystemTrayIcon::Information, QIcon(":/icons/cd_add.png"));
 			qApp->processEvents(QEventLoop::ExcludeUserInputEvents);
 			PLAY_SOUND_OPTIONAL("success", false);
 		}

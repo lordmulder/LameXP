@@ -860,7 +860,7 @@
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="50"/>
-        <location filename="../../gui/MainWindow.ui" line="4844"/>
+        <location filename="../../gui/MainWindow.ui" line="4845"/>
         <source>Source Files</source>
         <translation>Forrásfájlok</translation>
     </message>
@@ -881,13 +881,13 @@
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="242"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1247"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1249"/>
         <source>Show Details</source>
         <translation>Részletek megjelenítése</translation>
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="274"/>
-        <location filename="../../gui/MainWindow.ui" line="4852"/>
+        <location filename="../../gui/MainWindow.ui" line="4853"/>
         <source>Output Directory</source>
         <translation>Kimeneti könyvtár</translation>
     </message>
@@ -938,7 +938,7 @@
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="606"/>
-        <location filename="../../gui/MainWindow.ui" line="4868"/>
+        <location filename="../../gui/MainWindow.ui" line="4869"/>
         <source>Meta Data</source>
         <translation>Metaadat</translation>
     </message>
@@ -980,7 +980,7 @@
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="784"/>
-        <location filename="../../gui/MainWindow.ui" line="4860"/>
+        <location filename="../../gui/MainWindow.ui" line="4861"/>
         <source>Compression</source>
         <translation>Tömörítés</translation>
     </message>
@@ -1076,7 +1076,7 @@
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="1493"/>
-        <location filename="../../gui/MainWindow.ui" line="4876"/>
+        <location filename="../../gui/MainWindow.ui" line="4877"/>
         <source>Advanced Options</source>
         <translation>Speciális beállítások</translation>
     </message>
@@ -1618,7 +1618,7 @@
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="4655"/>
-        <location filename="../../gui/MainWindow.ui" line="4827"/>
+        <location filename="../../gui/MainWindow.ui" line="4828"/>
         <source>About...</source>
         <translation>Névjegy...</translation>
     </message>
@@ -1663,1001 +1663,1022 @@
         <translation>Konfiguráció</translation>
     </message>
     <message>
-        <location filename="../../gui/MainWindow.ui" line="4836"/>
+        <location filename="../../gui/MainWindow.ui" line="4837"/>
         <source>Quit</source>
         <translation>Kilépés</translation>
     </message>
     <message>
-        <location filename="../../gui/MainWindow.ui" line="4885"/>
+        <location filename="../../gui/MainWindow.ui" line="4886"/>
         <source>Open File(s)...</source>
         <translation>Fájl(ok) megnyitása...</translation>
     </message>
     <message>
-        <location filename="../../gui/MainWindow.ui" line="4894"/>
+        <location filename="../../gui/MainWindow.ui" line="4895"/>
         <source>Official LameXP Project Web-Site</source>
         <translation>Hivatalos LameXP projekt weboldal</translation>
     </message>
     <message>
-        <location filename="../../gui/MainWindow.ui" line="4897"/>
+        <location filename="../../gui/MainWindow.ui" line="4898"/>
         <source>Visit Official Web-Site</source>
         <translation>Hivatalos weboldal felkeresése</translation>
     </message>
     <message>
-        <location filename="../../gui/MainWindow.ui" line="4906"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1245"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1527"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1561"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1589"/>
+        <location filename="../../gui/MainWindow.ui" line="4907"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1247"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1529"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1563"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1591"/>
         <source>Check for Updates</source>
         <translation>Frissítések ellenőrzése</translation>
     </message>
     <message>
-        <location filename="../../gui/MainWindow.ui" line="4915"/>
+        <location filename="../../gui/MainWindow.ui" line="4916"/>
         <source>Open Folder...</source>
         <translation>Mappa megnyitása...</translation>
     </message>
     <message>
-        <location filename="../../gui/MainWindow.ui" line="4924"/>
+        <location filename="../../gui/MainWindow.ui" line="4925"/>
         <source>Clear All</source>
         <translation>Összes törlése</translation>
     </message>
     <message>
-        <location filename="../../gui/MainWindow.ui" line="4935"/>
+        <location filename="../../gui/MainWindow.ui" line="4936"/>
         <source>Plastique</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../../gui/MainWindow.ui" line="4943"/>
+        <location filename="../../gui/MainWindow.ui" line="4944"/>
         <source>Cleanlooks</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../../gui/MainWindow.ui" line="4951"/>
+        <location filename="../../gui/MainWindow.ui" line="4952"/>
         <source>Windows Vista (&quot;Aero&quot;)</source>
         <translation>Windows Vista (&quot;Aero&quot;)</translation>
     </message>
     <message>
-        <location filename="../../gui/MainWindow.ui" line="4959"/>
+        <location filename="../../gui/MainWindow.ui" line="4960"/>
         <source>Windows Classic</source>
         <translation>Klasszikus Windows</translation>
     </message>
     <message>
-        <location filename="../../gui/MainWindow.ui" line="4967"/>
+        <location filename="../../gui/MainWindow.ui" line="4968"/>
         <source>Windows XP (&quot;Luna&quot;)</source>
         <translation>Windows XP (&quot;Luna&quot;)</translation>
     </message>
     <message>
-        <location filename="../../gui/MainWindow.ui" line="4975"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2091"/>
+        <location filename="../../gui/MainWindow.ui" line="4976"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2093"/>
         <source>Disable Update Reminder</source>
         <translation>Frissítési emlékeztető letiltása</translation>
     </message>
     <message>
-        <location filename="../../gui/MainWindow.ui" line="4983"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2117"/>
+        <location filename="../../gui/MainWindow.ui" line="4984"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2119"/>
         <source>Disable Sound Effects</source>
         <translation>Hanghatások letiltása</translation>
     </message>
     <message>
-        <location filename="../../gui/MainWindow.ui" line="4992"/>
+        <location filename="../../gui/MainWindow.ui" line="4993"/>
         <source>Install WMA Decoder</source>
         <translation>WMA dekóder telepítése</translation>
     </message>
     <message>
-        <location filename="../../gui/MainWindow.ui" line="5000"/>
+        <location filename="../../gui/MainWindow.ui" line="5001"/>
         <source>Disable Nero AAC Notifications</source>
         <translation>Nero AAC értesítések letiltása</translation>
     </message>
     <message>
-        <location filename="../../gui/MainWindow.ui" line="5009"/>
+        <location filename="../../gui/MainWindow.ui" line="5010"/>
         <source>Show DropBox</source>
         <translation>DropBox megjelenítése</translation>
     </message>
     <message>
-        <location filename="../../gui/MainWindow.ui" line="5033"/>
+        <location filename="../../gui/MainWindow.ui" line="5034"/>
         <source>From File...</source>
         <translation>Fájlból...</translation>
     </message>
     <message>
-        <location filename="../../gui/MainWindow.ui" line="5042"/>
+        <location filename="../../gui/MainWindow.ui" line="5043"/>
         <source>Encode!</source>
         <translation>Kódolás!</translation>
     </message>
     <message>
-        <location filename="../../gui/MainWindow.ui" line="5050"/>
+        <location filename="../../gui/MainWindow.ui" line="5051"/>
         <source>Disable Shell Integration</source>
         <translation>Helyi menü integrálás letiltása</translation>
     </message>
     <message>
-        <location filename="../../gui/MainWindow.ui" line="5059"/>
+        <location filename="../../gui/MainWindow.ui" line="5060"/>
         <source>LameXP User&apos;s Manual</source>
         <translation>LameXP felhasználói kézikönyv</translation>
     </message>
     <message>
-        <location filename="../../gui/MainWindow.ui" line="5068"/>
+        <location filename="../../gui/MainWindow.ui" line="5069"/>
         <source>Changelog</source>
         <translation>Változások</translation>
     </message>
     <message>
-        <location filename="../../gui/MainWindow.ui" line="5077"/>
+        <location filename="../../gui/MainWindow.ui" line="5078"/>
         <source>Translator&apos;s Guide</source>
         <translation>Fordítói útmutató</translation>
     </message>
     <message>
-        <location filename="../../gui/MainWindow.ui" line="5086"/>
+        <location filename="../../gui/MainWindow.ui" line="5087"/>
         <source>Help &amp;&amp; Support</source>
         <translation>Súgó és támogatás</translation>
     </message>
     <message>
-        <location filename="../../gui/MainWindow.ui" line="5095"/>
+        <location filename="../../gui/MainWindow.ui" line="5096"/>
         <source>Open Folder Recursively...</source>
         <translation>Mappa rekurzív megnyitása...</translation>
     </message>
     <message>
-        <location filename="../../gui/MainWindow.ui" line="5103"/>
+        <location filename="../../gui/MainWindow.ui" line="5104"/>
         <source>Check for Beta Updates</source>
         <translation>Béta frissítések keresése</translation>
     </message>
     <message>
-        <location filename="../../gui/MainWindow.ui" line="5112"/>
+        <location filename="../../gui/MainWindow.ui" line="5113"/>
         <source>Import Cue Sheet</source>
         <translation>Cue Sheet importálása</translation>
     </message>
     <message>
-        <location filename="../../gui/MainWindow.ui" line="5120"/>
+        <location filename="../../gui/MainWindow.ui" line="5121"/>
         <source>Disable Slow Startup Notifications</source>
         <translation>Lassú indítási értesítések letiltása</translation>
     </message>
     <message>
-        <location filename="../../gui/MainWindow.ui" line="5128"/>
+        <location filename="../../gui/MainWindow.ui" line="5129"/>
         <source>Hibernate Computer On Shutdown</source>
         <translation>Számítógép hibernálása leállításnál</translation>
     </message>
     <message>
-        <location filename="../../gui/MainWindow.ui" line="5137"/>
+        <location filename="../../gui/MainWindow.ui" line="5138"/>
         <source>MuldeR&apos;s OpenSource Projects</source>
         <translation>MuldeR nyílt forráskódú projektjei</translation>
     </message>
     <message>
-        <location filename="../../gui/MainWindow.ui" line="5146"/>
+        <location filename="../../gui/MainWindow.ui" line="5147"/>
         <source>Report a Bug (GitHub)</source>
         <translation>Hibajelentés (GitHub)</translation>
     </message>
     <message>
-        <location filename="../../gui/MainWindow.ui" line="5155"/>
+        <location filename="../../gui/MainWindow.ui" line="5156"/>
         <source>Hydrogenaudio Knowledgebase</source>
         <translation>Hydrogenaudio tudástár</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="848"/>
+        <location filename="../../gui/MainWindow.ui" line="5164"/>
+        <source>Disable Icon in Notification Area</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="850"/>
         <source>Adding file(s), please wait...</source>
         <translation>Fájl(ok) hozzáadása, kis türelmet...</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="859"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="4294"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="861"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="4310"/>
         <source>Access Denied</source>
         <translation>Hozzáférés megtagadva</translation>
     </message>
     <message numerus="yes">
-        <location filename="../../src/Dialog_MainWindow.cpp" line="859"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="861"/>
         <source>%n file(s) have been rejected, because read access was not granted!</source>
         <translation>
             <numerusform>%n fájl el lett utasítva, mivel nem lett engedélyezve az olvasási hozzáférés!</numerusform>
         </translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="859"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="861"/>
         <source>This usually means the file is locked by another process.</source>
         <translation>Ez általában azt jelenti, hogy a fájl zárolva van egy másik folyamat által.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="863"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="865"/>
         <source>CDDA Files</source>
         <translation>CDDA fájlok</translation>
     </message>
     <message numerus="yes">
-        <location filename="../../src/Dialog_MainWindow.cpp" line="863"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="865"/>
         <source>%n file(s) have been rejected, because they are dummy CDDA files!</source>
         <translation>
             <numerusform>%n fájl el lett utasítva, mivel azok üres CDDA fájlok!</numerusform>
         </translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="863"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="865"/>
         <source>Sorry, LameXP cannot extract audio tracks from an Audio-CD at present.</source>
         <translation>Sajnáljuk, de a LameXP jelenleg nem képes lementeni a hangsávokat egy Audio CD-ről.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="863"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="865"/>
         <source>We recommend using %1 for that purpose.</source>
         <translation>Javasoljuk, hogy erre a célra használja a következőt: %1.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="867"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="869"/>
         <source>Cue Sheet</source>
         <translation>Cue Sheet</translation>
     </message>
     <message numerus="yes">
-        <location filename="../../src/Dialog_MainWindow.cpp" line="867"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="869"/>
         <source>%n file(s) have been rejected, because they appear to be Cue Sheet images!</source>
         <translation>
             <numerusform>%n fájl el lett utasítva, mivel azok Cue Sheet képeknek tűnnek!</numerusform>
         </translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="867"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="869"/>
         <source>Please use LameXP&apos;s Cue Sheet wizard for importing Cue Sheet files.</source>
         <translation>Kérjük, használja a LameXP Cue Sheet varázslóját a Cue Sheet fájlok importálásához.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="871"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="873"/>
         <source>Files Rejected</source>
         <translation>Fájlok elutasítva</translation>
     </message>
     <message numerus="yes">
-        <location filename="../../src/Dialog_MainWindow.cpp" line="871"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="873"/>
         <source>%n file(s) have been rejected, because the file format could not be recognized!</source>
         <translation>
             <numerusform>%n fájl el lett utasítva, mivel a fájl formátuma nem ismerhető fel!</numerusform>
         </translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="871"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="873"/>
         <source>This usually means the file is damaged or the file format is not supported.</source>
         <translation>Ez általában azt jelenti, hogy a fájl sérült, vagy a fájlformátuma nem támogatott.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="886"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="888"/>
         <source>Scanning folder(s) for files, please wait...</source>
         <translation>Fájlok keresése a mappában, kis türelmet...</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1237"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1239"/>
         <source>DEMO VERSION</source>
         <translation>Demó verzió</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1241"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1243"/>
         <source>Initializing directory outline, please be patient...</source>
         <translation>Könyvtárszerkezet inicializálása, kis türelmet...</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1242"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1244"/>
         <source>You can drop in audio files here!</source>
         <translation>Húzza ide a hangfájlokat!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1248"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1250"/>
         <source>Open File in External Application</source>
         <translation>Fájl megnyitása külső alkalmazásban</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1249"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1251"/>
         <source>Browse File Location</source>
         <translation>Fájl helyének tallózása</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1250"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1252"/>
         <source>Browse Selected Folder</source>
         <translation>Kijelölt mappa tallózása</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1251"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1253"/>
         <source>Refresh Directory Outline</source>
         <translation>Könyvtárszerkezet frissítése</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1252"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1254"/>
         <source>Go To Parent Directory</source>
         <translation>Ugrás a szülő mappába</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1253"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1255"/>
         <source>Bookmark Current Output Folder</source>
         <translation>Aktuális kimeneti mappa könyvjelző</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1254"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1256"/>
         <source>Export Meta Tags to CSV File</source>
         <translation>Meta-címkék exportálása CSV fájlba</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1255"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1257"/>
         <source>Import Meta Tags from CSV File</source>
         <translation>Meta-címkék importálása CSV fájlból</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1504"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1506"/>
         <source>License Declined</source>
         <translation>Licenc elutasítva</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1504"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1506"/>
         <source>You have declined the license. Consequently the application will exit now!</source>
         <translation>Ön elutasította a licencet, ezért az alkalmazás most kilép!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1504"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1506"/>
         <source>Goodbye!</source>
         <translation>Viszlát!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1527"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1529"/>
         <source>LameXP - Expired</source>
         <translation>LameXP - Lejárt</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1527"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1529"/>
         <source>This demo (pre-release) version of LameXP has expired at %1.</source>
         <translation>Ez a LameXP demó (előzetes kiadás) verzió lejárt ekkor: %1.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1527"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1529"/>
         <source>LameXP is free software and release versions won&apos;t expire.</source>
         <translation>A LameXP egy ingyenes szoftver és a kiadási változatai nem fognak lejárni.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1527"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1561"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1529"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1563"/>
         <source>Exit Program</source>
         <translation>Program bezárása</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1547"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1549"/>
         <source>It seems that a bogus anti-virus software is slowing down the startup of LameXP.</source>
         <translation>Úgy tűnik, hogy egy hamis antivírus szoftver lassítja a LameXP indítását.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1548"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1550"/>
         <source>Please refer to the %1 document for details and solutions!</source>
         <translation>Kérjük, tekintse meg a(z) %1 dokumentumot a részletekért és megoldásokért!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1548"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1550"/>
         <source>Manual</source>
         <translation>Kézikönyv</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1549"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1551"/>
         <source>Slow Startup</source>
         <translation>Lassú indítás</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1549"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1614"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1693"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2264"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="4204"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1551"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1616"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1695"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2266"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="4220"/>
         <source>Discard</source>
         <translation>Elvetés</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1549"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1614"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1551"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1616"/>
         <source>Don&apos;t Show Again</source>
         <translation>Ne jelenjen meg többé</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1561"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1563"/>
         <source>Urgent Update</source>
         <translation>Sürgős frissítés</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1561"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1563"/>
         <source>Your version of LameXP is more than a year old. Time for an update!</source>
         <translation>Az Ön LameXP verziója több mint egy éves. Ideje lenne frissíteni!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1561"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1775"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1563"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1777"/>
         <source>Ignore</source>
         <translation>Kihagyás</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1577"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1579"/>
         <source>Skipping update check this time, please be patient...</source>
         <translation>A frissítés ellenőrzésének kihagyása ezúttal, kis türelmet...</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1589"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2093"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2103"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1591"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2095"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2105"/>
         <source>Update Reminder</source>
         <translation>Frissítési emlékeztető</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1589"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1591"/>
         <source>Your last update check was more than 14 days ago. Check for updates now?</source>
         <translation>A utolsó ellenőrzés több, mint 14 napja volt. Ellenőrzi most a frissítéseket?</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1589"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1591"/>
         <source>Your did not check for LameXP updates yet. Check for updates now?</source>
         <translation>Ön még nem ellenőrizte a LameXP frissítéseit. Ellenőrzi most?</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1589"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1591"/>
         <source>Postpone</source>
         <translation>Elhalasztás</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1607"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1609"/>
         <source>The Nero AAC encoder could not be found. AAC encoding support will be disabled.</source>
         <translation>A Nero AAC kódoló nem található. Az AAC kódolás letiltásra kerül.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1608"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1610"/>
         <source>Please put &apos;neroAacEnc.exe&apos;, &apos;neroAacDec.exe&apos; and &apos;neroAacTag.exe&apos; into the LameXP directory!</source>
         <translation>Kérjük, helyezze a &apos;neroAacEnc.exe&apos;, &apos;neroAacDec.exe&apos; és &apos;neroAacTag.exe&apos; fájlt a LameXP könyvtárába!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1609"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1611"/>
         <source>Your LameXP install directory is located here:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1611"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1613"/>
         <source>You can download the Nero AAC encoder for free from this website:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1613"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1615"/>
         <source>Note: Nero AAC encoder version %1 or newer is required to enable AAC encoding support!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1614"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1616"/>
         <source>AAC Support Disabled</source>
         <translation>AAC támogatás letiltva</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1745"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1802"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1812"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1747"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1804"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1814"/>
         <source>LameXP</source>
         <translation>LameXP</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1745"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1747"/>
         <source>You must add at least one file to the list before proceeding!</source>
         <translation>A feldolgozás előtt legalább egy fájlt hozzá kell adnia a listáról!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1753"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1755"/>
         <source>Not Found</source>
         <translation>Nem található</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1753"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1755"/>
         <source>Your currently selected TEMP folder does not exist anymore:</source>
         <translation>A jelenleg kiválasztott TEMP mappa már nem létezik:</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1753"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1755"/>
         <source>Restore Default</source>
         <translation>Vissza alapértelmezettre</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1753"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1755"/>
         <source>Cancel</source>
         <translation>Mégse</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1770"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1772"/>
         <source>There are less than %1 GB of free diskspace available on your system&apos;s TEMP folder.</source>
         <translation>Kevesebb, mint %1 GB szabad lemezterület áll rendelkezésre a rendszer TEMP mappájában.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1771"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1773"/>
         <source>It is highly recommend to free up more diskspace before proceeding with the encode!</source>
         <translation>Javasoljuk, hogy szabadítson fel további lemezterületet a kódolás folytatása előtt!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1772"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1774"/>
         <source>Your TEMP folder is located at:</source>
         <translation>TEMP mappa helye:</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1775"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1777"/>
         <source>Low Diskspace Warning</source>
         <translation>Alacsony lemezterület figyelmeztetés</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1775"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1777"/>
         <source>Abort Encoding Process</source>
         <translation>Kódolási folyamat megszakítása</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1775"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1777"/>
         <source>Clean Disk Now</source>
         <translation>Lemeztisztítás</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1783"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1785"/>
         <source>Low Diskspace</source>
         <translation>Alacsony lemezterület</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1783"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1785"/>
         <source>You are proceeding with low diskspace. Problems might occur!</source>
         <translation>A feldolgozást alacsony lemezterülettel végzi. Ez problémákat okozhat!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1802"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1804"/>
         <source>Sorry, an unsupported encoder has been chosen!</source>
         <translation>Sajnáljuk, de egy nem támogatott kódoló lett kiválasztva!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1812"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1814"/>
         <source>Cannot write to the selected output directory.</source>
         <translation>Nem lehet írni a kiválasztott kimeneti könyvtárba.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1812"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1814"/>
         <source>Please choose a different directory!</source>
         <translation>Kérjük, válasszon egy másik könyvtárat!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2055"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2057"/>
         <source>Load Translation</source>
         <translation>Fordítás betöltése</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2057"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2059"/>
         <source>Translation Files</source>
         <translation>Fordítási fájlok</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2091"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2093"/>
         <source>Do you really want to disable the update reminder?</source>
         <translation>Valóban letiltja a frissítés emlékeztetőt?</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2091"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2117"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2143"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2169"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2262"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2299"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2325"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2093"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2119"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2145"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2171"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2264"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2301"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2327"/>
         <source>Yes</source>
         <translation>Igen</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2091"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2117"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2143"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2169"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2262"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2299"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2325"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2093"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2119"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2145"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2171"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2264"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2301"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2327"/>
         <source>No</source>
         <translation>Nem</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2093"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2095"/>
         <source>The update reminder has been disabled.</source>
         <translation>A frissítés emlékeztető le lett tiltva.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2093"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2095"/>
         <source>Please remember to check for updates at regular intervals!</source>
         <translation>Ne feledje el rendszeres időközönként ellenőrizni a frissítéseket!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2103"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2105"/>
         <source>The update reminder has been re-enabled.</source>
         <translation>A frissítési emlékeztető újra engedélyezve lett.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2117"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2119"/>
         <source>Do you really want to disable all sound effects?</source>
         <translation>Valóban letiltja az összes hanghatást?</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2119"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2129"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2121"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2131"/>
         <source>Sound Effects</source>
         <translation>Hanghatások</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2119"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2121"/>
         <source>All sound effects have been disabled.</source>
         <translation>Az összes hanghatás letiltásra került.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2129"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2131"/>
         <source>The sound effects have been re-enabled.</source>
         <translation>A hanghatások újra engedélyezésre kerültek.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2143"/>
         <location filename="../../src/Dialog_MainWindow.cpp" line="2145"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2155"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2147"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2157"/>
         <source>Nero AAC Notifications</source>
         <translation>Nero AAC értesítések</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2143"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2145"/>
         <source>Do you really want to disable all Nero AAC Encoder notifications?</source>
         <translation>Valóban letiltja az összes Nero AAC kódoló értesítést?</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2145"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2147"/>
         <source>All Nero AAC Encoder notifications have been disabled.</source>
         <translation>Az összes Nero AAC kódoló értesítés letiltásra került.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2155"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2157"/>
         <source>The Nero AAC Encoder notifications have been re-enabled.</source>
         <translation>A Nero AAC kódoló értesítések újra engedélyezésre kerültek.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2169"/>
         <location filename="../../src/Dialog_MainWindow.cpp" line="2171"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2181"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2173"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2183"/>
         <source>Slow Startup Notifications</source>
         <translation>Lassú indítási értesítések</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2169"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2171"/>
         <source>Do you really want to disable the slow startup notifications?</source>
         <translation>Valóban letiltja a lassú indítási értesítéseket?</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2171"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2173"/>
         <source>The slow startup notifications have been disabled.</source>
         <translation>A lassú indítási értesítések letiltásra kerültek.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2181"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2183"/>
         <source>The slow startup notifications have been re-enabled.</source>
         <translation>A lassú indítási értesítések újra engedélyezésre kerültek.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2203"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2207"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2205"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2209"/>
         <source>Open Cue Sheet</source>
         <translation>Cue Sheet megnyitása</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2203"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2209"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2205"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2211"/>
         <source>Cue Sheet File</source>
         <translation>Cue Sheet fájl</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2262"/>
         <location filename="../../src/Dialog_MainWindow.cpp" line="2264"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2277"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2266"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2279"/>
         <source>Beta Updates</source>
         <translation>Béta frissítések</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2262"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2264"/>
         <source>Do you really want LameXP to check for Beta (pre-release) updates?</source>
         <translation>Valóban ellenőrizni szeretné a LameXP béta (előzetes) frissítéseit?</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2264"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2266"/>
         <source>LameXP will check for Beta (pre-release) updates from now on.</source>
         <translation>A LameXP mostantól kezdve ellenőrizni fogja az előzetesen kiadott béta frissítéseket.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2264"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2266"/>
         <source>Check Now</source>
         <translation>Ellenőrzés most</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2277"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2279"/>
         <source>LameXP will &lt;i&gt;not&lt;/i&gt; check for Beta (pre-release) updates from now on.</source>
         <translation>A LameXP mostantól &lt;i&gt;nem&lt;/i&gt; ellenőrizni az előzetesen kiadott béta frissítéseket.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2299"/>
         <location filename="../../src/Dialog_MainWindow.cpp" line="2301"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2311"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2303"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2313"/>
         <source>Hibernate Computer</source>
         <translation>Számítógép hibernálása</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2299"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2301"/>
         <source>Do you really want the computer to be hibernated on shutdown?</source>
         <translation>Valóban hibernáni szeretné a számítógépet leállításnál?</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2301"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2303"/>
         <source>LameXP will hibernate the computer on shutdown from now on.</source>
         <translation>A LameXP innentől hibernálni fogja a számítógépet leállításnál.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2311"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2313"/>
         <source>LameXP will &lt;i&gt;not&lt;/i&gt; hibernate the computer on shutdown from now on.</source>
         <translation>A LameXP innentől &lt;i&gt;nem&lt;/i&gt; fogja hibernálni a számítógépet leállításnál.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2325"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2328"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2339"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2327"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2330"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2341"/>
         <source>Shell Integration</source>
         <translation>Megjelenítés a helyi menüben</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2325"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2327"/>
         <source>Do you really want to disable the LameXP shell integration?</source>
         <translation>Valóban letiltja a LameXP helyi menüben való megjelenítését?</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2328"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2330"/>
         <source>The LameXP shell integration has been disabled.</source>
         <translation>A LameXP helyi menübe integrálása letiltásra került.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2339"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2341"/>
         <source>The LameXP shell integration has been re-enabled.</source>
         <translation>A LameXP helyi menübe integrálása újra engedélyezésre került.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2409"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2418"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2357"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2361"/>
+        <source>Notification Icon</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2357"/>
+        <source>The notification icon has been disabled.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2361"/>
+        <source>The notification icon has been re-enabled.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2425"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2434"/>
         <source>Add file(s)</source>
         <translation>Fájl(ok) hozzáadása</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2448"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2452"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2464"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2468"/>
         <source>Add Folder</source>
         <translation>Mappa hozzáadása</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2470"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2486"/>
         <source>Filter Files</source>
         <translation>Fájlok szűrése</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2470"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2486"/>
         <source>Select filename filter:</source>
         <translation>Válasszon fájlnév szűrőt</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2686"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2702"/>
         <source>Loading dropped files or folders, please wait...</source>
         <translation>A rádobott fájlok vagy mappák betöltése, kis türelmet...</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2782"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2786"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2798"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2802"/>
         <source>Save CSV file</source>
         <translation>CSV fájl mentése</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2782"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2789"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2832"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2838"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2798"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2805"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2848"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2854"/>
         <source>CSV File</source>
         <translation>CSV fájl</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2803"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2806"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2809"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2812"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2819"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2822"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2825"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2828"/>
         <source>CSV Export</source>
         <translation>CSV exportálása</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2803"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2819"/>
         <source>Sorry, there are no meta tags that can be exported!</source>
         <translation>Sajnáljuk, de jelenleg nincs importálható meta-címke!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2806"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2822"/>
         <source>Sorry, failed to open CSV file for writing!</source>
         <translation>Sajnáljuk, de nem sikerült megnyitni írásra a CSV-fájlt!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2809"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2825"/>
         <source>Sorry, failed to write to the CSV file!</source>
         <translation>Sajnáljuk, de nem sikerült írni a CSV-fájlba!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2812"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2828"/>
         <source>The CSV files was created successfully!</source>
         <translation>A CSV-fájlok létrehozása sikeresen megtörtént!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2832"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2836"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2848"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2852"/>
         <source>Open CSV file</source>
         <translation>CSV fájl megnyitása</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2852"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2855"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2858"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2861"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2864"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2868"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2871"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2874"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2877"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2880"/>
         <source>CSV Import</source>
         <translation>CSV importálás</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2852"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2868"/>
         <source>Sorry, failed to open CSV file for reading!</source>
         <translation>Sajnáljuk, de nem sikerült megnyitni a CSV fájlt olvasásra!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2855"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2871"/>
         <source>Sorry, failed to read from the CSV file!</source>
         <translation>Sajnáljuk, de nem sikerült olvasni a CSV-fájlból!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2858"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2874"/>
         <source>Sorry, the CSV file does not contain any known fields!</source>
         <translation>Sajnáljuk, de a CSV-fájl nem tartalmaz ismert mezőket!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2861"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2877"/>
         <source>CSV file is incomplete. Not all files were updated!</source>
         <translation>A CSV-fájl hiányos. Nem minden fájl lett frissítve!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2864"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2880"/>
         <source>The CSV files was imported successfully!</source>
         <translation>A CSV-fájlok importálása sikeresen megtörtént!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3043"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3088"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3059"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3104"/>
         <source>New Folder</source>
         <translation>Új könyvtár</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3088"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3104"/>
         <source>Enter the name of the new folder:</source>
         <translation>Adja meg az új mappa nevét:</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3121"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3137"/>
         <source>Failed to create folder</source>
         <translation>Nem sikerült létrehozni a mappát</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3121"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3137"/>
         <source>The new folder could not be created:</source>
         <translation>Az új mappa nem hozható létre:</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3121"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3137"/>
         <source>Drive is read-only or insufficient access rights!</source>
         <translation>A meghajtó írásvédett, vagy nem rendelkezik megfelelő hozzáférési jogokkal!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3598"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3614"/>
         <source>Current Encoder: %1</source>
         <translation>Aktuális kódoló: %1</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3702"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3705"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3718"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3721"/>
         <source>Quality Level %1</source>
         <translation>Minőségi szint: %1</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3708"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3724"/>
         <source>Compression %1</source>
         <translation>Tömörítés: %1</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3711"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3727"/>
         <source>Uncompressed</source>
         <translation>Tömörítetlen</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3754"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3770"/>
         <source>Best Quality (Slow)</source>
         <translation>Legjobb minőség (Lassú)</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3757"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3773"/>
         <source>High Quality (Recommended)</source>
         <translation>Kiváló minőség (ajánlott)</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3760"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3776"/>
         <source>Acceptable Quality (Fast)</source>
         <translation>Elfogadható minőség (Gyors)</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3763"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3779"/>
         <source>Poor Quality (Very Fast)</source>
         <translation>Gyenge minőség (Nagyon gyors)</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="4193"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="4209"/>
         <source>File name without extension</source>
         <translation>Fájlnév kiterjesztés nélkül</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="4194"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="4210"/>
         <source>Track number with leading zero</source>
         <translation>Szám sorszáma kezdő nullával</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="4195"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="4211"/>
         <source>Track title</source>
         <translation>Szám címe</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="4196"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="4212"/>
         <source>Artist name</source>
         <translation>Előadó neve</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="4197"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="4213"/>
         <source>Album name</source>
         <translation>Album neve</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="4198"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="4214"/>
         <source>Year with (at least) four digits</source>
         <translation>Év (legalább) négy számjeggyel</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="4199"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="4215"/>
         <source>Comment</source>
         <translation>Megjegyzés</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="4201"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="4217"/>
         <source>Characters forbidden in file names:</source>
         <translation>Tiltott karakterek a fájlnevekben:</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="4204"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="4220"/>
         <source>Rename Macros</source>
         <translation>Makrók átnevezése</translation>
     </message>
     <message numerus="yes">
-        <location filename="../../src/Dialog_MainWindow.cpp" line="4251"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="4267"/>
         <source>%n Instance(s)</source>
         <translation>
             <numerusform>%n példány</numerusform>
         </translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="4294"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="4310"/>
         <source>Cannot write to the selected directory. Please choose another directory!</source>
         <translation>Nem lehet írni a kiválasztott könyvtárba. Kérjük válasszon egy másik könyvtárat!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="4431"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="4447"/>
         <source>Overwrite Mode</source>
         <translation>Felülírási mód</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="4431"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="4447"/>
         <source>Warning: This mode may overwrite existing files with no way to revert!</source>
         <translation>Figyelem: Ez a mód felülírja a már létező fájlokat, amelyeket azt követően nem tud visszaállítani!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="4431"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="4447"/>
         <source>Continue</source>
         <translation>Folytatás</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="4431"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="4447"/>
         <source>Revert</source>
         <translation>Visszaállítás</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="4524"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="4540"/>
         <source>Already Running</source>
         <translation>Már fut</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="4524"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="4540"/>
         <source>LameXP is already running, please use the running instance!</source>
         <translation>A LameXP már fut. Kérjük, használja a futó példányt!</translation>
     </message>
@@ -3145,209 +3166,209 @@
         <translation>Bezárás</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="219"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="229"/>
         <source>Show details for selected job</source>
         <translation>A kiválasztott feladat részleteinek megjelenítése</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="220"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="230"/>
         <source>Browse Output File Location</source>
         <translation>Kimeneti fájl helyének tallózása</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="226"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="236"/>
         <source>Filter Log Items</source>
         <translation>Naplóelemek szűrő</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="228"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="238"/>
         <source>Show Running Only</source>
         <translation>Csak a futó állományok megjelenítése</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="229"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="239"/>
         <source>Show Succeeded Only</source>
         <translation>Csak a sikeresek megjelenítése</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="230"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="240"/>
         <source>Show Failed Only</source>
         <translation>Csak a sikertelenek megjelenítése</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="231"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="241"/>
         <source>Show Skipped Only</source>
         <translation>Csak a kihagyottak megjelenítése</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="232"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="242"/>
         <source>Show All Items</source>
         <translation>Az összes elem megjelenítése</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="288"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="298"/>
         <source>Encoding Files</source>
         <translation>Fájlok kódolása</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="288"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="298"/>
         <source>Your files are being encoded, please be patient...</source>
         <translation>A fájlok kódolás alatt állnak, kis türelmet...</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="475"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="491"/>
         <source>Encoding files, please wait...</source>
         <translation>Fájlok kódolása, kis türelmet...</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="533"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="549"/>
         <source>Multi-threading enabled: Running %1 instances in parallel!</source>
         <translation>Többszálú feldolgozás engedélyezve: %1 példány fut párhuzamosan!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="665"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="681"/>
         <source>Aborted! Waiting for running jobs to terminate...</source>
         <translation>Megszakítva! Várakozás a futó feladatok lezárására...</translation>
     </message>
     <message numerus="yes">
-        <location filename="../../src/Dialog_Processing.cpp" line="676"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="692"/>
         <source>Encoding: %n file(s) of %1 completed so far, please wait...</source>
         <translation>
             <numerusform>Kódolás:  %1 - %n fájl került feldolgozásra eddig, kis türelmet...</numerusform>
         </translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="698"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="714"/>
         <source>Creating the playlist file, please wait...</source>
         <translation>Lejátszási lista fájl létrehozása, kis türelmet...</translation>
     </message>
     <message numerus="yes">
-        <location filename="../../src/Dialog_Processing.cpp" line="708"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="724"/>
         <source>Process was aborted by the user after %n file(s)!</source>
         <translation>
             <numerusform>A folyamatot a felhasználó megszakította %n fájl után!</numerusform>
         </translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="708"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="724"/>
         <source>Process was aborted prematurely by the user!</source>
         <translation>A folyamat idő előtt meg lett szakítva a felhasználó által!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="709"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="725"/>
         <source>LameXP - Aborted</source>
         <translation>LameXP - Megszakítva</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="709"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="725"/>
         <source>Process was aborted by the user.</source>
         <translation>A folyamat meg lett szakítva a felhasználó által.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="718"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="733"/>
         <source>Process finished after %1.</source>
         <translation>A folyamat befejeződött %1 után.</translation>
     </message>
     <message numerus="yes">
-        <location filename="../../src/Dialog_Processing.cpp" line="729"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="744"/>
         <source>Error: %1 of %n file(s) failed (%2). Double-click failed items for detailed information!</source>
         <translation>
             <numerusform>Hiba:  %n - %1 fájl feldolgozási hiba (%2). Kattintson duplán a hibás tételekre a részletes információkért!</numerusform>
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="../../src/Dialog_Processing.cpp" line="729"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="744"/>
         <source>%n file(s) skipped</source>
         <translation>
             <numerusform>%n fájl kihagyva</numerusform>
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="../../src/Dialog_Processing.cpp" line="733"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="748"/>
         <source>Error: %1 of %n file(s) failed. Double-click failed items for detailed information!</source>
         <translation>
             <numerusform>Hiba: %n - %1 fájlnál hiba lépett fel. Kattintson duplán a hibás tételekre a részletes információkért!</numerusform>
         </translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="735"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="750"/>
         <source>LameXP - Error</source>
         <translation>LameXP - Hiba</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="735"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="750"/>
         <source>At least one file has failed!</source>
         <translation>Legalább egy fájlnál hiba lépett fel!</translation>
     </message>
     <message numerus="yes">
-        <location filename="../../src/Dialog_Processing.cpp" line="747"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="761"/>
         <source>All files completed successfully. Skipped %n file(s).</source>
         <translation>
             <numerusform>Az összes fájl feldolgozása sikeresen befejeződött. Kihagyva %n fájl.</numerusform>
         </translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="751"/>
-        <location filename="../../src/Dialog_Processing.cpp" line="753"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="765"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="767"/>
         <source>All files completed successfully.</source>
         <translation>Az összes fájl feldolgozása sikeresen befejeződött.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="753"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="767"/>
         <source>LameXP - Done</source>
         <translation>LameXP - Kész</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="940"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="953"/>
         <source>None of the items matches the current filtering rules</source>
         <translation>Az elemek egyike sem egyezik a jelenlegi szűrési szabályokkal</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="1053"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="1066"/>
         <source>Playlist creation failed</source>
         <translation>Lejátszási lista létrehozási hiba</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="1053"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="1066"/>
         <source>The playlist file could not be created:</source>
         <translation>A lejátszási lista fájlt nem lehet létrehozni:</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="1115"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="1128"/>
         <source>Warning: Computer will shutdown in %1 seconds...</source>
         <translation>Figyelem: a számítógép %1 másodperc múlva le fog állni...</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="1119"/>
-        <location filename="../../src/Dialog_Processing.cpp" line="1120"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="1132"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="1133"/>
         <source>Cancel Shutdown</source>
         <translation>Leállítás megszakítása</translation>
     </message>
     <message numerus="yes">
-        <location filename="../../src/Dialog_Processing.cpp" line="1215"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="1228"/>
         <source>%n hour(s)</source>
         <translation>
             <numerusform>%n óra</numerusform>
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="../../src/Dialog_Processing.cpp" line="1216"/>
-        <location filename="../../src/Dialog_Processing.cpp" line="1220"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="1229"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="1233"/>
         <source>%n minute(s)</source>
         <translation>
             <numerusform>%n perc</numerusform>
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="../../src/Dialog_Processing.cpp" line="1221"/>
-        <location filename="../../src/Dialog_Processing.cpp" line="1225"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="1234"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="1238"/>
         <source>%n second(s)</source>
         <translation>
             <numerusform>%n másodperc</numerusform>
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="../../src/Dialog_Processing.cpp" line="1226"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="1239"/>
         <source>%n millisecond(s)</source>
         <translation>
             <numerusform>%n ezredmásodperc</numerusform>

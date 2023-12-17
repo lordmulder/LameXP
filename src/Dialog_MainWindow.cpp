@@ -712,6 +712,7 @@ MainWindow::MainWindow(MUtils::IPCChannel *const ipcChannel, FileListModel *cons
 	ui->actionDisableSlowStartupNotifications->setChecked(!m_settings->antivirNotificationsEnabled());
 	ui->actionDisableShellIntegration->setChecked(!m_settings->shellIntegrationEnabled());
 	ui->actionDisableShellIntegration->setDisabled(lamexp_version_portable() && ui->actionDisableShellIntegration->isChecked());
+	ui->actionDisableTrayIcon->setChecked(m_settings->disableTrayIcon());
 	ui->actionCheckForBetaUpdates->setChecked(m_settings->autoUpdateCheckBeta() || lamexp_version_test());
 	ui->actionCheckForBetaUpdates->setEnabled(!lamexp_version_test());
 	ui->actionHibernateComputer->setChecked(m_settings->hibernateComputer());
@@ -721,6 +722,7 @@ MainWindow::MainWindow(MUtils::IPCChannel *const ipcChannel, FileListModel *cons
 	connect(ui->actionDisableNeroAacNotifications, SIGNAL(triggered(bool)), this, SLOT(disableNeroAacNotificationsActionTriggered(bool)));
 	connect(ui->actionDisableSlowStartupNotifications, SIGNAL(triggered(bool)), this, SLOT(disableSlowStartupNotificationsActionTriggered(bool)));
 	connect(ui->actionDisableShellIntegration, SIGNAL(triggered(bool)), this, SLOT(disableShellIntegrationActionTriggered(bool)));
+	connect(ui->actionDisableTrayIcon, SIGNAL(triggered(bool)), this, SLOT(disableTrayIconActionTriggered(bool)));
 	connect(ui->actionShowDropBoxWidget, SIGNAL(triggered(bool)), this, SLOT(showDropBoxWidgetActionTriggered(bool)));
 	connect(ui->actionHibernateComputer, SIGNAL(triggered(bool)), this, SLOT(hibernateComputerActionTriggered(bool)));
 	connect(ui->actionCheckForBetaUpdates, SIGNAL(triggered(bool)), this, SLOT(checkForBetaUpdatesActionTriggered(bool)));
@@ -1961,7 +1963,7 @@ void MainWindow::cornerWidgetEventOccurred(QWidget* /*sender*/, QEvent *const ev
 /*
  * Style action triggered
  */
-void MainWindow::styleActionActivated(QAction *action)
+void MainWindow::styleActionActivated(QAction *const action)
 {
 	//Change style setting
 	if(action && action->data().isValid())
@@ -2084,7 +2086,7 @@ void MainWindow::languageFromFileActionActivated(bool /*checked*/)
 /*
  * Disable update reminder action
  */
-void MainWindow::disableUpdateReminderActionTriggered(bool checked)
+void MainWindow::disableUpdateReminderActionTriggered(const bool checked)
 {
 	if(checked)
 	{
@@ -2110,7 +2112,7 @@ void MainWindow::disableUpdateReminderActionTriggered(bool checked)
 /*
  * Disable sound effects action
  */
-void MainWindow::disableSoundsActionTriggered(bool checked)
+void MainWindow::disableSoundsActionTriggered(const bool checked)
 {
 	if(checked)
 	{
@@ -2136,7 +2138,7 @@ void MainWindow::disableSoundsActionTriggered(bool checked)
 /*
  * Disable Nero AAC encoder action
  */
-void MainWindow::disableNeroAacNotificationsActionTriggered(bool checked)
+void MainWindow::disableNeroAacNotificationsActionTriggered(const bool checked)
 {
 	if(checked)
 	{
@@ -2162,7 +2164,7 @@ void MainWindow::disableNeroAacNotificationsActionTriggered(bool checked)
 /*
  * Disable slow startup action
  */
-void MainWindow::disableSlowStartupNotificationsActionTriggered(bool checked)
+void MainWindow::disableSlowStartupNotificationsActionTriggered(const bool checked)
 {
 	if(checked)
 	{
@@ -2253,7 +2255,7 @@ void MainWindow::showDropBoxWidgetActionTriggered(bool /*checked*/)
 /*
  * Check for beta (pre-release) updates
  */
-void MainWindow::checkForBetaUpdatesActionTriggered(bool checked)
+void MainWindow::checkForBetaUpdatesActionTriggered(const bool checked)
 {	
 	bool checkUpdatesNow = false;
 	
@@ -2292,7 +2294,7 @@ void MainWindow::checkForBetaUpdatesActionTriggered(bool checked)
 /*
  * Hibernate computer action
  */
-void MainWindow::hibernateComputerActionTriggered(bool checked)
+void MainWindow::hibernateComputerActionTriggered(const bool checked)
 {
 	if(checked)
 	{
@@ -2318,7 +2320,7 @@ void MainWindow::hibernateComputerActionTriggered(bool checked)
 /*
  * Disable shell integration action
  */
-void MainWindow::disableShellIntegrationActionTriggered(bool checked)
+void MainWindow::disableShellIntegrationActionTriggered(const bool checked)
 {
 	if(checked)
 	{
@@ -2346,6 +2348,20 @@ void MainWindow::disableShellIntegrationActionTriggered(bool checked)
 	{
 		ui->actionDisableShellIntegration->setEnabled(false);
 	}
+}
+
+void MainWindow::disableTrayIconActionTriggered(const bool checked)
+{
+	if (checked)
+	{
+		QMessageBox::information(this, tr("Notification Icon"), NOBREAK(tr("The notification icon has been disabled.")));
+	}
+	else
+	{
+		QMessageBox::information(this, tr("Notification Icon"), NOBREAK(tr("The notification icon has been re-enabled.")));
+	}
+
+	m_settings->disableTrayIcon(checked);
 }
 
 // =========================================================

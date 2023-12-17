@@ -164,6 +164,7 @@ public:
 	LAMEXP_MAKE_OPTION_S(customParametersWave)
 	LAMEXP_MAKE_OPTION_S(customTempPath)
 	LAMEXP_MAKE_OPTION_B(customTempPathEnabled)
+	LAMEXP_MAKE_OPTION_B(disableTrayIcon)
 	LAMEXP_MAKE_OPTION_B(dropBoxWidgetEnabled)
 	LAMEXP_MAKE_OPTION_I(dropBoxWidgetPositionX)
 	LAMEXP_MAKE_OPTION_I(dropBoxWidgetPositionY)

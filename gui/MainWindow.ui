@@ -4804,6 +4804,7 @@
      <addaction name="actionDisableNeroAacNotifications"/>
      <addaction name="actionDisableSlowStartupNotifications"/>
      <addaction name="actionDisableShellIntegration"/>
+     <addaction name="actionDisableTrayIcon"/>
      <addaction name="separator"/>
      <addaction name="actionHibernateComputer"/>
      <addaction name="actionCheckForBetaUpdates"/>
@@ -5153,6 +5154,14 @@
    </property>
    <property name="text">
     <string>Hydrogenaudio Knowledgebase</string>
+   </property>
+  </action>
+  <action name="actionDisableTrayIcon">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Disable Icon in Notification Area</string>
    </property>
   </action>
  </widget>

@@ -266,6 +266,7 @@ LAMEXP_MAKE_ID(customParametersOpusEnc,      "AdvancedOptions/CustomParameters/O
 LAMEXP_MAKE_ID(customParametersWave,         "AdvancedOptions/CustomParameters/Wave");
 LAMEXP_MAKE_ID(customTempPath,               "AdvancedOptions/TempDirectory/CustomPath");
 LAMEXP_MAKE_ID(customTempPathEnabled,        "AdvancedOptions/TempDirectory/UseCustomPath");
+LAMEXP_MAKE_ID(disableTrayIcon,              "Flags/DisableTrayIcon");
 LAMEXP_MAKE_ID(dropBoxWidgetEnabled,         "DropBoxWidget/Enabled");
 LAMEXP_MAKE_ID(dropBoxWidgetPositionX,       "DropBoxWidget/Position/X");
 LAMEXP_MAKE_ID(dropBoxWidgetPositionY,       "DropBoxWidget/Position/Y");
@@ -682,6 +683,7 @@ LAMEXP_MAKE_OPTION_S(customParametersOpusEnc, QString())
 LAMEXP_MAKE_OPTION_S(customParametersWave, QString())
 LAMEXP_MAKE_OPTION_S(customTempPath, QDesktopServices::storageLocation(QDesktopServices::TempLocation))
 LAMEXP_MAKE_OPTION_B(customTempPathEnabled, false)
+LAMEXP_MAKE_OPTION_B(disableTrayIcon, true)
 LAMEXP_MAKE_OPTION_B(dropBoxWidgetEnabled, true)
 LAMEXP_MAKE_OPTION_I(dropBoxWidgetPositionX, -1)
 LAMEXP_MAKE_OPTION_I(dropBoxWidgetPositionY, -1)
