@@ -35,7 +35,7 @@
 #define VER_LAMEXP_MINOR_LO					1
 #define VER_LAMEXP_TYPE						Beta
 #define VER_LAMEXP_PATCH					5
-#define VER_LAMEXP_BUILD					2369
+#define VER_LAMEXP_BUILD					2370
 #define VER_LAMEXP_CONFG					2188
 
 ///////////////////////////////////////////////////////////////////////////////
