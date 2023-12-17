@@ -16,6 +16,7 @@ subtitle: "Audio-Encoder Front-End &ndash; Changelog"
 * Updated mpg123 decoder to v1.32.3 (2023-10-02), compiled with GCC 13.2.0
 * Updated MediaInfo to v23.11 (2023-11-30), compiled with ICL 2023.2 and MSVC 16.11
 * Updated cURL to v8.5.0 (2023-12-06), with libcurl v8.5.0 and OpenSSL v1.1.1w
+* Updated QAAC add-in (separate download) to QAAC v2.80 (2023-07-05), compiled with ICL 2024.0 and MSVC 16.11
 * Added an option to disable the icon in the notification area (now disabled by default)
 
 ## LameXP v4.20 [2023-03-07] ## {-}

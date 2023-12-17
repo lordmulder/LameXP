@@ -52,7 +52,7 @@
 #define VER_LAMEXP_TOOL_NEROAAC				1540
 #define VER_LAMEXP_TOOL_FHGAACENC			20151024
 #define VER_LAMEXP_TOOL_FDKAACENC			62
-#define VER_LAMEXP_TOOL_QAAC				264
+#define VER_LAMEXP_TOOL_QAAC				280
 
 ///////////////////////////////////////////////////////////////////////////////
 // Helper macros (aka: having fun with the C pre-processor)
