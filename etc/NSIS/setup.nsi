@@ -385,23 +385,21 @@ Function .onInit
 			MessageBox MB_TOPMOST|MB_ICONEXCLAMATION "This application requires Service Pack 2 for Windows XP x64.$\nPlease install the required Service Pack and retry!"
 			Quit
 		${EndIf}
-		${IfNot} ${UnattendedMode}
-			${If} ${Cmd} `MessageBox MB_TOPMOST|MB_ICONEXCLAMATION|MB_OKCANCEL|MB_DEFBUTTON2 "It appears that you are still running Windows XP, which reached $\"end of life$\" in April 2014 and therefore will not receive any updates or bug fixes anymore - not even for critical security vulnerabilities! We highly recommend updating to a contemporary operating system.$\n$\nClick 'OK' to proceed with the installation, or click 'Cancel' to abort." IDCANCEL`
-				Quit
-			${EndIf}
-		${EndIf}
 	${EndIf}
 
 	# Running on Windows Vista?
 	${If} ${IsWinVista}
-		${If} ${AtMostServicePack} 1
-			MessageBox MB_TOPMOST|MB_ICONEXCLAMATION "This application requires Service Pack 2 for Windows Vista.$\nPlease install the required Service Pack and retry!"
+	${AndIf} ${AtMostServicePack} 1
+		MessageBox MB_TOPMOST|MB_ICONEXCLAMATION "This application requires Service Pack 2 for Windows Vista.$\nPlease install the required Service Pack and retry!"
+		Quit
+	${EndIf}
+
+	# Running on Windows 8.0?
+	${If} ${IsWin8}
+		${WinVerGetBuild} $0
+		${If} $0 < 9600
+			MessageBox MB_TOPMOST|MB_ICONEXCLAMATION "This application requires Windows 8.1 or later.$\nPlease upgrade your Windows and retry!"
 			Quit
-		${EndIf}
-		${IfNot} ${UnattendedMode}
-			${If} ${Cmd} `MessageBox MB_TOPMOST|MB_ICONEXCLAMATION|MB_OKCANCEL|MB_DEFBUTTON2 "It appears that you are still running Windows Vista, which reached $\"end of life$\" in April 2017 and therefore will not receive any updates or bug fixes anymore - not even for critical security vulnerabilities! We highly recommend updating to a contemporary operating system.$\n$\nClick 'OK' to proceed with the installation, or click 'Cancel' to abort." IDCANCEL`
-				Quit
-			${EndIf}
 		${EndIf}
 	${EndIf}
 
