@@ -19,6 +19,7 @@ In addition to that, LameXP provides full support for *meta information*, includ
 
 **Tier #1:** LameXP is currently being developed on the following platforms:
 
+* Microsoft Windows 11, 32-Bit and 64-Bit editions
 * Microsoft Windows 10, 32-Bit and 64-Bit editions
 * Microsoft Windows 7 with Service Pack 1, 32-Bit and 64-Bit editions
 * Microsoft Windows XP with Service Pack 3 **(see remarks)**
@@ -28,7 +29,7 @@ In addition to that, LameXP provides full support for *meta information*, includ
 * Microsoft Windows 8.1, 32-Bit and 64-Bit editions
 * Microsoft Windows Vista with Service Pack 2, 32-Bit and 64-Bit editions
 * Microsoft Windows XP x64 Edition with Service Pack 2
-* GNU/Linux (e.g. Ubuntu 12.04), using Wine v1.4+
+* GNU/Linux (e.g. Ubuntu 12.04), requires using Wine v1.4+
 
 The following *legacy* platforms are **not** actively supported any longer:
 
@@ -38,11 +39,8 @@ The following *legacy* platforms are **not** actively supported any longer:
 * Microsoft Windows XP *without* Service Pack 3
 * Microsoft Windows 2000
 * Microsoft Windows NT 4.0
-* Microsoft Windows Millennium Edition
-* Microsoft Windows 98
-* Microsoft Windows 95
+* Microsoft Windows Millennium Edition and 9x
 
-*Remarks:* Windows XP has reached "end of life" on April 8th, 2014. This means that Microsoft has stopped all support for Windows XP. Thus **no** updates or bugfixes are made available to regular Windows XP users since that date, **not** even security fixes! Thus, all the security vulnerabilities that have been discovered *after* the deadline &ndash; and all the security vulnerabilities that are going to be discovered in the future &ndash; will *persists* forever! Consequently, using Windows XP has become a severe security risk, and the situation is only going to get worse. While LameXP will continue to support Windows XP (note that Service Pack 3 is required!) for the foreseeable future, we *highly* recommend everybody to update to a less antiquated system now. Windows XP support will be discontinued in a future version, when most users have migrated to a modern system.
 
 
 ## Output Formats (Encoders) ##
@@ -280,55 +278,29 @@ For legal reasons, the AAC (Advanced Audio Coding) encoder can **not** be includ
 
 LameXP can use the **Nero Digital** AAC encoder as well as the **QAAC** (Apple iTunes/QuickTime) encoder. This chapter describes how to set up one of these AAC encoders for use with the LameXP software.
 
-*Note:* If you are uncertain which AAC encoder to choose, please be aware that the QAAC encoder may produce slightly better sound quality, according to [listening tests](http://listening-tests.hydrogenaud.io/igorc/aac-96-a/results.html), while the Nero Digital encoder is less hassle to install.
-
-
-### Nero Digital AAC Encoder ###
-
-First of all, you need to download the <a href="https://web.archive.org/web/20160310025758/http://www.nero.com:80/enu/company/about-nero/nero-aac-codec.php"><b>Nero AAC encoder</b></a> from one of the following mirror sites:
-
-* <http://www.videohelp.com/software/Nero-AAC-Codec>
-* <http://www.free-codecs.com/download/Nero_AAC_Codec.htm>
-* <http://www.majorgeeks.com/files/details/nero_aac_codec_(formerly_nero_digital_audio).html>
-* <http://ftp6.nero.com/tools/NeroAACCodec-1.5.1.zip>
-
-*Note:*  Although the ZIP file is sometimes called ``NeroAACCodec-1.5.1.zip``, it may actually contains version **1.5.4.0** of the Nero AAC encoder software. Check the included ``changelog.txt`` to verify this!
-
-![](img/lamexp/setup_4a.png)
-
-Now open the downloaded ZIP file with your favourite file archive software (we recommend using [7-Zip](http://www.7-zip.org/) or [WinRAR](http://www.rarlab.com/download.htm)) and navigate to the "win32" sub-directory.
-
-![](img/lamexp/setup_4b.png)
-
-Finally, *extract* all the three files ``neroAacDec.exe``, ``neroAacEnc.exe`` and ``neroAacTag.exe`` into the LameXP installation directory. That is the directory where your LameXP executable file, i.e. the ``LameXP.exe``, is located.
-
-*Note:* By default, the LameXP installation directory is either ``C:\Program Files (x86)\MuldeR\LameXP`` or ``C:\Program Files\MuldeR\LameXP``. However, this can be changed by the user during the setup process.
-
-![](img/lamexp/setup_4c.png)
-
-Once the required Nero AAC files have been put into the proper place, simply *restart* LameXP in order to enable the AAC encoding support!
+*Note:* If you are uncertain which AAC encoder to choose, please be aware that the QAAC encoder may produce better sound quality, according to [listening tests](http://listening-tests.hydrogenaud.io/igorc/aac-96-a/results.html), while the Nero Digital encoder is less hassle to install.
 
 
 ### QAAC (Apple AAC) Encoder ###
 
-Getting the Apple/QuickTime AAC encoder ready involves *two* separate steps: In the first place we will install the QAAC encoder, and in the second place we will install the Apple AAC encoder libraries.
+Setting up the Apple/QuickTime AAC encoder involves *two* separate steps: In the first step we will install the QAAC application, and in the second step we will add the required Apple AAC encoder libraries.
 
 
 #### Install QAAC Encoder #### {-}
 
-First of all, you need to download the [QAAC](https://github.com/nu774/qaac) application, which provides a CLI font-end to the Apple/QuickTime AAC encoder. QAAC is provided as an *Add-in* for LameXP and is available from the following locations:
+First of all, you need to download the [QAAC](https://github.com/nu774/qaac) application, which provides a CLI font-end to the Apple/QuickTime AAC encoder. QAAC is provided as an **add-in** for LameXP and is available from the following download locations:
 
 * <http://sourceforge.net/projects/lamexp/files/Miscellaneous/Add-ins/qaac/>
 * <http://muldersoft.com/misc/lamexp/add-ins/qaac/>
 * <http://www.mediafire.com/folder/hmdfud5buajuh/qaac>
 
-Now open the downloaded ZIP file, e.g. ``LameXP.qaac-addin.yyyy-mm-dd.zip``, with your favourite file archive software (we recommend using [7-Zip](http://www.7-zip.org/) or [WinRAR](http://www.rarlab.com/download.htm)) to find the required QAAC program files.
+Now open the downloaded ZIP file, e.g. ``LameXP.qaac-addin.yyyy-mm-dd.zip``, with your favourite file archiver utility (we recommend using [7-Zip](http://www.7-zip.org/) or [WinRAR](http://www.rarlab.com/download.htm)) to find the required QAAC program files.
 
 *Note:* The LameXP software generally expects the **latest** version of the QAAC add-in; and the QAAC add-in is designed to work with the **latest** version of the LameXP software. Make sure your files are up-to-date!
 
 ![](img/lamexp/setup_5a.png)
 
-Please *extract* all the three files, the program ``qaac.exe`` plus its companion DLLs ``libsoxr.dll`` and ``libsoxconvolver.dll``, into the LameXP installation directory. That is the directory where your LameXP executable file, i.e. the ``LameXP.exe``, is located.
+Please *extract* the program file ``qaac.exe`` as well as the DLLs files ``libsoxr.dll`` and ``libsoxconvolver.dll`` into the LameXP installation directory. That is the directory where your LameXP executable file, i.e. the ``LameXP.exe``, is located.
 
 *Note:* By default, the LameXP installation directory is either ``C:\Program Files (x86)\MuldeR\LameXP`` or ``C:\Program Files\MuldeR\LameXP``. However, this can be changed by the user during the setup process.
 
@@ -359,6 +331,30 @@ After the "Apple Application Support" setup package has been extracted, you can 
 Once the QAAC encoder as well as the Apple AAC encoder libraries ("Apple Application Support") have been installed properly, simply *restart* LameXP in order to enable the AAC encoding support!
 
 *Note:* You may run ``qaac.exe --check`` from the [command prompt](http://en.wikipedia.org/wiki/Cmd.exe) to ensure that QAAC has been set up correctly. Expected output is ``qaac 2.xx, CoreAudioToolbox x.x.x.x``.
+
+
+### Nero Digital AAC Encoder ###
+
+First of all, you need to download the <a href="https://web.archive.org/web/20160310025758/http://www.nero.com:80/enu/company/about-nero/nero-aac-codec.php"><b>Nero AAC Codec</b></a> (Version 1.5.4) as a ZIP archive from one of the following mirror sites, because the original Nero AAC product web-site no longer seems to be functional:
+
+* <https://archive.org/details/nero-aaccodec-1.5.4>
+* <https://www.videohelp.com/software/Nero-AAC-Codec>
+* <https://www.free-codecs.com/download/Nero_AAC_Codec.htm>
+* <https://www.majorgeeks.com/files/details/nero_aac_codec_(formerly_nero_digital_audio).html>
+
+![](img/lamexp/setup_4a.png)
+
+Now open the downloaded ZIP file `NeroAACCodec-1.5.4.zip` with your favourite file archiver utility (we recommend using [7-Zip](http://www.7-zip.org/) or [WinRAR](http://www.rarlab.com/download.htm)) and then navigate to the "win32" sub-directory.
+
+![](img/lamexp/setup_4b.png)
+
+Finally, *extract* all the three files ``neroAacDec.exe``, ``neroAacEnc.exe`` and ``neroAacTag.exe`` into the LameXP installation directory. That is the directory where your LameXP executable file, i.e. the ``LameXP.exe``, is located.
+
+*Note:* By default, the LameXP installation directory is either ``C:\Program Files (x86)\MuldeR\LameXP`` or ``C:\Program Files\MuldeR\LameXP``. However, this can be changed by the user during the setup process.
+
+![](img/lamexp/setup_4c.png)
+
+Once the required Nero AAC files have been put into the proper place, simply *restart* LameXP in order to enable the AAC encoding support!
 
 
 
