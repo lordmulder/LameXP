@@ -288,7 +288,7 @@ Setting up the Apple/QuickTime AAC encoder involves *two* separate steps: In the
 
 #### Install QAAC Encoder #### {-}
 
-First of all, you need to download the [QAAC](https://github.com/nu774/qaac) application, which provides a CLI font-end to the Apple/QuickTime AAC encoder. QAAC is provided as an **add-in** for LameXP and is available from the following download locations:
+First of all, you need to download the [**QAAC**](https://github.com/nu774/qaac) application, which provides a CLI font-end to the Apple/QuickTime AAC encoder. QAAC is provided as an **add-in** for LameXP and is available from the following download locations:
 
 * <http://sourceforge.net/projects/lamexp/files/Miscellaneous/Add-ins/qaac/>
 * <http://muldersoft.com/misc/lamexp/add-ins/qaac/>
@@ -334,7 +334,9 @@ If a suitable version of the [Visual C++ Redistributable](https://learn.microsof
 
 Once the QAAC encoder application as well as the required Apple AAC encoder libraries have been installed properly, simply *restart* LameXP in order to enable the AAC encoding support!
 
-*Note:* You may run ``qaac.exe --check`` from the [command prompt](http://en.wikipedia.org/wiki/Cmd.exe) to ensure that QAAC has been set up correctly.
+You may run `qaac.exe --check` from the [command prompt](http://en.wikipedia.org/wiki/Cmd.exe) in order to ensure that QAAC has been set up correctly.
+
+![](img/lamexp/setup_5e.png)
 
 
 ### Nero Digital AAC Encoder ###
