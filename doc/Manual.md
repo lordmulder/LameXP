@@ -19,10 +19,10 @@ In addition to that, LameXP provides full support for *meta information*, includ
 
 **Tier #1:** LameXP is currently being developed on the following platforms:
 
-* Microsoft Windows 11, 32-Bit and 64-Bit editions
+* Microsoft Windows 11
 * Microsoft Windows 10, 32-Bit and 64-Bit editions
 * Microsoft Windows 7 with Service Pack 1, 32-Bit and 64-Bit editions
-* Microsoft Windows XP with Service Pack 3 **(see remarks)**
+* Microsoft Windows XP with Service Pack 3
 
 **Tier #2:** The following platforms should work too, but aren't tested extensively:
 
@@ -39,7 +39,7 @@ The following *legacy* platforms are **not** actively supported any longer:
 * Microsoft Windows XP *without* Service Pack 3
 * Microsoft Windows 2000
 * Microsoft Windows NT 4.0
-* Microsoft Windows Millennium Edition and 9x
+* Microsoft Windows 9x and Millennium Edition
 
 
 
@@ -227,7 +227,7 @@ Congratulation, LameXP has been installed successfully on your computer!
 
 ### ZIP Package ###
 
-If you decided for the **ZIP package**, you need to open the downloaded ZIP file, e.g. ``LameXP.yyyy-mm-dd.Release-Static.Build-xxxx.zip``, in your favourite file archive software (we recommend using [7-Zip](http://www.7-zip.org/) or [WinRAR](http://www.rarlab.com/download.htm)).
+If you decided for the **ZIP package**, you need to open the downloaded ZIP file, e.g. ``LameXP.yyyy-mm-dd.Release-Static.Build-xxxx.zip``, in your favorite file archive software (we recommend using [7-Zip](http://www.7-zip.org/) or [WinRAR](http://www.rarlab.com/download.htm)).
 
 ![](img/lamexp/setup_2a.png)
 
@@ -294,13 +294,15 @@ First of all, you need to download the [QAAC](https://github.com/nu774/qaac) app
 * <http://muldersoft.com/misc/lamexp/add-ins/qaac/>
 * <http://www.mediafire.com/folder/hmdfud5buajuh/qaac>
 
-Now open the downloaded ZIP file, e.g. ``LameXP.qaac-addin.yyyy-mm-dd.zip``, with your favourite file archiver utility (we recommend using [7-Zip](http://www.7-zip.org/) or [WinRAR](http://www.rarlab.com/download.htm)) to find the required QAAC program files.
+Now open the downloaded ZIP file, e.g. ``LameXP.qaac-addin.yyyy-mm-dd.zip``, with your favorite file archiver utility (we recommend using [7-Zip](http://www.7-zip.org/) or [WinRAR](http://www.rarlab.com/download.htm)) to find the required QAAC program files.
 
 *Note:* The LameXP software generally expects the **latest** version of the QAAC add-in; and the QAAC add-in is designed to work with the **latest** version of the LameXP software. Make sure your files are up-to-date!
 
 ![](img/lamexp/setup_5a.png)
 
-Please *extract* the program file ``qaac.exe`` as well as the DLLs files ``libsoxr.dll`` and ``libsoxconvolver.dll`` into the LameXP installation directory. That is the directory where your LameXP executable file, i.e. the ``LameXP.exe``, is located.
+Please *extract* the program file `qaac.exe` as well as the DLLs files `libsoxr.dll` and `libsoxconvolver.dll` into the LameXP installation directory. That is the directory where your LameXP executable file, i.e. the ``LameXP.exe``, is located.
+
+Alternately, if running on a 64-Bit (x64) version of Windows, you may also use the 64-Bit version of the QAAC program. In this case, extract `qaac64.exe` as well as `libsoxr64.dll` and `libsoxconvolver64.dll` into the LameXP installation directory. Also, if you want to use an optimized "SSE2" or "AVX2" version of QAAC, which requires support from the CPU, the file `qaac.sse2.exe`, `qaac.avx2.exe` or `qaac64.avx2.exe` must be *renamed* to `qaac.exe` or `qaac64.exe`, respectively.
 
 *Note:* By default, the LameXP installation directory is either ``C:\Program Files (x86)\MuldeR\LameXP`` or ``C:\Program Files\MuldeR\LameXP``. However, this can be changed by the user during the setup process.
 
@@ -309,28 +311,30 @@ Please *extract* the program file ``qaac.exe`` as well as the DLLs files ``libso
 
 #### Install Apple AAC Encoder Libraries #### {-}
 
-Next, the actual Apple/QuickTime AAC encoder libraries, which are part of the so-called "Apple Application Support" package, need to be installed on your computer. QAAC can *not* work without these libraries!
+Next, the actual Apple/QuickTime AAC encoder libraries (CoreAudioToolbox), which are part of the so-called "Apple Application Support" package, need to be installed on your computer. QAAC can **not** work without these libraries!
 
-The required "Apple Application Support" package is included, for example, in the official setup packages of *QuickTime* or *iTunes* for Windows, which can be obtained from the Apple web-site free of charge:
+The required "Apple Application Support" package is included, for example, in the official setup packages of *QuickTime* or *iTunes* for Windows, which can be obtained from the Apple web-site free of charge.
 
-* <https://www.apple.com/quicktime/download/>
-* <https://www.apple.com/itunes/download/>
+A more simple approach is to download the required Apple/QuickTime AAC encoder libraries as a *standalone* package, as kindly provided by GitHub user "AnimMouse", which can be obtained from the following download locations:
 
-Since you usually do **not** want to *install* the complete QuickTime (or iTunes) software on your computer, please only *download* the QuickTime (or iTunes) setup package, but do **not** actually *run* the installer!
+* <https://github.com/AnimMouse/QTFiles/releases>
+* <https://archive.org/download/qtfiles-icudt-62.dll>
+* <https://www.mediafire.com/folder/z6xwtgadnv7qe/qaac-qtfiles-v12.10.11>
+* <https://mega.nz/folder/AysxkLDb#CbOTCNdAK9OBveoNmDbHxw>
 
-Instead, open the QuickTimer setup program, i.e. ``QuickTimeInstaller.exe``, with your favourite file archive software (we recommend using [7-Zip](http://www.7-zip.org/) or [WinRAR](http://www.rarlab.com/download.htm)) and *extract* the required ``AppleApplicationSupport.msi`` package.
+*Note:* If you are using the 32-Bit version of QAAC (`qaac.exe`), the package `QTfiles.7z` needs to be obtained. But, if you are using the 64-Bit version of QAAC (`qaac64.exe`), the package `QTfiles64.7z` needs to be obtained instead!
 
 ![](img/lamexp/setup_5c.png)
 
-After the "Apple Application Support" setup package has been extracted, you can launch it by double-clicking on the ``AppleApplicationSupport.msi`` file. Then simply follow the installer's instructions!
+Finally, extract the *complete* contents of the package `QTfiles.7z` or `QTfiles64.7z` into a new sub-directory named `QTfiles` or `QTfiles64`, respectively, inside of the the LameXP installation directory.
 
-*Note:* If you do **not** want to install the "Apple Application Support" software at all, there is an *alternative* method, that will extract only the required DLL files from the MSI package. See [*here*](https://forum.doom9.org/showpost.php?p=1718529&postcount=1221) for details&hellip;
+If a suitable version of the [Visual C++ Redistributable](https://learn.microsoft.com/en-US/cpp/windows/latest-supported-vc-redist) is **not** already installed on your system, then you must *additionally* download and extract the package `QTfiles-msvc.7z` or `QTfiles64-msvc.7z` into the same sub-directory.
 
 ![](img/lamexp/setup_5d.png)
 
-Once the QAAC encoder as well as the Apple AAC encoder libraries ("Apple Application Support") have been installed properly, simply *restart* LameXP in order to enable the AAC encoding support!
+Once the QAAC encoder application as well as the required Apple AAC encoder libraries have been installed properly, simply *restart* LameXP in order to enable the AAC encoding support!
 
-*Note:* You may run ``qaac.exe --check`` from the [command prompt](http://en.wikipedia.org/wiki/Cmd.exe) to ensure that QAAC has been set up correctly. Expected output is ``qaac 2.xx, CoreAudioToolbox x.x.x.x``.
+*Note:* You may run ``qaac.exe --check`` from the [command prompt](http://en.wikipedia.org/wiki/Cmd.exe) to ensure that QAAC has been set up correctly.
 
 
 ### Nero Digital AAC Encoder ###
@@ -342,8 +346,6 @@ First of all, you need to download the <a href="https://web.archive.org/web/2016
 * <https://www.free-codecs.com/download/Nero_AAC_Codec.htm>
 * <https://www.majorgeeks.com/files/details/nero_aac_codec_(formerly_nero_digital_audio).html>
 
-![](img/lamexp/setup_4a.png)
-
 Now open the downloaded ZIP file `NeroAACCodec-1.5.4.zip` with your favourite file archiver utility (we recommend using [7-Zip](http://www.7-zip.org/) or [WinRAR](http://www.rarlab.com/download.htm)) and then navigate to the "win32" sub-directory.
 
 ![](img/lamexp/setup_4b.png)
@@ -354,7 +356,7 @@ Finally, *extract* all the three files ``neroAacDec.exe``, ``neroAacEnc.exe`` an
 
 ![](img/lamexp/setup_4c.png)
 
-Once the required Nero AAC files have been put into the proper place, simply *restart* LameXP in order to enable the AAC encoding support!
+Once all of the required Nero AAC encoder program files have been installed  to the proper location, simply *restart* LameXP in order to enable the AAC encoding support!
 
 
 
