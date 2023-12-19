@@ -1613,6 +1613,9 @@ void MainWindow::windowShown(void)
 		messageText += QString("<b>").append(tr("You can download the Nero AAC encoder for free from this website:")).append("</b><br>");
 		messageText += QString("<tt>").append(LINK(AboutDialog::neroAacUrl)).append("</tt><br><br>");
 		messageText += QString("<i>").append(tr("Note: Nero AAC encoder version %1 or newer is required to enable AAC encoding support!").arg(lamexp_version2string("v?.?.?.?", lamexp_toolver_neroaac(), "n/a"))).append("</i><br>");
+		messageText += QString("<hr><br>");
+		messageText += QString(tr("Alternatively, LameXP supports using QAAC, i.e. the Apple QuickTime/iTunes AAC encoder.")).append("<br>");
+		messageText += QString(tr("Please refer to the manual for instructions on how to set up QAAC with LameXP!")).append("<br>");
 		if(QMessageBox::information(this, tr("AAC Support Disabled"), NOBREAK(messageText), tr("Discard"), tr("Don't Show Again")) == 1)
 		{
 			m_settings->neroAacNotificationsEnabled(false);
