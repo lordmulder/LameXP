@@ -208,8 +208,6 @@ In order to start the installation process, simply double-click on the downloade
 
 Shortly after launching the setup program, an [UAC](http://en.wikipedia.org/wiki/User_Account_Control) (User Access Control) dialogue may appear. This is a standard Windows security feature, so don't worry! You have to choose "Yes", if you wish to continue the installation process.
 
-*Note:* If you wonder why Windows suggests that the LameXP setup program originates from an "unknown publisher", despite the fact that it was downloaded from the official web-site, then please the explanation [here](http://lamexp.sourceforge.net/doc/Manual.html#q-why-are-the-lamexp-binaries-not-digitally-signed)!
-
 ![](img/lamexp/setup_1a.png)
 
 Now simply follow the instructions of the setup wizard, which will guide you through the installation process&hellip;
@@ -220,24 +218,22 @@ Now simply follow the instructions of the setup wizard, which will guide you thr
 
 Congratulation, LameXP has been installed successfully on your computer!
 
-*Note:* If you keep the "Run LameXP &hellip;" option enabled and click on the "Finish" button, the LameXP software will be launched immediately.
+If you keep "Run LameXP &hellip;" enabled and click on the "Finish" button, LameXP software will be launched immediately.
 
 ![](img/lamexp/setup_1c.png)
 
 
 ### ZIP Package ###
 
-If you decided for the **ZIP package**, you need to open the downloaded ZIP file, e.g. ``LameXP.yyyy-mm-dd.Release-Static.Build-xxxx.zip``, in your favorite file archive software (we recommend using [7-Zip](http://www.7-zip.org/) or [WinRAR](http://www.rarlab.com/download.htm)).
+If you decided for the **ZIP package**, open the downloaded ZIP file, e.g. ``LameXP.yyyy-mm-dd.Release-Static.Build-xxxx.zip``, with your favorite file archiver utility (we recommend using [7-Zip](http://www.7-zip.org/) or [WinRAR](http://www.rarlab.com/download.htm)).
 
 ![](img/lamexp/setup_2a.png)
 
-This step may be slightly different, depending on what file archive software (e.g. 7-Zip or WinRAR) you are using. Select **all** files in the LameXP ZIP archive and *extract* them to a new/empty directory of your choice.
-
-*Note:* It is very important that you have write-access to the chosen destination directory. So make sure that you choose a directory where the required access rights are granted!
+Now select **all** files in the LameXP ZIP archive and *extract* them to a new/empty directory of your choice. This step may be slightly different, depending on what file archive software (e.g. 7-Zip or WinRAR) you are using.
 
 ![](img/lamexp/setup_2b.png)
 
-Congratulation, LameXP has been installed successfully on your computer! Now double-click on the ``LameXP.exe`` program file in order to launch the application!
+Congratulation, LameXP has been installed successfully on your computer! Now all you need to do is double-clicking on the `LameXP.exe` program file in order to launch the application!
 
 ![](img/lamexp/setup_2c.png)
 
@@ -251,7 +247,7 @@ Nonetheless, the LameXP software supports a so-called "portable mode", which can
 
 ### Enable the Portable Mode ###
 
-If you fully understand what the consequences of the "portable mode" are and still want to *enable* this mode, then simply **rename** the LameXP program file form ``LameXP.exe`` to ``LameXP-Portable.exe``. You must exit LameXP, before you can rename the program file!
+In order to enable the "portable mode" of LameXP, simply **rename** the program file `LameXP.exe` to `LameXP-Portable.exe`. Please be aware that you must exit all running instances of LameXP, before you can rename the program file!
 
 *Note:* By default, the LameXP installation directory is either ``C:\Program Files (x86)\MuldeR\LameXP`` or ``C:\Program Files\MuldeR\LameXP``. However, this can be changed by the user during the setup process.
 
@@ -278,7 +274,7 @@ For legal reasons, the AAC (Advanced Audio Coding) encoder can **not** be includ
 
 LameXP can use the **Nero Digital** AAC encoder as well as the **QAAC** (Apple iTunes/QuickTime) encoder. This chapter describes how to set up one of these AAC encoders for use with the LameXP software.
 
-*Note:* If you are uncertain which AAC encoder to choose, please be aware that the QAAC encoder may produce better sound quality, according to [listening tests](http://listening-tests.hydrogenaud.io/igorc/aac-96-a/results.html), while the Nero Digital encoder is less hassle to install.
+*Note:* If you are uncertain which AAC encoder to choose, please be aware that the QAAC encoder is known to produce better sound quality (at the same bitrate), according to [listening tests](http://listening-tests.hydrogenaud.io/igorc/aac-96-a/results.html), while the Nero Digital encoder is easier to install.
 
 
 ### QAAC (Apple AAC) Encoder ###
