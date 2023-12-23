@@ -265,6 +265,7 @@ UninstPage Custom un.LockedListShow
 !insertmacro MUI_LANGUAGE "Russian"
 !insertmacro MUI_LANGUAGE "Spanish"
 !insertmacro MUI_LANGUAGE "Ukrainian"
+!insertmacro MUI_LANGUAGE "Korean"
 
 ; !insertmacro MUI_LANGUAGE "Afrikaans"
 ; !insertmacro MUI_LANGUAGE "Arabic"
@@ -314,6 +315,8 @@ UninstPage Custom un.LockedListShow
 ;Ukrainian
 !include "..\Translation\LameXP_UK.nsh"
 
+;Korean
+!include "..\Translation\LameXP_KR.nsh"
 
 ;--------------------------------
 ;LogicLib Extensions

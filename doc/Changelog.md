@@ -19,6 +19,7 @@ subtitle: "Audio-Encoder Front-End &ndash; Changelog"
 * Updated QAAC add-in (separate download) to QAAC v2.80 (2023-07-05), compiled with ICL 2024.0 and MSVC 16.11
 * Updated ALAC decoder to refalac v1.80 (2023-07-05), compiled with ICL 2024.0 and MSVC 16.11
 * Added an option to disable the icon in the notification area (now disabled by default)
+* Updated language files (big thank-you to all contributors !!!)
 
 ## LameXP v4.20 [2023-03-07] ## {-}
 * Updated FLAC encoder/decoder to v1.4.1 (2022-09-22), compiled with ICL 2022.2 and MSVC 15.9
