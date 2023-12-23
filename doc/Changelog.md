@@ -11,7 +11,7 @@ subtitle: "Audio-Encoder Front-End &ndash; Changelog"
 * Updated the Windows SDK version to 10.0.19041.0
 * Updated LAME encoder to v3.101 Beta-3 (2023-12-15), compiled with ICL 2023.2 and MSVC 16.11
 * Updated Opus encoder/decoder libraries to v1.4+9 (2023-11-03) and Opus-Tools to v0.2+34 (2023-11-12)
-* Updated Monkey's Audio binary to v10.36 (2023-12-17), compiled with ICL 2024.0 and MSVC 16.11
+* Updated Monkey's Audio binary to v10.38 (2023-12-22), compiled with ICL 2024.0 and MSVC 16.11
 * Updated FLAC encoder/decoder to v1.4.3 (2023-06-23), compiled with ICL 2024.0 and MSVC 16.11
 * Updated mpg123 decoder to v1.32.3 (2023-10-02), compiled with GCC 13.2.0
 * Updated MediaInfo to v23.11 (2023-11-30), compiled with ICL 2023.2 and MSVC 16.11
