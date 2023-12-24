@@ -1464,7 +1464,10 @@ void MainWindow::windowShown(void)
 	const bool firstRun = arguments.contains("first-run");
 	if (firstRun)
 	{
-		m_settings->licenseAccepted(0);
+		if (m_settings->licenseAccepted() <= 0)
+		{
+			m_settings->licenseAccepted(0);
+		}
 		m_settings->autoUpdateCheckBeta(false);
 		m_settings->syncNow();
 	}
@@ -1518,7 +1521,7 @@ void MainWindow::windowShown(void)
 		return;
 	}
 	
-	//Check for expiration
+	//Check for expiration of "pre-release" version
 	if(lamexp_version_test())
 	{
 		if(MUtils::OS::current_date() >= lamexp_version_expires())
@@ -1543,7 +1546,7 @@ void MainWindow::windowShown(void)
 	}
 
 	//Slow startup indicator
-	if(m_settings->slowStartup() && m_settings->antivirNotificationsEnabled())
+	if((!firstRun) && m_settings->slowStartup() && m_settings->antivirNotificationsEnabled())
 	{
 		QString message;
 		message += tr("It seems that a bogus anti-virus software is slowing down the startup of LameXP.").append("<br>");

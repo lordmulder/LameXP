@@ -58,7 +58,7 @@ static const bool ENABLE_CUSTOM_TOOLS = true;
 #define MAKE_REGEXP(STR) (((STR) && ((STR)[0])) ? QRegExp((STR)) : QRegExp())
 
 /* constants */
-static const double g_allowedExtractDelay = 12.0;
+static const double g_allowedExtractDelay = 24.0;
 static const size_t BUFF_SIZE = 512;
 
 /* number of CPU cores -> number of threads */
