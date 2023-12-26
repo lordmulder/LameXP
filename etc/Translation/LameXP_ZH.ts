@@ -1230,7 +1230,7 @@
     <message>
         <location filename="../../gui/MainWindow.ui" line="5164"/>
         <source>Disable Icon in Notification Area</source>
-        <translation type="unfinished"></translation>
+        <translation>关闭通知区域的图标显示</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="850"/>
@@ -2342,28 +2342,28 @@
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="1612"/>
         <source>Alternatively, LameXP supports using QAAC, i.e. the Apple QuickTime/iTunes AAC encoder.</source>
-        <translation type="unfinished"></translation>
+        <translation>LameXP 可选择使用QAAC，即苹果QuickTime/iTunes AAC解码器。</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="1613"/>
         <source>Please refer to the manual for instructions on how to set up QAAC with LameXP!</source>
-        <translation type="unfinished"></translation>
+        <translation>请查阅用户指南获取在LameXP中设置QAAC的方法！</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="2355"/>
         <location filename="../../src/Dialog_MainWindow.cpp" line="2359"/>
         <source>Notification Icon</source>
-        <translation type="unfinished"></translation>
+        <translation>通知区域图标</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="2355"/>
         <source>The notification icon has been disabled.</source>
-        <translation type="unfinished"></translation>
+        <translation>通知区域图标已隐藏。</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="2359"/>
         <source>The notification icon has been re-enabled.</source>
-        <translation type="unfinished"></translation>
+        <translation>通知区域图标已重新显示。</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="2484"/>
