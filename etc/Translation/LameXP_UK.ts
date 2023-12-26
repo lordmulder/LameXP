@@ -1337,9 +1337,9 @@
     <message>
         <location filename="../../gui/MainWindow.ui" line="4907"/>
         <location filename="../../src/Dialog_MainWindow.cpp" line="1247"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1529"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1563"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1591"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1524"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1558"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1586"/>
         <source>Check for Updates</source>
         <translation>Перевірити наявність оновлень</translation>
     </message>
@@ -1380,13 +1380,13 @@
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="4976"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2096"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2091"/>
         <source>Disable Update Reminder</source>
         <translation>Заборонити нагадування про наявність оновлень</translation>
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="4984"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2122"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2117"/>
         <source>Disable Sound Effects</source>
         <translation>Заборонити звукові ефекти</translation>
     </message>
@@ -1432,7 +1432,7 @@
     </message>
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="861"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="4313"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="4308"/>
         <source>Access Denied</source>
         <translation>Доступ заборонено</translation>
     </message>
@@ -1452,12 +1452,12 @@
         <translation>Це зазвичай означає, що файл пошкоджено або формат не підтримується.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1758"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1753"/>
         <source>Cancel</source>
         <translation>Відмінити</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1591"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1586"/>
         <source>Postpone</source>
         <translation>Відхилити</translation>
     </message>
@@ -1482,368 +1482,368 @@
         <translation>Перейти до вибраної теки</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1506"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1501"/>
         <source>License Declined</source>
         <translation>Ліцензію не прийнято</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1506"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1501"/>
         <source>You have declined the license. Consequently the application will exit now!</source>
         <translation>Ви не прийняли ліцензію. Тому додаток буде зараз закрито!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1506"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1501"/>
         <source>Goodbye!</source>
         <translation>До побачення!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1529"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1524"/>
         <source>LameXP - Expired</source>
         <translation>Період використання LameXP вийшов</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1529"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1524"/>
         <source>This demo (pre-release) version of LameXP has expired at %1.</source>
         <translation>Період використання цієї демо (попереднього релізу) версії  LameXP закінчився %1.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1529"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1524"/>
         <source>LameXP is free software and release versions won&apos;t expire.</source>
         <translation>LameXP є безкоштовним ПО і період використання  не обмежено.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1529"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1563"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1524"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1558"/>
         <source>Exit Program</source>
         <translation>Вийти з програми</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1550"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1545"/>
         <source>Manual</source>
         <translation>Інструкція користувача</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1563"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1558"/>
         <source>Urgent Update</source>
         <translation>Термінове поновлення</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1563"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1558"/>
         <source>Your version of LameXP is more than a year old. Time for an update!</source>
         <translation>Версія вашого LameXP випущена більше року тому. Час поновити її!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1591"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2098"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2108"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1586"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2093"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2103"/>
         <source>Update Reminder</source>
         <translation>Нагадування оновлень</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1591"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1586"/>
         <source>Your last update check was more than 14 days ago. Check for updates now?</source>
         <translation>Останній раз ви перевіряли оновлення більш ніж 14 днів тому. Перевірити оновлення зараз?</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1591"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1586"/>
         <source>Your did not check for LameXP updates yet. Check for updates now?</source>
         <translation>Ви ще не перевіряли оновлення LameXP. Перевірити оновлення зараз?</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1609"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1604"/>
         <source>The Nero AAC encoder could not be found. AAC encoding support will be disabled.</source>
         <translation>Не можливо знайти кодер Nero AAC. Підтримка кодування AAC буде заборонена.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1610"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1605"/>
         <source>Please put &apos;neroAacEnc.exe&apos;, &apos;neroAacDec.exe&apos; and &apos;neroAacTag.exe&apos; into the LameXP directory!</source>
         <translation>Будь ласка, помістіть &apos;neroAacEnc.exe&apos;, &apos;neroAacDec.exe&apos; and &apos;neroAacTag.exe&apos; до теки LameXP!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1619"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1614"/>
         <source>AAC Support Disabled</source>
         <translation>Підтримку ААС заборонено</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1750"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1807"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1817"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1745"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1802"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1812"/>
         <source>LameXP</source>
         <translation>LameXP</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1750"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1745"/>
         <source>You must add at least one file to the list before proceeding!</source>
         <translation>Для продовження вам необхідно додати до списку хоча б один файл!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1780"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1775"/>
         <source>Low Diskspace Warning</source>
         <translation>Попередження про те, що недостатньо місця на диску</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1775"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1770"/>
         <source>There are less than %1 GB of free diskspace available on your system&apos;s TEMP folder.</source>
         <translation>Наявно менш ніж %1 ГБ вільного місця в вашій системній теці тимчасових файлів.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1776"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1771"/>
         <source>It is highly recommend to free up more diskspace before proceeding with the encode!</source>
         <translation>Рекомендовано звільнити більше місця на жорсткому диску перед продовженням і переходом до кодування!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1777"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1772"/>
         <source>Your TEMP folder is located at:</source>
         <translation>Шлях до теки тимчасових файлів:</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1780"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1775"/>
         <source>Abort Encoding Process</source>
         <translation>Перервати процес кодування</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1780"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1775"/>
         <source>Clean Disk Now</source>
         <translation>Очистити диск зараз</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1563"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1780"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1558"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1775"/>
         <source>Ignore</source>
         <translation>Ігнорувати</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1788"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1783"/>
         <source>Low Diskspace</source>
         <translation>Недостатньо місця на диску</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1788"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1783"/>
         <source>You are proceeding with low diskspace. Problems might occur!</source>
         <translation>Ви продовжили роботу з наявним місцем на диску, що є недостатнім. Тому можуть виникнути проблеми в подальшому!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1807"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1802"/>
         <source>Sorry, an unsupported encoder has been chosen!</source>
         <translation>Вибачте, але був обраний непідтримуваний кодер!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1817"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1812"/>
         <source>Cannot write to the selected output directory.</source>
         <translation>Неможливо вести запис до обраної вихідної теки.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1817"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1812"/>
         <source>Please choose a different directory!</source>
         <translation>Будь ласка, оберіть іншу теку!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2428"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2437"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2423"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2432"/>
         <source>Add file(s)</source>
         <translation>Додати файл(и)</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2060"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2055"/>
         <source>Load Translation</source>
         <translation>Завантажити переклад</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2062"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2057"/>
         <source>Translation Files</source>
         <translation>Файли перекладу</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3062"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3107"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3057"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3102"/>
         <source>New Folder</source>
         <translation>Нова тека</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3107"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3102"/>
         <source>Enter the name of the new folder:</source>
         <translation>Введіть назву нової теки:</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3140"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3135"/>
         <source>Failed to create folder</source>
         <translation>Збій при створенні теки</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3140"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3135"/>
         <source>The new folder could not be created:</source>
         <translation>Нову теку неможливо створити:</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3140"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3135"/>
         <source>Drive is read-only or insufficient access rights!</source>
         <translation>Носій в режимі &apos;лише для читання&apos; або використовуються недостатні права доступу!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="4543"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="4538"/>
         <source>Already Running</source>
         <translation>Вже запущено</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="4543"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="4538"/>
         <source>LameXP is already running, please use the running instance!</source>
         <translation>LameXP вже запущено, тому використовуйте запущену копію програми!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3721"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3724"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3716"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3719"/>
         <source>Quality Level %1</source>
         <translation>Рівень якості %1</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3727"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3722"/>
         <source>Compression %1</source>
         <translation>Стиснення %1</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3730"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3725"/>
         <source>Uncompressed</source>
         <translation>Нестиснутий</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3776"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3771"/>
         <source>High Quality (Recommended)</source>
         <translation>Висока якість (Рекомендовано)</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3782"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3777"/>
         <source>Poor Quality (Very Fast)</source>
         <translation>Дуже низька якість (Дуже швидко)</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2096"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2091"/>
         <source>Do you really want to disable the update reminder?</source>
         <translation>Ви дійсно хочете заборонити нагадування про оновлення?</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1611"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1606"/>
         <source>Your LameXP install directory is located here:</source>
         <translation>Ваш LameXP встановлено в теку:</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1613"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1608"/>
         <source>You can download the Nero AAC encoder for free from this website:</source>
         <translation>Ви можете безкоштовно завантажити кодер Nero AAC з веб-сайту:</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1615"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1610"/>
         <source>Note: Nero AAC encoder version %1 or newer is required to enable AAC encoding support!</source>
         <translation>Примітка: для підтримки кодування в AAC необхідний кодер Nero AAC версії %1 або новішої!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1617"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1612"/>
         <source>Alternatively, LameXP supports using QAAC, i.e. the Apple QuickTime/iTunes AAC encoder.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1618"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1613"/>
         <source>Please refer to the manual for instructions on how to set up QAAC with LameXP!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2096"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2122"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2148"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2174"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2267"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2304"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2330"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2091"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2117"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2143"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2169"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2262"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2299"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2325"/>
         <source>Yes</source>
         <translation>Так</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2096"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2122"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2148"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2174"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2267"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2304"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2330"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2091"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2117"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2143"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2169"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2262"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2299"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2325"/>
         <source>No</source>
         <translation>Ні</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2098"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2093"/>
         <source>The update reminder has been disabled.</source>
         <translation>Нагадування про оновлення були заборонені.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2098"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2093"/>
         <source>Please remember to check for updates at regular intervals!</source>
         <translation>Будь ласка, періодично перевіряйте оновлення самостійно!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2108"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2103"/>
         <source>The update reminder has been re-enabled.</source>
         <translation>Нагадування про оновлення були дозволені.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2122"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2117"/>
         <source>Do you really want to disable all sound effects?</source>
         <translation>Ви дійсно хочете заборонити весь звуковий супровід?</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2124"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2134"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2119"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2129"/>
         <source>Sound Effects</source>
         <translation>Звуковий супровід</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2124"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2119"/>
         <source>All sound effects have been disabled.</source>
         <translation>Весь звуковий супровід був заборонений.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2134"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2129"/>
         <source>The sound effects have been re-enabled.</source>
         <translation>Весь звуковий супровід був дозволений.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2148"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2150"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2160"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2143"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2145"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2155"/>
         <source>Nero AAC Notifications</source>
         <translation>Нагадування  про Nero AAC</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2148"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2143"/>
         <source>Do you really want to disable all Nero AAC Encoder notifications?</source>
         <translation>Ви дійсно хочете заборонити нагадування  про кодер Nero AAC?</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2150"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2145"/>
         <source>All Nero AAC Encoder notifications have been disabled.</source>
         <translation>Нагадування про кодер Nero AAC були заборонені.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2160"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2155"/>
         <source>The Nero AAC Encoder notifications have been re-enabled.</source>
         <translation>Нагадування  про кодер Nero AAC були дозволені.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2330"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2333"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2344"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2325"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2328"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2339"/>
         <source>Shell Integration</source>
         <translation>Інтеграція в системну оболонку</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2330"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2325"/>
         <source>Do you really want to disable the LameXP shell integration?</source>
         <translation>Ви дійсно хочете заборонити інтеграцію LameXP в системну оболонку?</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2333"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2328"/>
         <source>The LameXP shell integration has been disabled.</source>
         <translation>Інтеграцію LameXP в системну оболонку було заборонено.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2344"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2339"/>
         <source>The LameXP shell integration has been re-enabled.</source>
         <translation>Інтеграцію LameXP в системну оболонку було дозволено.</translation>
     </message>
@@ -1938,28 +1938,28 @@
         <translation>Йде сканування тек(и) на наявність файлів, будь ласка, зачекайте...</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1758"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1753"/>
         <source>Not Found</source>
         <translation>Не знайдено</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1758"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1753"/>
         <source>Your currently selected TEMP folder does not exist anymore:</source>
         <translation>Щойно обраної теки тимчасових файлів не існує:</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1758"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1753"/>
         <source>Restore Default</source>
         <translation>Відновлення типових налаштувань</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2467"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2471"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2462"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2466"/>
         <source>Add Folder</source>
         <translation>Додати теку</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="4313"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="4308"/>
         <source>Cannot write to the selected directory. Please choose another directory!</source>
         <translation>Не можливо вести запис до обраної теки. Будь ласка, оберіть іншу!</translation>
     </message>
@@ -2099,71 +2099,71 @@
         <translation>Будь ласка, використовуйте майстер імпорту списків Cue самого LameXP для додавання файлів списків.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1551"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1619"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1698"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2269"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="4223"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1546"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1614"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1693"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2264"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="4218"/>
         <source>Discard</source>
         <translation>Відмінити</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1551"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1619"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1546"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1614"/>
         <source>Don&apos;t Show Again</source>
         <translation>Не показувати знову</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2208"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2212"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2203"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2207"/>
         <source>Open Cue Sheet</source>
         <translation>Відкрити список Cue</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2208"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2214"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2203"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2209"/>
         <source>Cue Sheet File</source>
         <translation>Файл списку Cue</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2267"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2269"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2282"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2262"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2264"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2277"/>
         <source>Beta Updates</source>
         <translation>Оновлення бета-версій</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2267"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2262"/>
         <source>Do you really want LameXP to check for Beta (pre-release) updates?</source>
         <translation>Ви дійсно хочете щоб LameXP перевіряв наявність оновлень бета-версій?</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2269"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2264"/>
         <source>LameXP will check for Beta (pre-release) updates from now on.</source>
         <translation>Віднині LameXP буде перевіряти наявність оновлень бета-версій.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2269"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2264"/>
         <source>Check Now</source>
         <translation>Перевірити зараз</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2282"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2277"/>
         <source>LameXP will &lt;i&gt;not&lt;/i&gt; check for Beta (pre-release) updates from now on.</source>
         <translation>Віднині LameXP &lt;i&gt;не&lt;/i&gt; буде перевіряти наявність оновлень бета-версій.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1549"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1544"/>
         <source>It seems that a bogus anti-virus software is slowing down the startup of LameXP.</source>
         <translation>Здається, що антивірусне ПЗ уповільнює запуск LameXP.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1550"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1545"/>
         <source>Please refer to the %1 document for details and solutions!</source>
         <translation>Будь ласка, зверніться до документа %1 за детальною інформацією і можливими рішеннями!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1551"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1546"/>
         <source>Slow Startup</source>
         <translation>Уповільнений запуск</translation>
     </message>
@@ -2173,24 +2173,24 @@
         <translation>Заборонити нагадування про уповільнений запуск</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2174"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2176"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2186"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2169"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2171"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2181"/>
         <source>Slow Startup Notifications</source>
         <translation>Нагадування про уповільнений запуск</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2174"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2169"/>
         <source>Do you really want to disable the slow startup notifications?</source>
         <translation>Ви дійсно хочете заборонити нагадування про уповільнений запуск?</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2176"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2171"/>
         <source>The slow startup notifications have been disabled.</source>
         <translation>Нагадування про уповільнений запуск були заборонені.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2186"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2181"/>
         <source>The slow startup notifications have been re-enabled.</source>
         <translation>Нагадування про уповільнений запуск були дозволені.</translation>
     </message>
@@ -2205,37 +2205,37 @@
         <translation>Перейменовувати вихідні файли</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="4213"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="4208"/>
         <source>Track number with leading zero</source>
         <translation>Номер доріжки з нулями в старших розрядах</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="4214"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="4209"/>
         <source>Track title</source>
         <translation>Заголовок доріжки</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="4215"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="4210"/>
         <source>Artist name</source>
         <translation>Ім&apos;я виконавця</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="4216"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="4211"/>
         <source>Album name</source>
         <translation>Назва альбому</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="4217"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="4212"/>
         <source>Year with (at least) four digits</source>
         <translation>Рік (з вказанням щонайменше чотирьох цифр)</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="4218"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="4213"/>
         <source>Comment</source>
         <translation>Коментар</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="4223"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="4218"/>
         <source>Rename Macros</source>
         <translation>Макроси для перейменовування</translation>
     </message>
@@ -2260,7 +2260,7 @@
         <translation>&lt;a href=&quot;reset&quot;&gt;Скидання&lt;/a&gt; &amp;nbsp; &lt;a href=&quot;#&quot;&gt;Показати список макросів&lt;/a&gt;</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="4212"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="4207"/>
         <source>File name without extension</source>
         <translation>Назва файлу без розширення</translation>
     </message>
@@ -2275,7 +2275,7 @@
         <translation>Приклад назви файлу:</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="4220"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="4215"/>
         <source>Characters forbidden in file names:</source>
         <translation>Символи, заборонені в назвах файлів:</translation>
     </message>
@@ -2320,29 +2320,29 @@
         <translation>Переводити ПК в режим сну при вимкненні</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2304"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2306"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2316"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2299"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2301"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2311"/>
         <source>Hibernate Computer</source>
         <translation>Переводити ПК в режим сну</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2304"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2299"/>
         <source>Do you really want the computer to be hibernated on shutdown?</source>
         <translation>Ви дійсно хочете щоб ПК переводився в режим сну при вимкненні?</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2306"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2301"/>
         <source>LameXP will hibernate the computer on shutdown from now on.</source>
         <translation>Віднині LameXP буде переводити ПК в режим сну при вимкненні.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2316"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2311"/>
         <source>LameXP will &lt;i&gt;not&lt;/i&gt; hibernate the computer on shutdown from now on.</source>
         <translation>Віднині LameXP &lt;i&gt;не&lt;/i&gt; буде переводити ПК в режим сну при вимкненні.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1579"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1574"/>
         <source>Skipping update check this time, please be patient...</source>
         <translation>Наразі йде переривання перевірки оновлень, будь ласка, зачекайте...</translation>
     </message>
@@ -2357,110 +2357,110 @@
         <translation>Імпортувати метадані з файлу CSV</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2360"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2364"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2355"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2359"/>
         <source>Notification Icon</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2360"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2355"/>
         <source>The notification icon has been disabled.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2364"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2359"/>
         <source>The notification icon has been re-enabled.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2489"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2484"/>
         <source>Filter Files</source>
         <translation>Фільтр файлів</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2489"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2484"/>
         <source>Select filename filter:</source>
         <translation>Виберіть фільтр імені файла:</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2801"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2805"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2796"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2800"/>
         <source>Save CSV file</source>
         <translation>Збереження файла CSV</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2801"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2808"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2851"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2857"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2796"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2803"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2846"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2852"/>
         <source>CSV File</source>
         <translation>Файл CSV</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2822"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2825"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2828"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2831"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2817"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2820"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2823"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2826"/>
         <source>CSV Export</source>
         <translation>Експорт CSV</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2822"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2817"/>
         <source>Sorry, there are no meta tags that can be exported!</source>
         <translation>Вибачте, але немає жодного метатегу для витягнення!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2825"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2820"/>
         <source>Sorry, failed to open CSV file for writing!</source>
         <translation>Вибачте, не вдалося відкрити файл CSV для запису!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2828"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2823"/>
         <source>Sorry, failed to write to the CSV file!</source>
         <translation>Вибачте, не вдалося провести запис до файла CSV!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2831"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2826"/>
         <source>The CSV files was created successfully!</source>
         <translation>Файл CSV було успішно створено!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2851"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2855"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2846"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2850"/>
         <source>Open CSV file</source>
         <translation>Відкриття файла CSV</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2871"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2866"/>
         <source>Sorry, failed to open CSV file for reading!</source>
         <translation>Вибачте, не вдалося відкрити файл CSV для читання!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2874"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2869"/>
         <source>Sorry, failed to read from the CSV file!</source>
         <translation>Вибачте, не вдалося провести зчитування з файла CSV!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2877"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2872"/>
         <source>Sorry, the CSV file does not contain any known fields!</source>
         <translation>Вибачте, файл CSV не містить жодного відомого поля!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2880"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2875"/>
         <source>CSV file is incomplete. Not all files were updated!</source>
         <translation>Файл CSV є неповним. Не всі файли були оновлені!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2883"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2878"/>
         <source>The CSV files was imported successfully!</source>
         <translation>Файл CSV було успішно імпортовано!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2871"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2874"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2877"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2880"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2883"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2866"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2869"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2872"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2875"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2878"/>
         <source>CSV Import</source>
         <translation>Імпорт CSV</translation>
     </message>
@@ -2565,22 +2565,22 @@
         <translation>Якщо цільовий файл вже існує:</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="4450"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="4445"/>
         <source>Overwrite Mode</source>
         <translation>Режим перезапису</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="4450"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="4445"/>
         <source>Warning: This mode may overwrite existing files with no way to revert!</source>
         <translation>Попередження: Цей режим може перезаписати існуючі файли без можливості відмінити зміни!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="4450"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="4445"/>
         <source>Continue</source>
         <translation>Продовжити</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="4450"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="4445"/>
         <source>Revert</source>
         <translation>Відмінити</translation>
     </message>
@@ -2636,7 +2636,7 @@
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="../../src/Dialog_MainWindow.cpp" line="4270"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="4265"/>
         <source>%n Instance(s)</source>
         <translation>
             <numerusform>%n Копія</numerusform>
@@ -2655,22 +2655,22 @@
         <translation>Проекти відкритого ПО від MuldeR</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3773"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3768"/>
         <source>Best Quality (Slow)</source>
         <translation>Найкраща якість (Повільно)</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3779"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3774"/>
         <source>Acceptable Quality (Fast)</source>
         <translation>Прийнятна якість (Швидко)</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3617"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3612"/>
         <source>Current Encoder: %1</source>
         <translation>Поточний кодер: %1</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2705"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2700"/>
         <source>Loading dropped files or folders, please wait...</source>
         <translation>Завантаження перетягнутих на плаваюче віконце файлів чи тек, будь ласка, зачекайте...</translation>
     </message>

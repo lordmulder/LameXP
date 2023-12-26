@@ -1154,9 +1154,9 @@
     <message>
         <location filename="../../gui/MainWindow.ui" line="4907"/>
         <location filename="../../src/Dialog_MainWindow.cpp" line="1247"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1529"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1563"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1591"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1524"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1558"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1586"/>
         <source>Check for Updates</source>
         <translation>检查更新</translation>
     </message>
@@ -1197,13 +1197,13 @@
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="4976"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2096"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2091"/>
         <source>Disable Update Reminder</source>
         <translation>禁用更新提醒</translation>
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="4984"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2122"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2117"/>
         <source>Disable Sound Effects</source>
         <translation>禁用声音效果</translation>
     </message>
@@ -1239,7 +1239,7 @@
     </message>
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="861"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="4313"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="4308"/>
         <source>Access Denied</source>
         <translation>拒绝访问</translation>
     </message>
@@ -1279,321 +1279,321 @@
         <translation>浏览选定的文件夹</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1506"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1501"/>
         <source>License Declined</source>
         <translation>拒绝协议</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1506"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1501"/>
         <source>You have declined the license. Consequently the application will exit now!</source>
         <translation>您已拒绝协议。因此应用程序将立即退出!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1506"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1501"/>
         <source>Goodbye!</source>
         <translation>再见!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1529"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1524"/>
         <source>LameXP - Expired</source>
         <translation>LameXP - 过期</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1529"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1524"/>
         <source>This demo (pre-release) version of LameXP has expired at %1.</source>
         <translation>此预发行的 LameXP 演示版本已在 %1 过期.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1529"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1524"/>
         <source>LameXP is free software and release versions won&apos;t expire.</source>
         <translation>LameXP 是一个免费的软件并发布不会过期的版本。</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1529"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1563"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1524"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1558"/>
         <source>Exit Program</source>
         <translation>退出程序</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1550"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1545"/>
         <source>Manual</source>
         <translation>用户手册</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1563"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1558"/>
         <source>Urgent Update</source>
         <translation>紧急更新</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1563"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1558"/>
         <source>Your version of LameXP is more than a year old. Time for an update!</source>
         <translation>您的 LameXP 已过时超过一年。该更新了!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1591"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2098"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2108"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1586"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2093"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2103"/>
         <source>Update Reminder</source>
         <translation>更新提醒</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1591"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1586"/>
         <source>Your last update check was more than 14 days ago. Check for updates now?</source>
         <translation>距您上次检查更新超过了 14 天。立即检查更新吗?</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1591"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1586"/>
         <source>Your did not check for LameXP updates yet. Check for updates now?</source>
         <translation>您还没有检查过 LameXP 是否有新版本。立即检查更新吗?</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1591"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1586"/>
         <source>Postpone</source>
         <translation>推迟</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1609"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1604"/>
         <source>The Nero AAC encoder could not be found. AAC encoding support will be disabled.</source>
         <translation>找不到 Nero AAC 编码器。AAC 编码将被禁用。</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1610"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1605"/>
         <source>Please put &apos;neroAacEnc.exe&apos;, &apos;neroAacDec.exe&apos; and &apos;neroAacTag.exe&apos; into the LameXP directory!</source>
         <translation>请把 &apos;neroAacEnc.exe&apos;, &apos;neroAacDec.exe&apos; 和 &apos;neroAacTag.exe&apos; 放入 LameXP 目录!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1619"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1614"/>
         <source>AAC Support Disabled</source>
         <translation>AAC 支持被禁用</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1750"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1807"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1817"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1745"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1802"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1812"/>
         <source>LameXP</source>
         <translation>LameXP</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1750"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1745"/>
         <source>You must add at least one file to the list before proceeding!</source>
         <translation>您必须在继续之前向列表中添加至少一个文件!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1780"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1775"/>
         <source>Low Diskspace Warning</source>
         <translation>磁盘空间不足警告</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1775"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1770"/>
         <source>There are less than %1 GB of free diskspace available on your system&apos;s TEMP folder.</source>
         <translation>您的系统的 TEMP 文件夹有小于%1 GB 的可用空间。</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1776"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1771"/>
         <source>It is highly recommend to free up more diskspace before proceeding with the encode!</source>
         <translation>强烈推荐进行编码之前释放更多磁盘空间!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1777"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1772"/>
         <source>Your TEMP folder is located at:</source>
         <translation>您的 TEMP 文件夹位于:</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1780"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1775"/>
         <source>Abort Encoding Process</source>
         <translation>中止编码</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1780"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1775"/>
         <source>Clean Disk Now</source>
         <translation>现在清理磁盘</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1563"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1780"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1558"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1775"/>
         <source>Ignore</source>
         <translation>忽略</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1788"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1783"/>
         <source>Low Diskspace</source>
         <translation>磁盘空间不足</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1788"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1783"/>
         <source>You are proceeding with low diskspace. Problems might occur!</source>
         <translation>您将在磁盘空间不足的情况下继续,可能会出现问题 !</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1807"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1802"/>
         <source>Sorry, an unsupported encoder has been chosen!</source>
         <translation>对不起,您选择了一个不支持的编码器!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1817"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1812"/>
         <source>Cannot write to the selected output directory.</source>
         <translation>无法写入到所选的输出目录。</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1817"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1812"/>
         <source>Please choose a different directory!</source>
         <translation>请选择一个不同的目录!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2428"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2437"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2423"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2432"/>
         <source>Add file(s)</source>
         <translation>添加文件</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2060"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2055"/>
         <source>Load Translation</source>
         <translation>加载翻译</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2062"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2057"/>
         <source>Translation Files</source>
         <translation>翻译文件</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3062"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3107"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3057"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3102"/>
         <source>New Folder</source>
         <translation>新建文件夹</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3107"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3102"/>
         <source>Enter the name of the new folder:</source>
         <translation>输入新文件夹的名称:</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3140"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3135"/>
         <source>Failed to create folder</source>
         <translation>创建文件夹失败</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3140"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3135"/>
         <source>The new folder could not be created:</source>
         <translation>无法创建新的文件夹:</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3140"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3135"/>
         <source>Drive is read-only or insufficient access rights!</source>
         <translation>驱动器是只读的或没有足够的访问权限!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="4543"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="4538"/>
         <source>Already Running</source>
         <translation>已运行</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="4543"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="4538"/>
         <source>LameXP is already running, please use the running instance!</source>
         <translation>LameXP 已在运行,请使用当前运行的实例!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3721"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3724"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3716"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3719"/>
         <source>Quality Level %1</source>
         <translation>质量级别 %1</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3727"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3722"/>
         <source>Compression %1</source>
         <translation>压缩 %1</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3730"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3725"/>
         <source>Uncompressed</source>
         <translation>不压缩</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2096"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2091"/>
         <source>Do you really want to disable the update reminder?</source>
         <translation>确实要禁用更新提醒吗?</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2096"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2122"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2148"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2174"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2267"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2304"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2330"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2091"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2117"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2143"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2169"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2262"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2299"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2325"/>
         <source>Yes</source>
         <translation>是</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2096"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2122"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2148"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2174"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2267"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2304"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2330"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2091"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2117"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2143"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2169"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2262"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2299"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2325"/>
         <source>No</source>
         <translation>否</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2098"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2093"/>
         <source>The update reminder has been disabled.</source>
         <translation>更新提醒已被禁用。</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2098"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2093"/>
         <source>Please remember to check for updates at regular intervals!</source>
         <translation>请记得定期检查更新!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2108"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2103"/>
         <source>The update reminder has been re-enabled.</source>
         <translation>更新提醒已重新启用。</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2122"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2117"/>
         <source>Do you really want to disable all sound effects?</source>
         <translation>确实要禁用所有音效吗?</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2124"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2134"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2119"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2129"/>
         <source>Sound Effects</source>
         <translation>音效</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2124"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2119"/>
         <source>All sound effects have been disabled.</source>
         <translation>已禁用所有的音效。</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2134"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2129"/>
         <source>The sound effects have been re-enabled.</source>
         <translation>音效已经重新启用。</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2148"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2150"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2160"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2143"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2145"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2155"/>
         <source>Nero AAC Notifications</source>
         <translation>Nero AAC 通知</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2148"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2143"/>
         <source>Do you really want to disable all Nero AAC Encoder notifications?</source>
         <translation>确实要禁用所有 Nero AAC 编码器通知吗?</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2150"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2145"/>
         <source>All Nero AAC Encoder notifications have been disabled.</source>
         <translation>已禁用所有 Nero AAC 编码器通知。</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2160"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2155"/>
         <source>The Nero AAC Encoder notifications have been re-enabled.</source>
         <translation>Nero AAC 编码器通知已重新启用。</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1758"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1753"/>
         <source>Cancel</source>
         <translation>取消</translation>
     </message>
@@ -1613,12 +1613,12 @@
         <translation>更好的质量</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3776"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3771"/>
         <source>High Quality (Recommended)</source>
         <translation>高质量(推荐)</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3782"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3777"/>
         <source>Poor Quality (Very Fast)</source>
         <translation>质量差(非常快)</translation>
     </message>
@@ -1794,24 +1794,24 @@
         <translation>禁用外壳(shell)程序集成</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2330"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2333"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2344"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2325"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2328"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2339"/>
         <source>Shell Integration</source>
         <translation>外壳(shell)程序集成</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2330"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2325"/>
         <source>Do you really want to disable the LameXP shell integration?</source>
         <translation>确实要禁用 LameXP 外壳(shell)程序集成吗? </translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2333"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2328"/>
         <source>The LameXP shell integration has been disabled.</source>
         <translation>LameXP 外壳(shell)程序集成已被禁用。</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2344"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2339"/>
         <source>The LameXP shell integration has been re-enabled.</source>
         <translation>LameXP 外壳(shell)程序集成已重新启用。</translation>
     </message>
@@ -1871,22 +1871,22 @@
         <translation>将临时文件存储在您的系统默认的 TEMP 目录 (推荐)</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1758"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1753"/>
         <source>Not Found</source>
         <translation>未找到</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1758"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1753"/>
         <source>Your currently selected TEMP folder does not exist anymore:</source>
         <translation>您目前选定的 TEMP 文件夹不再存在:</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1758"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1753"/>
         <source>Restore Default</source>
         <translation>还原默认设置</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="4313"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="4308"/>
         <source>Cannot write to the selected directory. Please choose another directory!</source>
         <translation>无法写入所选目录。请选择另一个目录!</translation>
     </message>
@@ -1926,8 +1926,8 @@
         <translation>扫描文件夹中的文件,请稍候...</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2467"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2471"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2462"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2466"/>
         <source>Add Folder</source>
         <translation>添加文件夹</translation>
     </message>
@@ -1937,38 +1937,38 @@
         <translation>检查测试版更新</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2267"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2269"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2282"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2262"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2264"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2277"/>
         <source>Beta Updates</source>
         <translation>测试版更新</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2267"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2262"/>
         <source>Do you really want LameXP to check for Beta (pre-release) updates?</source>
         <translation>是否确实要检查 LameXP 测试版更新?</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2269"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2264"/>
         <source>LameXP will check for Beta (pre-release) updates from now on.</source>
         <translation>LameXP 现在将检查测试版更新。</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2269"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2264"/>
         <source>Check Now</source>
         <translation>现在检查</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1551"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1619"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1698"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2269"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="4223"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1546"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1614"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1693"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2264"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="4218"/>
         <source>Discard</source>
         <translation>放弃</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2282"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2277"/>
         <source>LameXP will &lt;i&gt;not&lt;/i&gt; check for Beta (pre-release) updates from now on.</source>
         <translation>LameXP从今以后将 &lt;i&gt; 不 &lt;/i&gt; 检查测试版更新。</translation>
     </message>
@@ -2083,8 +2083,8 @@
         <translation>指数搜索大小:</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1551"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1619"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1546"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1614"/>
         <source>Don&apos;t Show Again</source>
         <translation>不要再显示</translation>
     </message>
@@ -2094,14 +2094,14 @@
         <translation>导入Cue表</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2208"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2212"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2203"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2207"/>
         <source>Open Cue Sheet</source>
         <translation>打开Cue表</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2208"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2214"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2203"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2209"/>
         <source>Cue Sheet File</source>
         <translation>Cue表文件</translation>
     </message>
@@ -2121,17 +2121,17 @@
         <translation>请使用LameXP的Cue表向导导入Cue表文件。</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1549"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1544"/>
         <source>It seems that a bogus anti-virus software is slowing down the startup of LameXP.</source>
         <translation>似乎一个防病毒软件正在减缓的 LameXP 的启动。</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1550"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1545"/>
         <source>Please refer to the %1 document for details and solutions!</source>
         <translation>请参阅 %1 文件获得详细信息和解决方案!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1551"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1546"/>
         <source>Slow Startup</source>
         <translation>启动速度慢</translation>
     </message>
@@ -2141,24 +2141,24 @@
         <translation>禁用启动缓慢通知</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2174"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2176"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2186"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2169"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2171"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2181"/>
         <source>Slow Startup Notifications</source>
         <translation>开启启动缓慢通知</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2174"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2169"/>
         <source>Do you really want to disable the slow startup notifications?</source>
         <translation>确实要禁用启动速度慢的通知吗?</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2176"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2171"/>
         <source>The slow startup notifications have been disabled.</source>
         <translation>已禁用启动速度慢的通知。</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2186"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2181"/>
         <source>The slow startup notifications have been re-enabled.</source>
         <translation>启动速度慢的通知已重新启用。</translation>
     </message>
@@ -2173,37 +2173,37 @@
         <translation>重命名输出文件</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="4213"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="4208"/>
         <source>Track number with leading zero</source>
         <translation>零开头的音轨编号</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="4214"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="4209"/>
         <source>Track title</source>
         <translation>音轨标题</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="4215"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="4210"/>
         <source>Artist name</source>
         <translation>艺术家姓名</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="4216"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="4211"/>
         <source>Album name</source>
         <translation>专辑名称</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="4217"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="4212"/>
         <source>Year with (at least) four digits</source>
         <translation>年 至少是四位数</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="4218"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="4213"/>
         <source>Comment</source>
         <translation>注释</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="4223"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="4218"/>
         <source>Rename Macros</source>
         <translation>重命名宏</translation>
     </message>
@@ -2228,7 +2228,7 @@
         <translation>&lt;a href=&quot;reset&quot;&gt;复位&lt;/a&gt; &amp;nbsp; &lt;a href=&quot;#&quot;&gt;显示宏列表&lt;/a&gt;</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="4212"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="4207"/>
         <source>File name without extension</source>
         <translation>不带扩展名的文件名称</translation>
     </message>
@@ -2243,7 +2243,7 @@
         <translation>示例文件名称:</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="4220"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="4215"/>
         <source>Characters forbidden in file names:</source>
         <translation>文件名称中禁止的字符:</translation>
     </message>
@@ -2288,29 +2288,29 @@
         <translation>关闭时休眠计算机</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2304"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2306"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2316"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2299"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2301"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2311"/>
         <source>Hibernate Computer</source>
         <translation>计算机休眠</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2304"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2299"/>
         <source>Do you really want the computer to be hibernated on shutdown?</source>
         <translation>你真的要关闭时休眠计算机?</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2306"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2301"/>
         <source>LameXP will hibernate the computer on shutdown from now on.</source>
         <translation>LameXP 将从现在起关闭时休眠计算机。</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2316"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2311"/>
         <source>LameXP will &lt;i&gt;not&lt;/i&gt; hibernate the computer on shutdown from now on.</source>
         <translation>LameXP 从今以后 &lt;i&gt;不会&lt;\/i&gt; 关闭时休眠计算机。</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1579"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1574"/>
         <source>Skipping update check this time, please be patient...</source>
         <translation>跳过本次检查更新,请耐心等待...</translation>
     </message>
@@ -2325,135 +2325,135 @@
         <translation>从CSV文件导入Meta标签</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1611"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1606"/>
         <source>Your LameXP install directory is located here:</source>
         <translation>您的LameXP安装路径如下：</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1613"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1608"/>
         <source>You can download the Nero AAC encoder for free from this website:</source>
         <translation>您可以免费从以下网址下载Nero AAC解码器：</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1615"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1610"/>
         <source>Note: Nero AAC encoder version %1 or newer is required to enable AAC encoding support!</source>
         <translation>注意：需要%1或更新版本的Nero AAC解码器来实现AAC解码！</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1617"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1612"/>
         <source>Alternatively, LameXP supports using QAAC, i.e. the Apple QuickTime/iTunes AAC encoder.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1618"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1613"/>
         <source>Please refer to the manual for instructions on how to set up QAAC with LameXP!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2360"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2364"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2355"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2359"/>
         <source>Notification Icon</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2360"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2355"/>
         <source>The notification icon has been disabled.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2364"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2359"/>
         <source>The notification icon has been re-enabled.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2489"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2484"/>
         <source>Filter Files</source>
         <translation>筛选文件</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2489"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2484"/>
         <source>Select filename filter:</source>
         <translation>选择文件名筛选规则：</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2801"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2805"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2796"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2800"/>
         <source>Save CSV file</source>
         <translation>保存CSV文件</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2801"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2808"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2851"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2857"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2796"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2803"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2846"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2852"/>
         <source>CSV File</source>
         <translation>CSV文件</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2822"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2825"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2828"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2831"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2817"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2820"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2823"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2826"/>
         <source>CSV Export</source>
         <translation>CSV导出</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2822"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2817"/>
         <source>Sorry, there are no meta tags that can be exported!</source>
         <translation>抱歉,没有Meta标签可以导出!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2825"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2820"/>
         <source>Sorry, failed to open CSV file for writing!</source>
         <translation>抱歉,无法打开CSV文件进行写入!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2828"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2823"/>
         <source>Sorry, failed to write to the CSV file!</source>
         <translation>抱歉,无法写入CSV文件!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2831"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2826"/>
         <source>The CSV files was created successfully!</source>
         <translation>CSV文件创建成功!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2851"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2855"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2846"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2850"/>
         <source>Open CSV file</source>
         <translation>打开CSV文件</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2871"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2866"/>
         <source>Sorry, failed to open CSV file for reading!</source>
         <translation>抱歉,无法打开CSV文件!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2874"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2869"/>
         <source>Sorry, failed to read from the CSV file!</source>
         <translation>抱歉,未能从CSV文件读取!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2877"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2872"/>
         <source>Sorry, the CSV file does not contain any known fields!</source>
         <translation>抱歉,CSV文件中没有包含任何已知的字段!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2880"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2875"/>
         <source>CSV file is incomplete. Not all files were updated!</source>
         <translation>CSV文件不是完整的,不能进行所有文件更新!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2883"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2878"/>
         <source>The CSV files was imported successfully!</source>
         <translation>CSV文件导入成功!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2871"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2874"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2877"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2880"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2883"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2866"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2869"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2872"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2875"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2878"/>
         <source>CSV Import</source>
         <translation>CSV导入</translation>
     </message>
@@ -2558,22 +2558,22 @@
         <translation>如果目标文件已存在:</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="4450"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="4445"/>
         <source>Overwrite Mode</source>
         <translation>覆盖模式</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="4450"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="4445"/>
         <source>Warning: This mode may overwrite existing files with no way to revert!</source>
         <translation>警告: 这种模式可能会覆盖现有的文件且无法恢复!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="4450"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="4445"/>
         <source>Continue</source>
         <translation>继续</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="4450"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="4445"/>
         <source>Revert</source>
         <translation>后退</translation>
     </message>
@@ -2621,19 +2621,19 @@
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="../../src/Dialog_MainWindow.cpp" line="4270"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="4265"/>
         <source>%n Instance(s)</source>
         <translation>
             <numerusform>%n 个实例</numerusform>
         </translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3773"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3768"/>
         <source>Best Quality (Slow)</source>
         <translation>最佳质量（慢）</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3779"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3774"/>
         <source>Acceptable Quality (Fast)</source>
         <translation>可接受的质量（快速）</translation>
     </message>
@@ -2648,12 +2648,12 @@
         <translation>MuldeR的开源项目</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3617"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3612"/>
         <source>Current Encoder: %1</source>
         <translation>当前的编码：%1</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2705"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2700"/>
         <source>Loading dropped files or folders, please wait...</source>
         <translation>加载拖放文件或文件夹中，请稍候……</translation>
     </message>

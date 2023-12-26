@@ -1464,7 +1464,7 @@ void MainWindow::windowShown(void)
 	const bool firstRun = arguments.contains("first-run");
 	if (firstRun)
 	{
-		if (m_settings->licenseAccepted() <= 0)
+		if (m_settings->licenseAccepted() < 0)
 		{
 			m_settings->licenseAccepted(0);
 		}
@@ -1473,30 +1473,22 @@ void MainWindow::windowShown(void)
 	}
 
 	//Check license
-	if (m_settings->licenseAccepted() <= 0)
+	if (m_settings->licenseAccepted() == 0)
 	{
-		if (m_settings->licenseAccepted() == 0)
+		QScopedPointer<AboutDialog> about(new AboutDialog(m_settings, this, true));
+		if (about->exec() > 0)
 		{
-			QScopedPointer<AboutDialog> about(new AboutDialog(m_settings, this, true));
-			if (about->exec() > 0)
+			m_settings->licenseAccepted(1);
+			m_settings->syncNow();
+			PLAY_SOUND_OPTIONAL("woohoo", false);
+			if (lamexp_version_test())
 			{
-				m_settings->licenseAccepted(1);
-				m_settings->syncNow();
-				PLAY_SOUND_OPTIONAL("woohoo", false);
-				if (lamexp_version_test())
-				{
-					showAnnounceBox();
-				}
-			}
-			else
-			{
-				m_settings->licenseAccepted(-1);
-				m_settings->syncNow();
+				showAnnounceBox();
 			}
 		}
 		else
 		{
-			m_settings->licenseAccepted(0);
+			m_settings->licenseAccepted(-1);
 			m_settings->syncNow();
 		}
 	}

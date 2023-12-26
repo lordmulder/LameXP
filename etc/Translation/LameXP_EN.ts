@@ -63,7 +63,7 @@
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="../../src/Dialog_MainWindow.cpp" line="4270"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="4265"/>
         <source>%n Instance(s)</source>
         <translation>
             <numerusform>%n Instance</numerusform>
