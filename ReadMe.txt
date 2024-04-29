@@ -1,6 +1,6 @@
 LameXP - Audio Encoder Front-End
-Copyright (C) 2004-2023 LoRd_MuldeR <MuldeR2@GMX.de>
-http://www.muldersoft.com/
+Copyright (C) 2004-2024 LoRd_MuldeR <MuldeR2@GMX.de>
+https://www.muldersoft.com/
 
 	This program is free software; you can redistribute it and/or modify
 	it under the terms of the GNU GENERAL PUBLIC LICENSE as published by
