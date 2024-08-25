@@ -111,6 +111,14 @@ if %PATH_VCTOOL% GEQ 142 (
 	set "PATH_REDIST_VC=%~dp0\..\..\..\Prerequisites\MSVC\redist\vc\v%PATH_VCTOOL%_xp"
 )
 
+if "%LAMEXP_CONFIG%"=="Debug" (
+	set "QT_REDIST_CONFIG=Debug"
+	set "QT_REDIST_SUFFIX=d"
+) else (
+	set "QT_REDIST_CONFIG=Shared"
+	set "QT_REDIST_SUFFIX="
+)
+
 call "%~dp0\_copy.bat" "%BIN_PATH%\LameXP.exe" "%TMP_PATH%"
 call "%~dp0\_copy.bat" "%~dp0\..\..\etc\Manifest\VisualElements.xml" "%TMP_PATH%\LameXP.VisualElementsManifest.xml"
 
@@ -119,10 +127,10 @@ if "%LAMEXP_REDIST%"=="1" (
 	call "%~dp0\_copy.bat" "%BIN_PATH%\MUtils32-?.dll" "%TMP_PATH%"
 	mkdir "%TMP_PATH%\imageformats"
 	for %%i in (Core,Gui,Network,Xml,Svg) do (
-		call "%~dp0\_copy.bat" "%PATH_REDIST_QT%\Shared\bin\Qt%%i4.dll" "%TMP_PATH%"
+		call "%~dp0\_copy.bat" "%PATH_REDIST_QT%\%QT_REDIST_CONFIG%\bin\Qt%%i%QT_REDIST_SUFFIX%4.dll" "%TMP_PATH%"
 	)
 	for %%i in (gif,ico,jpeg,mng,svg,tga,tiff) do (
-		call "%~dp0\_copy.bat" "%PATH_REDIST_QT%\Shared\plugins\imageformats\q%%i4.dll" "%TMP_PATH%\imageformats"
+		call "%~dp0\_copy.bat" "%PATH_REDIST_QT%\%QT_REDIST_CONFIG%\plugins\imageformats\q%%i%QT_REDIST_SUFFIX%4.dll" "%TMP_PATH%\imageformats"
 	)
 	for %%i in ("%PATH_REDIST_VC%\x86\*.dll") do call "%~dp0\_copy.bat" "%%~i" "%TMP_PATH%"
 	if %PATH_VCTOOL% GEQ 140 (
@@ -138,10 +146,12 @@ for %%x in (exe,dll) do (
 	)
 )
 
-for %%e in (LameXP,Qt,MUtils) do (
-	for %%x in (exe,dll) do (
-		for %%f in ("%TMP_PATH%\%%e*.%%x") do (
-			"%~dp0\..\..\..\Prerequisites\UPX\upx.exe" --best "%%~ff"
+if not "%LAMEXP_CONFIG%"=="Debug" (
+	for %%e in (LameXP,Qt,MUtils) do (
+		for %%x in (exe,dll) do (
+			for %%f in ("%TMP_PATH%\%%e*.%%x") do (
+				"%~dp0\..\..\..\Prerequisites\UPX\upx.exe" --best "%%~ff"
+			)
 		)
 	)
 )
