@@ -136,7 +136,7 @@ const QDate &lamexp_version_expires(void)
 
 	if(g_lamexp_expiration_date.isNull())
 	{
-		g_lamexp_expiration_date.reset(new QDate(MUtils::Version::app_build_date().addDays(MUTILS_DEBUG ? 7 : 30)));
+		g_lamexp_expiration_date.reset(new QDate(MUtils::Version::app_build_date().addDays(MUTILS_DEBUG ? 14 : 91)));
 	}
 
 	return *g_lamexp_expiration_date;
