@@ -774,7 +774,7 @@ void AboutDialog::initSoftwareTab(void)
 	moreAboutText += makeToolText
 	(
 		tr("Monkey's Audio - Lossless Audio Compressor"),
-		"mac.exe", "v?.??",
+		"mac.exe", "v??.??",
 		tr("Freely available source code, simple SDK and non-restrictive licensing."),
 		"http://www.monkeysaudio.com/"
 	);
