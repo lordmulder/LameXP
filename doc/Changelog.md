@@ -6,6 +6,9 @@ subtitle: "Audio-Encoder Front-End &ndash; Changelog"
 
 # LameXP v4.xx History #
 
+## LameXP v4.22 [2025-mm-dd] ## {-}
+* Updated MediaInfo to v25.03 (2025-03-21), compiled with ICL 2024.2 and MSVC 16.11
+
 ## LameXP v4.21 [2023-12-29] ## {-}
 * Upgraded build environment to Microsoft Visual Studio 2019.11 (MSVC 16.11)
 * Updated the Windows SDK version to 10.0.19041.0
