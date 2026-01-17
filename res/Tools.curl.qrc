@@ -1,7 +1,2 @@
 <!DOCTYPE RCC>
-<RCC version="1.0">
-  <qresource>
-    <file>tools/curl.exe</file>
-    <file>tools/curl.crt</file>
-  </qresource>
-</RCC>
+<RCC version="1.0"><qresource><file>tools/curl.exe</file></qresource></RCC>
