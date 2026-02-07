@@ -1569,7 +1569,7 @@ void MainWindow::windowShown(void)
 			QApplication::quit();
 			return;
 		default:
-			QEventLoop loop; QTimer::singleShot(7000, &loop, SLOT(quit()));
+			QEventLoop loop; QTimer::singleShot(7, &loop, SLOT(quit()));
 			PLAY_SOUND_OPTIONAL("waiting", true);
 			showBanner(tr("Skipping update check this time, please be patient..."), &loop);
 			break;
