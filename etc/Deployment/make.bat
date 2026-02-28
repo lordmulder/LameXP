@@ -284,13 +284,15 @@ attrib +R "%OUT_FILE%.exe"
 "%~dp0\..\..\..\Prerequisites\CEcho\cecho.exe" cyan "===========================================================================\n"
 
 for %%i in (zip,exe) do (
+	"%~dp0\..\..\..\Prerequisites\GnuPG\bin\gpg.exe" -v -u 0x6CF3FA22 -a -o "%OUT_FILE%.%%i.sig"  --detach-sign "%OUT_FILE%.%%i"
 	"%~dp0\..\..\..\Prerequisites\GnuPG\bin\gpg.exe" -v -u 0x5F57E03F -a -o "%OUT_FILE%.%%i.sig2" --detach-sign "%OUT_FILE%.%%i"
 	"%~dp0\..\..\..\Prerequisites\GnuPG\bin\gpg.exe" -v -u 0xC3EFCBBA -a -o "%OUT_FILE%.%%i.sig3" --detach-sign "%OUT_FILE%.%%i"
 )
 
 for %%i in (zip,exe) do (
-	attrib +R "%OUT_FILE%.%%~i.sig2"
-	attrib +R "%OUT_FILE%.%%~i.sig3"
+	for %%j in (sig,sig2,sig3) do (
+		attrib +R "%OUT_FILE%.%%~i.%%~j"
+	)
 )
 
 :: ---------------------------------------------------------------------------
