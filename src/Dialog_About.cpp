@@ -117,7 +117,6 @@ g_lamexp_specialThanks[] =
 	{ "RareWares",             "http://www.rarewares.org/"        },
 	{ "GitHub",                "http://github.com/"               },
 	{ "SourceForge",           "http://sourceforge.net/"          },
-	{ "OSDN.net",              "http://osdn.net/"                 },
 	{ "Marius Hudea",          "http://savedonthe.net/"           },
 	{ "Qt Developer Network",  "http://www.qt.io/developers/"     },
 	{ "Codecs.com",            "http://www.codecs.com/"           },
@@ -135,8 +134,6 @@ g_lamexp_mirrors[] =
 {
 	{ "GitHub.com",      "https://github.com/lordmulder/LameXP"             },
 	{ "SourceForge.net", "http://sourceforge.net/p/lamexp/code/"            },
-    { "OSDN.net",        "https://osdn.net/projects/lamexp/scm/git/LameXP/" },
-	{ "Bitbucket.org",   "https://bitbucket.org/muldersoft/lamexp"          },
 	{ "GitLab.com"   ,   "https://gitlab.com/lamexp/lamexp"                 },
 	{ "Assembla.com",    "https://www.assembla.com/spaces/lamexp/"          },
 	{ "repo.or.cz",      "https://repo.or.cz/w/LameXP.git"                  },
