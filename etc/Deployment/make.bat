@@ -288,9 +288,10 @@ for %%i in (zip,exe) do (
 	"%~dp0\..\..\..\Prerequisites\GnuPG\bin\gpg.exe" -v -u 0xC3EFCBBA -a -o "%OUT_FILE%.%%i.sig3" --detach-sign "%OUT_FILE%.%%i"
 )
 
-attrib +R "%OUT_FILE%.exe.sig"
-attrib +R "%OUT_FILE%.exe.sig2"
-attrib +R "%OUT_FILE%.zip.sig2"
+for %%i in (zip,exe) do (
+	attrib +R "%OUT_FILE%.%%~i.sig2"
+	attrib +R "%OUT_FILE%.%%~i.sig3"
+)
 
 :: ---------------------------------------------------------------------------
 :: COMPLETED
