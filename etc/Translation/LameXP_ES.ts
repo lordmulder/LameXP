@@ -54,302 +54,302 @@
         <translation>Descartar</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_About.cpp" line="571"/>
+        <location filename="../../src/Dialog_About.cpp" line="568"/>
         <source>LameXP - Audio Encoder Front-end</source>
         <translation>LameXP - Interfaz de codificación de audio</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_About.cpp" line="575"/>
+        <location filename="../../src/Dialog_About.cpp" line="572"/>
         <source>Please visit %1 for news and updates!</source>
         <translation>¡Visita %1 para recibir noticias y actualizaciones!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_About.cpp" line="587"/>
-        <location filename="../../src/Dialog_About.cpp" line="599"/>
+        <location filename="../../src/Dialog_About.cpp" line="584"/>
+        <location filename="../../src/Dialog_About.cpp" line="596"/>
         <source>Note: This demo (pre-release) version of LameXP will expire at %1. Still %2 days left.</source>
         <translation>Nota: Esta versión demo (pre-lanzamiento) de LameXP expirará en %1. Aún quedan %2 días.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_About.cpp" line="619"/>
+        <location filename="../../src/Dialog_About.cpp" line="616"/>
         <source>Note: LameXP is free software. Do &lt;b&gt;not&lt;/b&gt; pay money to obtain or use LameXP! If some third-party website tries to make you pay for downloading LameXP, you should &lt;b&gt;not&lt;/b&gt; respond to the offer !!!</source>
         <translation>Nota: LameXP es software libre. ¡&lt;b&gt;No&lt;/b&gt; pagues dinero para obtener o utilizar LameXP! Si algún sitio web de terceros intenta hacerte pagar por descargar LameXP, ¡¡¡&lt;b&gt;no&lt;/b&gt; respondas a la oferta!!!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_About.cpp" line="633"/>
+        <location filename="../../src/Dialog_About.cpp" line="630"/>
         <source>The following people have contributed to LameXP:</source>
         <translation>Las siguientes personas han contribuido a LameXP:</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_About.cpp" line="636"/>
+        <location filename="../../src/Dialog_About.cpp" line="633"/>
         <source>Programmers:</source>
         <translation>Programadores:</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_About.cpp" line="639"/>
+        <location filename="../../src/Dialog_About.cpp" line="636"/>
         <source>Project Leader</source>
         <translation>Líder del proyecto</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_About.cpp" line="643"/>
+        <location filename="../../src/Dialog_About.cpp" line="640"/>
         <source>Translators:</source>
         <translation>Traductores:</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_About.cpp" line="655"/>
+        <location filename="../../src/Dialog_About.cpp" line="652"/>
         <source>Special thanks to:</source>
         <translation>Agradecimientos especiales a:</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_About.cpp" line="665"/>
+        <location filename="../../src/Dialog_About.cpp" line="662"/>
         <source>Official Mirrors:</source>
         <translation>Espejos oficiales:</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_About.cpp" line="675"/>
+        <location filename="../../src/Dialog_About.cpp" line="672"/>
         <source>If you are willing to contribute a LameXP translation, feel free to contact us!</source>
         <translation>Si quieres colaborar con una traducción de LameXP, ¡no dudes en ponerte en contacto con nosotros!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_About.cpp" line="686"/>
+        <location filename="../../src/Dialog_About.cpp" line="683"/>
         <source>The following third-party software is used in LameXP:</source>
         <translation>En LameXP se utiliza el siguiente software de terceros:</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_About.cpp" line="691"/>
+        <location filename="../../src/Dialog_About.cpp" line="688"/>
         <source>LAME - OpenSource mp3 Encoder</source>
         <translation>LAME - Codificador mp3 de código abierto</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_About.cpp" line="693"/>
-        <location filename="../../src/Dialog_About.cpp" line="715"/>
-        <location filename="../../src/Dialog_About.cpp" line="736"/>
-        <location filename="../../src/Dialog_About.cpp" line="757"/>
-        <location filename="../../src/Dialog_About.cpp" line="771"/>
-        <location filename="../../src/Dialog_About.cpp" line="785"/>
-        <location filename="../../src/Dialog_About.cpp" line="799"/>
-        <location filename="../../src/Dialog_About.cpp" line="834"/>
-        <location filename="../../src/Dialog_About.cpp" line="841"/>
-        <location filename="../../src/Dialog_About.cpp" line="855"/>
+        <location filename="../../src/Dialog_About.cpp" line="690"/>
+        <location filename="../../src/Dialog_About.cpp" line="712"/>
+        <location filename="../../src/Dialog_About.cpp" line="733"/>
+        <location filename="../../src/Dialog_About.cpp" line="754"/>
+        <location filename="../../src/Dialog_About.cpp" line="768"/>
+        <location filename="../../src/Dialog_About.cpp" line="782"/>
+        <location filename="../../src/Dialog_About.cpp" line="796"/>
+        <location filename="../../src/Dialog_About.cpp" line="831"/>
+        <location filename="../../src/Dialog_About.cpp" line="838"/>
+        <location filename="../../src/Dialog_About.cpp" line="852"/>
         <source>Released under the terms of the GNU Lesser General Public License.</source>
         <translation>Publicado bajo los términos de la Licencia Pública General Reducida GNU.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_About.cpp" line="698"/>
+        <location filename="../../src/Dialog_About.cpp" line="695"/>
         <source>OggEnc - Vorbis Encoder</source>
         <translation>OggEnc - Codificador Vorbis</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_About.cpp" line="700"/>
+        <location filename="../../src/Dialog_About.cpp" line="697"/>
         <source>Completely open and patent-free audio encoding technology.</source>
         <translation>Tecnología de codificación de audio abierta y libre de patentes.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_About.cpp" line="705"/>
+        <location filename="../../src/Dialog_About.cpp" line="702"/>
         <source>Nero AAC Reference MPEG-4 Encoder</source>
         <translation>Codificador MPEG-4 Nero AAC</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_About.cpp" line="707"/>
+        <location filename="../../src/Dialog_About.cpp" line="704"/>
         <source>Freeware state-of-the-art HE-AAC encoder with 2-Pass support.</source>
         <translation>Codificador HE-AAC gratuito de última generación con soporte de 2 pases.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_About.cpp" line="709"/>
+        <location filename="../../src/Dialog_About.cpp" line="706"/>
         <source>Available from vendor web-site as free download:</source>
         <translation>Disponible en la página web del proveedor como descarga gratuita:</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_About.cpp" line="713"/>
+        <location filename="../../src/Dialog_About.cpp" line="710"/>
         <source>Aften - A/52 audio encoder</source>
         <translation>Aften - Codificador de audio A/52</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_About.cpp" line="720"/>
+        <location filename="../../src/Dialog_About.cpp" line="717"/>
         <source>FLAC - Free Lossless Audio Codec</source>
         <translation>FLAC - Códec de audio gratuito sin pérdidas</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_About.cpp" line="722"/>
+        <location filename="../../src/Dialog_About.cpp" line="719"/>
         <source>Open and patent-free lossless audio compression technology.</source>
         <translation>Tecnología de compresión de audio sin pérdidas, abierta y libre de patentes.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_About.cpp" line="727"/>
+        <location filename="../../src/Dialog_About.cpp" line="724"/>
         <source>Opus Audio Codec</source>
         <translation>Códec de audio Opus</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_About.cpp" line="729"/>
+        <location filename="../../src/Dialog_About.cpp" line="726"/>
         <source>Totally open, royalty-free, highly versatile audio codec.</source>
         <translation>Códec de audio totalmente abierto, libre de derechos de autor y muy versátil.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_About.cpp" line="734"/>
+        <location filename="../../src/Dialog_About.cpp" line="731"/>
         <source>mpg123 - Fast Console MPEG Audio Player/Decoder</source>
         <translation>mpg123 - Rápido reproductor/decodificador de audio MPEG de consola</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_About.cpp" line="741"/>
+        <location filename="../../src/Dialog_About.cpp" line="738"/>
         <source>FAAD - OpenSource MPEG-4 and MPEG-2 AAC Decoder</source>
         <translation>FAAD - Decodificador AAC MPEG-4 y MPEG-2 de código abierto</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_About.cpp" line="743"/>
+        <location filename="../../src/Dialog_About.cpp" line="740"/>
         <source>Released under the terms of the GNU General Public License.</source>
         <translation>Publicado bajo los términos de la Licencia Pública General GNU.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_About.cpp" line="748"/>
+        <location filename="../../src/Dialog_About.cpp" line="745"/>
         <source>OggDec - Vorbis Decoder</source>
         <translation>OggDec - Decodificador Vorbis</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_About.cpp" line="750"/>
+        <location filename="../../src/Dialog_About.cpp" line="747"/>
         <source>Command line Ogg Vorbis decoder created by John33.</source>
         <translation>Decodificador Ogg Vorbis mediante línea de comandos creado por John33.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_About.cpp" line="755"/>
+        <location filename="../../src/Dialog_About.cpp" line="752"/>
         <source>Valdec from AC3Filter Tools - AC3/DTS Decoder</source>
         <translation>Valdec de AC3Filter Tools - Decodificador AC3/DTS</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_About.cpp" line="762"/>
+        <location filename="../../src/Dialog_About.cpp" line="759"/>
         <source>WavPack - Hybrid Lossless Compression</source>
         <translation>WavPack - Compresión híbrida sin pérdidas</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_About.cpp" line="764"/>
+        <location filename="../../src/Dialog_About.cpp" line="761"/>
         <source>Completely open audio compression format.</source>
         <translation>Formato de compresión de audio totalmente abierto.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_About.cpp" line="769"/>
+        <location filename="../../src/Dialog_About.cpp" line="766"/>
         <source>Musepack - Living Audio Compression</source>
         <translation>Musepack - Compresor de audio con pérdida</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_About.cpp" line="776"/>
+        <location filename="../../src/Dialog_About.cpp" line="773"/>
         <source>Monkey&apos;s Audio - Lossless Audio Compressor</source>
         <translation>Monkey&apos;s Audio - Compresor de audio sin pérdidas</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_About.cpp" line="778"/>
+        <location filename="../../src/Dialog_About.cpp" line="775"/>
         <source>Freely available source code, simple SDK and non-restrictive licensing.</source>
         <translation>Código fuente disponible gratuitamente, SDK sencillo y licencias no restrictivas.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_About.cpp" line="783"/>
+        <location filename="../../src/Dialog_About.cpp" line="780"/>
         <source>Shorten - Lossless Audio Compressor</source>
         <translation>Shorten - Compresor de audio sin pérdidas</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_About.cpp" line="790"/>
+        <location filename="../../src/Dialog_About.cpp" line="787"/>
         <source>Speex - Free Codec For Free Speech</source>
         <translation>Speex - Códec libre para la libertad de expresión</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_About.cpp" line="792"/>
+        <location filename="../../src/Dialog_About.cpp" line="789"/>
         <source>Open Source patent-free audio format designed for speech.</source>
         <translation>Formato de audio sin patentes de código abierto diseñado para voz.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_About.cpp" line="797"/>
+        <location filename="../../src/Dialog_About.cpp" line="794"/>
         <source>The True Audio - Lossless Audio Codec</source>
         <translation>The True Audio - Códec de audio sin pérdidas</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_About.cpp" line="804"/>
+        <location filename="../../src/Dialog_About.cpp" line="801"/>
         <source>refalac - Win32 command line ALAC encoder/decoder</source>
         <translation>refalac - De/Codificador ALAC mediante línea de comandos Win32</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_About.cpp" line="806"/>
+        <location filename="../../src/Dialog_About.cpp" line="803"/>
         <source>The ALAC reference implementation by Apple is available under the Apache license.</source>
         <translation>La implementación de referencia ALAC de Apple está disponible bajo licencia Apache.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_About.cpp" line="811"/>
+        <location filename="../../src/Dialog_About.cpp" line="808"/>
         <source>wma2wav - Dump WMA files to Wave Audio</source>
         <translation>wma2wav - Conversor de archivos WMA a Wave Audio</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_About.cpp" line="813"/>
+        <location filename="../../src/Dialog_About.cpp" line="810"/>
         <source>Copyright (c) 2011 LoRd_MuldeR &amp;lt;mulder2@gmx.de&amp;gt;. Some rights reserved.</source>
         <translation>Copyright (c) 2011 LoRd_MuldeR &amp;lt;mulder2@gmx.de&amp;gt;. Algunos derechos reservados.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_About.cpp" line="820"/>
+        <location filename="../../src/Dialog_About.cpp" line="817"/>
         <source>By Jory Stone &amp;lt;jcsston@toughguy.net&amp;gt; and LoRd_MuldeR &amp;lt;mulder2@gmx.de&amp;gt;.</source>
         <translation>Por Jory Stone &amp;lt;jcsston@toughguy.net&amp;gt; y LoRd_MuldeR &amp;lt;mulder2@gmx.de&amp;gt;.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_About.cpp" line="846"/>
+        <location filename="../../src/Dialog_About.cpp" line="843"/>
         <source>cURL - Curl URL Request Library</source>
         <translation>cURL - Biblioteca Curl de peticiones de URL</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_About.cpp" line="848"/>
+        <location filename="../../src/Dialog_About.cpp" line="845"/>
         <source>By Daniel Stenberg, released under the terms of the MIT/X Derivate License.</source>
         <translation>Por Daniel Stenberg, publicado bajo los términos de la licencia MIT/X Derivate.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_About.cpp" line="818"/>
+        <location filename="../../src/Dialog_About.cpp" line="815"/>
         <source>avs2wav - Avisynth to Wave Audio converter</source>
         <translation>avs2wav - Conversor Avisynth a Wave Audio</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_About.cpp" line="825"/>
+        <location filename="../../src/Dialog_About.cpp" line="822"/>
         <source>dcaenc</source>
         <translation>dcaenc</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_About.cpp" line="827"/>
+        <location filename="../../src/Dialog_About.cpp" line="824"/>
         <source>Copyright (c) 2008-2011 Alexander E. Patrakov. Distributed under the LGPL.</source>
         <translation>Copyright (c) 2008-2011 Alexander E. Patrakov. Distribuido bajo la LGPL.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_About.cpp" line="832"/>
+        <location filename="../../src/Dialog_About.cpp" line="829"/>
         <source>MediaInfo - Media File Analysis Tool</source>
         <translation>MediaInfo - Herramienta de análisis de archivos multimedia</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_About.cpp" line="839"/>
+        <location filename="../../src/Dialog_About.cpp" line="836"/>
         <source>SoX - Sound eXchange</source>
         <translation>SoX - Sound eXchange (Intercambio de sonido)</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_About.cpp" line="853"/>
+        <location filename="../../src/Dialog_About.cpp" line="850"/>
         <source>UPX - The Ultimate Packer for eXecutables</source>
         <translation>UPX - El mejor empaquetador de archivos ejecutables</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_About.cpp" line="860"/>
+        <location filename="../../src/Dialog_About.cpp" line="857"/>
         <source>Silk Icons - Over 700 icons in PNG format</source>
         <translation>Silk Icons - Más de 700 iconos en formato PNG</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_About.cpp" line="862"/>
+        <location filename="../../src/Dialog_About.cpp" line="859"/>
         <source>By Mark James, released under the Creative Commons &apos;BY&apos; License.</source>
         <translation>Por Mark James, publicado bajo la licencia Creative Commons &apos;BY&apos; License.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_About.cpp" line="867"/>
+        <location filename="../../src/Dialog_About.cpp" line="864"/>
         <source>Angry Chicken and Ghost Scream sound</source>
         <translation>Sonido de Pollo enfadado y Grito fantasma</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_About.cpp" line="869"/>
+        <location filename="../../src/Dialog_About.cpp" line="866"/>
         <source>By Alexander, released under the Creative Commons &apos;BY&apos; License.</source>
         <translation>Por Alexander, publicado bajo la licencia Creative Commons &apos;BY&apos;.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_About.cpp" line="874"/>
+        <location filename="../../src/Dialog_About.cpp" line="871"/>
         <source>The copyright of LameXP as a whole belongs to LoRd_MuldeR. The copyright of third-party software used in LameXP belongs to the individual authors.</source>
         <translation>El copyright de LameXP en su conjunto pertenece a LoRd_MuldeR. Los derechos de autor del software de terceros utilizado en LameXP pertenecen a sus autores.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_About.cpp" line="929"/>
+        <location filename="../../src/Dialog_About.cpp" line="926"/>
         <source>n/a</source>
         <translation>n/d</translation>
     </message>
